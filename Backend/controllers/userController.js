@@ -9,6 +9,12 @@ const User = require('../models/userModel')
 // @access Public
 const registerUser = asyncHandler(async (req, res) => {
   const { firstName, lastName, email, password } = req.body
+  const admin = await Admin.findById(req.admin.id)
+
+  if (!admin) {
+    res.status(401)
+    throw new Error('Admin not found')
+  }
 
   // Validation
   if (!firstName || !lastName || !email || !password) {
@@ -36,18 +42,22 @@ const registerUser = asyncHandler(async (req, res) => {
 
   // Create user
   const user = await User.create({
+    admin: req.admin.id,
     firstName,
     lastName,
     email,
+    adminPrivilege,
     password: hashedPassword,
   })
 
   if (user) {
     res.status(200).json({
       _id: user._id,
+      admin: req.admin.id,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
+      adminPrivilege: user.adminPrivilege,
       token: generateToken(user._id),
     })
   } else {
@@ -70,6 +80,7 @@ const loginUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      adminPrivilege: user.adminPrivilege,
       token: generateToken(user._id),
     })
   } else {

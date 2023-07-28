@@ -18,6 +18,10 @@ const eventSchema = mongoose.Schema(
     description: {
       type: String,
     },
+    linkId: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
