@@ -1,12 +1,7 @@
 const mongoose = require('mongoose')
 
-const userSchema = mongoose.Schema(
+const adminSchema = mongoose.Schema(
   {
-    admin: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: 'Admin',
-    },
     firstName: {
       type: String,
       required: [true, 'Please add a first name'],
@@ -29,4 +24,4 @@ const userSchema = mongoose.Schema(
   }
 )
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model('admin', adminSchema)
