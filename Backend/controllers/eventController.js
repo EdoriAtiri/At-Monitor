@@ -88,7 +88,7 @@ const deleteEvent = asyncHandler(async (req, res) => {
     throw new Error('Not Authorized')
   }
 
-  await ticket.deleteOne()
+  await thisEvent.deleteOne()
 
   res.status(200).json({ success: true })
 })
@@ -96,4 +96,5 @@ const deleteEvent = asyncHandler(async (req, res) => {
 module.exports = {
   createEvent,
   updateEvent,
+  deleteEvent,
 }
