@@ -54,7 +54,6 @@ const getEvents = asyncHandler(async (req, res) => {
 // @route /api/events/:id
 // @access Private
 const getEvent = asyncHandler(async (req, res) => {
-  const eventId = req.params.id
   // Get Admin using the Id in the jwt
   const admin = await Admin.findById(req.admin.id)
 
@@ -63,10 +62,10 @@ const getEvent = asyncHandler(async (req, res) => {
     throw new Error('Admin not found')
   }
 
-  const thisEvent = await Event.findById(eventId)
+  const thisEvent = await Event.findById(req.params.id)
 
-  //   Check that the admin created the event
-  if (req.admin.id !== thisEvent.id.toString()) {
+  //   Check that the admin that created the event matches the admin making the get request
+  if (req.admin.id !== thisEvent.admin.toString()) {
     res.status(401)
     throw new Error('Not Authorized')
   }
@@ -138,5 +137,6 @@ module.exports = {
   createEvent,
   updateEvent,
   deleteEvent,
+  getEvent,
   getEvents,
 }

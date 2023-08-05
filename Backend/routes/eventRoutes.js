@@ -8,10 +8,15 @@ const {
   updateEvent,
   deleteEvent,
   getEvents,
+  getEvent,
 } = require('../controllers/eventController')
 
 router.route('/').get(protect, getEvents).post(protect, createEvent)
 
-router.route('/:id').patch(protect, updateEvent).delete(protect, deleteEvent)
+router
+  .route('/:id')
+  .get(protect, getEvent)
+  .patch(protect, updateEvent)
+  .delete(protect, deleteEvent)
 
 module.exports = router
