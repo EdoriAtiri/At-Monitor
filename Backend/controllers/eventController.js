@@ -64,6 +64,35 @@ const updateEvent = asyncHandler(async (req, res) => {
   res.status(201).json(updatedEvent)
 })
 
+// @desc Delete an event
+// @route /api/events/:id
+// @access Private
+const deleteEvent = asyncHandler(async (req, res) => {
+  // Get Admin using the Id in the jwt
+  const admin = await Admin.findById(req.admin.id)
+
+  if (!admin) {
+    res.status(401)
+    throw new Error('Admin not found')
+  }
+
+  const thisEvent = await Event.findById(req.params.id)
+
+  if (!thisEvent) {
+    res.status(404)
+    throw new Error('Event not found')
+  }
+
+  if (thisEvent.admin.toString() !== req.admin.id) {
+    res.status(401)
+    throw new Error('Not Authorized')
+  }
+
+  await ticket.deleteOne()
+
+  res.status(200).json({ success: true })
+})
+
 module.exports = {
   createEvent,
   updateEvent,
