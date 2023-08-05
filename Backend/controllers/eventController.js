@@ -33,6 +33,23 @@ const createEvent = asyncHandler(async (req, res) => {
   res.status(201).json(event)
 })
 
+// @desc Get all admin events
+// @route /api/events/:id
+// @access Private
+const getEvents = asyncHandler(async (req, res) => {
+  // Get Admin using the Id in the jwt
+  const admin = await Admin.findById(req.admin.id)
+
+  if (!admin) {
+    res.status(401)
+    throw new Error('Admin not found')
+  }
+
+  const events = await Event.find({ admin: req.admin.id })
+
+  res.status(200).json(events)
+})
+
 // @desc Update an event
 // @route /api/events/:id
 // @access Private
@@ -97,4 +114,5 @@ module.exports = {
   createEvent,
   updateEvent,
   deleteEvent,
+  getEvents,
 }
