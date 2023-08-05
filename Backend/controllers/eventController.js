@@ -34,7 +34,7 @@ const createEvent = asyncHandler(async (req, res) => {
 })
 
 // @desc Get all admin events
-// @route /api/events/:id
+// @route /api/events
 // @access Private
 const getEvents = asyncHandler(async (req, res) => {
   // Get Admin using the Id in the jwt
@@ -48,6 +48,30 @@ const getEvents = asyncHandler(async (req, res) => {
   const events = await Event.find({ admin: req.admin.id })
 
   res.status(200).json(events)
+})
+
+// @desc Get an event
+// @route /api/events/:id
+// @access Private
+const getEvent = asyncHandler(async (req, res) => {
+  const eventId = req.params.id
+  // Get Admin using the Id in the jwt
+  const admin = await Admin.findById(req.admin.id)
+
+  if (!admin) {
+    res.status(401)
+    throw new Error('Admin not found')
+  }
+
+  const thisEvent = await Event.findById(eventId)
+
+  //   Check that the admin created the event
+  if (req.admin.id !== thisEvent.id.toString()) {
+    res.status(401)
+    throw new Error('Not Authorized')
+  }
+
+  res.status(200).json(thisEvent)
 })
 
 // @desc Update an event
