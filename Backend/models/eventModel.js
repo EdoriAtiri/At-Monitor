@@ -1,5 +1,13 @@
 const mongoose = require('mongoose')
 
+const registeredSchema = mongoose.Schema({
+  id: mongoose.Schema.Types.ObjectId,
+  fullName: String,
+  email: String,
+  phone: String,
+  gender: String,
+})
+
 const eventSchema = mongoose.Schema(
   {
     admin: {
@@ -22,6 +30,7 @@ const eventSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    registered: [registeredSchema],
   },
   {
     timestamps: true,

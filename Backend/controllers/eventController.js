@@ -10,7 +10,7 @@ const createEvent = asyncHandler(async (req, res) => {
   // Get Admin using the Id in the jwt
   const admin = await Admin.findById(req.admin.id)
 
-  const { eventName, eventDate, description, linkId } = req.body
+  const { eventName, eventDate, description, linkId, registered } = req.body
 
   if (!eventName || !eventDate) {
     res.status(400)
@@ -23,11 +23,12 @@ const createEvent = asyncHandler(async (req, res) => {
   }
 
   const event = await Event.create({
+    admin: req.admin.id,
     eventName,
     eventDate,
     description,
     linkId,
-    admin: req.admin.id,
+    registered,
   })
 
   res.status(201).json(event)
