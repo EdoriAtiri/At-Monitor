@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
 
 const registeredSchema = mongoose.Schema({
-  id: mongoose.Schema.Types.ObjectId,
+  memberId: mongoose.Schema.Types.ObjectId,
   fullName: String,
   email: String,
   phone: String,
   gender: String,
-  createdAt: { type: Date, default: Date.now },
+  createdAt: { type: Date, default: Date.now() },
 })
 
 const eventSchema = mongoose.Schema(

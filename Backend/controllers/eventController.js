@@ -65,6 +65,11 @@ const getEvent = asyncHandler(async (req, res) => {
 
   const thisEvent = await Event.findById(req.params.id)
 
+  if (!thisEvent) {
+    res.status(401)
+    throw new Error('Event not found')
+  }
+
   //   Check that the admin that created the event matches the admin making the get request
   if (req.admin.id !== thisEvent.admin.toString()) {
     res.status(401)
@@ -140,7 +145,7 @@ const deleteEvent = asyncHandler(async (req, res) => {
 const updateRegister = asyncHandler(async (req, res) => {
   // Get Admin using the Id in the jwt
   const admin = await Admin.findById(req.admin.id)
-
+  console.log(req.body)
   if (!admin) {
     res.status(401)
     throw new Error('Admin not found')
