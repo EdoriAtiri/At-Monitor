@@ -6,6 +6,7 @@ const registeredSchema = mongoose.Schema({
   email: String,
   phone: String,
   gender: String,
+  createdAt: { type: Date, default: Date.now },
 })
 
 const eventSchema = mongoose.Schema(

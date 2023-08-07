@@ -134,10 +134,40 @@ const deleteEvent = asyncHandler(async (req, res) => {
   res.status(200).json({ success: true })
 })
 
+// @desc update an event register
+// @route /api/events/:id/register
+// @access Private
+const updateRegister = asyncHandler(async (req, res) => {
+  // Get Admin using the Id in the jwt
+  const admin = await Admin.findById(req.admin.id)
+
+  if (!admin) {
+    res.status(401)
+    throw new Error('Admin not found')
+  }
+
+  const thisEvent = await Event.findById(req.params.id)
+
+  if (!thisEvent) {
+    res.status(404)
+    throw new Error('Event not found')
+  }
+
+  /* todo: add function to check if event has passed. if it has prevent register update */
+
+  const updateEventRegister = await Event.updateOne(
+    { _id: req.params.id },
+    { $push: { registered: req.body } }
+  )
+
+  res.status(201).json(updateEventRegister)
+})
+
 module.exports = {
   createEvent,
   updateEvent,
   deleteEvent,
   getEvent,
   getEvents,
+  updateRegister,
 }
