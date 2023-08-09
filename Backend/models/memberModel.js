@@ -1,17 +1,6 @@
 const mongoose = require('mongoose')
 
-const firstTimerData = mongoose.Schema(
-  {
-    isFirstTimer: {
-      type: Boolean,
-      default: false,
-      required: [true, 'Please provide a response'],
-    },
-  },
-  { timestamps: true }
-)
-
-const adminSchema = mongoose.Schema(
+const memberSchema = mongoose.Schema(
   {
     fullName: {
       type: String,
@@ -40,10 +29,9 @@ const adminSchema = mongoose.Schema(
     },
     membershipStatus: {
       type: String,
-      enum: ['Completed', 'In Progress', 'Paused', 'Not Started'],
+      enum: ['completed', 'ongoing', 'paused', 'undone'],
       required: [true, 'Please select an option'],
     },
-    firstTimer: firstTimerData,
   },
   {
     timestamps: true,
