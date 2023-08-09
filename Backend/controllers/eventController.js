@@ -165,7 +165,7 @@ const updateRegister = asyncHandler(async (req, res) => {
     { $push: { registered: req.body } }
   )
 
-  res.status(201).json(updateEventRegister)
+  res.status(201).json({ success: true })
 })
 
 module.exports = {

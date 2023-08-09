@@ -1,13 +1,17 @@
 const mongoose = require('mongoose')
 
-const registeredSchema = mongoose.Schema({
-  memberId: mongoose.Schema.Types.ObjectId,
-  fullName: String,
-  email: String,
-  phone: String,
-  gender: String,
-  createdAt: { type: Date, default: Date.now() },
-})
+const registeredSchema = mongoose.Schema(
+  {
+    memberId: mongoose.Schema.Types.ObjectId,
+    fullName: String,
+    email: String,
+    phone: String,
+    gender: String,
+  },
+  {
+    timestamps: true,
+  }
+)
 
 const eventSchema = mongoose.Schema(
   {

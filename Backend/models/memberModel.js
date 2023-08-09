@@ -1,5 +1,16 @@
 const mongoose = require('mongoose')
 
+const firstTimerData = mongoose.Schema(
+  {
+    isFirstTimer: {
+      type: Boolean,
+      default: false,
+      required: [true, 'Please provide a response'],
+    },
+  },
+  { timestamps: true }
+)
+
 const adminSchema = mongoose.Schema(
   {
     fullName: {
@@ -12,20 +23,19 @@ const adminSchema = mongoose.Schema(
     },
     email: {
       type: String,
-      required: [true, 'Please add an Email'],
     },
     address: {
       type: String,
-      required: [true, 'Please add a address'],
+      required: [true, 'Please add an address'],
     },
     gender: {
       type: String,
-      enum: ['Male', 'Female'],
+      enum: ['male', 'female'],
       required: [true, 'Please select gender'],
     },
     category: {
       type: String,
-      enum: ['Child', 'Teenager', 'Adult'],
+      enum: ['child', 'teenager', 'adult'],
       required: [true, 'Please select gender'],
     },
     membershipStatus: {
@@ -33,10 +43,7 @@ const adminSchema = mongoose.Schema(
       enum: ['Completed', 'In Progress', 'Paused', 'Not Started'],
       required: [true, 'Please select an option'],
     },
-    FirstTimer: {
-      type: Boolean,
-      required: [true, 'Please indicate'],
-    },
+    firstTimer: firstTimerData,
   },
   {
     timestamps: true,
