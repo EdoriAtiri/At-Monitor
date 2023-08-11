@@ -3,14 +3,19 @@ const router = express.Router()
 
 const { protect } = require('../middleware/authMiddleware')
 
-const { registerMember } = require('../controllers/memberController')
+const {
+  registerMember,
+  updateMember,
+} = require('../controllers/memberController')
 
 router.route('/').post(protect, registerMember)
 
-// router
-//   .route('/:id')
-//   .get(protect, getEvent)
-//   .patch(protect, updateEvent)
+router
+  .route('/:id')
+  //   .get(protect, getEvent)
+  .patch(protect, updateMember)
 //   .delete(protect, deleteEvent)
+
+router.route('/:id/update').post(protect, updateMember)
 
 module.exports = router

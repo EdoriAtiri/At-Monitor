@@ -1,6 +1,4 @@
 const asyncHandler = require('express-async-handler')
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
 
 const Member = require('../models/memberModel')
 const Admin = require('../models/adminModel')
@@ -37,7 +35,7 @@ const registerMember = asyncHandler(async (req, res) => {
     !category ||
     !membershipStatus
   ) {
-    req.statusCode(400)
+    res.status(400)
     throw new Error('Please include all required fields')
   }
 
@@ -77,6 +75,38 @@ const registerMember = asyncHandler(async (req, res) => {
   }
 })
 
+// @desc Update existing member record
+// @route /api/users/id/update
+// @access Public
+const updateMember = asyncHandler(async (req, res) => {
+  // Get Admin using the Id in the jwt
+  const admin = await Admin.findById(req.admin.id)
+
+  if (!admin) {
+    res.status(401)
+    throw new Error('Admin not found')
+  }
+
+  // Check if member exists
+  const memberId = await Member.findById(req.params.id)
+
+  if (!memberId) {
+    res.status(404)
+    throw new Error('Event not found')
+  }
+
+  const updatedMember = await Member.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    {
+      new: true,
+    }
+  )
+
+  res.status(201).json(updatedMember)
+})
+
 module.exports = {
   registerMember,
+  updateMember,
 }

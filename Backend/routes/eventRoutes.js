@@ -20,6 +20,6 @@ router
   .patch(protect, updateEvent)
   .delete(protect, deleteEvent)
 
-router.route('/:id/register').post(protect, updateRegister)
+router.route('/:id/registration').post(protect, updateRegister)
 
 module.exports = router
