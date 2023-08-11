@@ -7,6 +7,7 @@ const registeredSchema = mongoose.Schema(
     email: String,
     phone: String,
     gender: String,
+    firstTimer: Boolean,
   },
   {
     timestamps: true,
