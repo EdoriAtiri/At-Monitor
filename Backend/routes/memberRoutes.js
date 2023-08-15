@@ -6,6 +6,7 @@ const { protect } = require('../middleware/authMiddleware')
 const {
   registerMember,
   updateMember,
+  deleteMember,
 } = require('../controllers/memberController')
 
 router.route('/').post(protect, registerMember)
@@ -14,7 +15,7 @@ router
   .route('/:id')
   //   .get(protect, getEvent)
   .patch(protect, updateMember)
-//   .delete(protect, deleteEvent)
+  .delete(protect, deleteMember)
 
 router.route('/:id/update').post(protect, updateMember)
 
