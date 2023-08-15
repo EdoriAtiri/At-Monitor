@@ -124,11 +124,13 @@ const deleteEvent = asyncHandler(async (req, res) => {
 
   const thisEvent = await Event.findById(req.params.id)
 
+  // If event does not exist, return errorMessage
   if (!thisEvent) {
     res.status(404)
     throw new Error('Event not found')
   }
 
+  // If the admin trying to delete event did not create it, deny them and return error
   if (thisEvent.admin.toString() !== req.admin.id) {
     res.status(401)
     throw new Error('Not Authorized')

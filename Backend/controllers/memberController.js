@@ -92,7 +92,7 @@ const updateMember = asyncHandler(async (req, res) => {
 
   if (!memberId) {
     res.status(404)
-    throw new Error('Event not found')
+    throw new Error('Member not found')
   }
 
   const updatedMember = await Member.findByIdAndUpdate(
@@ -106,7 +106,33 @@ const updateMember = asyncHandler(async (req, res) => {
   res.status(201).json(updatedMember)
 })
 
+// @desc Delete member record
+// @route /api/users/id
+// @access Public
+const deleteMember = asyncHandler(async (req, res) => {
+  // Get Admin using the Id in the jwt
+  const admin = await Admin.findById(req.admin.id)
+
+  if (!admin) {
+    res.status(401)
+    throw new Error('Admin not found')
+  }
+
+  // Check if member exists
+  const memberId = await Member.findById(req.params.id)
+
+  if (!memberId) {
+    res.status(404)
+    throw new Error('Member not found')
+  }
+
+  memberId.deleteOne()
+
+  res.status(200).json({ success: true })
+})
+
 module.exports = {
   registerMember,
   updateMember,
+  deleteMember,
 }
