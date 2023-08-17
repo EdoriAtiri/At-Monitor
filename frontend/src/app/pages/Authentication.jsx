@@ -1,16 +1,16 @@
 import { useState } from 'react'
-import Register from '../components/Register'
+import Signup from '../components/Signup'
 import Login from '../components/Login'
 
 function Authentication() {
   // eslint-disable-next-line no-unused-vars
-  const [loginOrRegister, setLoginOrRegister] = useState('register')
+  const [loginOrSignup, setLoginOrSignup] = useState('signup')
 
-  if (loginOrRegister === 'login') {
+  if (loginOrSignup === 'login') {
     return <Login />
   }
-  if (loginOrRegister === 'register') {
-    return <Register />
+  if (loginOrSignup === 'signup') {
+    return <Signup />
   }
 }
 
