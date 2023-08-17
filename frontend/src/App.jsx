@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Login from './app/pages/Login.jsx'
+import Authentication from './app/pages/Authentication.jsx'
 
 function App() {
   return (
@@ -7,7 +7,7 @@ function App() {
       <Router>
         <div className="app">
           <Routes>
-            <Route path="/login" element={<Login />} />
+            <Route path="/authentication" element={<Authentication />} />
           </Routes>
         </div>
       </Router>
