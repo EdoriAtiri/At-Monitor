@@ -1,27 +1,15 @@
-const API_URL = '/api/admins'
+import axios from 'axios'
+const API_URL = 'http://localhost:5000/api/admins'
 
 // Signup admin
 const signup = async (data) => {
-  const options = {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  }
-  try {
-    const response = await fetch(API_URL, options)
+  const response = await axios.post(API_URL, data)
 
-    if (!response.ok) {
-      const message = `An error occurred: ${response.status}, ${response.statusText}`
-      throw new Error(message)
-    }
-    const data = await response.json()
-    return data
-  } catch (error) {
-    return error
+  if (response.data) {
+    localStorage.setItem('admin', JSON.stringify(response.data))
   }
+
+  return response.data
 }
 
 const authService = {

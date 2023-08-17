@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { signup, reset } from '../features/Auth/authSlice'
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -11,6 +13,24 @@ function Signup() {
 
   const { firstName, lastName, email, password, password2 } = formData
 
+  const dispatch = useDispatch()
+
+  const { admin, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  )
+
+  useEffect(() => {
+    if (isError) {
+      console.log(message)
+    }
+
+    if (isSuccess) {
+      alert('Account created successfully')
+    }
+
+    dispatch(reset())
+  }, [isError, message, isSuccess, admin])
+
   const onChange = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -18,12 +38,33 @@ function Signup() {
     }))
   }
 
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    if (password !== password2) {
+      console.log('passwords do not match')
+    } else {
+      const data = {
+        firstName,
+        lastName,
+        email,
+        password,
+      }
+
+      dispatch(signup(data))
+    }
+  }
+
+  if (isLoading) {
+    return <div>loading</div>
+  }
+
   return (
     <div className="w-full px-6">
       <h2>Administrator Signup</h2>
       <p>Hey, Enter your details to signup for an account</p>
 
-      <form>
+      <form onSubmit={onSubmit}>
         <div className="form-group">
           <input
             type="text"
@@ -84,6 +125,10 @@ function Signup() {
             placeholder="Confirm password"
             required
           />
+        </div>
+
+        <div>
+          <button>submit</button>
         </div>
       </form>
     </div>
