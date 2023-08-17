@@ -30,3 +30,34 @@ export const signup = createAsyncThunk(
     }
   }
 )
+
+export const authSlice = createSlice({
+  name: 'auth',
+  initialState,
+  reducers: {
+    reset: (state) => {
+      state.isLoading = false
+      state.isError = false
+      state.isSuccess = false
+      state.message = ''
+    },
+
+    extraReducers: (builder) => {
+      builder
+        .addCase(signup.pending, (state) => {
+          state.isLoading = true
+        })
+        .addCase(signup.fulfilled, (state, action) => {
+          state.isLoading = false
+          state.isSuccess = true
+          state.admin = action.payload
+        })
+        .addCase(signup.rejected, (state, action) => {
+          state.isLoading = false
+          state.isSuccess = false
+          state.message = action.payload
+          state.admin = null
+        })
+    },
+  },
+})
