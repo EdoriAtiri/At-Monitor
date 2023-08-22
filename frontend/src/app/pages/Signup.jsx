@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { signup, reset } from '../features/Auth/authSlice'
 
 function Signup() {
@@ -14,6 +15,7 @@ function Signup() {
   const { firstName, lastName, email, password, password2 } = formData
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const { admin, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
@@ -24,12 +26,14 @@ function Signup() {
       console.log(message)
     }
 
-    if (isSuccess) {
-      alert('Account created successfully')
+    // Redirect when logged in
+    if (isSuccess || admin) {
+      // navigate('/')
+      console.log('success')
     }
 
     dispatch(reset())
-  }, [isError, message, isSuccess, admin])
+  }, [isError, message, isSuccess, admin, navigate])
 
   const onChange = (e) => {
     setFormData((prev) => ({

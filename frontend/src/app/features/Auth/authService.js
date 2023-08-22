@@ -1,5 +1,5 @@
 import axios from 'axios'
-const API_URL = 'http://localhost:5000/api/admins'
+const API_URL = 'http://localhost:5000/api/admins/'
 
 // Signup admin
 const signup = async (data) => {
@@ -8,6 +8,8 @@ const signup = async (data) => {
   if (response.data) {
     localStorage.setItem('admin', JSON.stringify(response.data))
   }
+
+  console.log(response)
 
   return response.data
 }
