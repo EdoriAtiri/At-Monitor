@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <Router>
-        <div className="app">
+        <div className="app min-h-screen">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<Signup />} />
