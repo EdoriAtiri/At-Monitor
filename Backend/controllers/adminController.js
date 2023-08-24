@@ -12,7 +12,7 @@ const registerAdmin = asyncHandler(async (req, res) => {
 
   // Validation
   if (!firstName || !lastName || !email || !password) {
-    req.statusCode(400)
+    res.status(400)
     throw new Error('Please include all required fields')
   }
 
