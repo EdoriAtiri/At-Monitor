@@ -1,4 +1,5 @@
 import Logo from '../components/Logo'
+import { Link } from 'react-router-dom'
 
 function Login() {
   return (
@@ -49,6 +50,13 @@ function Login() {
             </button>
           </div>
         </form>
+
+        <span className="text-sm text">
+          Don&apos;t have an account?{' '}
+          <span className="text-blue-600 font-bold">
+            <Link to="/signup">Signup</Link>
+          </span>
+        </span>
       </div>
 
       <div className="w-1/2 py-10 px-10 flex flex-col relative">

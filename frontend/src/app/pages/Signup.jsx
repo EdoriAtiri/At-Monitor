@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { signup, reset } from '../features/Auth/authSlice'
 import Logo from '../components/Logo'
 
@@ -152,6 +152,13 @@ function Signup() {
             </button>
           </div>
         </form>
+
+        <span className="text-sm text">
+          Already have an account?{' '}
+          <span className="text-blue-600 font-bold">
+            <Link to="/login">Login</Link>
+          </span>
+        </span>
       </div>
 
       <div className="w-1/2 py-10 px-10 flex flex-col relative">

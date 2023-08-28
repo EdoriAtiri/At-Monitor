@@ -33,6 +33,22 @@ export const signup = createAsyncThunk(
   }
 )
 
+// Login an admin
+export const login = createAsyncThunk('auth/login', async (admin, thunkAPI) => {
+  try {
+    return await authService.login(admin)
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString()
+
+    console.log(message)
+
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
