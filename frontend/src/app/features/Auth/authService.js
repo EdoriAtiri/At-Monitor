@@ -14,8 +14,22 @@ const signup = async (data) => {
   return response.data
 }
 
+// Login admin
+const login = async (data) => {
+  const response = await axios.post(API_URL, data)
+
+  if (response.data) {
+    localStorage.setItem('admin', JSON.stringify(response.data))
+  }
+
+  console.log(response)
+
+  return response.data
+}
+
 const authService = {
   signup,
+  login,
 }
 
 export default authService
