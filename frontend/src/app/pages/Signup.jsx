@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { signup, reset } from '../features/Auth/authSlice'
+import Logo from '../components/Logo'
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -66,6 +67,8 @@ function Signup() {
   return (
     <div className="w-full min-h-screen flex flex-row">
       <div className="w-1/2 py-10 flex gap-6 flex-col justify-center items-center">
+        <Logo />
+
         <div className="text-left space-y-1 w-3/4 lg:w-1/2 [&>*]:w-full">
           <h2 className="text-2xl tracking-tight lg:text-3xl font-bold">
             Lets create your account

@@ -1,5 +1,68 @@
+import Logo from '../components/Logo'
+
 function Login() {
-  return <div>Login</div>
+  return (
+    <div className="w-full min-h-screen flex flex-row">
+      <div className="w-1/2 py-10 flex gap-6 flex-col justify-center items-center relative ">
+        <Logo />
+
+        <div className="text-left space-y-1 w-3/4 lg:w-1/2 [&>*]:w-full">
+          <h2 className="text-2xl tracking-tight lg:text-3xl font-bold">
+            Login in to AT Monitor
+          </h2>
+        </div>
+
+        <form
+          // onSubmit={onSubmit}
+          className="space-y-7 w-3/4 lg:w-1/2 [&>*]:w-full"
+        >
+          <div className="space-y-4">
+            <div className="form-group">
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                name="email"
+                // value={email}
+                // onChange={onChange}
+                placeholder="Enter your email address"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="password"
+                className="form-control"
+                id="password"
+                name="password"
+                // value={password}
+                // onChange={onChange}
+                placeholder="Enter password"
+                required
+              />
+            </div>
+          </div>
+
+          <div className="btn mt-36">
+            <button className="form-control grid place-content-center active:scale-95 transition-transform font-bold text-white bg-black">
+              Continue
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div className="w-1/2 py-10 px-10 flex flex-col relative">
+        <ul className="text-sm h-fit py-4 xl:text-base flex flex-row gap-6 justify-end w-full">
+          <li className="nav">About</li>
+          <li className="nav">Contact</li>
+        </ul>
+        <div className="font-bold text-7xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <span className="text-8xl xl">A</span>
+          <span className="-ml-4">M</span>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default Login

@@ -1,14 +1,12 @@
 import { Link } from 'react-router-dom'
 import Button from '../components/Button'
+import Logo from '../components/Logo'
 
 function Home() {
   return (
     <div className="w-full min-h-screen flex flex-row">
       <div className="w-1/2 py-10 space-y-32">
-        <div className="font-bold text-2xl ml-10">
-          <span className="text-3xl">A</span>
-          <span className="-ml-2">M</span>
-        </div>
+        <Logo />
         <div className="px-10 xl:px-20 m-auto space-y-6">
           <h1 className="font-bold text-4xl lg:text-6xl">
             Track Event Attendance{' '}
