@@ -1,7 +1,60 @@
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { login, reset } from '../features/Auth/authSlice'
 import Logo from '../components/Logo'
-import { Link } from 'react-router-dom'
 
 function Login() {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  })
+
+  const { email, password } = formData
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const { admin, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  )
+
+  useEffect(() => {
+    if (isError) {
+      console.log(message)
+    }
+
+    // Redirect when logged in
+    if (isSuccess || admin) {
+      // navigate('/')
+      console.log('success')
+    }
+
+    dispatch(reset())
+  }, [isError, message, isSuccess, admin, navigate])
+
+  const onChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }))
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    const data = {
+      email,
+      password,
+    }
+
+    dispatch(login(data))
+  }
+
+  if (isLoading) {
+    return <div>loading</div>
+  }
+
   return (
     <div className="w-full min-h-screen flex flex-row">
       <div className="w-1/2 py-10 flex gap-6 flex-col justify-center items-center relative ">
@@ -14,7 +67,7 @@ function Login() {
         </div>
 
         <form
-          // onSubmit={onSubmit}
+          onSubmit={onSubmit}
           className="space-y-7 w-3/4 lg:w-1/2 [&>*]:w-full"
         >
           <div className="space-y-4">
@@ -24,8 +77,8 @@ function Login() {
                 className="form-control"
                 id="email"
                 name="email"
-                // value={email}
-                // onChange={onChange}
+                value={email}
+                onChange={onChange}
                 placeholder="Enter your email address"
                 required
               />
@@ -36,8 +89,8 @@ function Login() {
                 className="form-control"
                 id="password"
                 name="password"
-                // value={password}
-                // onChange={onChange}
+                value={password}
+                onChange={onChange}
                 placeholder="Enter password"
                 required
               />

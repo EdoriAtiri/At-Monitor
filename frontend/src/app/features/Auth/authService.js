@@ -16,7 +16,7 @@ const signup = async (data) => {
 
 // Login admin
 const login = async (data) => {
-  const response = await axios.post(API_URL, data)
+  const response = await axios.post(API_URL + 'login', data)
 
   if (response.data) {
     localStorage.setItem('admin', JSON.stringify(response.data))
