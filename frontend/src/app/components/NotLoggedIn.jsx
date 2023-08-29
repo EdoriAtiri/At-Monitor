@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import Button from '../components/Button'
-import Logo from '../components/Logo'
+import Button from './Button'
+import Logo from './Logo'
 
 function NotLoggedIn() {
   return (
