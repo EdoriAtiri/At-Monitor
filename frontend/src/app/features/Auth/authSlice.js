@@ -59,38 +59,38 @@ export const authSlice = createSlice({
       state.isSuccess = false
       state.message = ''
     },
+  },
 
-    extraReducers: (builder) => {
-      builder
-        .addCase(signup.pending, (state) => {
-          state.isLoading = true
-        })
-        .addCase(signup.fulfilled, (state, action) => {
-          state.isLoading = false
-          state.isSuccess = true
-          state.admin = action.payload
-        })
-        .addCase(signup.rejected, (state, action) => {
-          state.isLoading = false
-          state.isSuccess = false
-          state.message = action.payload
-          state.admin = null
-        })
-        .addCase(login.pending, (state) => {
-          state.isLoading = true
-        })
-        .addCase(login.fulfilled, (state, action) => {
-          state.isLoading = false
-          state.isSuccess = true
-          state.admin = action.payload
-        })
-        .addCase(login.rejected, (state, action) => {
-          state.isLoading = false
-          state.isSuccess = false
-          state.message = action.payload
-          state.admin = null
-        })
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(signup.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(signup.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.admin = action.payload
+      })
+      .addCase(signup.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+        state.admin = null
+      })
+      .addCase(login.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.admin = action.payload
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+        state.admin = null
+      })
   },
 })
 

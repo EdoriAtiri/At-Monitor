@@ -29,7 +29,7 @@ function Signup() {
 
     // Redirect when logged in
     if (isSuccess || admin) {
-      // navigate('/')
+      navigate('/dashboard')
       console.log('success')
     }
 

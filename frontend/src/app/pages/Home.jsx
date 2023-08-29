@@ -1,9 +1,14 @@
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
+import { useAuthStatus } from '../hooks/useAuthStatus'
 import Button from '../components/Button'
 import Logo from '../components/Logo'
 
 function Home() {
-  return (
+  const { loggedIn } = useAuthStatus()
+
+  return loggedIn ? (
+    <Navigate to="/dashboard" />
+  ) : (
     <div className="w-full min-h-screen flex flex-row">
       <div className="w-1/2 py-10 space-y-32">
         <Logo />
