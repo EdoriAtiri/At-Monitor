@@ -15,7 +15,7 @@ function Dashboard() {
       {/* Dashboard SideBar */}
       <section
         title="side bar"
-        className="w-64 h-screen pt-32 bg-sky-400 space-y-16"
+        className="w-96 h-screen pt-32 bg-sky-400 space-y-16"
       >
         <nav className="pl-6">
           <ul className="text-xl font-semibold space-y-6">
