@@ -10,4 +10,8 @@
   .form-control {
     @apply w-52 py-3 h-10 pl-2 w-full text-sm rounded border border-gray-400;
   }
+
+  .sidebar-icons {
+    @apply flex gap-6 items-center;
+  }
 }
