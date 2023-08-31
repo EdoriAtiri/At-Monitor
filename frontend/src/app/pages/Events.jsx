@@ -1,3 +1,5 @@
+import EventCard from '../components/EventCard'
+
 function Events() {
   return (
     <div className="w-full mx-6 mt-10 mb-6">
@@ -25,6 +27,10 @@ function Events() {
           </tr>
         </table>
       </div>
+      {/* Events */}
+      <section className="w-full">
+        <EventCard />
+      </section>
     </div>
   )
 }
