@@ -31,6 +31,7 @@ function Login() {
     }
 
     dispatch(reset())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError, message, isSuccess, admin, navigate])
 
   const onChange = (e) => {

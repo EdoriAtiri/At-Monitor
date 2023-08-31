@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import Logo from '../components/Logo'
 import {
   FaCalendarDays,
@@ -7,7 +7,6 @@ import {
   FaGear,
   FaPowerOff,
 } from 'react-icons/fa6'
-import Events from './Events'
 
 function Dashboard() {
   return (
@@ -21,14 +20,14 @@ function Dashboard() {
         <nav className="pl-6">
           <ul className="text-xl font-semibold space-y-6">
             <li className="sidebar-icons">
-              <FaCalendarDays /> <Link>Events</Link>
+              <FaCalendarDays /> <Link to="events">Events</Link>
             </li>
             <li className="sidebar-icons">
               <FaPersonCircleCheck /> <Link>Registrars</Link>
             </li>
             <li className="sidebar-icons">
               <FaUserCheck />
-              <Link>Profile</Link>
+              <Link to="profile">Profile</Link>
             </li>
           </ul>
         </nav>
@@ -45,14 +44,7 @@ function Dashboard() {
       </section>
 
       {/* Outlet */}
-      <Events />
-      {/* Events */}
-      {/* <section title="Dashboard">
-        <heading className="flex">
-          <h1>My Events</h1>
-          <button>Create a new Event</button>
-        </heading>
-      </section> */}
+      <Outlet />
     </div>
   )
 }
