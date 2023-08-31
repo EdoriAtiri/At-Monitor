@@ -4,6 +4,7 @@ import Signup from './app/pages/Signup.jsx'
 import Login from './app/pages/Login.jsx'
 import Dashboard from './app/pages/Dashboard.jsx'
 import PrivateRoute from './app/components/PrivateRoute.jsx'
+import Events from './app/pages/Events.jsx'
 
 function App() {
   return (
@@ -17,7 +18,9 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<PrivateRoute />}>
-              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/dashboard" element={<Dashboard />}>
+                <Route path="events" element={<Events />} />
+              </Route>
             </Route>
           </Routes>
         </div>

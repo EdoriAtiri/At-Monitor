@@ -7,6 +7,7 @@ import {
   FaGear,
   FaPowerOff,
 } from 'react-icons/fa6'
+import Events from './Events'
 
 function Dashboard() {
   return (
@@ -43,6 +44,8 @@ function Dashboard() {
         </ul>
       </section>
 
+      {/* Outlet */}
+      <Events />
       {/* Events */}
       {/* <section title="Dashboard">
         <heading className="flex">
