@@ -1,6 +1,25 @@
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { getEvents, reset } from '../features/Events/eventSlice'
 import EventCard from '../components/EventCard'
 
 function Events() {
+  const { myEvents, isSuccess } = useSelector((state) => state.myEvents)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    return () => {
+      if (isSuccess) {
+        dispatch(reset())
+      }
+    }
+  }, [dispatch, isSuccess])
+
+  useEffect(() => {
+    dispatch(getEvents())
+  }, [dispatch])
+
   return (
     <div className="w-full mx-6 mt-10 mb-6">
       <heading className="flex items-center justify-between text-xl font-semibold">
