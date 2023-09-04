@@ -72,9 +72,17 @@ function Events() {
       </div>
       {/* Events */}
       <section className="w-full flex flex-col mt-8 gap-6">
-        <EventCard />
-        <EventCard />
-        <EventCard />
+        {myEvents.map((myEvent) => {
+          return (
+            <EventCard
+              name={myEvent.eventName}
+              created={myEvent.createdAt}
+              date={myEvent.eventDate}
+              registered={myEvent.registered.length || 0}
+              key={myEvent._id}
+            />
+          )
+        })}
       </section>
     </div>
   )
