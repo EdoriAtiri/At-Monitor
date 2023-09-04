@@ -10,13 +10,13 @@ import {
 
 function Dashboard() {
   return (
-    <div className="flex flex-row relative">
-      <Logo />
+    <div className="relative flex flex-row">
       {/* Dashboard SideBar */}
       <section
         title="side bar"
-        className="w-96 h-screen pt-32 bg-sky-400 space-y-16"
+        className="w-60 h-screen pt-14 bg-sky-400 space-y-16 fixed top-0 left-0"
       >
+        <Logo />
         <nav className="pl-6">
           <ul className="text-xl font-semibold space-y-6">
             <li className="sidebar-icons">
@@ -44,7 +44,9 @@ function Dashboard() {
       </section>
 
       {/* Outlet */}
-      <Outlet />
+      <div className="ml-60 w-full">
+        <Outlet />
+      </div>
     </div>
   )
 }

@@ -24,10 +24,12 @@ function Events() {
     }
   }, [dispatch, isSuccess])
 
+  // Gets events data
   useEffect(() => {
     dispatch(getEvents())
   }, [dispatch])
 
+  // Creates stats when getEvents is successful
   useEffect(() => {
     const currentDate = new Date()
 
@@ -43,7 +45,7 @@ function Events() {
   }, [myEvents])
 
   return (
-    <div className="w-full mx-6 mt-10 mb-6">
+    <div className=" mx-6 mt-10 mb-6">
       <heading className="flex items-center justify-between text-xl font-semibold">
         <h1>My Events</h1>
         <button className="text-lg border border-gray-700 p-1 rounded-md">
@@ -69,7 +71,9 @@ function Events() {
         </table>
       </div>
       {/* Events */}
-      <section className="w-full">
+      <section className="w-full flex flex-col mt-8 gap-6">
+        <EventCard />
+        <EventCard />
         <EventCard />
       </section>
     </div>
