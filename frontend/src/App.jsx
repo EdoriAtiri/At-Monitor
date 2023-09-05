@@ -5,6 +5,7 @@ import Login from './app/pages/Login.jsx'
 import Dashboard from './app/pages/Dashboard.jsx'
 import PrivateRoute from './app/components/PrivateRoute.jsx'
 import Events from './app/pages/Events.jsx'
+import Event from './app/pages/Event.jsx'
 import Profile from './app/pages/Profile.jsx'
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />}>
                 <Route path="profile" element={<Profile />} />
                 <Route path="events" element={<Events />} />
+                <Route path="events/:eventId" element={<Event />} />
               </Route>
             </Route>
           </Routes>
