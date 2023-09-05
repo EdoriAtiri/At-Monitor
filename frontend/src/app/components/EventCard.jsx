@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types'
 
 function EventCard({ name, created, date, registered, onClickBtn }) {
+  const currentDate = new Date()
+  const past = currentDate > new Date(date)
+
   return (
     <button className="w-full" onClick={onClickBtn}>
       <table className="flex w-full lg:w-96 justify-between border border-gray-700 py-2 px-4 lg:p-4 rounded-md">
@@ -9,12 +12,24 @@ function EventCard({ name, created, date, registered, onClickBtn }) {
           <th>Date Created:</th>
           <th>Event Date:</th>
           <th>Total Registered:</th>
+          <th>Status:</th>
         </tr>
         <tr className="flex gap-2 flex-col text-right">
           <td>{name}</td>
           <td>{created}</td>
           <td>{date}</td>
           <td>{registered}</td>
+          <td>
+            {past ? (
+              <span className="bg-green-400 font-bold rounded px-1 py-0.5">
+                Finished
+              </span>
+            ) : (
+              <span className="bg-orange-400 font-bold rounded px-1 py-0.5">
+                Pending
+              </span>
+            )}
+          </td>
         </tr>
       </table>
     </button>
