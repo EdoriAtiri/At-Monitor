@@ -4,6 +4,11 @@ function EventCard({ name, created, date, registered, onClickBtn }) {
   const currentDate = new Date()
   const past = currentDate > new Date(date)
 
+  const formatDate = (inputDate) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' }
+    return inputDate.toLocaleDateString('en-GB', options)
+  }
+
   return (
     <button className="w-full" onClick={onClickBtn}>
       <table className="flex w-full lg:w-96 justify-between border border-gray-700 py-2 px-4 lg:p-4 rounded-md">
@@ -16,8 +21,8 @@ function EventCard({ name, created, date, registered, onClickBtn }) {
         </tr>
         <tr className="flex gap-2 flex-col text-right">
           <td>{name}</td>
-          <td>{created}</td>
-          <td>{date}</td>
+          <td>{formatDate(new Date(created))}</td>
+          <td>{formatDate(new Date(date))}</td>
           <td>{registered}</td>
           <td>
             {past ? (
