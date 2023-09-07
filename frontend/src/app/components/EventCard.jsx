@@ -1,14 +1,10 @@
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
+import formatDate from '../lib/formatDate'
 
 function EventCard({ name, created, date, registered, id }) {
   const currentDate = new Date()
   const past = currentDate > new Date(date)
-
-  const formatDate = (inputDate) => {
-    const options = { year: 'numeric', month: 'short', day: 'numeric' }
-    return new Date(inputDate).toLocaleDateString('en-GB', options)
-  }
 
   const navigate = useNavigate()
 
