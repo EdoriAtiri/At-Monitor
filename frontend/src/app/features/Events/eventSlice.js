@@ -76,6 +76,19 @@ export const eventSlice = createSlice({
         state.isError = true
         state.message = action.payload
       })
+      .addCase(getEvent.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getEvent.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.myEvents = action.payload
+      })
+      .addCase(getEvent.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
   },
 })
 
