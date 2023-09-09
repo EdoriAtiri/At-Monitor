@@ -3,7 +3,7 @@ import eventService from './EventService'
 
 const initialState = {
   myEvents: [],
-  event: {},
+  myEvent: {},
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -82,7 +82,7 @@ export const eventSlice = createSlice({
       .addCase(getEvent.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.myEvents = action.payload
+        state.myEvent = action.payload
       })
       .addCase(getEvent.rejected, (state, action) => {
         state.isLoading = false

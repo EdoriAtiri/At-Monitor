@@ -80,7 +80,7 @@ function Events() {
               date={myEvent.eventDate}
               registered={myEvent.registered.length || 0}
               key={myEvent.linkId}
-              id={myEvent.linkId}
+              id={myEvent._id}
             />
           )
         })}

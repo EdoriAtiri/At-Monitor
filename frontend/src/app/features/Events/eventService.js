@@ -22,7 +22,6 @@ const getEvent = async (eventId, token) => {
       Authorization: `Bearer ${token}`,
     },
   }
-
   const response = await axios.get(API_URL + eventId, config)
 
   return response.data
