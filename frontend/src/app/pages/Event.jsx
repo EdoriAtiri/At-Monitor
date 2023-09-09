@@ -8,6 +8,7 @@ function Event() {
   const { myEvent, isLoading, isError, message } = useSelector(
     (state) => state.myEvents
   )
+  const { admin } = useSelector((state) => state.auth)
 
   const dispatch = useDispatch()
   const { eventId } = useParams()
@@ -42,7 +43,7 @@ function Event() {
           {/* <div className="w-[1px] h-full bg-slate-700 absolute left-24"></div> */}
           <tbody>
             <tr className="flex [&>*]:w-28">
-              <td>{myEvent.admin}</td>
+              <td>{`${admin.firstName} ${admin.lastName}`}</td>
               <td>{formatDate(myEvent.eventDate)}</td>
             </tr>
           </tbody>
