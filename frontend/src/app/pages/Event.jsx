@@ -3,7 +3,7 @@ import formatDate from '../lib/formatDate'
 function Event() {
   return (
     <div className=" mx-6 mt-10 mb-6">
-      <h1 className="text-3xl mb-5">Event Name</h1>
+      <h1 className="text-3xl mb-5 uppercase">Event Name</h1>
       {/* Table for creator and date */}
       <div className="flex ">
         <table className="flex flex-col mb-6 w-full lg:w-96 justify-between relative">
@@ -41,6 +41,23 @@ function Event() {
           <td>t.co/iriwfoifowfj</td>
         </tr>
       </table>{' '}
+      {/* Registered attendees */}
+      <section className="mt-8">
+        <div>
+          <h2 className="text-xl">Registered Participants</h2>
+          <span>
+            <span>10</span>total
+          </span>
+          <div className="flex">
+            sort by:{' '}
+            <select>
+              <option value="date">Date</option>
+              <option value="name">Name</option>
+            </select>
+          </div>
+        </div>
+        <ul></ul>
+      </section>
     </div>
   )
 }
