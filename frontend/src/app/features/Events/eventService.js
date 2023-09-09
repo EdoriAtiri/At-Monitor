@@ -15,8 +15,22 @@ const getEvents = async (token) => {
   return response.data
 }
 
+// Get an admin event
+const getEvent = async (eventId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+
+  const response = await axios.get(API_URL + eventId, config)
+
+  return response.data
+}
+
 const eventService = {
   getEvents,
+  getEvent,
 }
 
 export default eventService
