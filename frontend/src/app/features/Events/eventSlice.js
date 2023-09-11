@@ -54,6 +54,28 @@ export const getEvent = createAsyncThunk(
   }
 )
 
+// Edit an admin event
+export const editEvent = createAsyncThunk(
+  'events/editEvent',
+  async (eventId, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.admin.token
+      return await eventService.getEvent(eventId, token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+
+      console.log(message)
+
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 export const eventSlice = createSlice({
   name: 'event',
   initialState,
@@ -85,6 +107,19 @@ export const eventSlice = createSlice({
         state.myEvent = action.payload
       })
       .addCase(getEvent.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      .addCase(editEvent.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(editEvent.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.myEvent = action.payload
+      })
+      .addCase(editEvent.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
