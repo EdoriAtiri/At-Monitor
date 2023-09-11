@@ -27,9 +27,23 @@ const getEvent = async (eventId, token) => {
   return response.data
 }
 
+// Get an admin event
+const editEvent = async (updatedEvent, eventId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+
+  const response = await axios.patch(API_URL + eventId, updatedEvent, config)
+
+  return response.data
+}
+
 const eventService = {
   getEvents,
   getEvent,
+  editEvent,
 }
 
 export default eventService
