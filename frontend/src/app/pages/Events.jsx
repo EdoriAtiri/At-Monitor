@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getEvents, reset } from '../features/Events/eventSlice'
 import EventCard from '../components/EventCard'
+import NewEvent from '../components/NewEvent'
 
 function Events() {
+  const [isNewEvent, setIsNewEvent] = useState(false)
   const { myEvents, isSuccess } = useSelector((state) => state.myEvents)
   const [eventStats, setEventStats] = useState({
     total: '',
@@ -46,9 +48,13 @@ function Events() {
 
   return (
     <div className=" mx-6 mt-10 mb-6">
+      {isNewEvent && <NewEvent closeForm={() => setIsNewEvent(false)} />}
       <heading className="items-center justify-between flex text-xl font-semibold">
         <h1>My Events</h1>
-        <button className="text-lg border border-gray-700 p-1 rounded-md">
+        <button
+          onClick={() => setIsNewEvent(true)}
+          className="text-lg border border-gray-700 p-1 rounded-md"
+        >
           Create New Event
         </button>
       </heading>{' '}

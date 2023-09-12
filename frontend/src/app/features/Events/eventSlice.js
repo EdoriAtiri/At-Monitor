@@ -139,7 +139,7 @@ export const eventSlice = createSlice({
       .addCase(createEvent.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.myEvent = action.payload
+        state.myEvents = [action.payload, ...state.myEvents]
       })
       .addCase(createEvent.rejected, (state, action) => {
         state.isLoading = false

@@ -81,7 +81,7 @@ function EditEventForm({ eventId, closeEdit }) {
       <div className="w-80 bg-white h-fit z-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-6 py-6 rounded">
         <button
           onClick={closeEdit}
-          className="text-lg p-1 uppercase font-bold absolute right-0 pr-1 top-0"
+          className="text-lg p-1 uppercase font-bold absolute right-0 pr-2 top-0"
         >
           x
         </button>

@@ -35,7 +35,7 @@ function NewEvent({ closeForm }) {
       ...eventData,
     }
     dispatch(createEvent(data))
-    // closeForm()
+    closeForm()
   }
 
   // Convert to error and success pop ups
@@ -45,7 +45,7 @@ function NewEvent({ closeForm }) {
     }
 
     if (isSuccess) {
-      closeForm()
+      console.log('success')
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -65,7 +65,7 @@ function NewEvent({ closeForm }) {
       <div className="w-80 bg-white h-fit z-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-6 py-6 rounded">
         <button
           onClick={closeForm}
-          className="text-lg p-1 uppercase font-bold absolute right-0 pr-1 top-0"
+          className="text-lg p-1 uppercase font-bold absolute right-0 pr-2 top-0"
         >
           x
         </button>
@@ -147,7 +147,7 @@ function NewEvent({ closeForm }) {
 
           <div className="btn mt-36">
             <button className="form-control grid place-content-center active:scale-95 transition-transform font-bold text-white bg-black">
-              Edit
+              Create Event
             </button>
           </div>
         </form>{' '}
