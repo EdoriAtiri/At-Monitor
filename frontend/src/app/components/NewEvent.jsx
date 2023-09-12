@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { editEvent } from '../features/Events/eventSlice'
+import { createEvent } from '../features/Events/eventSlice'
 
-function EditEventForm({ eventId, closeEdit }) {
+function NewEvent({ closeForm }) {
   const [eventData, setEventData] = useState({
     eventName: '',
     eventDate: '',
@@ -11,32 +11,12 @@ function EditEventForm({ eventId, closeEdit }) {
     linkId: '',
   })
 
-  // const [isInitial, setIsInitial] = useState(true)
-
-  const formatDate = (dateString) => {
-    if (!dateString) return ''
-    const date = new Date(dateString)
-    return date.toISOString().split('T')[0] // Extract yyyy-mm-dd
-  }
-
-  const dispatch = useDispatch()
-  // console.log(eventId)
-
-  const { myEvent, isError, isLoading, message } = useSelector(
+  const { isError, isLoading, isSuccess, message } = useSelector(
     (state) => state.myEvents
   )
 
-  //   If editing event data, get the existing data
-  useEffect(() => {
-    if (myEvent) {
-      setEventData({
-        eventName: myEvent.eventName || '1',
-        eventDate: myEvent.eventDate || '',
-        description: myEvent.description || '',
-        linkId: myEvent.linkId || '',
-      })
-    }
-  }, [myEvent])
+  const dispatch = useDispatch()
+  // console.log(eventId)
 
   const { eventName, eventDate, description, linkId } = eventData
 
@@ -47,21 +27,25 @@ function EditEventForm({ eventId, closeEdit }) {
     }))
   }
 
+  // Submit event data
   const onSubmit = (e) => {
     e.preventDefault()
 
     const data = {
       ...eventData,
     }
-    dispatch(editEvent({ data, eventId }))
-
-    closeEdit()
+    dispatch(createEvent(data))
+    // closeForm()
   }
 
   // Convert to error and success pop ups
   useEffect(() => {
     if (isError) {
       console.log(message)
+    }
+
+    if (isSuccess) {
+      closeForm()
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -74,13 +58,13 @@ function EditEventForm({ eventId, closeEdit }) {
   return (
     <div className="absolute top-0 left-0  w-screen h-screen">
       <button
-        onClick={closeEdit}
+        onClick={closeForm}
         className="position absolute top-0 left-0 bg-black h-full w-full opacity-30"
       ></button>
 
       <div className="w-80 bg-white h-fit z-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-6 py-6 rounded">
         <button
-          onClick={closeEdit}
+          onClick={closeForm}
           className="text-lg p-1 uppercase font-bold absolute right-0 pr-1 top-0"
         >
           x
@@ -120,7 +104,7 @@ function EditEventForm({ eventId, closeEdit }) {
                 className="form-control pr-2"
                 id="eventDate"
                 name="eventDate"
-                value={formatDate(eventDate)}
+                value={eventDate}
                 onChange={onChange}
                 required
               />
@@ -172,13 +156,8 @@ function EditEventForm({ eventId, closeEdit }) {
   )
 }
 
-EditEventForm.propTypes = {
-  eventId: PropTypes.string,
-  closeEdit: PropTypes.func,
+NewEvent.propTypes = {
+  closeForm: PropTypes.func,
 }
 
-EditEventForm.defaultProps = {
-  eventId: 'eventId',
-}
-
-export default EditEventForm
+export default NewEvent
