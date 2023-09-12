@@ -3,6 +3,7 @@ import formatDate from '../lib/formatDate'
 import { useSelector, useDispatch } from 'react-redux'
 import { getEvent } from '../features/Events/eventSlice'
 import { useParams } from 'react-router-dom'
+import EventForm from '../components/EventForm'
 
 function Event() {
   const { myEvent, isLoading, isError, message } = useSelector(
@@ -29,6 +30,7 @@ function Event() {
 
   return (
     <div className=" mx-6 mt-10 mb-6">
+      <EventForm eventId={eventId} />
       <h1 className="text-3xl mb-5 uppercase">{myEvent.eventName}</h1>
       {/* Table for creator and date */}
       <div className="flex ">

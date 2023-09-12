@@ -47,8 +47,6 @@ export const getEvent = createAsyncThunk(
         error.message ||
         error.toString()
 
-      console.log(message)
-
       return thunkAPI.rejectWithValue(message)
     }
   }
@@ -57,9 +55,10 @@ export const getEvent = createAsyncThunk(
 // Edit an admin event
 export const editEvent = createAsyncThunk(
   'events/editEvent',
-  async (data, eventId, thunkAPI) => {
+  async ({ data, eventId }, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.admin.token
+
       return await eventService.editEvent(data, eventId, token)
     } catch (error) {
       const message =

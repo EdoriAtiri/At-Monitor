@@ -1,7 +1,7 @@
 const asyncHandler = require('express-async-handler')
 
 const Admin = require('../models/adminModel')
-const Event = require('../models/EventModel')
+const Event = require('../models/eventModel')
 
 // @desc Create a new event
 // @route /api/events
@@ -86,6 +86,7 @@ const updateEvent = asyncHandler(async (req, res) => {
   // Get Admin using the Id in the jwt
   const admin = await Admin.findById(req.admin.id)
 
+  console.log(req.body)
   if (!admin) {
     res.status(401)
     throw new Error('Admin not found')

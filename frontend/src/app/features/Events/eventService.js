@@ -27,7 +27,7 @@ const getEvent = async (eventId, token) => {
   return response.data
 }
 
-// Get an admin event
+// Edit an admin event
 const editEvent = async (updatedEvent, eventId, token) => {
   const config = {
     headers: {
