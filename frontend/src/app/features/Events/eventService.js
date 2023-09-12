@@ -27,7 +27,20 @@ const getEvent = async (eventId, token) => {
   return response.data
 }
 
-// Edit an admin event
+// create an event
+const createEvent = async (newEventData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+
+  const response = await axios.post(API_URL, newEventData, config)
+
+  return response.data
+}
+
+// Edit an event
 const editEvent = async (updatedEvent, eventId, token) => {
   const config = {
     headers: {
@@ -43,6 +56,7 @@ const editEvent = async (updatedEvent, eventId, token) => {
 const eventService = {
   getEvents,
   getEvent,
+  createEvent,
   editEvent,
 }
 
