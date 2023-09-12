@@ -52,7 +52,29 @@ export const getEvent = createAsyncThunk(
   }
 )
 
-// Edit an admin event
+// Create an event
+export const createEvent = createAsyncThunk(
+  'events/createEvent',
+  async (data, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.admin.token
+
+      return await eventService.createEvent(data, token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+
+      console.log(message)
+
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+// Edit an event
 export const editEvent = createAsyncThunk(
   'events/editEvent',
   async ({ data, eventId }, thunkAPI) => {
