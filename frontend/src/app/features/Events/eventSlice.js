@@ -81,6 +81,7 @@ export const eventSlice = createSlice({
   reducers: {
     // eslint-disable-next-line no-unused-vars
     reset: (state) => initialState,
+    // resetSuccess: (state) => (state.isSuccess = false),
   },
   extraReducers: (builder) => {
     builder
@@ -126,5 +127,5 @@ export const eventSlice = createSlice({
   },
 })
 
-export const { reset } = eventSlice.actions
+export const { reset, resetSuccess } = eventSlice.actions
 export default eventSlice.reducer

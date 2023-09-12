@@ -29,6 +29,10 @@ function Event() {
     return <div>Loading...</div>
   }
 
+  const openEdit = () => {
+    setEditEvent(true)
+  }
+
   return (
     <div className=" mx-6 mt-10 mb-6">
       {editEvent && (
@@ -59,7 +63,7 @@ function Event() {
         {/* Actions */}
         <div className="flex items-start gap-3">
           <button
-            onClick={() => setEditEvent(true)}
+            onClick={openEdit}
             className="text-lg border border-gray-700 p-1 rounded-md"
           >
             Edit

@@ -11,6 +11,8 @@ function EditEventForm({ eventId, closeEdit }) {
     linkId: '',
   })
 
+  // const [isInitial, setIsInitial] = useState(true)
+
   const formatDate = (dateString) => {
     if (!dateString) return ''
     const date = new Date(dateString)
@@ -20,7 +22,7 @@ function EditEventForm({ eventId, closeEdit }) {
   const dispatch = useDispatch()
   // console.log(eventId)
 
-  const { myEvent, isError, isSuccess, isLoading, message } = useSelector(
+  const { myEvent, isError, isLoading, message } = useSelector(
     (state) => state.myEvents
   )
 
@@ -52,6 +54,7 @@ function EditEventForm({ eventId, closeEdit }) {
       ...eventData,
     }
     dispatch(editEvent({ data, eventId }))
+    closeEdit()
   }
 
   // Convert to error and success pop ups
@@ -60,18 +63,11 @@ function EditEventForm({ eventId, closeEdit }) {
       console.log(message)
     }
 
-    if (isSuccess) {
-      console.log('success')
-    }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isError, message, isSuccess])
+  }, [isError, message])
 
   if (isLoading) {
     return <div>loading...</div>
-  }
-  if (isError) {
-    return <div>failed...</div>
   }
 
   return (
@@ -133,7 +129,7 @@ function EditEventForm({ eventId, closeEdit }) {
                 htmlFor="description"
                 className="text-sm md:text-base lg:text-xl"
               >
-                Event Name
+                Description{' '}
               </label>
               <input
                 type="text"
@@ -150,7 +146,7 @@ function EditEventForm({ eventId, closeEdit }) {
                 htmlFor="linkId"
                 className="text-sm md:text-base lg:text-xl"
               >
-                Event Name
+                Link{' '}
               </label>
               <input
                 type="text"
