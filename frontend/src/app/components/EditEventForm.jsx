@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { editEvent } from '../features/Events/eventSlice'
 
-function EditEventForm({ eventId, close }) {
+function EditEventForm({ eventId, closeEdit }) {
   const [eventData, setEventData] = useState({
     eventName: '',
     eventDate: '',
@@ -77,11 +77,17 @@ function EditEventForm({ eventId, close }) {
   return (
     <div className="absolute top-0 left-0  w-screen h-screen">
       <button
-        onClick={close}
+        onClick={closeEdit}
         className="position absolute top-0 left-0 bg-black h-full w-full opacity-30"
       ></button>
 
       <div className="w-80 bg-white h-fit z-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-6 py-6 rounded">
+        <button
+          onClick={closeEdit}
+          className="text-lg p-1 uppercase font-bold absolute right-0 pr-1 top-0"
+        >
+          x
+        </button>
         <form
           onSubmit={onSubmit}
           className="space-y-7 w-full h-full [&>*]:w-full"
@@ -171,7 +177,7 @@ function EditEventForm({ eventId, close }) {
 
 EditEventForm.propTypes = {
   eventId: PropTypes.string,
-  close: PropTypes.func,
+  closeEdit: PropTypes.func,
 }
 
 EditEventForm.defaultProps = {

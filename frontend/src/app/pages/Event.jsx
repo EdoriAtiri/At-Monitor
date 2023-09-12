@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import formatDate from '../lib/formatDate'
 import { useSelector, useDispatch } from 'react-redux'
 import { getEvent } from '../features/Events/eventSlice'
@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 import EditEventForm from '../components/EditEventForm'
 
 function Event() {
+  const [editEvent, setEditEvent] = useState(false)
   const { myEvent, isLoading, isError, message } = useSelector(
     (state) => state.myEvents
   )
@@ -30,7 +31,12 @@ function Event() {
 
   return (
     <div className=" mx-6 mt-10 mb-6">
-      <EditEventForm eventId={eventId} />
+      {editEvent && (
+        <EditEventForm
+          eventId={eventId}
+          closeEdit={() => setEditEvent(false)}
+        />
+      )}
       <h1 className="text-3xl mb-5 uppercase">{myEvent.eventName}</h1>
       {/* Table for creator and date */}
       <div className="flex ">
@@ -52,7 +58,10 @@ function Event() {
         </table>{' '}
         {/* Actions */}
         <div className="flex items-start gap-3">
-          <button className="text-lg border border-gray-700 p-1 rounded-md">
+          <button
+            onClick={() => setEditEvent(true)}
+            className="text-lg border border-gray-700 p-1 rounded-md"
+          >
             Edit
           </button>
           <button className="text-lg border border-gray-700 p-1 rounded-md">
