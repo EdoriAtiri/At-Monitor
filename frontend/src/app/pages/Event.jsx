@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react'
 import formatDate from '../lib/formatDate'
 import { useSelector, useDispatch } from 'react-redux'
-import { getEvent } from '../features/Events/eventSlice'
-import { useParams } from 'react-router-dom'
+import { getEvent, deleteEvent } from '../features/Events/eventSlice'
+import { useNavigate, useParams } from 'react-router-dom'
 import EditEventForm from '../components/EditEventForm'
 
 function Event() {
   const [editEvent, setEditEvent] = useState(false)
-  const { myEvent, isLoading, isError, message } = useSelector(
+  const { myEvent, isLoading, isError, message, isSuccess } = useSelector(
     (state) => state.myEvents
   )
   const { admin } = useSelector((state) => state.auth)
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { eventId } = useParams()
 
   useEffect(() => {
@@ -31,6 +32,15 @@ function Event() {
 
   const openEdit = () => {
     setEditEvent(true)
+  }
+
+  // Delete Event
+  const onDeleteEvent = () => {
+    dispatch(deleteEvent(eventId))
+
+    if (isSuccess) {
+      navigate('/dashboard/events')
+    }
   }
 
   return (
@@ -68,7 +78,10 @@ function Event() {
           >
             Edit
           </button>
-          <button className="text-lg border border-gray-700 p-1 rounded-md">
+          <button
+            onClick={onDeleteEvent}
+            className="text-lg border border-gray-700 p-1 rounded-md"
+          >
             Delete
           </button>
         </div>
