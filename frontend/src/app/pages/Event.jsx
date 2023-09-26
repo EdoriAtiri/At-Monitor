@@ -43,25 +43,25 @@ function Event() {
       )}
       <h1 className="text-3xl mb-5 uppercase">{myEvent.eventName}</h1>
       {/* Table for creator and date */}
-      <div className="flex ">
-        <table className="flex flex-col mb-6 w-full lg:w-96 justify-between relative">
-          <thead>
-            <tr className="font-bold flex [&>*]:w-28 [&>*]:text-left">
-              <th>Created By</th>
-              <th>Event Date</th>
-            </tr>
-          </thead>
+      <div className="flex gap-2 mb-4">
+        <div className="stats">
+          <div className="stat">
+            <div className="stat-title">Created By</div>
+            <div className="stat-value text-2xl">
+              {`${admin.firstName} ${admin.lastName}`}
+            </div>
+          </div>
 
-          {/* <div className="w-[1px] h-full bg-slate-700 absolute left-24"></div> */}
-          <tbody>
-            <tr className="flex [&>*]:w-28">
-              <td>{`${admin.firstName} ${admin.lastName}`}</td>
-              <td>{formatDate(myEvent.eventDate)}</td>
-            </tr>
-          </tbody>
-        </table>{' '}
+          <div className="stat">
+            <div className="stat-title">Event Date</div>
+            <div className="stat-value text-2xl">
+              {formatDate(myEvent.eventDate)}
+            </div>
+          </div>
+        </div>
+
         {/* Actions */}
-        <div className="flex items-start gap-3">
+        <div className="flex items-center gap-3">
           <button
             onClick={openEdit}
             className="text-lg border border-gray-700 p-1 rounded-md"
