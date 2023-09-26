@@ -74,17 +74,17 @@ function Event() {
         </div>
       </div>
       {/* Table for description and link */}
-      <table className="flex w-full lg:w-96 justify-between ">
+      <table className="table">
         <thead>
-          <tr className="font-bold flex gap-2 flex-col [&>*]:h-12 [&>*]:min-h-fit [&>*]:w-24 [&>*]:text-left">
-            <th>Description</th>
+          <tr className="font-bold">
             <th>Link</th>
+            <th>Description</th>
           </tr>
         </thead>
         <tbody>
-          <tr className="flex gap-2 flex-col">
-            <td>{myEvent.description}</td>
+          <tr className="">
             <td>{myEvent.linkId}</td>
+            <td>{myEvent.description}</td>
           </tr>
         </tbody>
       </table>{' '}
