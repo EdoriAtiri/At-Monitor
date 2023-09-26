@@ -97,6 +97,29 @@ export const editEvent = createAsyncThunk(
   }
 )
 
+// Delete an event
+export const deleteEvent = createAsyncThunk(
+  'events/deleteEvent',
+  async (eventId, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.admin.token
+
+      return await eventService.deleteEvent(eventId, token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+
+      console.log(message)
+
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 export const eventSlice = createSlice({
   name: 'event',
   initialState,

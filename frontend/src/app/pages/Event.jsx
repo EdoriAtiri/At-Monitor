@@ -43,8 +43,8 @@ function Event() {
       )}
       <h1 className="text-3xl mb-5 uppercase">{myEvent.eventName}</h1>
       {/* Table for creator and date */}
-      <div className="flex gap-2 mb-4">
-        <div className="stats">
+      <div className="flex gap-4 mb-4">
+        <div className="stats shadow">
           <div className="stat">
             <div className="stat-title">Created By</div>
             <div className="stat-value text-2xl">

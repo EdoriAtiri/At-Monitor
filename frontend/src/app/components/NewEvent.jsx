@@ -75,7 +75,7 @@ function NewEvent({ closeForm }) {
         >
           <div className="space-y-4">
             {/*  */}
-            <div className="form-group space-y-2">
+            <div className="space-y-2">
               <label
                 htmlFor="eventName"
                 className="text-sm md:text-base lg:text-xl"
@@ -92,7 +92,7 @@ function NewEvent({ closeForm }) {
                 required
               />
             </div>
-            <div className="form-group space-y-2">
+            <div className="space-y-2">
               <label
                 htmlFor="eventDate"
                 className="text-sm md:text-base lg:text-xl"
@@ -109,7 +109,7 @@ function NewEvent({ closeForm }) {
                 required
               />
             </div>
-            <div className="form-group space-y-2">
+            <div className="space-y-2">
               <label
                 htmlFor="description"
                 className="text-sm md:text-base lg:text-xl"
@@ -126,7 +126,7 @@ function NewEvent({ closeForm }) {
                 required
               />
             </div>
-            <div className="form-group space-y-2">
+            <div className="space-y-2">
               <label
                 htmlFor="linkId"
                 className="text-sm md:text-base lg:text-xl"
