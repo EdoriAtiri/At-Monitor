@@ -84,7 +84,7 @@ function NewEvent({ closeForm }) {
               </label>
               <input
                 type="text"
-                className="form-control"
+                className="form-input-style"
                 id="eventName"
                 name="eventName"
                 value={eventName}
@@ -101,7 +101,7 @@ function NewEvent({ closeForm }) {
               </label>
               <input
                 type="date"
-                className="form-control pr-2"
+                className="form-input-style pr-2"
                 id="eventDate"
                 name="eventDate"
                 value={eventDate}
@@ -118,7 +118,7 @@ function NewEvent({ closeForm }) {
               </label>
               <input
                 type="text"
-                className="form-control"
+                className="form-input-style"
                 id="description"
                 name="description"
                 value={description}
@@ -135,7 +135,7 @@ function NewEvent({ closeForm }) {
               </label>
               <input
                 type="text"
-                className="form-control"
+                className="form-input-style"
                 id="linkId"
                 name="linkId"
                 value={linkId}
@@ -146,7 +146,7 @@ function NewEvent({ closeForm }) {
           </div>
 
           <div className="btn mt-36">
-            <button className="form-control grid place-content-center active:scale-95 transition-transform font-bold text-white bg-black">
+            <button className="form-input-style grid place-content-center active:scale-95 transition-transform font-bold text-white bg-black">
               Create Event
             </button>
           </div>
