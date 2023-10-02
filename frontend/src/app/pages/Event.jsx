@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import formatDate from '../lib/formatDate'
 import { useSelector, useDispatch } from 'react-redux'
-import { getEvent, deleteEvent } from '../features/Events/eventSlice'
 import { useNavigate, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { getEvent, deleteEvent } from '../features/Events/eventSlice'
 import EditEventForm from '../components/EditEventForm'
 
 function Event() {
@@ -18,7 +19,7 @@ function Event() {
 
   useEffect(() => {
     if (isError) {
-      console.log(message)
+      toast.error(message)
     }
 
     dispatch(getEvent(eventId))

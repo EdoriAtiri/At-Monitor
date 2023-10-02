@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
 import { editEvent } from '../features/Events/eventSlice'
 
 function EditEventForm({ eventId, closeEdit }) {
@@ -61,7 +62,7 @@ function EditEventForm({ eventId, closeEdit }) {
   // Convert to error and success pop ups
   useEffect(() => {
     if (isError) {
-      console.log(message)
+      toast.error(message)
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

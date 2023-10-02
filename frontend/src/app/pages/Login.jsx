@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { login, reset } from '../features/Auth/authSlice'
 import Logo from '../components/Logo'
 
@@ -21,7 +22,7 @@ function Login() {
 
   useEffect(() => {
     if (isError) {
-      console.log(message)
+      toast.error(message)
     }
 
     // Redirect when logged in
@@ -75,7 +76,7 @@ function Login() {
             <div className="form-group">
               <input
                 type="email"
-                className="form-control"
+                className="form-input-style"
                 id="email"
                 name="email"
                 value={email}
@@ -87,7 +88,7 @@ function Login() {
             <div className="form-group">
               <input
                 type="password"
-                className="form-control"
+                className="form-input-style"
                 id="password"
                 name="password"
                 value={password}
@@ -99,7 +100,7 @@ function Login() {
           </div>
 
           <div className="btn mt-36">
-            <button className="form-control grid place-content-center active:scale-95 transition-transform font-bold text-white bg-black">
+            <button className="form-input-style grid place-content-center active:scale-95 transition-transform font-bold text-white bg-black">
               Continue
             </button>
           </div>

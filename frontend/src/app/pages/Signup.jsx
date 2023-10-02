@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { signup, reset } from '../features/Auth/authSlice'
 import Logo from '../components/Logo'
 
@@ -24,7 +25,7 @@ function Signup() {
 
   useEffect(() => {
     if (isError) {
-      console.log(message)
+      toast.error(message)
     }
 
     // Redirect when logged in
@@ -47,7 +48,7 @@ function Signup() {
     e.preventDefault()
 
     if (password !== password2) {
-      console.log('passwords do not match')
+      toast.error('passwords do not match')
     } else {
       const data = {
         firstName,
@@ -86,7 +87,7 @@ function Signup() {
             <div className="form-group">
               <input
                 type="text"
-                className="form-control"
+                className="form-input-style"
                 id="firstName"
                 name="firstName"
                 value={firstName}
@@ -99,7 +100,7 @@ function Signup() {
             <div className="form-group">
               <input
                 type="text"
-                className="form-control"
+                className="form-input-style"
                 id="lastName"
                 name="lastName"
                 value={lastName}
@@ -111,7 +112,7 @@ function Signup() {
             <div className="form-group">
               <input
                 type="email"
-                className="form-control"
+                className="form-input-style"
                 id="email"
                 name="email"
                 value={email}
@@ -123,7 +124,7 @@ function Signup() {
             <div className="form-group">
               <input
                 type="password"
-                className="form-control"
+                className="form-input-style"
                 id="password"
                 name="password"
                 value={password}
@@ -135,7 +136,7 @@ function Signup() {
             <div className="form-group">
               <input
                 type="password"
-                className="form-control"
+                className="form-input-style"
                 id="password2"
                 name="password2"
                 value={password2}
@@ -147,7 +148,7 @@ function Signup() {
           </div>
 
           <div className="btn mt-36">
-            <button className="form-control grid place-content-center active:scale-95 transition-transform font-bold text-white bg-black">
+            <button className="form-input-style grid place-content-center active:scale-95 transition-transform font-bold text-white bg-black">
               Continue
             </button>
           </div>
