@@ -49,6 +49,7 @@ const registerMember = asyncHandler(async (req, res) => {
 
   // Create member
   const member = await Member.create({
+    admin: req.admin.id,
     fullName,
     phone,
     email,

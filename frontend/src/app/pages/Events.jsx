@@ -6,7 +6,9 @@ import NewEvent from '../components/NewEvent'
 
 function Events() {
   const [isNewEvent, setIsNewEvent] = useState(false)
-  const { myEvents, isSuccess } = useSelector((state) => state.myEvents)
+  const { myEvents, isSuccess, isLoading } = useSelector(
+    (state) => state.myEvents
+  )
   const [eventStats, setEventStats] = useState({
     total: '',
     pending: '',
@@ -35,21 +37,27 @@ function Events() {
   useEffect(() => {
     const currentDate = new Date()
 
-    setEventStats({
-      total: myEvents.length || 0,
-      pending:
-        myEvents.filter((event) => new Date(event.eventDate) > currentDate)
-          .length || 0,
-      past:
-        myEvents.filter((event) => new Date(event.eventDate) < currentDate)
-          .length || 0,
-    })
+    if (Array.isArray(myEvents)) {
+      setEventStats({
+        total: myEvents.length || 0,
+        pending:
+          myEvents.filter((event) => new Date(event.eventDate) > currentDate)
+            .length || 0,
+        past:
+          myEvents.filter((event) => new Date(event.eventDate) < currentDate)
+            .length || 0,
+      })
+    }
   }, [myEvents])
+
+  if (isLoading) {
+    return <p>Loading...</p>
+  }
 
   return (
     <div className=" mx-6 mt-10 mb-6">
       {isNewEvent && <NewEvent closeForm={() => setIsNewEvent(false)} />}
-      <heading className="items-center justify-between flex text-xl font-semibold">
+      <header className="items-center justify-between flex text-xl font-semibold">
         <h1>My Events</h1>
         <button
           onClick={() => setIsNewEvent(true)}
@@ -57,29 +65,30 @@ function Events() {
         >
           Create New Event
         </button>
-      </heading>{' '}
+      </header>{' '}
       {/* Admin Event Stats */}
-      <div className="mt-8">
-        {/* <h2 className="mb-3 text-lg font-semibold">Stats</h2> */}
-        <table className="flex w-full justify-between">
-          <tr className="flex flex-col border border-gray-700 p-2 lg:p-4 rounded-md font-bold items-center text-gray-800">
-            <th className=" text-lg">Total Events</th>
-            <tr className="">{total}</tr>
-          </tr>
-          <tr className="flex flex-col border border-gray-700 p-2 lg:p-4 rounded-md font-bold items-center text-gray-800">
-            <th className=" text-lg">Pending Events</th>
-            <tr>{pending}</tr>
-          </tr>
-          <tr className="flex flex-col border border-gray-700 p-2 lg:p-4 rounded-md font-bold items-center text-gray-800">
-            <th className=" text-lg">Past Events</th>
-            <tr>{past}</tr>
-          </tr>
-        </table>
+      <div className="flex gap-4 mb-4 mt-8">
+        <div className="stats shadow">
+          <div className="stat">
+            <div className="stat-title">Total Events</div>
+            <div className="stat-value text-2xl">{total}</div>
+          </div>
+
+          <div className="stat">
+            <div className="stat-title">Pending Events</div>
+            <div className="stat-value text-2xl">{pending}</div>
+          </div>
+
+          <div className="stat">
+            <div className="stat-title">Past Events</div>
+            <div className="stat-value text-2xl">{past}</div>
+          </div>
+        </div>
       </div>
       {/* Events */}
       <section className="w-full flex flex-col mt-8 gap-8">
-        {myEvents.map((myEvent) => {
-          return (
+        {Array.isArray(myEvents) ? (
+          myEvents.map((myEvent) => (
             <EventCard
               name={myEvent.eventName}
               created={myEvent.createdAt}
@@ -88,8 +97,10 @@ function Events() {
               key={myEvent.linkId}
               id={myEvent._id}
             />
-          )
-        })}
+          ))
+        ) : (
+          <p>Loading events...</p>
+        )}
       </section>
     </div>
   )
