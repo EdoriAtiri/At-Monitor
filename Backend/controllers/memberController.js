@@ -62,6 +62,7 @@ const registerMember = asyncHandler(async (req, res) => {
   if (member) {
     res.status(200).json({
       _id: member._id,
+      admin: member.admin,
       fullName: member.fullName,
       phone: member.phone,
       email: member.email,

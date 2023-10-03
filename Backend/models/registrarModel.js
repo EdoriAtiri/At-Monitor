@@ -19,6 +19,10 @@ const memberSchema = mongoose.Schema(
       required: true,
       default: false,
     },
+    password: {
+      type: String,
+      required: [true, 'Please add a password'],
+    },
   },
   {
     timestamps: true,
