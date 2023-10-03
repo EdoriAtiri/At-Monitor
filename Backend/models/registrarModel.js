@@ -14,6 +14,11 @@ const memberSchema = mongoose.Schema(
     email: {
       type: String,
     },
+    isAdmin: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
   },
   {
     timestamps: true,
