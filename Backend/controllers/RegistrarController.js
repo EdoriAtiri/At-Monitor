@@ -14,7 +14,7 @@ const Admin = require('../models/adminModel')
 const createRegistrar = asyncHandler(async (req, res) => {
   // Get Admin using the Id in the jwt
   //   const admin = await Admin.findById(req.admin.id)
-  const admin = await Admin.findById(req.body.admin)
+  const admin = await Admin.findById(req.admin.id)
 
   if (!admin) {
     res.status(401)
@@ -52,18 +52,18 @@ const createRegistrar = asyncHandler(async (req, res) => {
   //   }
 
   //   check password length
-  if (password.length < 8) {
-    res.status(400)
-    throw new Error('Password must be at least 8 characters')
-  }
+  // if (password.length < 8) {
+  //   res.status(400)
+  //   throw new Error('Password must be at least 8 characters')
+  // }
 
   // Hash Password
-  const salt = await bcrypt.genSalt(10)
-  const hashedPassword = await bcrypt.hash(password, salt)
+  // const salt = await bcrypt.genSalt(10)
+  // const hashedPassword = await bcrypt.hash(password, salt)
 
   // Create registrar
   const registrar = await Registrar.create({
-    admin: req.body.admin,
+    admin: req.admin.id,
     member: memberExists._id,
     fullName,
     email,
@@ -82,13 +82,6 @@ const createRegistrar = asyncHandler(async (req, res) => {
     throw new Error('Invalid data')
   }
 })
-
-// Generate token
-const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: '30d',
-  })
-}
 
 module.exports = {
   createRegistrar,

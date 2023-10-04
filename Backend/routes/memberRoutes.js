@@ -7,9 +7,11 @@ const {
   registerMember,
   updateMember,
   deleteMember,
+  getMembers,
 } = require('../controllers/memberController')
 
 router.route('/').post(protect, registerMember)
+router.route('/').get(protect, getMembers)
 
 router
   .route('/:id')

@@ -89,7 +89,7 @@ const getMembers = asyncHandler(async (req, res) => {
     throw new Error('Admin not found')
   }
 
-  const members = await Event.find({ admin: req.admin.id })
+  const members = await Member.find({ admin: req.admin.id })
 
   res.status(200).json(members)
 })
