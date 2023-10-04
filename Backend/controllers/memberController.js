@@ -77,6 +77,23 @@ const registerMember = asyncHandler(async (req, res) => {
   }
 })
 
+// @desc Get all members
+// @route /api/members
+// @access Private
+const getMembers = asyncHandler(async (req, res) => {
+  // Get Admin using the Id in the jwt
+  const admin = await Admin.findById(req.admin.id)
+
+  if (!admin) {
+    res.status(401)
+    throw new Error('Admin not found')
+  }
+
+  const members = await Event.find({ admin: req.admin.id })
+
+  res.status(200).json(members)
+})
+
 // @desc Update existing member record
 // @route /api/users/id/update
 // @access Public
@@ -137,4 +154,5 @@ module.exports = {
   registerMember,
   updateMember,
   deleteMember,
+  getMembers,
 }

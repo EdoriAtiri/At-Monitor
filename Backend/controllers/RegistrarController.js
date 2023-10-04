@@ -67,7 +67,6 @@ const createRegistrar = asyncHandler(async (req, res) => {
     member: memberExists._id,
     fullName,
     email,
-    hashedPassword,
   })
 
   if (registrar) {
@@ -77,7 +76,6 @@ const createRegistrar = asyncHandler(async (req, res) => {
       admin: registrar.admin,
       fullName: registrar.fullName,
       email: registrar.email,
-      token: generateToken(registrar._id),
     })
   } else {
     res.status(400)
