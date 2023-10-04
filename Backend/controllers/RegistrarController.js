@@ -98,9 +98,9 @@ const generateRegistrarToken = asyncHandler(async (req, res) => {
   }
 
   // Get id from request body and check if exists, throw error if not
-  const { registrarID } = req.body
+  const { id } = req.params
 
-  const registrarExists = await Registrar.findById(registrarID)
+  const registrarExists = await Registrar.findById(id)
 
   if (!registrarExists) {
     res.status(400)
@@ -109,7 +109,7 @@ const generateRegistrarToken = asyncHandler(async (req, res) => {
 
   // if registrar exists return a token to the admin
   if (registrarExists) {
-    res.status(200).json({ token: generateToken(registrarExists._id) })
+    res.status(200).json({ token: generateToken(registrarExists._id, '1d') })
   } else {
     res.status(400)
     throw new Error('Invalid data')

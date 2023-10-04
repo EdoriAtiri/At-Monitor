@@ -3,7 +3,10 @@ const router = express.Router()
 
 const { protect } = require('../middleware/authMiddleware')
 
-const { createRegistrar } = require('../controllers/RegistrarController')
+const {
+  createRegistrar,
+  generateRegistrarToken,
+} = require('../controllers/RegistrarController')
 
 router.route('/').post(protect, createRegistrar)
 
@@ -13,6 +16,6 @@ router.route('/').post(protect, createRegistrar)
 //   .patch(protect, updateMember)
 //   .delete(protect, deleteMember)
 
-// router.route('/:id/update').post(protect, updateMember)
+router.route('/:id/generate').get(protect, generateRegistrarToken)
 
 module.exports = router
