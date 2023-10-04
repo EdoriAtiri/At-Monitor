@@ -24,6 +24,7 @@ app.get('/', (req, res) => {
 app.use('/api/admins', require('./routes/adminRoutes'))
 app.use('/api/events', require('./routes/eventRoutes'))
 app.use('/api/members', require('./routes/memberRoutes'))
+app.use('/api/registrars', require('./routes/registrarRoutes'))
 
 app.use(errorHandler)
 

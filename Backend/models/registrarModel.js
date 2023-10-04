@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const memberSchema = mongoose.Schema(
+const registrarSchema = mongoose.Schema(
   {
     admin: {
       type: mongoose.Schema.Types.ObjectId,
@@ -21,7 +21,7 @@ const memberSchema = mongoose.Schema(
     },
     password: {
       type: String,
-      // required: [true, 'Please add a password'],
+      required: [true, 'Please add a password'],
     },
   },
   {
@@ -29,4 +29,4 @@ const memberSchema = mongoose.Schema(
   }
 )
 
-module.exports = mongoose.model('member', memberSchema)
+module.exports = mongoose.model('registrar', registrarSchema)
