@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const generateToken = require('../lib/genToken')
 
 const Member = require('../models/memberModel')
 const Registrar = require('../models/registrarModel')
@@ -83,6 +84,39 @@ const createRegistrar = asyncHandler(async (req, res) => {
   }
 })
 
+// @desc generate a token for link for a user to create a password for themselves
+// @route /api/registrarToken
+// @access Public
+const generateRegistrarToken = asyncHandler(async (req, res) => {
+  // Get Admin using the Id in the jwt
+  const admin = await Admin.findById(req.admin.id)
+
+  // check if admin
+  if (!admin) {
+    res.status(401)
+    throw new Error('Admin not found')
+  }
+
+  // Get id from request body and check if exists, throw error if not
+  const { registrarID } = req.body
+
+  const registrarExists = await Registrar.findById(registrarID)
+
+  if (!registrarExists) {
+    res.status(400)
+    throw new Error('Registrar does not exist')
+  }
+
+  // if registrar exists return a token to the admin
+  if (registrarExists) {
+    res.status(200).json({ token: generateToken(registrarExists._id) })
+  } else {
+    res.status(400)
+    throw new Error('Invalid data')
+  }
+})
+
 module.exports = {
   createRegistrar,
+  generateRegistrarToken,
 }

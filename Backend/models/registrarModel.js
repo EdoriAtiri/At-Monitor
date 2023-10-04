@@ -23,6 +23,11 @@ const registrarSchema = mongoose.Schema(
       type: String,
       // required: [true, 'Please add a password'],
     },
+    isActivated: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
   },
   {
     timestamps: true,
