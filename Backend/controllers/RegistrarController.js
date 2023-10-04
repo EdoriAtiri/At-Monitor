@@ -1,4 +1,6 @@
 const asyncHandler = require('express-async-handler')
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 const Member = require('../models/memberModel')
 const Registrar = require('../models/registrarModel')
@@ -11,14 +13,15 @@ const Admin = require('../models/adminModel')
 // @access Public
 const createRegistrar = asyncHandler(async (req, res) => {
   // Get Admin using the Id in the jwt
-  const admin = await Admin.findById(req.admin.id)
+  //   const admin = await Admin.findById(req.admin.id)
+  const admin = await Admin.findById(req.body.admin)
 
   if (!admin) {
     res.status(401)
     throw new Error('Admin not found')
   }
 
-  const { fullName, email } = req.body
+  const { fullName, email, password } = req.body
 
   // Validation
   if (!fullName || !email) {
@@ -27,11 +30,11 @@ const createRegistrar = asyncHandler(async (req, res) => {
   }
 
   //  Check if already a registrar
-  const registrarExists = await Member.findOne({ email })
+  const registrarExists = await Registrar.findOne({ email })
 
   if (registrarExists) {
     res.status(400)
-    throw new Error('Registration already exists')
+    throw new Error('Registrar already exists')
   }
 
   //  Check if a member
@@ -39,7 +42,7 @@ const createRegistrar = asyncHandler(async (req, res) => {
 
   if (!memberExists) {
     res.status(400)
-    throw new Error('Not a registered member')
+    throw new Error('Not a registered member of this organization')
   }
 
   //   Check membership status
@@ -48,26 +51,47 @@ const createRegistrar = asyncHandler(async (req, res) => {
   //     throw new Error('Has not completed membership training')
   //   }
 
-  // Create member
-  const member = await Member.create({
-    admin: req.admin.id,
+  //   check password length
+  if (password.length < 8) {
+    res.status(400)
+    throw new Error('Password must be at least 8 characters')
+  }
+
+  // Hash Password
+  const salt = await bcrypt.genSalt(10)
+  const hashedPassword = await bcrypt.hash(password, salt)
+
+  // Create registrar
+  const registrar = await Registrar.create({
+    admin: req.body.admin,
+    member: memberExists._id,
     fullName,
     email,
+    hashedPassword,
   })
 
-  if (member) {
+  if (registrar) {
     res.status(200).json({
-      _id: member._id,
-      fullName: member.fullName,
-      phone: member.phone,
-      email: member.email,
-      address: member.address,
-      gender: member.gender,
-      category: member.category,
-      membershipStatus: member.membershipStatus,
+      _id: registrar._id,
+      member: registrar.member,
+      admin: registrar.admin,
+      fullName: registrar.fullName,
+      email: registrar.email,
+      token: generateToken(registrar._id),
     })
   } else {
     res.status(400)
     throw new Error('Invalid data')
   }
 })
+
+// Generate token
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: '30d',
+  })
+}
+
+module.exports = {
+  createRegistrar,
+}

@@ -21,7 +21,7 @@ const memberSchema = mongoose.Schema(
     },
     password: {
       type: String,
-      required: [true, 'Please add a password'],
+      // required: [true, 'Please add a password'],
     },
   },
   {
