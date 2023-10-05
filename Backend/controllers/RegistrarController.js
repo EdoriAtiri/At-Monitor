@@ -170,6 +170,12 @@ const createRegistrarPassword = asyncHandler(async (req, res) => {
     res.status(401)
     throw new Error('Registrar not found')
   }
+
+  if (registrar.password) {
+    res.status(401)
+    throw new Error('Operation already completed')
+  }
+
   const { password } = req.body
 
   //   check password length
