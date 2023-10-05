@@ -193,7 +193,7 @@ const createRegistrarPassword = asyncHandler(async (req, res) => {
   // Create registrar password
   const updatedRegistrar = await Registrar.findByIdAndUpdate(
     req.params.id,
-    { password: hashedPassword },
+    { password: hashedPassword, isActivated: true },
     {
       new: true,
     }
