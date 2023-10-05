@@ -153,7 +153,9 @@ const getRegistrars = asyncHandler(async (req, res) => {
     throw new Error('Admin not found')
   }
 
-  const registrars = await Registrar.find({ admin: req.admin.id })
+  const registrars = await Registrar.find({ admin: req.admin.id }).select(
+    '-password'
+  )
 
   res.status(200).json(registrars)
 })
