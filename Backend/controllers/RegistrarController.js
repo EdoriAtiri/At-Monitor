@@ -116,7 +116,30 @@ const generateRegistrarToken = asyncHandler(async (req, res) => {
   }
 })
 
+// @desc get registrar
+// @route /api/registrar/:id
+// @access Public
+const getRegistrar = asyncHandler(async (req, res) => {
+  // Get token from params
+  const token = req.params.id.split(' ')[1]
+  // Verify and decode the token
+  const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
+  const registrar = await Registrar.findById(decodedToken)
+
+  if (registrar) {
+    res.status(200).json({
+      id: registrar._id,
+      fullName: registrar.fullName,
+      email: registrar.email,
+    })
+  } else {
+    res.status(400)
+    throw new Error('An error has occurred, contact administrator')
+  }
+})
+
 module.exports = {
   createRegistrar,
   generateRegistrarToken,
+  getRegistrar,
 }

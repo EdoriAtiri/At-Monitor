@@ -16,6 +16,7 @@ const signup = async (data) => {
 
 // Login admin
 const login = async (data) => {
+  console.log(data)
   const response = await axios.post(API_URL + 'login', data)
 
   if (response.data) {
