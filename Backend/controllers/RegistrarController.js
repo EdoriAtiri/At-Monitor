@@ -121,10 +121,11 @@ const generateRegistrarToken = asyncHandler(async (req, res) => {
 // @access Public
 const getRegistrar = asyncHandler(async (req, res) => {
   // Get token from params
-  const token = req.params.id.split(' ')[1]
+  const token = req.params.id
   // Verify and decode the token
   const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
-  const registrar = await Registrar.findById(decodedToken)
+  console.log(decodedToken)
+  const registrar = await Registrar.findById(decodedToken.id)
 
   if (registrar) {
     res.status(200).json({

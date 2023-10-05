@@ -6,13 +6,12 @@ const { protect } = require('../middleware/authMiddleware')
 const {
   createRegistrar,
   generateRegistrarToken,
+  getRegistrar,
 } = require('../controllers/RegistrarController')
 
 router.route('/').post(protect, createRegistrar)
 
-// router
-//   .route('/:id')
-//   //   .get(protect, getEvent)
+router.route('/:id').get(protect, getRegistrar)
 //   .patch(protect, updateMember)
 //   .delete(protect, deleteMember)
 
