@@ -7,14 +7,16 @@ const {
   createRegistrar,
   generateRegistrarToken,
   getRegistrar,
+  createRegistrarPassword,
 } = require('../controllers/RegistrarController')
 
 router.route('/').post(protect, createRegistrar)
 
 router.route('/:id').get(protect, getRegistrar)
-//   .patch(protect, updateMember)
+// .patch(protect, createRegistrarPassword)
 //   .delete(protect, deleteMember)
 
 router.route('/:id/generate').get(protect, generateRegistrarToken)
+router.route('/:id/createauth').get(protect, createRegistrarPassword)
 
 module.exports = router

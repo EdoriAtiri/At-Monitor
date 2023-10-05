@@ -193,4 +193,5 @@ module.exports = {
   createRegistrar,
   generateRegistrarToken,
   getRegistrar,
+  createRegistrarPassword,
 }
