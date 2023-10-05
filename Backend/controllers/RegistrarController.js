@@ -77,6 +77,7 @@ const createRegistrar = asyncHandler(async (req, res) => {
       admin: registrar.admin,
       fullName: registrar.fullName,
       email: registrar.email,
+      token: generateToken(registrarExists._id, '1d'),
     })
   } else {
     res.status(400)
@@ -140,6 +141,23 @@ const getRegistrar = asyncHandler(async (req, res) => {
   }
 })
 
+// @desc get all registrars
+// @route /api/registrar/
+// @access Public
+const getRegistrars = asyncHandler(async (req, res) => {
+  // Get Admin using the Id in the jwt
+  const admin = await Admin.findById(req.admin.id)
+
+  if (!admin) {
+    res.status(401)
+    throw new Error('Admin not found')
+  }
+
+  const registrars = await Registrar.find({ admin: req.admin.id })
+
+  res.status(200).json(registrars)
+})
+
 // @desc create registrar password
 // @route /api/registrar/:id/createauth
 // @access Public
@@ -192,5 +210,6 @@ module.exports = {
   createRegistrar,
   generateRegistrarToken,
   getRegistrar,
+  getRegistrars,
   createRegistrarPassword,
 }
