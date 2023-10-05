@@ -125,8 +125,10 @@ const getRegistrar = asyncHandler(async (req, res) => {
   // Verify and decode the token
   const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
   console.log(decodedToken)
+  // Find the registrar
   const registrar = await Registrar.findById(decodedToken.id)
 
+  // If the registrar is found return registrar id, name and email, else return error
   if (registrar) {
     res.status(200).json({
       id: registrar._id,
@@ -136,6 +138,54 @@ const getRegistrar = asyncHandler(async (req, res) => {
   } else {
     res.status(400)
     throw new Error('An error has occurred, contact administrator')
+  }
+})
+
+// @desc create registrar password
+// @route /api/registrar/:id/createauth
+// @access Public
+const createRegistrarPassword = asyncHandler(async (req, res) => {
+  // Find the registrar
+  const registrar = await Registrar.findById(req.params.id)
+
+  // check for registrar
+  if (!registrar) {
+    res.status(401)
+    throw new Error('Registrar not found')
+  }
+  const { password } = req.body
+
+  //   check password length
+  if (password.length < 8) {
+    res.status(400)
+    throw new Error('Password must be at least 8 characters')
+  }
+
+  // Hash Password
+  const salt = await bcrypt.genSalt(10)
+  const hashedPassword = await bcrypt.hash(password, salt)
+
+  // Create registrar password
+  const updatedRegistrar = await Member.findByIdAndUpdate(
+    req.params.id,
+    { password: hashedPassword },
+    {
+      new: true,
+    }
+  )
+
+  if (updatedRegistrar) {
+    res.status(201).json({
+      id: registrar._id,
+      member: registrar.member,
+      fullName: registrar.fullName,
+      email: registrar.email,
+      isAdmin: registrar.isAdmin,
+      token: generateToken(registrar._id, '1d'),
+    })
+  } else {
+    res.status(400)
+    throw new Error('Invalid data')
   }
 })
 
