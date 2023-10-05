@@ -124,7 +124,6 @@ const getRegistrar = asyncHandler(async (req, res) => {
   const token = req.params.id
   // Verify and decode the token
   const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
-  console.log(decodedToken)
   // Find the registrar
   const registrar = await Registrar.findById(decodedToken.id)
 
@@ -166,7 +165,7 @@ const createRegistrarPassword = asyncHandler(async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, salt)
 
   // Create registrar password
-  const updatedRegistrar = await Member.findByIdAndUpdate(
+  const updatedRegistrar = await Registrar.findByIdAndUpdate(
     req.params.id,
     { password: hashedPassword },
     {

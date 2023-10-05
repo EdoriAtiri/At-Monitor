@@ -17,6 +17,6 @@ router.route('/:id').get(protect, getRegistrar)
 //   .delete(protect, deleteMember)
 
 router.route('/:id/generate').get(protect, generateRegistrarToken)
-router.route('/:id/createauth').get(protect, createRegistrarPassword)
+router.route('/:id/createauth').patch(createRegistrarPassword)
 
 module.exports = router
