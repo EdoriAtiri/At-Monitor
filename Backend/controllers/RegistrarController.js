@@ -214,10 +214,36 @@ const createRegistrarPassword = asyncHandler(async (req, res) => {
   }
 })
 
+// @desc Delete registrar record
+// @route /api/users/id
+// @access Public
+const deleteRegistrar = asyncHandler(async (req, res) => {
+  // Get Admin using the Id in the jwt
+  const admin = await Admin.findById(req.admin.id)
+
+  if (!admin) {
+    res.status(401)
+    throw new Error('You are not authorized to do this operation')
+  }
+
+  // Check if Registrar exists
+  const registrarId = await Registrar.findById(req.params.id)
+
+  if (!registrarId) {
+    res.status(404)
+    throw new Error('Registrar not found')
+  }
+
+  registrarId.deleteOne()
+
+  res.status(200).json({ success: true })
+})
+
 module.exports = {
   createRegistrar,
   generateRegistrarToken,
   getRegistrar,
   getRegistrars,
   createRegistrarPassword,
+  deleteRegistrar,
 }
