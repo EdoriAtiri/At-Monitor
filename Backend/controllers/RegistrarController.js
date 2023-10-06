@@ -215,7 +215,7 @@ const createRegistrarPassword = asyncHandler(async (req, res) => {
 })
 
 // @desc Delete registrar record
-// @route /api/users/id
+// @route /api/registrars/id
 // @access Public
 const deleteRegistrar = asyncHandler(async (req, res) => {
   // Get Admin using the Id in the jwt
