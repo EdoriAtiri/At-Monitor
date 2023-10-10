@@ -23,7 +23,7 @@ function Dashboard() {
               <FaCalendarDays /> <Link to="events">Events</Link>
             </li>
             <li className="sidebar-icons">
-              <FaPersonCircleCheck /> <Link>Registrars</Link>
+              <FaPersonCircleCheck /> <Link to="registrars">Registrars</Link>
             </li>
             <li className="sidebar-icons">
               <FaUserCheck />

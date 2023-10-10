@@ -7,7 +7,7 @@ function Home() {
   const { loggedIn } = useAuthStatus()
 
   return loggedIn ? (
-    <Navigate to="/dashboard" />
+    <Navigate to="/dashboard/events" />
   ) : (
     <div className="w-full min-h-screen flex flex-row">
       <div className="w-1/2 py-10 space-y-32">

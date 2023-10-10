@@ -30,7 +30,7 @@ function Signup() {
 
     // Redirect when logged in
     if (isSuccess || admin) {
-      navigate('/dashboard')
+      navigate('/dashboard/events')
       console.log('success')
     }
 
