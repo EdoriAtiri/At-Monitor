@@ -10,6 +10,7 @@ const {
   createRegistrarPassword,
   getRegistrars,
   deleteRegistrar,
+  toggleRegistrarActivation,
 } = require('../controllers/RegistrarController')
 
 router.route('/').post(protect, createRegistrar).get(protect, getRegistrars)
@@ -21,6 +22,8 @@ router
   .delete(protect, deleteRegistrar)
 
 router.route('/:id/generate').get(protect, generateRegistrarToken)
+router.route('/:id/activation').patch(protect, toggleRegistrarActivation)
+// set header for this
 router.route('/:id/auth/create').patch(createRegistrarPassword)
 
 module.exports = router

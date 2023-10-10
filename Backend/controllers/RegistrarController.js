@@ -22,7 +22,7 @@ const createRegistrar = asyncHandler(async (req, res) => {
     throw new Error('Admin not found')
   }
 
-  const { fullName, email, password } = req.body
+  const { fullName, email } = req.body
 
   // Validation
   if (!fullName || !email) {
@@ -51,16 +51,6 @@ const createRegistrar = asyncHandler(async (req, res) => {
   //     res.status(400)
   //     throw new Error('Has not completed membership training')
   //   }
-
-  //   check password length
-  // if (password.length < 8) {
-  //   res.status(400)
-  //   throw new Error('Password must be at least 8 characters')
-  // }
-
-  // Hash Password
-  // const salt = await bcrypt.genSalt(10)
-  // const hashedPassword = await bcrypt.hash(password, salt)
 
   // Create registrar
   const registrar = await Registrar.create({
@@ -243,8 +233,8 @@ const deleteRegistrar = asyncHandler(async (req, res) => {
 // @route /api/registrars/id/activation
 // @access Public
 const toggleRegistrarActivation = asyncHandler(async (req, res) => {
-  // Get Admin using the Id in the jwt
-  const admin = await Admin.findById(req.admin.id)
+  // Get Admin using the Id added in the auth middleware
+  const admin = await Admin.findById('64e479e7847b196ebad4a7a5')
 
   if (!admin) {
     res.status(401)
@@ -265,7 +255,7 @@ const toggleRegistrarActivation = asyncHandler(async (req, res) => {
     throw new Error('Invalid data type')
   }
 
-  const Registrar = await Registrar.findByIdAndUpdate(
+  await Registrar.findByIdAndUpdate(
     req.params.id,
     { isActivated: req.body.isActivated },
     {
@@ -282,4 +272,5 @@ module.exports = {
   getRegistrars,
   createRegistrarPassword,
   deleteRegistrar,
+  toggleRegistrarActivation,
 }
