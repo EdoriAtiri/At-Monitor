@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getRegistrars, reset } from '../features/Registrars/registrarSlice'
-import formatDate from '../lib/formatDate'
+import RegistrarCard from '../components/RegistrarCard'
 
 const Registrars = () => {
   // eslint-disable-next-line no-unused-vars
@@ -82,29 +82,13 @@ const Registrars = () => {
       <section className="w-full flex flex-col mt-8 gap-8">
         {Array.isArray(registrars) ? (
           registrars.map((registrar) => (
-            // eslint-disable-next-line react/jsx-key
-            <table className="flex w-full lg:w-96 justify-between border border-gray-700 py-2 px-4 lg:p-4 rounded-md">
-              <tr className="font-bold flex gap-2 flex-col text-left ">
-                <th>Name</th>
-                <th>Created</th>
-                <th>Status</th>
-              </tr>
-              <tr className="flex gap-2 flex-col text-right">
-                <td>{registrar.fullName}</td>
-                <td>{formatDate(registrar.createdAt)}</td>
-                <td>
-                  {registrar.isActivated ? (
-                    <span className="bg-green-400 font-bold rounded px-1 py-0.5">
-                      Active
-                    </span>
-                  ) : (
-                    <span className="bg-red-600 font-bold rounded px-1 py-0.5">
-                      Inactive
-                    </span>
-                  )}
-                </td>
-              </tr>
-            </table>
+            <RegistrarCard
+              name={registrar.fullName}
+              createdAt={registrar.createdAt}
+              status={registrar.isActivated}
+              key={registrar._id}
+              id={registrar._id}
+            />
           ))
         ) : (
           <p>An error occurred while loading registars</p>
