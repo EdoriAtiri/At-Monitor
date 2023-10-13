@@ -34,7 +34,7 @@ export const getRegistrars = createAsyncThunk(
 
 // Get a registrar
 export const getRegistrar = createAsyncThunk(
-  'events/getRegistrar',
+  'registrars/getRegistrar',
   async (registrarId, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.admin.token
@@ -81,7 +81,7 @@ export const registrarSlice = createSlice({
       .addCase(getRegistrar.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.myEvent = action.payload
+        state.registrar = action.payload
       })
       .addCase(getRegistrar.rejected, (state, action) => {
         state.isLoading = false

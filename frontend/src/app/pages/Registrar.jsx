@@ -1,32 +1,32 @@
-// import { useEffect, useState } from 'react'
-// import formatDate from '../lib/formatDate'
-// import { useSelector, useDispatch } from 'react-redux'
-// import { useNavigate, useParams } from 'react-router-dom'
-// import { toast } from 'react-toastify'
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { getRegistrar } from '../features/Registrars/registrarSlice'
 
 function Registrar() {
-  //   const [edit, setEdit] = useState(false)
-  //   const { registrar, isLoading, isError, message, isSuccess } = useSelector(
-  // (state) => state.myEvents )
-  //   const { admin } = useSelector((state) => state.auth)
+  // const [edit, setEdit] = useState(false)
+  const { registrar, isLoading, isError, message } = useSelector(
+    (state) => state.registrars
+  )
 
-  //   const dispatch = useDispatch()
-  //   const navigate = useNavigate()
-  //   const { registrarId } = useParams()
+  const dispatch = useDispatch()
+  // const navigate = useNavigate()
+  const { registrarId } = useParams()
 
-  //   useEffect(() => {
-  //     if (isError) {
-  //       toast.error(message)
-  //     }
+  useEffect(() => {
+    dispatch(getRegistrar(registrarId))
 
-  //     dispatch(getEvent(registrarId))
+    if (isError) {
+      toast.error(message)
+    }
 
-  //     // eslint-disable-next-line react-hooks/exhaustive-deps
-  //   }, [isError, message, registrarId])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isError, message, registrarId])
 
-  //   if (isLoading) {
-  //     return <div>Loading...</div>
-  //   }
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
 
   //   const openEdit = () => {
   //     setEdit(true)
@@ -49,13 +49,13 @@ function Registrar() {
           closeEdit={() => setEditEvent(false)}
         />
       )} */}
-      <h1 className="text-3xl mb-5 uppercase">{}</h1>
+      <h1 className="text-3xl mb-5 uppercase">{registrar.fullName}</h1>
       {/* Stat for creator and date */}
       <div className="flex gap-4 mb-4">
         <div className="stats shadow">
           <div className="stat">
             <div className="stat-title">Status</div>
-            <div className="stat-value text-2xl">{}</div>
+            <div className="stat-value text-2xl">{registrar.isActivated}</div>
           </div>
 
           {/* <div className="stat">
