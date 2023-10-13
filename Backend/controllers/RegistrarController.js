@@ -107,12 +107,12 @@ const generateRegistrarToken = asyncHandler(async (req, res) => {
   }
 })
 
-// @desc get registrar
-// @route /api/registrar/:id
+// @desc get registrar for password activation
+// @route /api/registrar/:token/activation
 // @access Public
-const getRegistrar = asyncHandler(async (req, res) => {
+const getRegistrarActivation = asyncHandler(async (req, res) => {
   // Get token from params
-  const token = req.params.id
+  const token = req.params.token
   // Verify and decode the token
   const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
   // Find the registrar
@@ -268,7 +268,7 @@ const toggleRegistrarActivation = asyncHandler(async (req, res) => {
 module.exports = {
   createRegistrar,
   generateRegistrarToken,
-  getRegistrar,
+  getRegistrarActivation,
   getRegistrars,
   createRegistrarPassword,
   deleteRegistrar,

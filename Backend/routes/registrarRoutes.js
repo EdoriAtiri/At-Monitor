@@ -6,7 +6,7 @@ const { protect } = require('../middleware/authMiddleware')
 const {
   createRegistrar,
   generateRegistrarToken,
-  getRegistrar,
+  getRegistrarActivation,
   createRegistrarPassword,
   getRegistrars,
   deleteRegistrar,
@@ -17,11 +17,12 @@ router.route('/').post(protect, createRegistrar).get(protect, getRegistrars)
 
 router
   .route('/:id')
-  .get(protect, getRegistrar)
+  // .get(protect, getRegistrar)
   // .patch(protect, createRegistrarPassword)
   .delete(protect, deleteRegistrar)
 
 router.route('/:id/generate').get(protect, generateRegistrarToken)
+router.route('/:token/activation').get(protect, getRegistrarActivation)
 router.route('/:id/activation').patch(protect, toggleRegistrarActivation)
 // set header for this
 router.route('/:id/auth/create').patch(createRegistrarPassword)
