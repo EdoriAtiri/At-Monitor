@@ -9,6 +9,7 @@ const {
   getRegistrarActivation,
   createRegistrarPassword,
   getRegistrars,
+  getRegistrars,
   deleteRegistrar,
   toggleRegistrarActivation,
 } = require('../controllers/RegistrarController')
@@ -17,7 +18,7 @@ router.route('/').post(protect, createRegistrar).get(protect, getRegistrars)
 
 router
   .route('/:id')
-  // .get(protect, getRegistrar)
+  .get(protect, getRegistrar)
   // .patch(protect, createRegistrarPassword)
   .delete(protect, deleteRegistrar)
 
