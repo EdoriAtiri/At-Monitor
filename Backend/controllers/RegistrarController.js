@@ -131,6 +131,34 @@ const getRegistrarActivation = asyncHandler(async (req, res) => {
   }
 })
 
+// @desc get registrar
+// @route /api/registrar/:id/
+// @access Public
+const getRegistrar = asyncHandler(async (req, res) => {
+  // Get id from params
+  const id = req.params.id
+  // Find registrar
+  const registrar = await Registrar.findById(id)
+
+  // If the registrar is found return registrar id, name and email, else return error
+  if (registrar) {
+    res.status(200).json({
+      id: registrar._id,
+      fullName: registrar.fullName,
+      email: registrar.email,
+      admin: registrar.admin,
+      member: registrar.member,
+      address: registrar.address,
+      gender: registrar.gender,
+      membershipStatus: registrar.membershipStatus,
+      isActivated: registrar.isActivated,
+    })
+  } else {
+    res.status(400)
+    throw new Error('An error has occurred, contact administrator')
+  }
+})
+
 // @desc get all registrars
 // @route /api/registrar/
 // @access Public
@@ -269,6 +297,7 @@ module.exports = {
   createRegistrar,
   generateRegistrarToken,
   getRegistrarActivation,
+  getRegistrar,
   getRegistrars,
   createRegistrarPassword,
   deleteRegistrar,
