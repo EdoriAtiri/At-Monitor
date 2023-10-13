@@ -7,6 +7,6 @@ export const store = configureStore({
   reducer: {
     auth: authReducer,
     myEvents: eventReducer,
-    registrar: registrarReducer,
+    registrars: registrarReducer,
   },
 })
