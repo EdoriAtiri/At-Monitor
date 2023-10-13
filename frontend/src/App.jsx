@@ -10,6 +10,7 @@ import Events from './app/pages/Events.jsx'
 import Event from './app/pages/Event.jsx'
 import Profile from './app/pages/Profile.jsx'
 import Registrars from './app/pages/Registrars.jsx'
+import Registrar from './app/pages/Registrar.jsx'
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
                 <Route path="registrars" element={<Registrars />} />
                 <Route path="events" element={<Events />} />
                 <Route path="events/:eventId" element={<Event />} />
+                <Route path="registrars/:registrarId" element={<Registrar />} />
               </Route>
             </Route>
           </Routes>
