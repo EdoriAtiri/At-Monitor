@@ -99,7 +99,7 @@ function Events() {
             />
           ))
         ) : (
-          <p>Loading events...</p>
+          <p>Error loading events...</p>
         )}
       </section>
     </div>
