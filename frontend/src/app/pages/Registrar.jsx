@@ -58,7 +58,7 @@ function Registrar() {
             // onClick={openEdit}
             className="text-lg border border-gray-700 p-1 rounded-md"
           >
-            Edit
+            {registrar.isActivated ? 'deactivate' : 'activate'}
           </button>
           <button
             // onClick={onDeleteRegistrar}
@@ -87,7 +87,7 @@ function Registrar() {
               {registrar.isActivated ? (
                 <p className="text-green-500">Active</p>
               ) : (
-                <p className="text-red-500">Disabled</p>
+                <p className="text-red-500">Inactive</p>
               )}
             </td>
             <td>{registrar.email}</td>

@@ -262,7 +262,7 @@ const deleteRegistrar = asyncHandler(async (req, res) => {
 // @access Public
 const toggleRegistrarActivation = asyncHandler(async (req, res) => {
   // Get Admin using the Id added in the auth middleware
-  const admin = await Admin.findById('64e479e7847b196ebad4a7a5')
+  const admin = await Admin.findById(req.admin.id)
 
   if (!admin) {
     res.status(401)

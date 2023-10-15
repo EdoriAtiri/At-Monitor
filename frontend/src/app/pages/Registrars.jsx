@@ -13,7 +13,7 @@ const Registrars = () => {
     active: '',
     inactive: '',
   })
-
+  // const { isAddRegistrar, setIsAddRegistrar } = useState(false)
   const { total, active, inactive } = registrarStats
   const dispatch = useDispatch()
 
@@ -53,7 +53,7 @@ const Registrars = () => {
       <header className="items-center justify-between flex text-xl font-semibold">
         <h1>Registrars</h1>
         <button
-          //   onClick={() => setIsNewEvent(true)}
+          // onClick={() => setIsAddRegistrar(true)}
           className="text-lg border border-gray-700 p-1 rounded-md"
         >
           Add Registrar
