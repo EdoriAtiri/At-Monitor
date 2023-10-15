@@ -111,6 +111,19 @@ export const registrarSlice = createSlice({
         state.isError = true
         state.message = action.payload
       })
+      .addCase(toggleRegistrarActivation.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(toggleRegistrarActivation.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.message = action.payload
+      })
+      .addCase(toggleRegistrarActivation.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
   },
 })
 
