@@ -8,7 +8,7 @@ const {
   generateRegistrarToken,
   getRegistrarActivation,
   createRegistrarPassword,
-  getRegistrars,
+  getRegistrar,
   getRegistrars,
   deleteRegistrar,
   toggleRegistrarActivation,

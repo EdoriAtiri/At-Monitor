@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { getRegistrar } from '../features/Registrars/registrarSlice'
 
@@ -49,23 +49,9 @@ function Registrar() {
           closeEdit={() => setEditEvent(false)}
         />
       )} */}
-      <h1 className="text-3xl mb-5 uppercase">{registrar.fullName}</h1>
       {/* Stat for creator and date */}
-      <div className="flex gap-4 mb-4">
-        <div className="stats shadow">
-          <div className="stat">
-            <div className="stat-title">Status</div>
-            <div className="stat-value text-2xl">{registrar.isActivated}</div>
-          </div>
-
-          {/* <div className="stat">
-            <div className="stat-title">Event Date</div>
-            <div className="stat-value text-2xl">
-              {formatDate(myEvent.eventDate)}
-            </div>
-          </div> */}
-        </div>
-
+      <div className="flex gap-4 mb-4 justify-between">
+        <h1 className="text-3xl mb-5 uppercase">{registrar.fullName}</h1>
         {/* Actions */}
         <div className="flex items-center gap-3">
           <button
@@ -82,21 +68,37 @@ function Registrar() {
           </button>
         </div>
       </div>
-      {/* Table for description and link
+      {/* Registrar Details */}
       <table className="table">
         <thead>
           <tr className="font-bold">
-            <th>Link</th>
-            <th>Description</th>
+            <th>Full Name</th>
+            <th>Admin Status</th>
+            <th>Status</th>
+            <th>Email</th>
+            <th>Membership</th>
           </tr>
         </thead>
         <tbody>
           <tr className="">
-            <td>{myEvent.linkId}</td>
-            <td>{myEvent.description}</td>
+            <td>{registrar.fullName}</td>
+            <td>{registrar.isAdmin ? 'Yes' : 'No'}</td>
+            <td>
+              {registrar.isActivated ? (
+                <p className="text-green-500">Active</p>
+              ) : (
+                <p className="text-red-500">Disabled</p>
+              )}
+            </td>
+            <td>{registrar.email}</td>
+            {/* @todo 
+            Add Icon instead of text and add link address */}
+            <td>
+              <Link>Link</Link>
+            </td>
           </tr>
         </tbody>
-      </table>{' '} */}
+      </table>{' '}
     </div>
   )
 }
