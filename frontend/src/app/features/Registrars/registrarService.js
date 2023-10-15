@@ -26,9 +26,22 @@ const getRegistrar = async (registrarId, token) => {
   return response.data
 }
 
+// Toggle Registrar Activation
+const toggleRegistrarActivation = async (data, registrarId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+  const response = await axios.get(API_URL + registrarId, data, config)
+
+  return response.data
+}
+
 const registrarService = {
   getRegistrars,
   getRegistrar,
+  toggleRegistrarActivation,
 }
 
 export default registrarService
