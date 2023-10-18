@@ -33,7 +33,11 @@ const toggleRegistrarActivation = async (data, registrarId, token) => {
       Authorization: `Bearer ${token}`,
     },
   }
-  const response = await axios.get(API_URL + registrarId, data, config)
+  const response = await axios.patch(
+    `${API_URL}${registrarId}/activation`,
+    data,
+    config
+  )
 
   return response.data
 }

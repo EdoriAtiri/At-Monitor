@@ -2,11 +2,14 @@ import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { getRegistrar } from '../features/Registrars/registrarSlice'
+import {
+  getRegistrar,
+  toggleRegistrarActivation,
+} from '../features/Registrars/registrarSlice'
 
 function Registrar() {
   // const [edit, setEdit] = useState(false)
-  const { registrar, isLoading, isError, message } = useSelector(
+  const { registrar, isLoading, isError, message, isSuccess } = useSelector(
     (state) => state.registrars
   )
 
@@ -20,7 +23,9 @@ function Registrar() {
     if (isError) {
       toast.error(message)
     }
-
+    if (isSuccess) {
+      toast.success(`Success`)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError, message, registrarId])
 
@@ -28,9 +33,16 @@ function Registrar() {
     return <div>Loading...</div>
   }
 
-  //   const openEdit = () => {
-  //     setEdit(true)
-  //   }
+  // Toggle Registrar Activation
+  const onClickActivation = () => {
+    const data = { isActivated: !registrar.isActivated }
+    dispatch(
+      toggleRegistrarActivation({
+        data,
+        registrarId,
+      })
+    )
+  }
 
   // Delete Event
   //   const onDeleteEvent = () => {
@@ -55,7 +67,7 @@ function Registrar() {
         {/* Actions */}
         <div className="flex items-center gap-3">
           <button
-            // onClick={openEdit}
+            onClick={onClickActivation}
             className="text-lg border border-gray-700 p-1 rounded-md"
           >
             {registrar.isActivated ? 'deactivate' : 'activate'}
