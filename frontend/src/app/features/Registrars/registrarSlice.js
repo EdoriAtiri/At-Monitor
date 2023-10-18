@@ -82,7 +82,9 @@ export const registrarSlice = createSlice({
   reducers: {
     // eslint-disable-next-line no-unused-vars
     reset: (state) => initialState,
-    // resetSuccess: (state) => (state.isSuccess = false),
+    updateIsSuccess: (state, action) => {
+      state.isSuccess = action.payload // Set isSuccess to the payload value
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -128,5 +130,5 @@ export const registrarSlice = createSlice({
   },
 })
 
-export const { reset, resetSuccess } = registrarSlice.actions
+export const { reset, updateIsSuccess } = registrarSlice.actions
 export default registrarSlice.reducer

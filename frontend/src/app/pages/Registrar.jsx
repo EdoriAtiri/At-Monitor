@@ -9,7 +9,7 @@ import {
 
 function Registrar() {
   // const [edit, setEdit] = useState(false)
-  const { registrar, isLoading, isError, message, isSuccess } = useSelector(
+  const { registrar, isLoading, isError, message } = useSelector(
     (state) => state.registrars
   )
 
@@ -23,15 +23,9 @@ function Registrar() {
     if (isError) {
       toast.error(message)
     }
-    if (isSuccess) {
-      toast.success(`Success`)
-    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError, message, registrarId])
-
-  if (isLoading) {
-    return <div>Loading...</div>
-  }
 
   // Toggle Registrar Activation
   const onClickActivation = () => {
@@ -53,6 +47,9 @@ function Registrar() {
   //     }
   //   }
 
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
   return (
     <div className=" mx-6 mt-10 mb-6">
       {/* {edit && (
