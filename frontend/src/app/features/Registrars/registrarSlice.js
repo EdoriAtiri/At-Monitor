@@ -76,6 +76,29 @@ export const toggleRegistrarActivation = createAsyncThunk(
   }
 )
 
+// Delete a registrar
+export const deleteRegistrar = createAsyncThunk(
+  'registrars/deleteRegistrar',
+  async (registrarId, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.admin.token
+
+      return await registrarService.deleteRegistrar(registrarId, token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+
+      console.log(message)
+
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 export const registrarSlice = createSlice({
   name: 'registrars',
   initialState,
