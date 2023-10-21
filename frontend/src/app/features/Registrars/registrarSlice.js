@@ -150,6 +150,19 @@ export const registrarSlice = createSlice({
         state.isError = true
         state.message = action.payload
       })
+      .addCase(deleteRegistrar.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(deleteRegistrar.fulfilled, (state) => {
+        state.isLoading = false
+        state.isSuccess = true
+        // state.myEvent.filter((event) => event._id !== action.payload._id)
+      })
+      .addCase(deleteRegistrar.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
   },
 })
 
