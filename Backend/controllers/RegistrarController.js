@@ -67,7 +67,7 @@ const createRegistrar = asyncHandler(async (req, res) => {
       admin: registrar.admin,
       fullName: registrar.fullName,
       email: registrar.email,
-      token: generateToken(registrarExists._id, '1d'),
+      token: generateToken(registrar._id, '1d'),
     })
   } else {
     res.status(400)
