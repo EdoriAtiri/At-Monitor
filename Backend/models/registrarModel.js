@@ -7,11 +7,11 @@ const registrarSchema = mongoose.Schema(
       required: true,
       ref: 'Admin',
     },
-    member: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: 'Member',
-    },
+    // member: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   required: true,
+    //   ref: 'Member',
+    // },
     fullName: {
       type: String,
       required: [true, 'Please add full name'],

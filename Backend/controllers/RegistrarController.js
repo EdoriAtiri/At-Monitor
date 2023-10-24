@@ -39,12 +39,12 @@ const createRegistrar = asyncHandler(async (req, res) => {
   }
 
   //  Check if a member
-  const memberExists = await Member.findOne({ email })
+  // const memberExists = await Member.findOne({ email })
 
-  if (!memberExists) {
-    res.status(400)
-    throw new Error('Not a registered member of this organization')
-  }
+  // if (!memberExists) {
+  //   res.status(400)
+  //   throw new Error('Not a registered member of this organization')
+  // }
 
   //   Check membership status
   //   if(memberExists.membershipStatus !== 'completed') {
@@ -55,7 +55,7 @@ const createRegistrar = asyncHandler(async (req, res) => {
   // Create registrar
   const registrar = await Registrar.create({
     admin: req.admin.id,
-    member: memberExists._id,
+    // member: memberExists._id,
     fullName,
     email,
   })
