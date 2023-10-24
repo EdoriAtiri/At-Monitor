@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -10,7 +10,7 @@ import {
 } from '../features/Registrars/registrarSlice'
 
 function Registrar() {
-  // const [edit, setEdit] = useState(false)
+  const [isDeletePrompt, setIsDeletePrompt] = useState(false)
   const { registrar, isLoading, isError, message, isSuccess } = useSelector(
     (state) => state.registrars
   )
@@ -40,10 +40,12 @@ function Registrar() {
     )
   }
 
-  // Delete Event
+  // Show Delete Confirmation
+
+  // Delete Registrar
   const onDeleteRegistrar = () => {
     dispatch(deleteRegistrar(registrarId))
-
+    setIsDeletePrompt(false)
     if (isSuccess) {
       navigate('/dashboard/registrars')
     }
@@ -60,7 +62,13 @@ function Registrar() {
           closeEdit={() => setEditEvent(false)}
         />
       )} */}
-      <ActConfirmation />
+      {isDeletePrompt && (
+        <ActConfirmation
+          onClickBtn={onDeleteRegistrar}
+          title="Delete Registrar"
+          action={`delete ${registrar.fullName}`}
+        />
+      )}
       {/* Stat for creator and date */}
       <div className="flex gap-4 mb-4 justify-between">
         <h1 className="text-3xl mb-5 uppercase">{registrar.fullName}</h1>
@@ -73,7 +81,7 @@ function Registrar() {
             {registrar.isActivated ? 'deactivate' : 'activate'}
           </button>
           <button
-            onClick={onDeleteRegistrar}
+            onClick={() => setIsDeletePrompt(true)}
             className="text-lg border border-gray-700 p-1 rounded-md"
           >
             Delete
