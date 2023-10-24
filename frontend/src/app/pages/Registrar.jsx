@@ -64,9 +64,10 @@ function Registrar() {
       )} */}
       {isDeletePrompt && (
         <ActConfirmation
+          title={`delete ${registrar.fullName}`}
+          action="delete"
           onClickBtn={onDeleteRegistrar}
-          title="Delete Registrar"
-          action={`delete ${registrar.fullName}`}
+          onClickCancel={() => setIsDeletePrompt(false)}
         />
       )}
       {/* Stat for creator and date */}
