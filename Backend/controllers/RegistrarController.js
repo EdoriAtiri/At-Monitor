@@ -38,19 +38,19 @@ const createRegistrar = asyncHandler(async (req, res) => {
     throw new Error('Registrar already exists')
   }
 
-  //  Check if a member
-  // const memberExists = await Member.findOne({ email })
+  /*  Check if a member
+  const memberExists = await Member.findOne({ email })
 
-  // if (!memberExists) {
-  //   res.status(400)
-  //   throw new Error('Not a registered member of this organization')
-  // }
+  if (!memberExists) {
+    res.status(400)
+    throw new Error('Not a registered member of this organization')
+  }
 
-  //   Check membership status
-  //   if(memberExists.membershipStatus !== 'completed') {
-  //     res.status(400)
-  //     throw new Error('Has not completed membership training')
-  //   }
+    Check membership status
+    if(memberExists.membershipStatus !== 'completed') {
+      res.status(400)
+      throw new Error('Has not completed membership training')
+    } */
 
   // Create registrar
   const registrar = await Registrar.create({
