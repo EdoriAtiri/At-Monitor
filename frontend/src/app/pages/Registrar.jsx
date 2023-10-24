@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import ActConfirmation from '../components/ActConfirmation'
 import {
   getRegistrar,
   toggleRegistrarActivation,
@@ -59,6 +60,7 @@ function Registrar() {
           closeEdit={() => setEditEvent(false)}
         />
       )} */}
+      <ActConfirmation />
       {/* Stat for creator and date */}
       <div className="flex gap-4 mb-4 justify-between">
         <h1 className="text-3xl mb-5 uppercase">{registrar.fullName}</h1>

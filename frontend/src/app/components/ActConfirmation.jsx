@@ -1,15 +1,30 @@
-const ActConfirmation = () => {
+import PropTypes from 'prop-types'
+
+const ActConfirmation = ({ title, action, onClickBtn }) => {
   return (
-    <div class="card w-96 bg-base-100 shadow-xl">
-      <div class="card-body">
-        <h2 class="card-title">Card title!</h2>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
-        <div class="card-actions justify-end">
-          <button class="btn btn-primary">Buy Now</button>
+    <div className="absolute z-10 top-1/2 left-1/2 transform -translate-x-1/2 translate-y-1/2 card w-96 shadow-2xl bg-gray-100">
+      <div className="card-body">
+        <h2 className="card-title capitalize">{title}</h2>
+        <p>Are you sure you want to {action}</p>
+        <div className="card-actions justify-end">
+          <button onClick={onClickBtn} className="btn btn-primary uppercase">
+            {action}
+          </button>
         </div>
       </div>
     </div>
   )
+}
+
+ActConfirmation.propTypes = {
+  title: PropTypes.string,
+  action: PropTypes.string,
+  onClickBtn: PropTypes.func,
+}
+
+ActConfirmation.defaultProps = {
+  title: 'Delete',
+  action: 'delete',
 }
 
 export default ActConfirmation
