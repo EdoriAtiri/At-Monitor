@@ -26,6 +26,18 @@ const getRegistrar = async (registrarId, token) => {
   return response.data
 }
 
+// Create a Registrar
+const createRegistrar = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+  const response = await axios.post(API_URL, config)
+
+  return response.data
+}
+
 // Toggle Registrar Activation
 const toggleRegistrarActivation = async (data, registrarId, token) => {
   const config = {
@@ -60,6 +72,7 @@ const registrarService = {
   getRegistrar,
   toggleRegistrarActivation,
   deleteRegistrar,
+  createRegistrar,
 }
 
 export default registrarService
