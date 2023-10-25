@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getEvents, reset } from '../features/Events/eventSlice'
 import EventCard from '../components/EventCard'
 import NewEvent from '../components/NewEvent'
+import Loading from '../components/Loading'
 
 function Events() {
   const [isNewEvent, setIsNewEvent] = useState(false)
@@ -56,6 +57,7 @@ function Events() {
 
   return (
     <div className=" mx-6 mt-10 mb-6">
+      <Loading />
       {isNewEvent && <NewEvent closeForm={() => setIsNewEvent(false)} />}
       <header className="items-center justify-between flex text-xl font-semibold">
         <h1>My Events</h1>
