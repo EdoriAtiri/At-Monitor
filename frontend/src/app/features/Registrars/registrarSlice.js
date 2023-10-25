@@ -52,6 +52,26 @@ export const getRegistrar = createAsyncThunk(
   }
 )
 
+// Create a registrar
+export const createRegistrar = createAsyncThunk(
+  'registrars/createRegistrar',
+  async (_, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.admin.token
+      return await registrarService.createRegistrar(token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 // Toggle registrar Activation
 export const toggleRegistrarActivation = createAsyncThunk(
   'registrars/toggleRegistrarActivation',

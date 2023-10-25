@@ -15,7 +15,6 @@ function NewRegistrar({ closeForm }) {
   )
 
   const dispatch = useDispatch()
-  // console.log(eventId)
 
   const { fullName, email } = registrarData
 
