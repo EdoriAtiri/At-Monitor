@@ -5,8 +5,10 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { getEvent, deleteEvent } from '../features/Events/eventSlice'
 import EditEventForm from '../components/EditEventForm'
+import ActConfirmation from '../components/ActConfirmation'
 
 function Event() {
+  const [isDeletePrompt, setIsDeletePrompt] = useState(false)
   const [editEvent, setEditEvent] = useState(false)
   const { myEvent, isLoading, isError, message, isSuccess } = useSelector(
     (state) => state.myEvents
@@ -52,6 +54,14 @@ function Event() {
           closeEdit={() => setEditEvent(false)}
         />
       )}
+      {isDeletePrompt && (
+        <ActConfirmation
+          action={`delete ${myEvent.eventName} ?`}
+          title="delete"
+          onClickBtn={onDeleteEvent}
+          onClickCancel={() => setIsDeletePrompt(false)}
+        />
+      )}
       <h1 className="text-3xl mb-5 uppercase">{myEvent.eventName}</h1>
       {/* Stat for creator and date */}
       <div className="flex gap-4 mb-4">
@@ -80,7 +90,7 @@ function Event() {
             Edit
           </button>
           <button
-            onClick={onDeleteEvent}
+            onClick={() => setIsDeletePrompt(true)}
             className="text-lg border border-gray-700 p-1 rounded-md"
           >
             Delete

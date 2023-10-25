@@ -11,7 +11,7 @@ const ActConfirmation = ({ title, action, onClickBtn, onClickCancel }) => {
             onClick={onClickBtn}
             className="btn btn-primary uppercase text-white"
           >
-            {action}
+            {title}
           </button>
           <button
             onClick={onClickCancel}
