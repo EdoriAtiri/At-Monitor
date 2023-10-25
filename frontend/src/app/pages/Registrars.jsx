@@ -3,9 +3,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getRegistrars, reset } from '../features/Registrars/registrarSlice'
 import RegistrarCard from '../components/RegistrarCard'
 import Loading from '../components/Loading'
+import NewRegistrar from '../components/NewRegistrar'
 
 const Registrars = () => {
-  // eslint-disable-next-line no-unused-vars
+  const [isForm, setIsForm] = useState(false)
+
   const { registrars, isSuccess, isLoading } = useSelector(
     (state) => state.registrars
   )
@@ -51,10 +53,11 @@ const Registrars = () => {
   return (
     <div className="mx-6 mt-10 mb-6">
       {' '}
+      {isForm && <NewRegistrar closeForm={() => setIsForm(false)} />}
       <header className="items-center justify-between flex text-xl font-semibold">
         <h1>Registrars</h1>
         <button
-          // onClick={() => setIsAddRegistrar(true)}
+          onClick={() => setIsForm(true)}
           className="text-lg border border-gray-700 p-1 rounded-md"
         >
           Add Registrar
