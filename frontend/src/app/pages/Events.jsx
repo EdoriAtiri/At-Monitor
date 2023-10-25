@@ -52,12 +52,11 @@ function Events() {
   }, [myEvents])
 
   if (isLoading) {
-    return <p>Loading...</p>
+    return <Loading />
   }
 
   return (
     <div className=" mx-6 mt-10 mb-6">
-      <Loading />
       {isNewEvent && <NewEvent closeForm={() => setIsNewEvent(false)} />}
       <header className="items-center justify-between flex text-xl font-semibold">
         <h1>My Events</h1>

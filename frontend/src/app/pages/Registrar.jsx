@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import ActConfirmation from '../components/ActConfirmation'
+import Loading from '../components/Loading'
 import {
   getRegistrar,
   toggleRegistrarActivation,
@@ -52,7 +53,7 @@ function Registrar() {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Loading />
   }
   return (
     <div className=" mx-6 mt-10 mb-6">

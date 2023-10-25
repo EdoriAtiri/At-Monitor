@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 import { getEvent, deleteEvent } from '../features/Events/eventSlice'
 import EditEventForm from '../components/EditEventForm'
 import ActConfirmation from '../components/ActConfirmation'
+import Loading from '../components/Loading'
 
 function Event() {
   const [isDeletePrompt, setIsDeletePrompt] = useState(false)
@@ -30,7 +31,7 @@ function Event() {
   }, [isError, message, eventId])
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Loading />
   }
 
   const openEdit = () => {

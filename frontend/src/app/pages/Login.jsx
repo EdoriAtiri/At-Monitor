@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { login, reset } from '../features/Auth/authSlice'
 import Logo from '../components/Logo'
+import Loading from '../components/Loading'
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -54,7 +55,7 @@ function Login() {
   }
 
   if (isLoading) {
-    return <div>loading...</div>
+    return <Loading />
   }
 
   return (

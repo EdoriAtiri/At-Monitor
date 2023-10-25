@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getRegistrars, reset } from '../features/Registrars/registrarSlice'
 import RegistrarCard from '../components/RegistrarCard'
+import Loading from '../components/Loading'
 
 const Registrars = () => {
   // eslint-disable-next-line no-unused-vars
@@ -44,7 +45,7 @@ const Registrars = () => {
   }, [registrars])
 
   if (isLoading) {
-    return <p>Loading...</p>
+    return <Loading />
   }
 
   return (
