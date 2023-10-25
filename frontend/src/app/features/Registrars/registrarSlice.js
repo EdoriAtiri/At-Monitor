@@ -183,6 +183,19 @@ export const registrarSlice = createSlice({
         state.isError = true
         state.message = action.payload
       })
+      .addCase(createRegistrar.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(createRegistrar.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.myEvents = [action.payload, ...state.registrars]
+      })
+      .addCase(createRegistrar.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
   },
 })
 
