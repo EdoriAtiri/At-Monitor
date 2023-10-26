@@ -40,7 +40,7 @@ const RegistrarCard = ({ name, createdAt, status, id }) => {
 RegistrarCard.propTypes = {
   name: PropTypes.string,
   createdAt: PropTypes.string,
-  status: PropTypes.string,
+  status: PropTypes.bool,
   id: PropTypes.string,
 }
 

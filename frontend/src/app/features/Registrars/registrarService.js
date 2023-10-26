@@ -27,13 +27,13 @@ const getRegistrar = async (registrarId, token) => {
 }
 
 // Create a Registrar
-const createRegistrar = async (token) => {
+const createRegistrar = async (data, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   }
-  const response = await axios.post(API_URL, config)
+  const response = await axios.post(API_URL, data, config)
 
   return response.data
 }

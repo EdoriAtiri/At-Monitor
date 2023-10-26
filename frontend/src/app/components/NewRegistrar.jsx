@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
-// import { createEvent } from '../features/Events/eventSlice'
+import { createRegistrar } from '../features/Registrars/registrarSlice'
 
 function NewRegistrar({ closeForm }) {
   const [registrarData, setRegistrarData] = useState({
@@ -32,7 +32,7 @@ function NewRegistrar({ closeForm }) {
     // const data = {
     //   ...registrarData,
     // }
-    // dispatch(createEvent(data))
+    dispatch(createRegistrar(registrarData))
     closeForm()
   }
 

@@ -55,10 +55,10 @@ export const getRegistrar = createAsyncThunk(
 // Create a registrar
 export const createRegistrar = createAsyncThunk(
   'registrars/createRegistrar',
-  async (_, thunkAPI) => {
+  async (data, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.admin.token
-      return await registrarService.createRegistrar(token)
+      return await registrarService.createRegistrar(data, token)
     } catch (error) {
       const message =
         (error.response &&
@@ -189,7 +189,7 @@ export const registrarSlice = createSlice({
       .addCase(createRegistrar.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.myEvents = [action.payload, ...state.registrars]
+        state.registrars = [action.payload, ...state.registrars]
       })
       .addCase(createRegistrar.rejected, (state, action) => {
         state.isLoading = false
