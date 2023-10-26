@@ -16,6 +16,7 @@ const ActConfirmation = ({ title, action, onClickBtn, onClickCancel }) => {
           <div className="card-actions justify-end">
             <button
               onClick={onClickBtn}
+              autoFocus
               className="btn btn-primary uppercase text-white"
             >
               {title}
