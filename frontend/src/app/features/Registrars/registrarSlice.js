@@ -189,6 +189,7 @@ export const registrarSlice = createSlice({
       .addCase(createRegistrar.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
+        action.payload.createdAt = new Date().toLocaleDateString()
         state.registrars = [action.payload, ...state.registrars]
       })
       .addCase(createRegistrar.rejected, (state, action) => {
