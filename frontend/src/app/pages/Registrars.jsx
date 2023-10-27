@@ -1,12 +1,21 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useSearchParams } from 'react-router-dom'
 import { getRegistrars, reset } from '../features/Registrars/registrarSlice'
 import RegistrarCard from '../components/RegistrarCard'
 import Loading from '../components/Loading'
 import NewRegistrar from '../components/NewRegistrar'
 
 const Registrars = () => {
+  // const [activeRegistrars, setActiveRegistrars] = useState(false)
+  const [defaultRegistrars, setDefaultRegistrars] = useState()
   const [isForm, setIsForm] = useState(false)
+  const [searchParams, setSearchParams] = useSearchParams({
+    activeOnly: false,
+  })
+  const q = searchParams.get('q')
+  // useSearchParams stores values as string, so for booleans and numbers check that you have the val you want
+  const activeOnly = searchParams.get('activeOnly') === 'true'
 
   const { registrars, isSuccess, isLoading } = useSelector(
     (state) => state.registrars
@@ -33,6 +42,13 @@ const Registrars = () => {
     dispatch(getRegistrars())
   }, [dispatch])
 
+  // update default registrars
+  useEffect(() => {
+    if (registrars) {
+      setDefaultRegistrars(registrars)
+    }
+  }, [registrars])
+
   // Creates stats when getRegistrars is successful
   useEffect(() => {
     if (Array.isArray(registrars)) {
@@ -44,7 +60,20 @@ const Registrars = () => {
           registrars.filter((registrar) => !registrar.isActivated).length || 0,
       })
     }
-  }, [registrars])
+  }, [Registrars])
+
+  // filtering alg for activeOnly
+  useEffect(() => {
+    const filteredActiveRegistrars = registrars?.filter(
+      (reg) => reg.isActivated === true
+    )
+
+    if (activeOnly) {
+      setDefaultRegistrars(filteredActiveRegistrars)
+    } else {
+      setDefaultRegistrars(registrars)
+    }
+  }, [activeOnly, registrars])
 
   if (isLoading) {
     return <Loading />
@@ -82,10 +111,30 @@ const Registrars = () => {
           </div>
         </div>
       </div>
+      {/* Sorting and Filtering */}
+      <div>
+        <div className="flex items-center gap-1">
+          <label className="text-xs" htmlFor="activeOnly">
+            Active Registrars Only
+          </label>{' '}
+          <input
+            type="checkbox"
+            id="activeOnly"
+            checked={activeOnly}
+            onChange={(e) =>
+              setSearchParams((prev) => {
+                prev.set('activeOnly', e.target.checked)
+
+                return prev
+              })
+            }
+          />
+        </div>
+      </div>
       {/* Registrars */}
       <section className="w-full flex flex-col mt-8 gap-8">
-        {Array.isArray(registrars) ? (
-          registrars.map((registrar) => (
+        {Array.isArray(defaultRegistrars) ? (
+          defaultRegistrars.map((registrar) => (
             <RegistrarCard
               name={registrar.fullName}
               createdAt={registrar.createdAt}
