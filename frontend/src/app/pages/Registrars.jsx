@@ -6,8 +6,11 @@ import RegistrarCard from '../components/RegistrarCard'
 import Loading from '../components/Loading'
 import NewRegistrar from '../components/NewRegistrar'
 
+const SORT_VALUES = ['date created', 'name', 'status']
+
 const Registrars = () => {
   const [defaultRegistrars, setDefaultRegistrars] = useState()
+  const [sortValue, setSortValue] = useState('date created')
   const [isForm, setIsForm] = useState(false)
   const [searchParams, setSearchParams] = useSearchParams({
     activeOnly: false,
@@ -16,7 +19,6 @@ const Registrars = () => {
   const q = searchParams.get('q')
   // useSearchParams stores values as string, so for booleans and numbers check that you have the val you want
   const activeOnly = searchParams.get('activeOnly') === 'true'
-  // const items = defaultRegistrars.filter(item)
 
   const { registrars, isSuccess, isLoading } = useSelector(
     (state) => state.registrars
@@ -117,10 +119,11 @@ const Registrars = () => {
         </div>
       </div>
       {/* Sorting and Filtering */}
-      <div>
+      <div className="flex">
         <div>
           <label htmlFor="q">search by name</label>
           <input
+            className="input input-bordered w-full max-w-xs"
             type="text"
             id="q"
             value={q}
@@ -156,6 +159,25 @@ const Registrars = () => {
             }
           />
         </div>
+      </div>
+      {/*  */}
+      <div className="dropdown dropdown-end">
+        <label htmlFor="sort" className="">
+          Sort by:
+        </label>
+
+        <select className="capitalize" name="sort" id="sort">
+          {SORT_VALUES.map((value, index) => (
+            <option
+              onClick={() => setSortValue(value)}
+              className="capitalize"
+              key={index}
+              value={value}
+            >
+              {value}
+            </option>
+          ))}{' '}
+        </select>
       </div>
       {/* Registrars */}
       <section className="w-full flex flex-col mt-8 gap-8">
