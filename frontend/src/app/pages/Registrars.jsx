@@ -7,15 +7,16 @@ import Loading from '../components/Loading'
 import NewRegistrar from '../components/NewRegistrar'
 
 const Registrars = () => {
-  // const [activeRegistrars, setActiveRegistrars] = useState(false)
   const [defaultRegistrars, setDefaultRegistrars] = useState()
   const [isForm, setIsForm] = useState(false)
   const [searchParams, setSearchParams] = useSearchParams({
     activeOnly: false,
+    q: '',
   })
   const q = searchParams.get('q')
   // useSearchParams stores values as string, so for booleans and numbers check that you have the val you want
   const activeOnly = searchParams.get('activeOnly') === 'true'
+  // const items = defaultRegistrars.filter(item)
 
   const { registrars, isSuccess, isLoading } = useSelector(
     (state) => state.registrars
@@ -60,20 +61,24 @@ const Registrars = () => {
           registrars.filter((registrar) => !registrar.isActivated).length || 0,
       })
     }
-  }, [Registrars])
+  }, [registrarStats, registrars])
 
-  // filtering alg for activeOnly
+  // filter by query or activeOnly or query and activeOnly
   useEffect(() => {
-    const filteredActiveRegistrars = registrars?.filter(
-      (reg) => reg.isActivated === true
-    )
+    const filteredRegistrars =
+      registrars?.filter((reg) => {
+        return (
+          reg.fullName.toLowerCase().includes(q.toLowerCase()) &&
+          (activeOnly ? reg.isActivated : true)
+        )
+      }) ?? []
 
-    if (activeOnly) {
-      setDefaultRegistrars(filteredActiveRegistrars)
+    if (q || activeOnly) {
+      setDefaultRegistrars(filteredRegistrars)
     } else {
       setDefaultRegistrars(registrars)
     }
-  }, [activeOnly, registrars])
+  }, [activeOnly, q, registrars])
 
   if (isLoading) {
     return <Loading />
@@ -113,6 +118,24 @@ const Registrars = () => {
       </div>
       {/* Sorting and Filtering */}
       <div>
+        <div>
+          <label htmlFor="q">search by name</label>
+          <input
+            type="text"
+            id="q"
+            value={q}
+            onChange={(e) =>
+              setSearchParams(
+                (prev) => {
+                  prev.set('q', e.target.value)
+
+                  return prev
+                },
+                { replace: true }
+              )
+            }
+          />
+        </div>
         <div className="flex items-center gap-1">
           <label className="text-xs" htmlFor="activeOnly">
             Active Registrars Only
@@ -122,11 +145,14 @@ const Registrars = () => {
             id="activeOnly"
             checked={activeOnly}
             onChange={(e) =>
-              setSearchParams((prev) => {
-                prev.set('activeOnly', e.target.checked)
+              setSearchParams(
+                (prev) => {
+                  prev.set('activeOnly', e.target.checked)
 
-                return prev
-              })
+                  return prev
+                },
+                { replace: true }
+              )
             }
           />
         </div>
