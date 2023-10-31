@@ -102,6 +102,7 @@ const Registrars = () => {
     // For sort to work defaultRegistrars must be an array
     const sortedRegistrars = [...defaultRegistrars]
     sortedRegistrars.sort(sortByProperty(sortProperty))
+    if (sortProperty === 'isActivated') sortedRegistrars.reverse()
     setDefaultRegistrars(sortedRegistrars)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortValue])
