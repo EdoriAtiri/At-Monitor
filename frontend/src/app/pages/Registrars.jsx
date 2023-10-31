@@ -5,11 +5,12 @@ import { getRegistrars, reset } from '../features/Registrars/registrarSlice'
 import RegistrarCard from '../components/RegistrarCard'
 import Loading from '../components/Loading'
 import NewRegistrar from '../components/NewRegistrar'
+import sortByProperty from '../lib/sortByProperty'
 
 const SORT_VALUES = ['date created', 'name', 'status']
 
 const Registrars = () => {
-  const [defaultRegistrars, setDefaultRegistrars] = useState()
+  const [defaultRegistrars, setDefaultRegistrars] = useState([])
   const [sortValue, setSortValue] = useState('date created')
   const [isForm, setIsForm] = useState(false)
   const [searchParams, setSearchParams] = useSearchParams({
@@ -63,7 +64,7 @@ const Registrars = () => {
           registrars.filter((registrar) => !registrar.isActivated).length || 0,
       })
     }
-  }, [registrarStats, registrars])
+  }, [registrars])
 
   // filter by query or activeOnly or query and activeOnly
   useEffect(() => {
@@ -84,12 +85,26 @@ const Registrars = () => {
 
   // Sort registrars by
   useEffect(() => {
-    setDefaultRegistrars((prev) => {
-      prev.sort((a, b) => {
-        if (a.fullName > b.fullName) return 1
-      })
-    })
-  }, [])
+    let sortProperty
+
+    switch (sortValue) {
+      case 'name':
+        sortProperty = 'fullName'
+        break
+      case 'status':
+        sortProperty = 'isActivated'
+        break
+      default:
+        sortProperty = 'createdAt'
+        break
+    }
+
+    // For sort to work defaultRegistrars must be an array
+    const sortedRegistrars = [...defaultRegistrars]
+    sortedRegistrars.sort(sortByProperty(sortProperty))
+    setDefaultRegistrars(sortedRegistrars)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortValue])
 
   // Loading Screen
   if (isLoading) {
@@ -176,14 +191,14 @@ const Registrars = () => {
           Sort by:
         </label>
 
-        <select className="capitalize" name="sort" id="sort">
+        <select
+          className="capitalize"
+          name="sort"
+          id="sort"
+          onChange={(e) => setSortValue(e.target.value)}
+        >
           {SORT_VALUES.map((value, index) => (
-            <option
-              onClick={() => setSortValue(value)}
-              className="capitalize"
-              key={index}
-              value={value}
-            >
+            <option className="capitalize" key={index} value={value}>
               {value}
             </option>
           ))}{' '}
