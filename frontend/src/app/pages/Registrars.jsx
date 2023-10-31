@@ -82,6 +82,16 @@ const Registrars = () => {
     }
   }, [activeOnly, q, registrars])
 
+  // Sort registrars by
+  useEffect(() => {
+    setDefaultRegistrars((prev) => {
+      prev.sort((a, b) => {
+        if (a.fullName > b.fullName) return 1
+      })
+    })
+  }, [])
+
+  // Loading Screen
   if (isLoading) {
     return <Loading />
   }
