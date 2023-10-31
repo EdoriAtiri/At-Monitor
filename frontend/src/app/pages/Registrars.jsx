@@ -11,15 +11,19 @@ const SORT_VALUES = ['date created', 'name', 'status']
 
 const Registrars = () => {
   const [defaultRegistrars, setDefaultRegistrars] = useState([])
-  const [sortValue, setSortValue] = useState('date created')
+  // const [sortValue, setSortValue] = useState('date created')
   const [isForm, setIsForm] = useState(false)
+  // Search Params
   const [searchParams, setSearchParams] = useSearchParams({
     activeOnly: false,
     q: '',
   })
   const q = searchParams.get('q')
-  // useSearchParams stores values as string, so for booleans and numbers check that you have the val you want
   const activeOnly = searchParams.get('activeOnly') === 'true'
+  // Search Params
+  const [sortParams, setSortParams] = useSearchParams()
+  const sortBy = sortParams.get('sortBy')
+  // useSearchParams stores values as string, so for booleans and numbers check that you have the val you want
 
   const { registrars, isSuccess, isLoading } = useSelector(
     (state) => state.registrars
@@ -87,7 +91,7 @@ const Registrars = () => {
   useEffect(() => {
     let sortProperty
 
-    switch (sortValue) {
+    switch (sortBy) {
       case 'name':
         sortProperty = 'fullName'
         break
@@ -102,10 +106,11 @@ const Registrars = () => {
     // For sort to work defaultRegistrars must be an array
     const sortedRegistrars = [...defaultRegistrars]
     sortedRegistrars.sort(sortByProperty(sortProperty))
+    // SortbyProperty returns inactive registrars first, the reverse method flips that
     if (sortProperty === 'isActivated') sortedRegistrars.reverse()
     setDefaultRegistrars(sortedRegistrars)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sortValue])
+  }, [sortBy])
 
   // Loading Screen
   if (isLoading) {
@@ -196,10 +201,20 @@ const Registrars = () => {
           className="capitalize"
           name="sort"
           id="sort"
-          onChange={(e) => setSortValue(e.target.value)}
+          onChange={(e) =>
+            setSortParams({ sortBy: e.target.value }, { replace: true })
+          }
         >
+          {/* <option className="capitalize" selected={sortBy}>name</option>
+          <option className="capitalize">date created</option>
+          <option className="capitalize">status</option> */}
           {SORT_VALUES.map((value, index) => (
-            <option className="capitalize" key={index} value={value}>
+            <option
+              selected={sortBy === value}
+              className="capitalize"
+              key={index}
+              value={value}
+            >
               {value}
             </option>
           ))}{' '}
