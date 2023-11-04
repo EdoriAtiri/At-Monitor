@@ -17,12 +17,12 @@ const Registrars = () => {
   const [searchParams, setSearchParams] = useSearchParams({
     activeOnly: false,
     q: '',
+    sortBy: '',
   })
   const q = searchParams.get('q')
   const activeOnly = searchParams.get('activeOnly') === 'true'
   // Search Params
-  const [sortParams, setSortParams] = useSearchParams()
-  const sortBy = sortParams.get('sortBy')
+  const sortBy = searchParams.get('sortBy')
   // useSearchParams stores values as string, so for booleans and numbers check that you have the val you want
 
   const { registrars, isSuccess, isLoading } = useSelector(
@@ -73,36 +73,39 @@ const Registrars = () => {
   // filter by query or activeOnly or query and activeOnly
   useEffect(() => {
     const filteredRegistrars =
-      registrars?.filter((reg) => {
-        return (
-          reg.fullName?.toLowerCase()?.includes(q?.toLowerCase()) &&
-          (activeOnly ? reg.isActivated : true)
-        )
+      registrars?.filter((item) => {
+        // Check if the item's name includes the provided name (case-insensitive)
+        const nameMatch = item?.fullName
+          ?.toLowerCase()
+          .includes(q?.toLowerCase())
+
+        // Check if the item's activation status matches the provided isActive value
+        const activationMatch = activeOnly
+          ? item.isActivated
+          : item.isActivated || !item.isActivated
+
+        // Return true if both conditions are met
+        return nameMatch && activationMatch
       }) ?? []
 
-    if (q || activeOnly) {
-      setDefaultRegistrars(filteredRegistrars)
-    } else {
-      setDefaultRegistrars(registrars)
-    }
+    setDefaultRegistrars(filteredRegistrars)
   }, [activeOnly, q, registrars])
 
   // Sort registrars by
-  useEffect(() => {
-    let sortProperty
+  // useEffect(() => {
+  //   let sortProperty
 
-    if (sortBy === 'name') sortProperty = 'fullName'
-    if (sortBy === 'status') sortProperty = 'isActivated'
-    if (sortBy === 'date created') sortProperty = 'createdAt'
+  //   if (sortBy === 'name') sortProperty = 'fullName'
+  //   if (sortBy === 'status') sortProperty = 'isActivated'
+  //   if (sortBy === 'date created') sortProperty = 'createdAt'
 
-    // For sort to work defaultRegistrars must be an array
-    const sortedRegistrars = [...defaultRegistrars]
-    sortedRegistrars.sort(sortByProperty(sortProperty))
-    // SortbyProperty returns inactive registrars first, the reverse method flips that
-    if (sortProperty === 'isActivated') sortedRegistrars.reverse()
-    setDefaultRegistrars(sortedRegistrars)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sortBy])
+  //   // For sort to work defaultRegistrars must be an array
+  //   const sortedRegistrars = [...defaultRegistrars]
+  //   sortedRegistrars.sort(sortByProperty(sortProperty))
+  //   // SortbyProperty returns inactive registrars first, the reverse method flips that
+  //   if (sortProperty === 'isActivated') sortedRegistrars.reverse()
+  //   setDefaultRegistrars(sortedRegistrars)
+  // }, [sortBy])
 
   // Loading Screen
   if (isLoading) {
@@ -194,7 +197,14 @@ const Registrars = () => {
           name="sort"
           id="sort"
           onChange={(e) =>
-            setSortParams({ sortBy: e.target.value }, { replace: true })
+            setSearchParams(
+              (prev) => {
+                prev.set('sortBy', e.target.value)
+
+                return prev
+              },
+              { replace: true }
+            )
           }
         >
           {SORT_VALUES.map((value, index) => (
