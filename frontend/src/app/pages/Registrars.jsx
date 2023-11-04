@@ -75,7 +75,7 @@ const Registrars = () => {
     const filteredRegistrars =
       registrars?.filter((reg) => {
         return (
-          reg.fullName.toLowerCase().includes(q.toLowerCase()) &&
+          reg.fullName?.toLowerCase()?.includes(q?.toLowerCase()) &&
           (activeOnly ? reg.isActivated : true)
         )
       }) ?? []
@@ -91,17 +91,9 @@ const Registrars = () => {
   useEffect(() => {
     let sortProperty
 
-    switch (sortBy) {
-      case 'name':
-        sortProperty = 'fullName'
-        break
-      case 'status':
-        sortProperty = 'isActivated'
-        break
-      default:
-        sortProperty = 'createdAt'
-        break
-    }
+    if (sortBy === 'name') sortProperty = 'fullName'
+    if (sortBy === 'status') sortProperty = 'isActivated'
+    if (sortBy === 'date created') sortProperty = 'createdAt'
 
     // For sort to work defaultRegistrars must be an array
     const sortedRegistrars = [...defaultRegistrars]
@@ -205,9 +197,6 @@ const Registrars = () => {
             setSortParams({ sortBy: e.target.value }, { replace: true })
           }
         >
-          {/* <option className="capitalize" selected={sortBy}>name</option>
-          <option className="capitalize">date created</option>
-          <option className="capitalize">status</option> */}
           {SORT_VALUES.map((value, index) => (
             <option
               selected={sortBy === value}
