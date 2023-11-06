@@ -36,7 +36,7 @@ const Registrars = () => {
   const q = searchParams.get('q')
   const activeOnly = searchParams.get('activeOnly') === 'true'
   // Search Params
-  const sortBy = searchParams.get('sortBy')
+  const sortBy = searchParams.get('sortBy') || 'date created'
   // useSearchParams stores values as string, so for booleans and numbers check that you have the val you want
 
   const { registrars, isSuccess, isLoading } = useSelector(
