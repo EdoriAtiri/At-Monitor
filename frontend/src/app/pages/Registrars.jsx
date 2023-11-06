@@ -7,7 +7,21 @@ import Loading from '../components/Loading'
 import NewRegistrar from '../components/NewRegistrar'
 import sortByProperty from '../lib/sortByProperty'
 
-const SORT_VALUES = ['date created', 'name', 'status']
+// const SORT_VALUES = ['date created', 'name', 'status']
+const SORT_VALUES = [
+  {
+    display: 'date created',
+    value: 'createdAt',
+  },
+  {
+    display: 'name',
+    value: 'fullName',
+  },
+  {
+    display: 'status',
+    value: 'isActivated',
+  },
+]
 
 const Registrars = () => {
   const [defaultRegistrars, setDefaultRegistrars] = useState([])
@@ -88,24 +102,32 @@ const Registrars = () => {
         return nameMatch && activationMatch
       }) ?? []
 
-    setDefaultRegistrars(filteredRegistrars)
-  }, [activeOnly, q, registrars])
+    SORT_VALUES.forEach((val) => {
+      if (sortBy === val.display) {
+        sortRegistrars(filteredRegistrars, val.value)
+      }
+    })
+  }, [activeOnly, q, registrars, sortBy])
 
-  // Sort registrars by
-  // useEffect(() => {
-  //   let sortProperty
+  const sortRegistrars = (arr, value) => {
+    // For sort to work defaultRegistrars must be an array
+    const sortedRegistrars = [...arr]
+    sortedRegistrars.sort(sortByProperty(value))
+    // SortbyProperty returns inactive registrars first, the reverse method flips that
+    if (value === 'isActivated') sortedRegistrars.reverse()
+    setDefaultRegistrars(sortedRegistrars)
+  }
 
-  //   if (sortBy === 'name') sortProperty = 'fullName'
-  //   if (sortBy === 'status') sortProperty = 'isActivated'
-  //   if (sortBy === 'date created') sortProperty = 'createdAt'
+  // Sort registrars by SORT_VALUE value if display name matches sortBy
+  useEffect(() => {
+    SORT_VALUES.forEach((val) => {
+      if (sortBy === val.display) {
+        sortRegistrars(defaultRegistrars, val.value)
+      }
+    })
 
-  //   // For sort to work defaultRegistrars must be an array
-  //   const sortedRegistrars = [...defaultRegistrars]
-  //   sortedRegistrars.sort(sortByProperty(sortProperty))
-  //   // SortbyProperty returns inactive registrars first, the reverse method flips that
-  //   if (sortProperty === 'isActivated') sortedRegistrars.reverse()
-  //   setDefaultRegistrars(sortedRegistrars)
-  // }, [sortBy])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortBy])
 
   // Loading Screen
   if (isLoading) {
@@ -186,7 +208,7 @@ const Registrars = () => {
           />
         </div>
       </div>
-      {/*  */}
+      {/* sorting */}
       <div className="dropdown dropdown-end">
         <label htmlFor="sort" className="">
           Sort by:
@@ -207,14 +229,14 @@ const Registrars = () => {
             )
           }
         >
-          {SORT_VALUES.map((value, index) => (
+          {SORT_VALUES.map((val, index) => (
             <option
-              selected={sortBy === value}
+              selected={sortBy === val.display}
               className="capitalize"
               key={index}
-              value={value}
+              value={val.display}
             >
-              {value}
+              {val.display}
             </option>
           ))}{' '}
         </select>
