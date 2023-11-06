@@ -148,7 +148,7 @@ const Registrars = () => {
         </button>
       </header>{' '}
       {/* Registrar Stats */}
-      <div className="flex gap-4 mb-4 mt-8">
+      <div className="flex gap-4 mt-8">
         <div className="stats shadow">
           <div className="stat">
             <div className="stat-title">Total Registrars</div>
@@ -167,11 +167,13 @@ const Registrars = () => {
         </div>
       </div>
       {/* Sorting and Filtering */}
-      <div className="flex">
-        <div>
-          <label htmlFor="q">search by name</label>
+      <div className="flex flex-col lg:flex-row gap-3 lg:gap-6 mt-6 mb-1">
+        <div className=" flex gap-2 items-center">
+          <label className="text-sm" htmlFor="q">
+            Search By Name
+          </label>
           <input
-            className="input input-bordered w-full max-w-xs"
+            className="input input-bordered w-full max-w-xs h-8"
             type="text"
             id="q"
             value={q}
@@ -187,62 +189,68 @@ const Registrars = () => {
             }
           />
         </div>
-        <div className="flex items-center gap-1">
-          <label className="text-xs" htmlFor="activeOnly">
-            Active Registrars Only
-          </label>{' '}
-          <input
-            type="checkbox"
-            id="activeOnly"
-            checked={activeOnly}
-            onChange={(e) =>
-              setSearchParams(
-                (prev) => {
-                  prev.set('activeOnly', e.target.checked)
+        {/* Active and sort */}
+        <div className="flex gap-3 lg:gap-6 items-center h-8">
+          {/* active only */}
+          <div className="flex items-center gap-2 h-full">
+            <label className="text-sm" htmlFor="activeOnly">
+              Active Only
+            </label>{' '}
+            <input
+              className=""
+              type="checkbox"
+              id="activeOnly"
+              checked={activeOnly}
+              onChange={(e) =>
+                setSearchParams(
+                  (prev) => {
+                    prev.set('activeOnly', e.target.checked)
 
-                  return prev
-                },
-                { replace: true }
-              )
-            }
-          />
+                    return prev
+                  },
+                  { replace: true }
+                )
+              }
+            />
+          </div>
+
+          {/* sorting */}
+          <div className="dropdown dropdown-end text-sm gap-2 flex items-center h-full">
+            <label htmlFor="sort" className="">
+              Sort By:
+            </label>
+
+            <select
+              className="capitalize"
+              name="sort"
+              id="sort"
+              onChange={(e) =>
+                setSearchParams(
+                  (prev) => {
+                    prev.set('sortBy', e.target.value)
+
+                    return prev
+                  },
+                  { replace: true }
+                )
+              }
+            >
+              {SORT_VALUES.map((val, index) => (
+                <option
+                  selected={sortBy === val.display}
+                  className="capitalize"
+                  key={index}
+                  value={val.display}
+                >
+                  {val.display}
+                </option>
+              ))}{' '}
+            </select>
+          </div>
         </div>
       </div>
-      {/* sorting */}
-      <div className="dropdown dropdown-end">
-        <label htmlFor="sort" className="">
-          Sort by:
-        </label>
-
-        <select
-          className="capitalize"
-          name="sort"
-          id="sort"
-          onChange={(e) =>
-            setSearchParams(
-              (prev) => {
-                prev.set('sortBy', e.target.value)
-
-                return prev
-              },
-              { replace: true }
-            )
-          }
-        >
-          {SORT_VALUES.map((val, index) => (
-            <option
-              selected={sortBy === val.display}
-              className="capitalize"
-              key={index}
-              value={val.display}
-            >
-              {val.display}
-            </option>
-          ))}{' '}
-        </select>
-      </div>
       {/* Registrars */}
-      <section className="w-full flex flex-col mt-8 gap-8">
+      <section className="w-full flex flex-col  mt-6 gap-8">
         {Array.isArray(defaultRegistrars) ? (
           defaultRegistrars.map((registrar) => (
             <RegistrarCard
