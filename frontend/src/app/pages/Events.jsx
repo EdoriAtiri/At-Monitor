@@ -217,6 +217,7 @@ function Events() {
 
           <select
             className="capitalize"
+            defaultValue={sortBy}
             name="sort"
             id="sort"
             onChange={(e) =>
@@ -231,12 +232,7 @@ function Events() {
             }
           >
             {SORT_VALUES.map((val, index) => (
-              <option
-                selected={sortBy === val.display}
-                className="capitalize"
-                key={index}
-                value={val.display}
-              >
+              <option className="capitalize" key={index} value={val.display}>
                 {val.display}
               </option>
             ))}{' '}
