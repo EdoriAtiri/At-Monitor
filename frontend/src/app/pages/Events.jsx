@@ -1,11 +1,37 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useSearchParams } from 'react-router-dom'
 import { getEvents, reset } from '../features/Events/eventSlice'
 import EventCard from '../components/EventCard'
 import NewEvent from '../components/NewEvent'
 import Loading from '../components/Loading'
+import sortByProperty from '../lib/sortByProperty'
+
+const SORT_VALUES = [
+  {
+    display: 'date created',
+    value: 'createdAt',
+  },
+  {
+    display: 'event date',
+    value: 'eventDate',
+  },
+  {
+    display: 'name',
+    value: 'eventName',
+  },
+  {
+    display: 'finished',
+    value: 'finished',
+  },
+  {
+    display: 'pending',
+    value: 'pending',
+  },
+]
 
 function Events() {
+  const [defaultEvents, setDefaultEvents] = useState([])
   const [isNewEvent, setIsNewEvent] = useState(false)
   const { myEvents, isSuccess, isLoading } = useSelector(
     (state) => state.myEvents
@@ -17,6 +43,15 @@ function Events() {
   })
 
   const { total, pending, past } = eventStats
+
+  const [searchParams, setSearchParams] = useSearchParams({
+    q: '',
+    sortBy: '',
+  })
+  const q = searchParams.get('q')
+  // Search Params
+  const sortBy = searchParams.get('sortBy') || 'date created'
+  // useSearchParams stores values as string, so for booleans and numbers check that you have the val you want
 
   const dispatch = useDispatch()
 
@@ -34,6 +69,13 @@ function Events() {
     dispatch(getEvents())
   }, [dispatch])
 
+  // update default events
+  useEffect(() => {
+    if (myEvents) {
+      setDefaultEvents(myEvents)
+    }
+  }, [myEvents])
+
   // Creates stats when getEvents is successful
   useEffect(() => {
     const currentDate = new Date()
@@ -50,6 +92,64 @@ function Events() {
       })
     }
   }, [myEvents])
+
+  // filter by query
+  useEffect(() => {
+    const filteredEvents =
+      myEvents?.filter((item) => {
+        // Check if the item's name includes the provided name (case-insensitive)
+        const nameMatch = item?.eventName
+          ?.toLowerCase()
+          .includes(q?.toLowerCase())
+        return nameMatch
+      }) ?? []
+
+    SORT_VALUES.forEach((val) => {
+      if (sortBy === val.display) {
+        sortEvents(filteredEvents, val.value)
+      }
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [q, myEvents, sortBy])
+
+  const sortEvents = (arr, value) => {
+    // For sort to work defaultEvents must be an array
+    let sortedEvents = [...arr]
+    const currentDate = new Date()
+
+    const pendingEvents = sortedEvents.filter(
+      (event) => new Date(event.eventDate) > currentDate
+    )
+    const finishedEvents = sortedEvents.filter(
+      (event) => new Date(event.eventDate) < currentDate
+    )
+
+    if (sortBy !== 'finished' || sortBy !== 'pending') {
+      sortedEvents.sort(sortByProperty(value))
+      if (sortBy === 'event date') sortedEvents.reverse()
+      // SortbyProperty returns inactive Events first, the reverse method flips that
+    }
+
+    // Sort by pending or completed
+    if (sortBy === 'finished') {
+      sortedEvents = [...finishedEvents, ...pendingEvents]
+    }
+    if (sortBy === 'pending')
+      sortedEvents = [...pendingEvents, ...finishedEvents]
+
+    setDefaultEvents(sortedEvents)
+  }
+
+  // Sort registrars by SORT_VALUE value if display name matches sortBy
+  useEffect(() => {
+    SORT_VALUES.forEach((val) => {
+      if (sortBy === val.display) {
+        sortEvents(defaultEvents, val.value)
+      }
+    })
+    console.log(sortBy)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortBy])
 
   if (isLoading) {
     return <Loading />
@@ -86,17 +186,74 @@ function Events() {
           </div>
         </div>
       </div>
+      {/* Sorting and Filtering */}
+      <div className="flex flex-col lg:flex-row gap-3 lg:gap-6 mt-6 mb-1">
+        <div className=" flex gap-2 items-center">
+          <label className="text-sm" htmlFor="q">
+            Search
+          </label>
+          <input
+            className="input input-bordered w-full max-w-xs h-8"
+            type="text"
+            id="q"
+            value={q}
+            onChange={(e) =>
+              setSearchParams(
+                (prev) => {
+                  prev.set('q', e.target.value)
+
+                  return prev
+                },
+                { replace: true }
+              )
+            }
+          />
+        </div>
+        {/* sorting */}
+        <div className="dropdown dropdown-end text-sm gap-2 flex items-center h-full">
+          <label htmlFor="sort" className="">
+            Sort By:
+          </label>
+
+          <select
+            className="capitalize"
+            name="sort"
+            id="sort"
+            onChange={(e) =>
+              setSearchParams(
+                (prev) => {
+                  prev.set('sortBy', e.target.value)
+
+                  return prev
+                },
+                { replace: true }
+              )
+            }
+          >
+            {SORT_VALUES.map((val, index) => (
+              <option
+                selected={sortBy === val.display}
+                className="capitalize"
+                key={index}
+                value={val.display}
+              >
+                {val.display}
+              </option>
+            ))}{' '}
+          </select>
+        </div>
+      </div>
       {/* Events */}
       <section className="w-full flex flex-col mt-8 gap-8">
-        {Array.isArray(myEvents) ? (
-          myEvents.map((myEvent) => (
+        {Array.isArray(defaultEvents) ? (
+          defaultEvents.map((event) => (
             <EventCard
-              name={myEvent.eventName}
-              created={myEvent.createdAt}
-              date={myEvent.eventDate}
-              registered={myEvent.registered.length || 0}
-              key={myEvent.linkId}
-              id={myEvent._id}
+              name={event.eventName}
+              created={event.createdAt}
+              date={event.eventDate}
+              registered={event.registered.length || 0}
+              key={event.linkId}
+              id={event._id}
             />
           ))
         ) : (

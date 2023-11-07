@@ -170,7 +170,7 @@ const Registrars = () => {
       <div className="flex flex-col lg:flex-row gap-3 lg:gap-6 mt-6 mb-1">
         <div className=" flex gap-2 items-center">
           <label className="text-sm" htmlFor="q">
-            Search By Name
+            Search
           </label>
           <input
             className="input input-bordered w-full max-w-xs h-8"
