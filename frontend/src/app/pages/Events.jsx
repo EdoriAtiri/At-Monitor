@@ -130,7 +130,7 @@ function Events() {
       // SortbyProperty returns inactive Events first, the reverse method flips that
     }
 
-    // Sort by pending or completed
+    // Sort by pending or finished
     if (sortBy === 'finished') {
       sortedEvents = [...finishedEvents, ...pendingEvents]
     }

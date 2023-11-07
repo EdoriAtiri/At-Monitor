@@ -295,11 +295,11 @@ const toggleRegistrarActivation = asyncHandler(async (req, res) => {
 
 module.exports = {
   createRegistrar,
-  generateRegistrarToken,
-  getRegistrarActivation,
   getRegistrar,
   getRegistrars,
-  createRegistrarPassword,
   deleteRegistrar,
   toggleRegistrarActivation,
+  getRegistrarActivation,
+  generateRegistrarToken,
+  createRegistrarPassword,
 }
