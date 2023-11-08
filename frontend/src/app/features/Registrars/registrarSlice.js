@@ -219,6 +219,19 @@ export const registrarSlice = createSlice({
         state.isError = true
         state.message = action.payload
       })
+      .addCase(generateActivationToken.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(generateActivationToken.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.registrar.activationToken = action.payload.token
+      })
+      .addCase(generateActivationToken.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
   },
 })
 
