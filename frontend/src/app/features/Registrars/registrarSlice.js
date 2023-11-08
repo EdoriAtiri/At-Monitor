@@ -225,7 +225,8 @@ export const registrarSlice = createSlice({
       .addCase(generateActivationToken.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.registrar.activationToken = action.payload.token
+        const token = action.payload.token
+        state.registrar = { ...state.registrar, token }
       })
       .addCase(generateActivationToken.rejected, (state, action) => {
         state.isLoading = false

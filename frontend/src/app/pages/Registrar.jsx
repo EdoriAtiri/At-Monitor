@@ -9,6 +9,7 @@ import {
   getRegistrar,
   toggleRegistrarActivation,
   deleteRegistrar,
+  generateActivationToken,
 } from '../features/Registrars/registrarSlice'
 
 function Registrar() {
@@ -20,6 +21,7 @@ function Registrar() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { registrarId } = useParams()
+  const domain = window.location.hostname
 
   useEffect(() => {
     dispatch(getRegistrar(registrarId))
@@ -42,8 +44,6 @@ function Registrar() {
     )
   }
 
-  // Show Delete Confirmation
-
   // Delete Registrar
   const onDeleteRegistrar = () => {
     dispatch(deleteRegistrar(registrarId))
@@ -51,6 +51,11 @@ function Registrar() {
     if (isSuccess) {
       navigate('/dashboard/registrars')
     }
+  }
+
+  // Genrate Registrar activation Link
+  const generateLink = () => {
+    dispatch(generateActivationToken(registrarId))
   }
 
   if (isLoading) {
@@ -123,17 +128,33 @@ function Registrar() {
         </tbody>
       </table>{' '}
       {/* Generated registrar token */}
-      <div className="card w-72 lg:w-96 bg-base-100 shadow-xl mt-4">
+      <div className="card w-96 bg-base-100 p-4 shadow-xl mt-4">
         <div className="card-body">
           <h2 className="card-title">Activation Link</h2>
-          <p>Click Generate to generate a new activation link</p>
-          <div className="card-actions justify-end flex items-center gap-2">
-            <button className="btn">Generate</button>
-
-            <button className="hover:text-blue-500 transition-all focus:text-blue-500 active:scale-90">
+          {registrar.token ? (
+            <Link className="">
+              {domain + ':5173/' + registrar.token.slice(0, 34) + '...'}
+            </Link>
+          ) : (
+            <p>Click Generate to create a new activation link</p>
+          )}
+        </div>
+        <div className="card-actions justify-end flex items-center gap-2">
+          {registrar.token && (
+            <button
+              onClick={() => {
+                navigator.clipboard.writeText(
+                  domain + ':5173/' + registrar.token + 'generate'
+                )
+              }}
+              className="hover:text-blue-500 transition-all focus:text-blue-500 active:scale-90"
+            >
               <FaCopy />
             </button>
-          </div>
+          )}
+          <button onClick={generateLink} className="btn">
+            Generate
+          </button>
         </div>
       </div>
     </div>

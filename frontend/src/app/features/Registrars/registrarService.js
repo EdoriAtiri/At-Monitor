@@ -76,7 +76,6 @@ const generateActivationToken = async (registrarId, token) => {
   }
 
   const response = await axios.get(API_URL + registrarId + '/generate', config)
-
   return response.data
 }
 
