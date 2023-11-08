@@ -4,6 +4,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import ActConfirmation from '../components/ActConfirmation'
 import Loading from '../components/Loading'
+import { FaCopy } from 'react-icons/fa6'
 import {
   getRegistrar,
   toggleRegistrarActivation,
@@ -121,6 +122,20 @@ function Registrar() {
           </tr>
         </tbody>
       </table>{' '}
+      {/* Generated registrar token */}
+      <div className="card w-72 lg:w-96 bg-base-100 shadow-xl mt-4">
+        <div className="card-body">
+          <h2 className="card-title">Activation Link</h2>
+          <p>Click Generate to generate a new activation link</p>
+          <div className="card-actions justify-end flex items-center gap-2">
+            <button className="btn">Generate</button>
+
+            <button className="hover:text-blue-500 transition-all focus:text-blue-500 active:scale-90">
+              <FaCopy />
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
