@@ -132,7 +132,10 @@ function Registrar() {
         <div className="card-body">
           <h2 className="card-title">Activation Link</h2>
           {registrar.token ? (
-            <Link className="">
+            <Link
+              to={'/registrar/' + registrar.token + '/activation'}
+              className=""
+            >
               {domain + ':5173/' + registrar.token.slice(0, 34) + '...'}
             </Link>
           ) : (
@@ -144,7 +147,11 @@ function Registrar() {
             <button
               onClick={() => {
                 navigator.clipboard.writeText(
-                  domain + ':5173/' + registrar.token + 'generate'
+                  domain +
+                    ':5173/' +
+                    'registrar/' +
+                    registrar.token +
+                    '/activation'
                 )
               }}
               className="hover:text-blue-500 transition-all focus:text-blue-500 active:scale-90"

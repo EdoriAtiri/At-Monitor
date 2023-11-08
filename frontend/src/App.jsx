@@ -11,6 +11,7 @@ import Event from './app/pages/Event.jsx'
 import Profile from './app/pages/Profile.jsx'
 import Registrars from './app/pages/Registrars.jsx'
 import Registrar from './app/pages/Registrar.jsx'
+import RegistrarActivation from './app/pages/RegistrarActivation.jsx'
 
 function App() {
   return (
@@ -25,6 +26,10 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
+            <Route
+              path="/registrar/:token/activation"
+              element={<RegistrarActivation />}
+            />
             <Route path="/dashboard" element={<PrivateRoute />}>
               <Route path="/dashboard" element={<Dashboard />}>
                 <Route path="profile" element={<Profile />} />
