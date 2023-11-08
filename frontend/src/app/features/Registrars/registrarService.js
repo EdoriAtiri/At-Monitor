@@ -54,7 +54,7 @@ const toggleRegistrarActivation = async (data, registrarId, token) => {
   return response.data
 }
 
-// Delete an event
+// Delete a registrar
 const deleteRegistrar = async (registrarId, token) => {
   const config = {
     headers: {
@@ -67,12 +67,26 @@ const deleteRegistrar = async (registrarId, token) => {
   return response.data
 }
 
+// Generate token for registrar activation link and password creation
+const generateActivationToken = async (registrarId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+
+  const response = await axios.get(API_URL + registrarId + '/generate', config)
+
+  return response.data
+}
+
 const registrarService = {
   getRegistrars,
   getRegistrar,
   toggleRegistrarActivation,
   deleteRegistrar,
   createRegistrar,
+  generateActivationToken,
 }
 
 export default registrarService

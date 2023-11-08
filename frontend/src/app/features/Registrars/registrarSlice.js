@@ -119,7 +119,7 @@ export const deleteRegistrar = createAsyncThunk(
   }
 )
 
-// Delete a registrar
+// Generate token for registrar activation link and password creation
 export const generateActivationToken = createAsyncThunk(
   'registrars/generateActivationToken',
   async (registrarId, thunkAPI) => {
