@@ -22,7 +22,7 @@ const getRegistrar = async (registrarId, token) => {
     },
   }
   const response = await axios.get(API_URL + registrarId, config)
-
+  console.log(response.data)
   return response.data
 }
 

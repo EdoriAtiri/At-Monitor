@@ -137,7 +137,6 @@ const getRegistrarActivation = asyncHandler(async (req, res) => {
 const getRegistrar = asyncHandler(async (req, res) => {
   // Get Admin using the Id in the jwt
   const admin = await Admin.findById(req.admin.id)
-
   if (!admin) {
     res.status(401)
     throw new Error('Admin not found')
@@ -146,7 +145,7 @@ const getRegistrar = asyncHandler(async (req, res) => {
   // Get id from params
   const id = req.params.id
   // Find registrar
-  const registrar = await Registrar.findById(id)
+  const registrar = await Registrar.findOne({ _id: id, admin: admin._id })
 
   // If the registrar is found return registrar id, name and email, else return error
   if (registrar) {
@@ -155,10 +154,8 @@ const getRegistrar = asyncHandler(async (req, res) => {
       fullName: registrar.fullName,
       email: registrar.email,
       admin: registrar.admin,
-      member: registrar.member,
-      address: registrar.address,
-      gender: registrar.gender,
-      membershipStatus: registrar.membershipStatus,
+      // member: registrar.member,
+      isAdmin: registrar.isAdmin,
       isActivated: registrar.isActivated,
     })
   } else {
