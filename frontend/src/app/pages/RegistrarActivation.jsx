@@ -1,6 +1,31 @@
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { getRegForActivation } from '../features/Registrars/registrarSlice'
 
 const RegistrarActivation = () => {
+  const { registrar, isError, message } = useSelector(
+    (state) => state.registrars
+  )
+
+  const dispatch = useDispatch()
+  const { token } = useParams()
+
+  useEffect(() => {
+    dispatch(getRegForActivation(token))
+
+    if (isError) {
+      toast.error(message)
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isError, message, token])
+
+  useEffect(() => {
+    if (registrar) console.log(registrar)
+  }, [registrar])
+
   return (
     <main className="w-full h-screen flex flex-col items-center justify-center px-4">
       <div className="max-w-sm w-full text-gray-600">
@@ -13,13 +38,16 @@ const RegistrarActivation = () => {
             <h3 className="text-gray-800 text-2xl font-bold s">Sign up</h3>
           </div>
         </div>
-        <p className="text-center text-xl">Complete Your Registration</p>
+        <p className="text-center text-xl">
+          Complete Your Registration {registrar.fullName}
+        </p>
         <form onSubmit={(e) => e.preventDefault()} className="mt-8 space-y-5">
           <div>
             <label className="font-medium">Email</label>
             <input
               type="email"
               disabled
+              value={registrar.email}
               className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
             />
           </div>

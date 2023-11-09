@@ -23,7 +23,7 @@ router
   .delete(protect, deleteRegistrar)
 
 router.route('/:id/generate').get(protect, generateRegistrarToken)
-router.route('/:token/activation').get(protect, getRegistrarActivation)
+router.route('/:token/activation').get(getRegistrarActivation)
 router.route('/:id/activation').patch(protect, toggleRegistrarActivation)
 // set header for this
 router.route('/:id/auth/create').patch(createRegistrarPassword)
