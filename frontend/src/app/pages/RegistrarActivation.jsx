@@ -3,9 +3,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { getRegForActivation } from '../features/Registrars/registrarSlice'
+import Loading from '../components/Loading'
 
 const RegistrarActivation = () => {
-  const { registrar, isError, message } = useSelector(
+  const { registrar, isError, message, isLoading } = useSelector(
     (state) => state.registrars
   )
 
@@ -22,9 +23,9 @@ const RegistrarActivation = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError, message, token])
 
-  useEffect(() => {
-    if (registrar) console.log(registrar)
-  }, [registrar])
+  if (isLoading) {
+    return <Loading />
+  }
 
   return (
     <main className="w-full h-screen flex flex-col items-center justify-center px-4">
@@ -56,6 +57,8 @@ const RegistrarActivation = () => {
             <input
               type="password"
               required
+              min="8"
+              placeholder="enter a password"
               className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
             />
           </div>

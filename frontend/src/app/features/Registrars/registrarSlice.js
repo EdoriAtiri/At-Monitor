@@ -162,6 +162,25 @@ export const getRegForActivation = createAsyncThunk(
   }
 )
 
+// Create registrar password
+export const createRegPassword = createAsyncThunk(
+  'registrars/createRegPassword',
+  async (password, thunkAPI) => {
+    try {
+      return await registrarService.createRegPassword(password)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 export const registrarSlice = createSlice({
   name: 'registrars',
   initialState,

@@ -225,7 +225,7 @@ const createRegistrarPassword = asyncHandler(async (req, res) => {
   if (updatedRegistrar) {
     res.status(201).json({
       id: registrar._id,
-      member: registrar.member,
+      // member: registrar.member,
       fullName: registrar.fullName,
       email: registrar.email,
       isAdmin: registrar.isAdmin,
