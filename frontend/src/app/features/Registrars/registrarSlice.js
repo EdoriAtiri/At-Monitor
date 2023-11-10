@@ -165,9 +165,10 @@ export const getRegForActivation = createAsyncThunk(
 // Create registrar Auth
 export const createRegAuth = createAsyncThunk(
   'registrars/createRegAuth',
-  async ({ password, registrarId }, thunkAPI) => {
+  async ({ data, id }, thunkAPI) => {
+    console.log(data, id)
     try {
-      return await registrarService.createRegAuth(password, registrarId)
+      return await registrarService.createRegAuth(data, id)
     } catch (error) {
       const message =
         (error.response &&

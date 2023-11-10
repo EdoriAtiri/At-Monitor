@@ -88,7 +88,7 @@ const getRegForActivation = async (activationToken) => {
 
 // create auth for registrar
 const createRegAuth = async (data, id) => {
-  const response = await axios.get(API_URL + id + '/auth/create', data)
+  const response = await axios.patch(API_URL + id + '/auth/create', data)
 
   return response.data
 }

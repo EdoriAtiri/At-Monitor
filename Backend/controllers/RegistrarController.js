@@ -121,7 +121,7 @@ const getRegistrarActivation = asyncHandler(async (req, res) => {
   // If the registrar is found return registrar id, name and email, else return error
   if (registrar) {
     res.status(200).json({
-      id: registrar._id,
+      _id: registrar._id,
       fullName: registrar.fullName,
       email: registrar.email,
     })
@@ -150,7 +150,7 @@ const getRegistrar = asyncHandler(async (req, res) => {
   // If the registrar is found return registrar id, name and email, else return error
   if (registrar) {
     res.status(200).json({
-      id: registrar._id,
+      _id: registrar._id,
       fullName: registrar.fullName,
       email: registrar.email,
       admin: registrar.admin,
@@ -224,7 +224,7 @@ const createRegistrarPassword = asyncHandler(async (req, res) => {
 
   if (updatedRegistrar) {
     res.status(201).json({
-      id: registrar._id,
+      _id: registrar._id,
       // member: registrar.member,
       fullName: registrar.fullName,
       email: registrar.email,
