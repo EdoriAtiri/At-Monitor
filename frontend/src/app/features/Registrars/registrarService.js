@@ -81,12 +81,14 @@ const generateActivationToken = async (registrarId, token) => {
 
 // Get a Registrar for activation and password creation
 const getRegForActivation = async (activationToken) => {
-  // const config = {
-  //   headers: {
-  //     Authorization: `Bearer ${token}`,
-  //   },
-  // }
   const response = await axios.get(API_URL + activationToken + '/activation')
+
+  return response.data
+}
+
+// create auth for registrar
+const createRegAuth = async (data, id) => {
+  const response = await axios.get(API_URL + id + '/auth/create', data)
 
   return response.data
 }
@@ -99,6 +101,7 @@ const registrarService = {
   createRegistrar,
   generateActivationToken,
   getRegForActivation,
+  createRegAuth,
 }
 
 export default registrarService
