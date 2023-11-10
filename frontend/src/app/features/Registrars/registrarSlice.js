@@ -162,12 +162,12 @@ export const getRegForActivation = createAsyncThunk(
   }
 )
 
-// Create registrar password
-export const createRegPassword = createAsyncThunk(
-  'registrars/createRegPassword',
-  async (password, thunkAPI) => {
+// Create registrar Auth
+export const createRegAuth = createAsyncThunk(
+  'registrars/createRegAuth',
+  async ({ password, registrarId }, thunkAPI) => {
     try {
-      return await registrarService.createRegPassword(password)
+      return await registrarService.createRegAuth(password, registrarId)
     } catch (error) {
       const message =
         (error.response &&
@@ -286,15 +286,15 @@ export const registrarSlice = createSlice({
         state.isError = true
         state.message = action.payload
       })
-      .addCase(createRegPassword.pending, (state) => {
+      .addCase(createRegAuth.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(createRegPassword.fulfilled, (state, action) => {
+      .addCase(createRegAuth.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
         state.registrar = action.payload
       })
-      .addCase(createRegPassword.rejected, (state, action) => {
+      .addCase(createRegAuth.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
