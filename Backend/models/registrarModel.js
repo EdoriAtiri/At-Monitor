@@ -19,7 +19,7 @@ const registrarSchema = mongoose.Schema(
     email: {
       type: String,
     },
-    isAdmin: {
+    hasAdminPrivilege: {
       type: Boolean,
       required: true,
       default: false,
