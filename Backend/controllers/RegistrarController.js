@@ -94,7 +94,7 @@ const generateRegistrarToken = asyncHandler(async (req, res) => {
   const registrarExists = await Registrar.findById(id)
 
   // check if registrar already has a password
-  if (registrar.password) {
+  if (registrarExists.password) {
     res.status(403)
     throw new Error('This account is already activated')
   }

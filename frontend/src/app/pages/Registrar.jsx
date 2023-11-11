@@ -26,12 +26,8 @@ function Registrar() {
   useEffect(() => {
     dispatch(getRegistrar(registrarId))
 
-    if (isError) {
-      toast.error(message)
-    }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isError, message, registrarId])
+  }, [registrarId])
 
   // Toggle Registrar Activation
   const onClickActivation = () => {
@@ -44,6 +40,12 @@ function Registrar() {
     )
   }
 
+  useEffect(() => {
+    if (isError) {
+      toast.error(message)
+    }
+  }, [isError, message])
+
   // Delete Registrar
   const onDeleteRegistrar = () => {
     dispatch(deleteRegistrar(registrarId))
@@ -53,7 +55,7 @@ function Registrar() {
     }
   }
 
-  // Genrate Registrar activation Link
+  // Generate Registrar activation Link
   const generateLink = () => {
     dispatch(generateActivationToken(registrarId))
   }
