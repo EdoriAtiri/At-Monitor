@@ -67,6 +67,7 @@ const createRegistrar = asyncHandler(async (req, res) => {
       admin: registrar.admin,
       fullName: registrar.fullName,
       email: registrar.email,
+      hasAdminPrivilege: registrar.hasAdminPrivilege,
       // token: generateToken(registrar._id, '1d'),
     })
   } else {
@@ -136,6 +137,7 @@ const getRegistrarActivation = asyncHandler(async (req, res) => {
       _id: registrar._id,
       fullName: registrar.fullName,
       email: registrar.email,
+      hasAdminPrivilege: registrar.hasAdminPrivilege,
     })
   } else {
     res.status(400)
@@ -167,7 +169,7 @@ const getRegistrar = asyncHandler(async (req, res) => {
       email: registrar.email,
       admin: registrar.admin,
       // member: registrar.member,
-      isAdmin: registrar.isAdmin,
+      hasAdminPrivilege: registrar.hasAdminPrivilege,
       isActivated: registrar.isActivated,
     })
   } else {
@@ -240,7 +242,7 @@ const createRegistrarPassword = asyncHandler(async (req, res) => {
       // member: registrar.member,
       fullName: registrar.fullName,
       email: registrar.email,
-      isAdmin: registrar.isAdmin,
+      hasAdminPrivilege: registrar.hasAdminPrivilege,
       token: generateToken(registrar._id, '1d'),
     })
   } else {
