@@ -93,6 +93,12 @@ const generateRegistrarToken = asyncHandler(async (req, res) => {
 
   const registrarExists = await Registrar.findById(id)
 
+  // check if registrar already has a password
+  if (registrar.password) {
+    res.status(403)
+    throw new Error('This account is already activated')
+  }
+
   if (!registrarExists) {
     res.status(400)
     throw new Error('Registrar does not exist')
@@ -117,6 +123,12 @@ const getRegistrarActivation = asyncHandler(async (req, res) => {
   const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
   // Find the registrar
   const registrar = await Registrar.findById(decodedToken.id)
+
+  // check if registrar already has a password
+  if (registrar.password) {
+    res.status(403)
+    throw new Error('This account is already activated')
+  }
 
   // If the registrar is found return registrar id, name and email, else return error
   if (registrar) {
@@ -281,7 +293,7 @@ const toggleRegistrarActivation = asyncHandler(async (req, res) => {
   if (registrarId && !registrarId.password) {
     res.status(403)
     throw new Error(
-      "Can't activate a registrar without the registrar activating themselves. Generate a token and forward it to the registrar."
+      'Not allowed to activate a registrar without the registrar activating themselves. Generate a token and forward it to the registrar.'
     )
   }
 
