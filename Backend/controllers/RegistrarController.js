@@ -277,6 +277,14 @@ const toggleRegistrarActivation = asyncHandler(async (req, res) => {
   // Check if Registrar exists
   const registrarId = await Registrar.findById(req.params.id)
 
+  // Check if Registrar has password
+  if (registrarId && !registrarId.password) {
+    res.status(403)
+    throw new Error(
+      "Can't activate a registrar without the registrar activating themselves. Generate a token and forward it to the registrar."
+    )
+  }
+
   if (!registrarId) {
     res.status(404)
     throw new Error('Registrar not found')
