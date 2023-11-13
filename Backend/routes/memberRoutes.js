@@ -8,6 +8,7 @@ const {
   updateMember,
   deleteMember,
   getMembers,
+  getMember,
 } = require('../controllers/memberController')
 
 router.route('/').post(protect, registerMember)
@@ -15,7 +16,7 @@ router.route('/').get(protect, getMembers)
 
 router
   .route('/:id')
-  //   .get(protect, getEvent)
+  .get(protect, getMember)
   .patch(protect, updateMember)
   .delete(protect, deleteMember)
 
