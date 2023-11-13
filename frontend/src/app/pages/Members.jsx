@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useSearchParams } from 'react-router-dom'
 import { getMembers, reset } from '../features/Members/memberSlice'
-import EventCard from '../components/EventCard'
+import MemberCard from '../components/memberCard'
 import NewEvent from '../components/NewEvent'
 import Loading from '../components/Loading'
 import sortByProperty from '../lib/sortByProperty'
@@ -31,7 +31,7 @@ const SORT_VALUES = [
 ]
 
 function Members() {
-  const [defaultEvents, setDefaultEvents] = useState([])
+  const [defaultMembers, setDefaultMembers] = useState([])
   const [isNewMember, setIsNewMember] = useState(false)
   const { members, isSuccess, isLoading } = useSelector(
     (state) => state.members
@@ -63,19 +63,19 @@ function Members() {
       }
     }
   }, [dispatch, isSuccess])
-  // Gets events data
+  // Gets members
   useEffect(() => {
     dispatch(getMembers())
   }, [dispatch])
 
-  /*
   // update default events
   useEffect(() => {
-    if (myEvents) {
-      setDefaultEvents(myEvents)
+    if (members) {
+      setDefaultMembers(members)
     }
-  }, [myEvents])
+  }, [members])
 
+  /*
   // Creates stats when getEvents is successful
   useEffect(() => {
     const currentDate = new Date()
@@ -113,7 +113,7 @@ function Members() {
   }, [q, myEvents, sortBy])
 
   const sortEvents = (arr, value) => {
-    // For sort to work defaultEvents must be an array
+    // For sort to work defaultMembers must be an array
     let sortedEvents = [...arr]
     const currentDate = new Date()
 
@@ -137,14 +137,14 @@ function Members() {
     if (sortBy === 'pending')
       sortedEvents = [...pendingEvents, ...finishedEvents]
 
-    setDefaultEvents(sortedEvents)
+    setDefaultMembers(sortedEvents)
   }
 
   // Sort registrars by SORT_VALUE value if display name matches sortBy
   useEffect(() => {
     SORT_VALUES.forEach((val) => {
       if (sortBy === val.display) {
-        sortEvents(defaultEvents, val.value)
+        sortEvents(defaultMembers, val.value)
       }
     })
     console.log(sortBy)
@@ -242,15 +242,15 @@ function Members() {
       </div>
       {/* Members */}
       <section className="w-full flex flex-col mt-8 gap-8">
-        {Array.isArray(defaultEvents) ? (
-          defaultEvents.map((event) => (
-            <EventCard
-              name={event.eventName}
-              created={event.createdAt}
-              date={event.eventDate}
-              registered={event.registered.length || 0}
-              key={event.linkId}
-              id={event._id}
+        {Array.isArray(defaultMembers) ? (
+          defaultMembers.map((member) => (
+            <MemberCard
+              name={member.fullName}
+              gender={member.gender}
+              category={member.category}
+              membershipStatus={member.membershipStatus}
+              key={member._id}
+              id={member._id}
             />
           ))
         ) : (
