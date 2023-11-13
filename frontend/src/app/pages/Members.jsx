@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useSearchParams } from 'react-router-dom'
-import { getEvents, reset } from '../features/Events/eventSlice'
+import { getMembers, reset } from '../features/Members/memberSlice'
 import EventCard from '../components/EventCard'
 import NewEvent from '../components/NewEvent'
 import Loading from '../components/Loading'
@@ -33,8 +33,8 @@ const SORT_VALUES = [
 function Members() {
   const [defaultEvents, setDefaultEvents] = useState([])
   const [isNewEvent, setIsNewEvent] = useState(false)
-  const { myEvents, isSuccess, isLoading } = useSelector(
-    (state) => state.myEvents
+  const { members, isSuccess, isLoading } = useSelector(
+    (state) => state.members
   )
   const [eventStats, setEventStats] = useState({
     total: '',
@@ -63,10 +63,9 @@ function Members() {
       }
     }
   }, [dispatch, isSuccess])
-
   // Gets events data
   useEffect(() => {
-    dispatch(getEvents())
+    dispatch(getMembers())
   }, [dispatch])
 
   // update default events
