@@ -12,6 +12,7 @@ import Profile from './app/pages/Profile.jsx'
 import Registrars from './app/pages/Registrars.jsx'
 import Registrar from './app/pages/Registrar.jsx'
 import RegistrarActivation from './app/pages/RegistrarActivation.jsx'
+import Members from './app/pages/Members.jsx'
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
                 <Route path="profile" element={<Profile />} />
                 <Route path="registrars" element={<Registrars />} />
                 <Route path="events" element={<Events />} />
+                <Route path="members" element={<Members />} />
                 <Route path="events/:eventId" element={<Event />} />
                 <Route path="registrars/:registrarId" element={<Registrar />} />
               </Route>
