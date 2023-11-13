@@ -94,6 +94,41 @@ const getMembers = asyncHandler(async (req, res) => {
   res.status(200).json(members)
 })
 
+// @desc get member
+// @route /api/members/:id/
+// @access Public
+const getMember = asyncHandler(async (req, res) => {
+  // Get Admin using the Id in the jwt
+  const admin = await Admin.findById(req.admin.id)
+  if (!admin) {
+    res.status(401)
+    throw new Error('Admin not found')
+  }
+
+  // Get id from params
+  const id = req.params.id
+  // Find member
+  const member = await Member.findOne({ _id: id, admin: admin._id })
+
+  // If the member is found return member id, name and email, else return error
+  if (member) {
+    res.status(200).json({
+      _id: member._id,
+      fullName: member.fullName,
+      email: member.email,
+      admin: member.admin,
+      phone: member.phone,
+      address: member.address,
+      gender: member.gender,
+      category: member.category,
+      membershipStatus: member.membershipStatus,
+    })
+  } else {
+    res.status(400)
+    throw new Error('An error has occurred, contact administrator')
+  }
+})
+
 // @desc Update existing member record
 // @route /api/users/id/update
 // @access Public
@@ -155,4 +190,5 @@ module.exports = {
   updateMember,
   deleteMember,
   getMembers,
+  getMember,
 }
