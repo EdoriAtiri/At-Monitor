@@ -32,7 +32,7 @@ const SORT_VALUES = [
 
 function Members() {
   const [defaultEvents, setDefaultEvents] = useState([])
-  const [isNewEvent, setIsNewEvent] = useState(false)
+  const [isNewMember, setIsNewMember] = useState(false)
   const { members, isSuccess, isLoading } = useSelector(
     (state) => state.members
   )
@@ -68,6 +68,7 @@ function Members() {
     dispatch(getMembers())
   }, [dispatch])
 
+  /*
   // update default events
   useEffect(() => {
     if (myEvents) {
@@ -149,6 +150,7 @@ function Members() {
     console.log(sortBy)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortBy])
+  */
 
   if (isLoading) {
     return <Loading />
@@ -156,14 +158,14 @@ function Members() {
 
   return (
     <div className=" mx-6 mt-10 mb-6">
-      {isNewEvent && <NewEvent closeForm={() => setIsNewEvent(false)} />}
+      {isNewMember && <NewEvent closeForm={() => setIsNewMember(false)} />}
       <header className="items-center justify-between flex text-xl font-semibold">
-        <h1>My Events</h1>
+        <h1>Members</h1>
         <button
-          onClick={() => setIsNewEvent(true)}
+          onClick={() => setIsNewMember(true)}
           className="text-lg border border-gray-700 p-1 rounded-md"
         >
-          Create New Event
+          Create New Member
         </button>
       </header>{' '}
       {/* Admin Event Stats */}
@@ -238,7 +240,7 @@ function Members() {
           </select>
         </div>
       </div>
-      {/* Events */}
+      {/* Members */}
       <section className="w-full flex flex-col mt-8 gap-8">
         {Array.isArray(defaultEvents) ? (
           defaultEvents.map((event) => (
