@@ -36,13 +36,13 @@ function Members() {
   const { members, isSuccess, isLoading } = useSelector(
     (state) => state.members
   )
-  const [eventStats, setEventStats] = useState({
+  const [memberStats, setMemberStats] = useState({
     total: '',
-    pending: '',
-    past: '',
+    adults: '',
+    teenagersAndChildren: '',
   })
 
-  const { total, pending, past } = eventStats
+  const { total, adults, teenagersAndChildren } = memberStats
 
   const [searchParams, setSearchParams] = useSearchParams({
     q: '',
@@ -75,24 +75,23 @@ function Members() {
     }
   }, [members])
 
-  /*
-  // Creates stats when getEvents is successful
+  // Creates stats when getMembers is successful
   useEffect(() => {
-    const currentDate = new Date()
-
-    if (Array.isArray(myEvents)) {
-      setEventStats({
-        total: myEvents.length || 0,
-        pending:
-          myEvents.filter((event) => new Date(event.eventDate) > currentDate)
-            .length || 0,
-        past:
-          myEvents.filter((event) => new Date(event.eventDate) < currentDate)
-            .length || 0,
+    if (Array.isArray(members)) {
+      setMemberStats({
+        total: members.length || 0,
+        adults:
+          members.filter((members) => members.category === 'adult').length || 0,
+        teenagersAndChildren:
+          members.filter(
+            (members) =>
+              members.category === 'teenager' || members.category === 'child'
+          ).length || 0,
       })
     }
-  }, [myEvents])
+  }, [members])
 
+  /*
   // filter by query
   useEffect(() => {
     const filteredEvents =
@@ -168,22 +167,22 @@ function Members() {
           Create New Member
         </button>
       </header>{' '}
-      {/* Admin Event Stats */}
+      {/* Admin member Stats */}
       <div className="flex gap-4 mb-4 mt-8">
         <div className="stats shadow">
           <div className="stat">
-            <div className="stat-title">Total Events</div>
+            <div className="stat-title">Total Members</div>
             <div className="stat-value text-2xl">{total}</div>
           </div>
 
           <div className="stat">
-            <div className="stat-title">Pending Events</div>
-            <div className="stat-value text-2xl">{pending}</div>
+            <div className="stat-title">Adults</div>
+            <div className="stat-value text-2xl">{adults}</div>
           </div>
 
           <div className="stat">
-            <div className="stat-title">Past Events</div>
-            <div className="stat-value text-2xl">{past}</div>
+            <div className="stat-title">Teens and Children</div>
+            <div className="stat-value text-2xl">{teenagersAndChildren}</div>
           </div>
         </div>
       </div>
