@@ -7,28 +7,28 @@ import NewEvent from '../components/NewEvent'
 import Loading from '../components/Loading'
 import sortByProperty from '../lib/sortByProperty'
 
-// const SORT_VALUES = [
-//   {
-//     display: 'date created',
-//     value: 'createdAt',
-//   },
-//   {
-//     display: 'event date',
-//     value: 'eventDate',
-//   },
-//   {
-//     display: 'name',
-//     value: 'eventName',
-//   },
-//   {
-//     display: 'finished',
-//     value: 'finished',
-//   },
-//   {
-//     display: 'pending',
-//     value: 'pending',
-//   },
-// ]
+const SORT_VALUES = [
+  {
+    display: 'date created',
+    value: 'createdAt',
+  },
+  {
+    display: 'event date',
+    value: 'eventDate',
+  },
+  {
+    display: 'name',
+    value: 'eventName',
+  },
+  {
+    display: 'finished',
+    value: 'finished',
+  },
+  {
+    display: 'pending',
+    value: 'pending',
+  },
+]
 
 function Members() {
   const [defaultEvents, setDefaultEvents] = useState([])
