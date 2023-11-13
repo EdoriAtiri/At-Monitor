@@ -6,6 +6,7 @@ import {
   FaUserCheck,
   FaGear,
   FaPowerOff,
+  FaPeopleGroup,
 } from 'react-icons/fa6'
 
 function Dashboard() {
@@ -24,6 +25,10 @@ function Dashboard() {
             </li>
             <li className="sidebar-icons">
               <FaPersonCircleCheck /> <Link to="registrars">Registrars</Link>
+            </li>
+            <li className="sidebar-icons">
+              <FaPeopleGroup />
+              <Link to="members">Members</Link>
             </li>
             <li className="sidebar-icons">
               <FaUserCheck />
