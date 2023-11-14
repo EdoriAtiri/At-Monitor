@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, useNavigate } from 'react-router-dom'
 import { getMembers, reset } from '../features/Members/memberSlice'
 import NewEvent from '../components/NewEvent'
 import Loading from '../components/Loading'
@@ -49,6 +49,7 @@ function Members() {
   // useSearchParams stores values as string, so for booleans and numbers check that you have the val you want
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   // Triggers the reset reducer function in eventSlice and sets the state back to the initialState object, effectively clearing any data and resetting the flags like isLoading, isSuccess, isError, and message to their initial values.
   useEffect(() => {
@@ -87,23 +88,23 @@ function Members() {
   }, [members])
 
   // filter by query
-  // useEffect(() => {
-  //   const filteredMembers =
-  //     members?.filter((item) => {
-  //       // Check if the item's name includes the provided name (case-insensitive)
-  //       const nameMatch = item?.eventName
-  //         ?.toLowerCase()
-  //         .includes(q?.toLowerCase())
-  //       return nameMatch
-  //     }) ?? []
+  useEffect(() => {
+    const filteredMembers =
+      members?.filter((item) => {
+        // Check if the item's name includes the provided name (case-insensitive)
+        const nameMatch = item?.fullName
+          ?.toLowerCase()
+          .includes(q?.toLowerCase())
+        return nameMatch
+      }) ?? []
 
-  //   SORT_VALUES.forEach((val) => {
-  //     if (sortBy === val.display) {
-  //       sortMembers(filteredMembers, val.value)
-  //     }
-  //   })
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [q, members, sortBy])
+    SORT_VALUES.forEach((val) => {
+      if (sortBy === val.display) {
+        sortMembers(filteredMembers, val.value)
+      }
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [q, members, sortBy])
 
   const sortMembers = (arr, value) => {
     // For sort to work defaultMembers must be an array
@@ -119,7 +120,6 @@ function Members() {
         sortMembers(defaultMembers, val.value)
       }
     })
-    console.log(sortBy)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortBy])
 
@@ -226,9 +226,15 @@ function Members() {
           <tbody className="text-gray-600 divide-y">
             {Array.isArray(defaultMembers) ? (
               defaultMembers.map((member, index) => (
-                <tr key={member._id}>
+                <tr
+                  className="cursor-pointer capitalize hover:bg-gray-100 transition-colors"
+                  key={member._id}
+                  onClick={() => {
+                    navigate(`/dashboard/members/${member._id}`)
+                  }}
+                >
                   <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-6 py-4 whitespace-nowrap capit">
                     {member.fullName}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
