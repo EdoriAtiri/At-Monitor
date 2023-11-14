@@ -48,7 +48,7 @@ function Event() {
   }
 
   return (
-    <div className=" mx-6 mt-10 mb-6">
+    <div className="mx-6 mt-10 mb-6">
       {editEvent && (
         <EditEventForm
           eventId={eventId}
