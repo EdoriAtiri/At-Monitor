@@ -8,24 +8,20 @@ import sortByProperty from '../lib/sortByProperty'
 
 const SORT_VALUES = [
   {
-    display: 'date created',
-    value: 'createdAt',
-  },
-  {
-    display: 'event date',
-    value: 'eventDate',
-  },
-  {
     display: 'name',
-    value: 'eventName',
+    value: 'fullName',
   },
   {
-    display: 'finished',
-    value: 'finished',
+    display: 'gender',
+    value: 'gender',
   },
   {
-    display: 'pending',
-    value: 'pending',
+    display: 'category',
+    value: 'category',
+  },
+  {
+    display: 'membership',
+    value: 'membershipStatus',
   },
 ]
 
@@ -49,7 +45,7 @@ function Members() {
   })
   const q = searchParams.get('q')
   // Search Params
-  const sortBy = searchParams.get('sortBy') || 'date created'
+  const sortBy = searchParams.get('sortBy') || 'name'
   // useSearchParams stores values as string, so for booleans and numbers check that you have the val you want
 
   const dispatch = useDispatch()
@@ -90,65 +86,42 @@ function Members() {
     }
   }, [members])
 
-  /*
   // filter by query
-  useEffect(() => {
-    const filteredEvents =
-      myEvents?.filter((item) => {
-        // Check if the item's name includes the provided name (case-insensitive)
-        const nameMatch = item?.eventName
-          ?.toLowerCase()
-          .includes(q?.toLowerCase())
-        return nameMatch
-      }) ?? []
+  // useEffect(() => {
+  //   const filteredMembers =
+  //     members?.filter((item) => {
+  //       // Check if the item's name includes the provided name (case-insensitive)
+  //       const nameMatch = item?.eventName
+  //         ?.toLowerCase()
+  //         .includes(q?.toLowerCase())
+  //       return nameMatch
+  //     }) ?? []
 
-    SORT_VALUES.forEach((val) => {
-      if (sortBy === val.display) {
-        sortEvents(filteredEvents, val.value)
-      }
-    })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [q, myEvents, sortBy])
+  //   SORT_VALUES.forEach((val) => {
+  //     if (sortBy === val.display) {
+  //       sortMembers(filteredMembers, val.value)
+  //     }
+  //   })
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [q, members, sortBy])
 
-  const sortEvents = (arr, value) => {
+  const sortMembers = (arr, value) => {
     // For sort to work defaultMembers must be an array
-    let sortedEvents = [...arr]
-    const currentDate = new Date()
-
-    const pendingEvents = sortedEvents.filter(
-      (event) => new Date(event.eventDate) > currentDate
-    )
-    const finishedEvents = sortedEvents.filter(
-      (event) => new Date(event.eventDate) < currentDate
-    )
-
-    if (sortBy !== 'finished' || sortBy !== 'pending') {
-      sortedEvents.sort(sortByProperty(value))
-      if (sortBy === 'event date') sortedEvents.reverse()
-      // SortbyProperty returns inactive Events first, the reverse method flips that
-    }
-
-    // Sort by pending or finished
-    if (sortBy === 'finished') {
-      sortedEvents = [...finishedEvents, ...pendingEvents]
-    }
-    if (sortBy === 'pending')
-      sortedEvents = [...pendingEvents, ...finishedEvents]
-
-    setDefaultMembers(sortedEvents)
+    let sortedMembers = [...arr]
+    sortedMembers.sort(sortByProperty(value))
+    setDefaultMembers(sortedMembers)
   }
 
   // Sort registrars by SORT_VALUE value if display name matches sortBy
   useEffect(() => {
     SORT_VALUES.forEach((val) => {
       if (sortBy === val.display) {
-        sortEvents(defaultMembers, val.value)
+        sortMembers(defaultMembers, val.value)
       }
     })
     console.log(sortBy)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortBy])
-  */
 
   if (isLoading) {
     return <Loading />
@@ -243,7 +216,7 @@ function Members() {
         <table className="w-full table-auto text-sm text-left">
           <thead className="bg-gray-50 text-gray-600 font-medium border-b">
             <tr>
-              <th className="py-3 px-6">No</th>
+              <th className="py-3 px-6">S/N</th>
               <th className="py-3 px-6">Name</th>
               <th className="py-3 px-6">Gender</th>
               <th className="py-3 px-6">Category</th>
