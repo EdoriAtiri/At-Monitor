@@ -12,7 +12,7 @@ const initialState = {
 
 // Get admin members
 export const getMembers = createAsyncThunk(
-  'events/getAllMembers',
+  'members/getAllMembers',
   async (_, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.admin.token
@@ -32,25 +32,25 @@ export const getMembers = createAsyncThunk(
   }
 )
 
-// // Get an admin event
-// export const getEvent = createAsyncThunk(
-//   'events/getEvent',
-//   async (eventId, thunkAPI) => {
-//     try {
-//       const token = thunkAPI.getState().auth.admin.token
-//       return await eventService.getEvent(eventId, token)
-//     } catch (error) {
-//       const message =
-//         (error.response &&
-//           error.response.data &&
-//           error.response.data.message) ||
-//         error.message ||
-//         error.toString()
+// Get an admin member
+export const getMember = createAsyncThunk(
+  'members/getMember',
+  async (memberId, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.admin.token
+      return await memberService.getMember(memberId, token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
 
-//       return thunkAPI.rejectWithValue(message)
-//     }
-//   }
-// )
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
 
 // // Create an event
 // export const createEvent = createAsyncThunk(
