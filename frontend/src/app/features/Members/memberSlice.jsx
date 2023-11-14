@@ -52,28 +52,28 @@ export const getMember = createAsyncThunk(
   }
 )
 
-// // Create an event
-// export const createEvent = createAsyncThunk(
-//   'events/createEvent',
-//   async (data, thunkAPI) => {
-//     try {
-//       const token = thunkAPI.getState().auth.admin.token
+// Create New Member
+export const createMember = createAsyncThunk(
+  'members/createMember',
+  async (data, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.admin.token
 
-//       return await eventService.createEvent(data, token)
-//     } catch (error) {
-//       const message =
-//         (error.response &&
-//           error.response.data &&
-//           error.response.data.message) ||
-//         error.message ||
-//         error.toString()
+      return await memberService.createMember(data, token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
 
-//       console.log(message)
+      console.log(message)
 
-//       return thunkAPI.rejectWithValue(message)
-//     }
-//   }
-// )
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
 // // Edit an event
 // export const editEvent = createAsyncThunk(
 //   'events/editEvent',

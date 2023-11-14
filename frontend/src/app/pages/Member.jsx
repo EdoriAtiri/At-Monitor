@@ -26,7 +26,7 @@ const Member = () => {
   return (
     <div className="mx-6 mt-10 mb-6">
       <h1 className="text-3xl mb-5 uppercase">
-        {member.fullName.split(' ')[0]}
+        {member?.fullName?.split(' ')[0]}
       </h1>
 
       <table className="flex w-full lg:w-96 justify-evenly py-2 px-4 lg:p-4 rounded-md">
