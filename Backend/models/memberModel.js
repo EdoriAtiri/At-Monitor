@@ -28,7 +28,7 @@ const memberSchema = mongoose.Schema(
     },
     gender: {
       type: String,
-      enum: ['male', 'female'],
+      enum: ['male', 'female', 'none'],
       required: [true, 'Please select gender'],
     },
     category: {
