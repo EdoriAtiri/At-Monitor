@@ -142,19 +142,19 @@ export const memberSlice = createSlice({
         state.isError = true
         state.message = action.payload
       })
-    //   .addCase(getEvent.pending, (state) => {
-    //     state.isLoading = true
-    //   })
-    //   .addCase(getEvent.fulfilled, (state, action) => {
-    //     state.isLoading = false
-    //     state.isSuccess = true
-    //     state.myEvent = action.payload
-    //   })
-    //   .addCase(getEvent.rejected, (state, action) => {
-    //     state.isLoading = false
-    //     state.isError = true
-    //     state.message = action.payload
-    //   })
+      .addCase(getMember.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getMember.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.member = action.payload
+      })
+      .addCase(getMember.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
     //   .addCase(createEvent.pending, (state) => {
     //     state.isLoading = true
     //   })
