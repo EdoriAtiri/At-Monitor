@@ -212,7 +212,7 @@ function Members() {
         </div>
       </div>
       {/* Members */}
-      <div className="mt-12 shadow-sm border rounded-lg overflow-x-auto">
+      <div className="mt-6 shadow-sm border rounded-lg overflow-x-auto">
         <table className="w-full table-auto text-sm text-left">
           <thead className="bg-gray-50 text-gray-600 font-medium border-b">
             <tr>
