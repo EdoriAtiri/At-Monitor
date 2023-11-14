@@ -14,8 +14,21 @@ const getMembers = async (token) => {
   return response.data
 }
 
+// Get an admin member
+const getMember = async (id, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+
+  const response = await axios.get(API_URL + id, config)
+  return response.data
+}
+
 const memberService = {
   getMembers,
+  getMember,
 }
 
 export default memberService
