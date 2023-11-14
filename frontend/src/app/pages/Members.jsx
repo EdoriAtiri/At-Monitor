@@ -240,22 +240,42 @@ function Members() {
         </div>
       </div>
       {/* Members */}
-      <section className="w-full flex flex-col mt-8 gap-8">
-        {Array.isArray(defaultMembers) ? (
-          defaultMembers.map((member) => (
-            <MemberCard
-              name={member.fullName}
-              gender={member.gender}
-              category={member.category}
-              membershipStatus={member.membershipStatus}
-              key={member._id}
-              id={member._id}
-            />
-          ))
-        ) : (
-          <p>Error loading events...</p>
-        )}
-      </section>
+      <div className="mt-12 shadow-sm border rounded-lg overflow-x-auto">
+        <table className="w-full table-auto text-sm text-left">
+          <thead className="bg-gray-50 text-gray-600 font-medium border-b">
+            <tr>
+              <th className="py-3 px-6">No</th>
+              <th className="py-3 px-6">Name</th>
+              <th className="py-3 px-6">Gender</th>
+              <th className="py-3 px-6">Category</th>
+              <th className="py-3 px-6">Membership</th>
+            </tr>
+          </thead>
+          <tbody className="text-gray-600 divide-y">
+            {Array.isArray(defaultMembers) ? (
+              defaultMembers.map((member, index) => (
+                <tr key={member._id}>
+                  <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {member.fullName}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {member.gender}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {member.category}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {member.membershipStatus}
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <p>Error loading events...</p>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }
