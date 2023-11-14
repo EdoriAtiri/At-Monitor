@@ -26,9 +26,23 @@ const getMember = async (id, token) => {
   return response.data
 }
 
+// create member
+const createMember = async (data, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+
+  const response = await axios.post(API_URL, data, config)
+
+  return response.data
+}
+
 const memberService = {
   getMembers,
   getMember,
+  createMember,
 }
 
 export default memberService

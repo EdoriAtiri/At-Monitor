@@ -22,6 +22,10 @@ const memberSchema = mongoose.Schema(
       type: String,
       required: [true, 'Please add an address'],
     },
+    dob: {
+      type: Date,
+      required: true,
+    },
     gender: {
       type: String,
       enum: ['male', 'female'],

@@ -20,6 +20,7 @@ const registerMember = asyncHandler(async (req, res) => {
     phone,
     email,
     address,
+    dob,
     gender,
     category,
     membershipStatus,
@@ -31,6 +32,7 @@ const registerMember = asyncHandler(async (req, res) => {
     !address ||
     !email ||
     !phone ||
+    !dob ||
     !gender ||
     !category ||
     !membershipStatus
@@ -54,6 +56,7 @@ const registerMember = asyncHandler(async (req, res) => {
     phone,
     email,
     address,
+    dob,
     gender,
     category,
     membershipStatus,
@@ -66,6 +69,7 @@ const registerMember = asyncHandler(async (req, res) => {
       fullName: member.fullName,
       phone: member.phone,
       email: member.email,
+      dob: member.dob,
       address: member.address,
       gender: member.gender,
       category: member.category,
@@ -118,6 +122,7 @@ const getMember = asyncHandler(async (req, res) => {
       email: member.email,
       admin: member.admin,
       phone: member.phone,
+      dob: member.dob,
       address: member.address,
       gender: member.gender,
       category: member.category,
