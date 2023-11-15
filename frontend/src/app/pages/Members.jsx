@@ -126,15 +126,15 @@ function Members() {
   }
 
   return (
-    <div className=" mx-6 mt-10 mb-6">
-      <header className="items-center justify-between flex text-xl font-semibold">
+    <div className=" mx-6 mb-6 mt-10">
+      <header className="flex items-center justify-between text-xl font-semibold">
         <h1>Members</h1>
-        <button className="text-lg border border-gray-700 p-1 rounded-md">
+        <button className="rounded-md border border-gray-700 p-1 text-lg">
           <Link to="create">Create New Member</Link>
         </button>
       </header>{" "}
       {/* Admin member Stats */}
-      <div className="flex gap-4 mb-4 mt-8">
+      <div className="mb-4 mt-8 flex gap-4">
         <div className="stats shadow">
           <div className="stat">
             <div className="stat-title">Total Members</div>
@@ -153,13 +153,13 @@ function Members() {
         </div>
       </div>
       {/* Sorting and Filtering */}
-      <div className="flex flex-col lg:flex-row gap-3 lg:gap-6 mt-6 mb-1">
-        <div className=" flex gap-2 items-center">
+      <div className="mb-1 mt-6 flex flex-col gap-3 lg:flex-row lg:gap-6">
+        <div className=" flex items-center gap-2">
           <label className="text-sm" htmlFor="q">
             Search
           </label>
           <input
-            className="input input-bordered w-full max-w-xs h-8"
+            className="input input-bordered h-8 w-full max-w-xs"
             type="text"
             id="q"
             value={q}
@@ -176,7 +176,7 @@ function Members() {
           />
         </div>
         {/* sorting */}
-        <div className="dropdown dropdown-end text-sm gap-2 flex items-center h-full">
+        <div className="dropdown dropdown-end flex h-full items-center gap-2 text-sm">
           <label htmlFor="sort" className="">
             Sort By:
           </label>
@@ -206,39 +206,39 @@ function Members() {
         </div>
       </div>
       {/* Members */}
-      <div className="mt-6 shadow-sm border rounded-lg overflow-x-auto">
-        <table className="w-full table-auto text-sm text-left">
-          <thead className="bg-gray-50 text-gray-600 font-medium border-b">
+      <div className="mt-6 overflow-x-auto rounded-lg border shadow-sm">
+        <table className="w-full table-auto text-left text-sm">
+          <thead className="border-b bg-gray-50 font-medium text-gray-600">
             <tr>
-              <th className="py-3 px-6">S/N</th>
-              <th className="py-3 px-6">Name</th>
-              <th className="py-3 px-6">Gender</th>
-              <th className="py-3 px-6">Category</th>
-              <th className="py-3 px-6">Membership</th>
+              <th className="px-6 py-3">S/N</th>
+              <th className="px-6 py-3">Name</th>
+              <th className="px-6 py-3">Gender</th>
+              <th className="px-6 py-3">Category</th>
+              <th className="px-6 py-3">Membership</th>
             </tr>
           </thead>
-          <tbody className="text-gray-600 divide-y">
+          <tbody className="divide-y text-gray-600">
             {Array.isArray(defaultMembers) ? (
               defaultMembers.map((member, index) => (
                 <tr
                   tabIndex="0"
-                  className="cursor-pointer capitalize hover:bg-gray-100 transition-colors focus:outline-none focus:bg-gray-100"
+                  className="cursor-pointer capitalize transition-colors hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
                   key={member._id}
                   onClick={() => {
                     navigate(`/dashboard/members/${member._id}`);
                   }}
                 >
-                  <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
-                  <td className="px-6 py-4 whitespace-nowrap capit">
+                  <td className="whitespace-nowrap px-6 py-4">{index + 1}</td>
+                  <td className="capit whitespace-nowrap px-6 py-4">
                     {member.fullName}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="whitespace-nowrap px-6 py-4">
                     {member.gender}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="whitespace-nowrap px-6 py-4">
                     {member.category}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="whitespace-nowrap px-6 py-4">
                     {member.membershipStatus}
                   </td>
                 </tr>

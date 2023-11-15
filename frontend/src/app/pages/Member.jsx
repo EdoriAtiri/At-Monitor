@@ -24,14 +24,14 @@ const Member = () => {
   }, [isError, message, memberId]);
 
   return (
-    <div className="mx-6 mt-10 mb-6">
-      <h1 className="text-3xl mb-5 uppercase">
+    <div className="mx-6 mb-6 mt-10">
+      <h1 className="mb-5 text-3xl uppercase">
         {member?.fullName?.split(" ")[0]}
       </h1>
 
-      <table className="flex w-full lg:w-96 justify-evenly py-2 px-4 lg:p-4 rounded-md">
+      <table className="flex w-full justify-evenly rounded-md px-4 py-2 lg:w-96 lg:p-4">
         <thead>
-          <tr className="font-bold flex gap-2 flex-col text-left ">
+          <tr className="flex flex-col gap-2 text-left font-bold ">
             <th>Full Name:</th>
             <th>Gender:</th>
             <th>Category:</th>
@@ -42,7 +42,7 @@ const Member = () => {
           </tr>
         </thead>
         <tbody>
-          <tr className="flex gap-2 flex-col ">
+          <tr className="flex flex-col gap-2 ">
             <td>{member.fullName}</td>
             <td>{member.gender}</td>
             <td>{member.category}</td>

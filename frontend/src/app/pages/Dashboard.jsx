@@ -15,11 +15,11 @@ function Dashboard() {
       {/* Dashboard SideBar */}
       <section
         title="side bar"
-        className="w-60 h-screen pt-14 bg-sky-400 space-y-16 fixed top-0 left-0"
+        className="fixed left-0 top-0 h-screen w-60 space-y-16 bg-sky-400 pt-14"
       >
         <Logo />
         <nav className="pl-6">
-          <ul className="text-xl font-semibold space-y-6">
+          <ul className="space-y-6 text-xl font-semibold">
             <li className="sidebar-icons">
               <FaCalendarDays /> <Link to="events">Events</Link>
             </li>
@@ -37,7 +37,7 @@ function Dashboard() {
           </ul>
         </nav>
 
-        <ul className="text-xl opacity-80 font-semibold space-y-6 pl-6">
+        <ul className="space-y-6 pl-6 text-xl font-semibold opacity-80">
           <li className="sidebar-icons">
             <FaGear />
             <Link>Settings</Link>

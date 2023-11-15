@@ -73,22 +73,22 @@ function EditEventForm({ eventId, closeEdit }) {
   }
 
   return (
-    <div className="absolute top-0 left-0  w-screen h-screen">
+    <div className="absolute left-0 top-0  h-screen w-screen">
       <button
         onClick={closeEdit}
-        className="position absolute top-0 left-0 bg-black h-full w-full opacity-30"
+        className="position absolute left-0 top-0 h-full w-full bg-black opacity-30"
       ></button>
 
-      <div className="w-80 bg-white h-fit z-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-6 py-6 rounded">
+      <div className="absolute left-1/2 top-1/2 z-10 h-fit w-80 -translate-x-1/2 -translate-y-1/2 transform rounded bg-white px-6 py-6">
         <button
           onClick={closeEdit}
-          className="text-lg p-1 uppercase font-bold absolute right-0 pr-2 top-0"
+          className="absolute right-0 top-0 p-1 pr-2 text-lg font-bold uppercase"
         >
           x
         </button>
         <form
           onSubmit={onSubmit}
-          className="space-y-7 w-full h-full [&>*]:w-full"
+          className="h-full w-full space-y-7 [&>*]:w-full"
         >
           <div className="space-y-4">
             {/*  */}
@@ -163,7 +163,7 @@ function EditEventForm({ eventId, closeEdit }) {
           </div>
 
           <div className="btn mt-36">
-            <button className="form-input-style grid place-content-center active:scale-95 transition-transform font-bold text-white bg-black">
+            <button className="form-input-style grid place-content-center bg-black font-bold text-white transition-transform active:scale-95">
               Edit
             </button>
           </div>

@@ -22,7 +22,7 @@ function App() {
       <ToastContainer />
 
       <Router>
-        <div className="w-full min-h-screen">
+        <div className="min-h-screen w-full">
           <Routes>
             {/* <Route path="/" element={<PrivateRoute />}>
             </Route> */}

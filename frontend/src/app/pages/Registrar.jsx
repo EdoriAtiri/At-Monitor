@@ -64,7 +64,7 @@ function Registrar() {
     return <Loading />;
   }
   return (
-    <div className=" mx-6 mt-10 mb-6">
+    <div className=" mx-6 mb-6 mt-10">
       {/* {edit && (
         <EditEventForm
           eventId={eventId}
@@ -80,19 +80,19 @@ function Registrar() {
         />
       )}
       {/* Stat for creator and date */}
-      <div className="flex gap-4 mb-4 justify-between">
-        <h1 className="text-3xl mb-5 uppercase">{registrar.fullName}</h1>
+      <div className="mb-4 flex justify-between gap-4">
+        <h1 className="mb-5 text-3xl uppercase">{registrar.fullName}</h1>
         {/* Actions */}
         <div className="flex items-center gap-3">
           <button
             onClick={onClickActivation}
-            className="text-lg border border-gray-700 p-1 rounded-md"
+            className="rounded-md border border-gray-700 p-1 text-lg"
           >
             {registrar.isActivated ? "deactivate" : "activate"}
           </button>
           <button
             onClick={() => setIsDeletePrompt(true)}
-            className="text-lg border border-gray-700 p-1 rounded-md"
+            className="rounded-md border border-gray-700 p-1 text-lg"
           >
             Delete
           </button>
@@ -130,7 +130,7 @@ function Registrar() {
         </tbody>
       </table>{" "}
       {/* Generated registrar token */}
-      <div className="card w-96 bg-base-100 p-4 shadow-xl mt-4">
+      <div className="card mt-4 w-96 bg-base-100 p-4 shadow-xl">
         <div className="card-body">
           <h2 className="card-title">Activation Link</h2>
           {registrar.token ? (
@@ -144,7 +144,7 @@ function Registrar() {
             <p>Click Generate to create a new activation link</p>
           )}
         </div>
-        <div className="card-actions justify-end flex items-center gap-2">
+        <div className="card-actions flex items-center justify-end gap-2">
           {registrar.token && (
             <button
               onClick={() => {
@@ -156,7 +156,7 @@ function Registrar() {
                     "/activation",
                 );
               }}
-              className="hover:text-blue-500 transition-all focus:text-blue-500 active:scale-90"
+              className="transition-all hover:text-blue-500 focus:text-blue-500 active:scale-90"
             >
               <FaCopy />
             </button>

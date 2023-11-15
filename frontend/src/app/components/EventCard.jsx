@@ -15,9 +15,9 @@ function EventCard({ name, created, date, registered, id }) {
         navigate(`/dashboard/events/${id}`);
       }}
     >
-      <table className="flex w-full lg:w-96 justify-between border border-gray-700 py-2 px-4 lg:p-4 rounded-md">
+      <table className="flex w-full justify-between rounded-md border border-gray-700 px-4 py-2 lg:w-96 lg:p-4">
         <thead>
-          <tr className="font-bold flex gap-2 flex-col text-left ">
+          <tr className="flex flex-col gap-2 text-left font-bold ">
             <th>Event Name:</th>
             <th>Date Created:</th>
             <th>Event Date:</th>
@@ -26,18 +26,18 @@ function EventCard({ name, created, date, registered, id }) {
           </tr>
         </thead>
         <tbody>
-          <tr className="flex gap-2 flex-col text-right">
+          <tr className="flex flex-col gap-2 text-right">
             <td>{name}</td>
             <td>{formatDate(created)}</td>
             <td>{formatDate(date)}</td>
             <td>{registered}</td>
             <td>
               {past ? (
-                <span className="bg-green-400 font-bold rounded px-1 py-0.5">
+                <span className="rounded bg-green-400 px-1 py-0.5 font-bold">
                   Finished
                 </span>
               ) : (
-                <span className="bg-orange-400 font-bold rounded px-1 py-0.5">
+                <span className="rounded bg-orange-400 px-1 py-0.5 font-bold">
                   Pending
                 </span>
               )}

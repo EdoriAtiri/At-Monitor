@@ -1,14 +1,14 @@
 const Loading = () => {
   return (
-    <div className="absolute top-0 left-0 w-full h-screen">
-      <div className="absolute top-0 left-0 h-screen w-full z-10 bg-black opacity-70"></div>
+    <div className="absolute left-0 top-0 h-screen w-full">
+      <div className="absolute left-0 top-0 z-10 h-screen w-full bg-black opacity-70"></div>
       {/*  */}
 
-      <div className="text-center absolute z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+      <div className="absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2 transform text-center">
         <div role="status">
           <svg
             aria-hidden="true"
-            className="inline w-16 h-16 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+            className="mr-2 inline h-16 w-16 animate-spin fill-blue-600 text-gray-200 dark:text-gray-600"
             viewBox="0 0 100 101"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -22,7 +22,7 @@ const Loading = () => {
               fill="currentFill"
             />
           </svg>
-          <span className="z-20 block text-xl text-white mt-4">Loading...</span>
+          <span className="z-20 mt-4 block text-xl text-white">Loading...</span>
         </div>
       </div>
     </div>

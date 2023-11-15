@@ -156,19 +156,19 @@ function Events() {
   }
 
   return (
-    <div className=" mx-6 mt-10 mb-6">
+    <div className=" mx-6 mb-6 mt-10">
       {isNewEvent && <NewEvent closeForm={() => setIsNewEvent(false)} />}
-      <header className="items-center justify-between flex text-xl font-semibold">
+      <header className="flex items-center justify-between text-xl font-semibold">
         <h1>My Events</h1>
         <button
           onClick={() => setIsNewEvent(true)}
-          className="text-lg border border-gray-700 p-1 rounded-md"
+          className="rounded-md border border-gray-700 p-1 text-lg"
         >
           Create New Event
         </button>
       </header>{" "}
       {/* Admin Event Stats */}
-      <div className="flex gap-4 mb-4 mt-8">
+      <div className="mb-4 mt-8 flex gap-4">
         <div className="stats shadow">
           <div className="stat">
             <div className="stat-title">Total Events</div>
@@ -187,13 +187,13 @@ function Events() {
         </div>
       </div>
       {/* Sorting and Filtering */}
-      <div className="flex flex-col lg:flex-row gap-3 lg:gap-6 mt-6 mb-1">
-        <div className=" flex gap-2 items-center">
+      <div className="mb-1 mt-6 flex flex-col gap-3 lg:flex-row lg:gap-6">
+        <div className=" flex items-center gap-2">
           <label className="text-sm" htmlFor="q">
             Search
           </label>
           <input
-            className="input input-bordered w-full max-w-xs h-8"
+            className="input input-bordered h-8 w-full max-w-xs"
             type="text"
             id="q"
             value={q}
@@ -210,7 +210,7 @@ function Events() {
           />
         </div>
         {/* sorting */}
-        <div className="dropdown dropdown-end text-sm gap-2 flex items-center h-full">
+        <div className="dropdown dropdown-end flex h-full items-center gap-2 text-sm">
           <label htmlFor="sort" className="">
             Sort By:
           </label>
@@ -240,7 +240,7 @@ function Events() {
         </div>
       </div>
       {/* Events */}
-      <section className="w-full flex flex-col mt-8 gap-8">
+      <section className="mt-8 flex w-full flex-col gap-8">
         {Array.isArray(defaultEvents) ? (
           defaultEvents.map((event) => (
             <EventCard

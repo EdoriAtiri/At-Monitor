@@ -48,7 +48,7 @@ function Event() {
   };
 
   return (
-    <div className="mx-6 mt-10 mb-6">
+    <div className="mx-6 mb-6 mt-10">
       {editEvent && (
         <EditEventForm
           eventId={eventId}
@@ -63,9 +63,9 @@ function Event() {
           onClickCancel={() => setIsDeletePrompt(false)}
         />
       )}
-      <h1 className="text-3xl mb-5 uppercase">{myEvent.eventName}</h1>
+      <h1 className="mb-5 text-3xl uppercase">{myEvent.eventName}</h1>
       {/* Stat for creator and date */}
-      <div className="flex gap-4 mb-4">
+      <div className="mb-4 flex gap-4">
         <div className="stats shadow">
           <div className="stat">
             <div className="stat-title">Created By</div>
@@ -86,13 +86,13 @@ function Event() {
         <div className="flex items-center gap-3">
           <button
             onClick={openEdit}
-            className="text-lg border border-gray-700 p-1 rounded-md"
+            className="rounded-md border border-gray-700 p-1 text-lg"
           >
             Edit
           </button>
           <button
             onClick={() => setIsDeletePrompt(true)}
-            className="text-lg border border-gray-700 p-1 rounded-md"
+            className="rounded-md border border-gray-700 p-1 text-lg"
           >
             Delete
           </button>

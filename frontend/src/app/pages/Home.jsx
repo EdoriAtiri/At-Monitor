@@ -9,11 +9,11 @@ function Home() {
   return loggedIn ? (
     <Navigate to="/dashboard/events" />
   ) : (
-    <div className="w-full min-h-screen flex flex-row">
-      <div className="w-1/2 py-10 space-y-32">
+    <div className="flex min-h-screen w-full flex-row">
+      <div className="w-1/2 space-y-32 py-10">
         <Logo />
-        <div className="px-10 xl:px-20 m-auto space-y-6">
-          <h1 className="font-bold text-4xl lg:text-6xl">
+        <div className="m-auto space-y-6 px-10 xl:px-20">
+          <h1 className="text-4xl font-bold lg:text-6xl">
             Track Event Attendance{" "}
           </h1>
           <p className="text-sm lg:text-lg">
@@ -31,13 +31,13 @@ function Home() {
         </div>
       </div>
 
-      <div className="w-1/2 py-10 px-10 flex flex-col relative">
-        <ul className="text-sm h-fit py-4 xl:text-base flex flex-row gap-6 justify-end w-full">
+      <div className="relative flex w-1/2 flex-col px-10 py-10">
+        <ul className="flex h-fit w-full flex-row justify-end gap-6 py-4 text-sm xl:text-base">
           <li className="nav">About</li>
           <li className="nav">Contact</li>
         </ul>
-        <div className="font-bold text-7xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <span className="text-8xl xl">A</span>
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform text-7xl font-bold">
+          <span className="xl text-8xl">A</span>
           <span className="-ml-4">M</span>
         </div>
       </div>

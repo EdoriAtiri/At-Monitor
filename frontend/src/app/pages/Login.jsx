@@ -59,19 +59,19 @@ function Login() {
   }
 
   return (
-    <div className="w-full min-h-screen flex flex-row">
-      <div className="w-1/2 py-10 flex gap-6 flex-col justify-center items-center relative ">
+    <div className="flex min-h-screen w-full flex-row">
+      <div className="relative flex w-1/2 flex-col items-center justify-center gap-6 py-10 ">
         <Logo />
 
-        <div className="text-left space-y-1 w-3/4 lg:w-1/2 [&>*]:w-full">
-          <h2 className="text-2xl tracking-tight lg:text-3xl font-bold">
+        <div className="w-3/4 space-y-1 text-left lg:w-1/2 [&>*]:w-full">
+          <h2 className="text-2xl font-bold tracking-tight lg:text-3xl">
             Login in to AT Monitor
           </h2>
         </div>
 
         <form
           onSubmit={onSubmit}
-          className="space-y-7 w-3/4 lg:w-1/2 [&>*]:w-full"
+          className="w-3/4 space-y-7 lg:w-1/2 [&>*]:w-full"
         >
           <div className="space-y-4">
             <div className="form-group">
@@ -101,27 +101,27 @@ function Login() {
           </div>
 
           <div className="btn mt-36">
-            <button className="form-input-style grid place-content-center active:scale-95 transition-transform font-bold text-white bg-black">
+            <button className="form-input-style grid place-content-center bg-black font-bold text-white transition-transform active:scale-95">
               Continue
             </button>
           </div>
         </form>
 
-        <span className="text-sm text">
+        <span className="text text-sm">
           Don&apos;t have an account?{" "}
-          <span className="text-blue-600 font-bold">
+          <span className="font-bold text-blue-600">
             <Link to="/signup">Signup</Link>
           </span>
         </span>
       </div>
 
-      <div className="w-1/2 py-10 px-10 flex flex-col relative">
-        <ul className="text-sm h-fit py-4 xl:text-base flex flex-row gap-6 justify-end w-full">
+      <div className="relative flex w-1/2 flex-col px-10 py-10">
+        <ul className="flex h-fit w-full flex-row justify-end gap-6 py-4 text-sm xl:text-base">
           <li className="nav">About</li>
           <li className="nav">Contact</li>
         </ul>
-        <div className="font-bold text-7xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <span className="text-8xl xl">A</span>
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform text-7xl font-bold">
+          <span className="xl text-8xl">A</span>
           <span className="-ml-4">M</span>
         </div>
       </div>
