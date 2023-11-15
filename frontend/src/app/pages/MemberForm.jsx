@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { createMember } from "../features/Members/memberSlice";
@@ -19,6 +19,17 @@ function MemberForm() {
   const { isError, isLoading, isSuccess, message } = useSelector(
     (state) => state.members,
   );
+
+  const [params, setParams] = useSearchParams({
+    activeOnly: false,
+    q: "",
+    sortBy: "",
+  });
+  const isEdit = params.get("type") === "edit";
+  const id = params.get("id");
+
+  console.log(isEdit);
+  console.log(id);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

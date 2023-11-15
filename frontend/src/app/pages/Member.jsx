@@ -8,6 +8,7 @@ const Member = () => {
   const { member, isLoading, isError, message, isSuccess } = useSelector(
     (state) => state.members,
   );
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
