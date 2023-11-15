@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-// import { createEvent } from '../features/Events/eventSlice'
+import { createMember } from "../features/Members/memberSlice";
 
 function NewEvent() {
   const [memberData, setMemberData] = useState({
@@ -19,8 +20,8 @@ function NewEvent() {
     (state) => state.members,
   );
 
-  // const dispatch = useDispatch()
-  // console.log(eventId)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const {
     fullName,
@@ -40,29 +41,29 @@ function NewEvent() {
     }));
   };
 
-  // Submit event data
-  // const onSubmit = (e) => {
-  //   e.preventDefault()
+  // Submit members data
+  const onSubmit = (e) => {
+    e.preventDefault();
 
-  //   const data = {
-  //     ...memberData,
-  //   }
-  //   dispatch(createEvent(data))
-  //   closeForm()
-  // }
+    const data = {
+      ...memberData,
+    };
 
-  // Convert to error and success pop ups
+    dispatch(createMember(data));
+  };
+
   useEffect(() => {
+    // Check if isSuccess is true, then navigate
+    if (isSuccess) {
+      navigate("/dashboard/members");
+      toast.success("Member created successfully");
+    }
+
+    // Handle errors if any
     if (isError) {
       toast.error(message);
     }
-
-    if (isSuccess) {
-      console.log("success");
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isError, message]);
+  }, [isSuccess, isError, message, navigate]);
 
   if (isLoading) {
     return <div>loading...</div>;
@@ -70,10 +71,7 @@ function NewEvent() {
 
   return (
     <div className="mx-6 mb-6 mt-10">
-      <form
-        // onSubmit={onSubmit}
-        className="space-y-7"
-      >
+      <form onSubmit={onSubmit} className="space-y-7">
         <div className="flex flex-col space-y-4 lg:flex-row lg:gap-12 lg:space-y-0">
           {/*  */}
           <div className="space-y-4">
@@ -82,7 +80,7 @@ function NewEvent() {
                 htmlFor="fullName"
                 className="text-sm md:text-base lg:text-xl"
               >
-                Event Name
+                Full Name
               </label>
               <input
                 type="text"
@@ -170,11 +168,15 @@ function NewEvent() {
                 Category
               </label>
               <select
+                onChange={onChange}
                 className="form-input-style py-1 pr-2"
                 name="category"
                 id="category"
                 value={category}
               >
+                <option value="" disabled defaultValue hidden>
+                  Select Category
+                </option>
                 <option value="adult">Adult</option>
                 <option value="teenager">Teenager</option>
                 <option value="child">Child</option>
@@ -188,11 +190,16 @@ function NewEvent() {
                 Gender
               </label>
               <select
+                onChange={onChange}
                 className="form-input-style py-1 pr-2"
                 name="gender"
                 id="gender"
                 value={gender}
               >
+                <option value="" disabled defaultValue hidden>
+                  Select Gender
+                </option>
+
                 <option value="male">Male</option>
                 <option value="male">Female</option>
                 <option value="none">Prefer not to say</option>
@@ -206,15 +213,19 @@ function NewEvent() {
                 Membership Status
               </label>
               <select
+                onChange={onChange}
                 className="form-input-style py-1 pr-2"
                 name="membershipStatus"
                 id="membershipStatus"
                 value={membershipStatus}
               >
+                <option value="" disabled defaultValue hidden>
+                  Select Membership Status
+                </option>
                 <option value="completed">Completed</option>
                 <option value="ongoing">Ongoing</option>
                 <option value="paused">Paused</option>
-                <option value="undone">Undone</option>
+                <option value="undone">None</option>
               </select>
             </div>
           </div>
@@ -222,7 +233,7 @@ function NewEvent() {
 
         <div className="lg:72 btn mt-36 w-96">
           <button className="form-input-style grid place-content-center bg-black font-bold text-white transition-transform active:scale-95">
-            Create Event
+            Create
           </button>
         </div>
       </form>{" "}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useSearchParams, useNavigate, Link } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { getMembers, reset } from "../features/Members/memberSlice";
 import Loading from "../components/Loading";
 import sortByProperty from "../lib/sortByProperty";
@@ -127,14 +127,21 @@ function Members() {
 
   return (
     <div className=" mx-6 mb-6 mt-10">
-      <header className="flex items-center justify-between text-xl font-semibold">
+      <header className="mb-8 flex items-center justify-between text-xl font-semibold">
         <h1>Members</h1>
-        <button className="rounded-md border border-gray-700 p-1 text-lg">
-          <Link to="create">Create New Member</Link>
+        <button
+          onClick={() => {
+            dispatch(reset());
+            navigate("/dashboard/members/create");
+          }}
+          className="rounded-md border border-gray-700 p-1 text-lg"
+        >
+          {" "}
+          Create New Member
         </button>
       </header>{" "}
       {/* Admin member Stats */}
-      <div className="mb-4 mt-8 flex gap-4">
+      <div className="mb-4 flex gap-4">
         <div className="stats shadow">
           <div className="stat">
             <div className="stat-title">Total Members</div>
