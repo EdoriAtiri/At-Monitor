@@ -1,51 +1,51 @@
-import { useEffect, useState } from 'react'
-import formatDate from '../lib/formatDate'
-import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import { getEvent, deleteEvent } from '../features/Events/eventSlice'
-import EditEventForm from '../components/EditEventForm'
-import ActConfirmation from '../components/ActConfirmation'
-import Loading from '../components/Loading'
+import { useEffect, useState } from "react";
+import formatDate from "../lib/formatDate";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { getEvent, deleteEvent } from "../features/Events/eventSlice";
+import EditEventForm from "../components/EditEventForm";
+import ActConfirmation from "../components/ActConfirmation";
+import Loading from "../components/Loading";
 
 function Event() {
-  const [isDeletePrompt, setIsDeletePrompt] = useState(false)
-  const [editEvent, setEditEvent] = useState(false)
+  const [isDeletePrompt, setIsDeletePrompt] = useState(false);
+  const [editEvent, setEditEvent] = useState(false);
   const { myEvent, isLoading, isError, message, isSuccess } = useSelector(
-    (state) => state.myEvents
-  )
-  const { admin } = useSelector((state) => state.auth)
+    (state) => state.myEvents,
+  );
+  const { admin } = useSelector((state) => state.auth);
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const { eventId } = useParams()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { eventId } = useParams();
 
   useEffect(() => {
     if (isError) {
-      toast.error(message)
+      toast.error(message);
     }
 
-    dispatch(getEvent(eventId))
+    dispatch(getEvent(eventId));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isError, message, eventId])
+  }, [isError, message, eventId]);
 
   if (isLoading) {
-    return <Loading />
+    return <Loading />;
   }
 
   const openEdit = () => {
-    setEditEvent(true)
-  }
+    setEditEvent(true);
+  };
 
   // Delete Event
   const onDeleteEvent = () => {
-    dispatch(deleteEvent(eventId))
+    dispatch(deleteEvent(eventId));
 
     if (isSuccess) {
-      navigate('/dashboard/events')
+      navigate("/dashboard/events");
     }
-  }
+  };
 
   return (
     <div className="mx-6 mt-10 mb-6">
@@ -112,7 +112,7 @@ function Event() {
             <td>{myEvent.description}</td>
           </tr>
         </tbody>
-      </table>{' '}
+      </table>{" "}
       {/* Registered attendees */}
       {/* <section className="mt-8">
         <div>
@@ -136,7 +136,7 @@ function Event() {
         </div>
       </section> */}
     </div>
-  )
+  );
 }
 
-export default Event
+export default Event;

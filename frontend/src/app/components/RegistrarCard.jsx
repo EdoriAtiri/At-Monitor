@@ -1,14 +1,14 @@
-import PropTypes from 'prop-types'
-import formatDate from '../lib/formatDate'
-import { useNavigate } from 'react-router-dom'
+import PropTypes from "prop-types";
+import formatDate from "../lib/formatDate";
+import { useNavigate } from "react-router-dom";
 
 const RegistrarCard = ({ name, createdAt, status, id }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <button
       className="w-full"
       onClick={() => {
-        navigate(`/dashboard/registrars/${id}`)
+        navigate(`/dashboard/registrars/${id}`);
       }}
     >
       <table className="flex w-full lg:w-96 justify-between border border-gray-700 py-2 px-4 lg:p-4 rounded-md">
@@ -38,20 +38,20 @@ const RegistrarCard = ({ name, createdAt, status, id }) => {
         </tbody>
       </table>
     </button>
-  )
-}
+  );
+};
 
 RegistrarCard.propTypes = {
   name: PropTypes.string,
   createdAt: PropTypes.string,
   status: PropTypes.bool,
   id: PropTypes.string,
-}
+};
 
 RegistrarCard.defaultProps = {
-  name: 'registrar',
-  createdAt: '0/0/0',
-  status: '0/0/0',
-}
+  name: "registrar",
+  createdAt: "0/0/0",
+  status: "0/0/0",
+};
 
-export default RegistrarCard
+export default RegistrarCard;

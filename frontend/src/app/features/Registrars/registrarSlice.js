@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import registrarService from './registrarService'
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import registrarService from "./registrarService";
 
 const initialState = {
   registrars: [],
@@ -7,301 +7,301 @@ const initialState = {
   isError: false,
   isSuccess: false,
   isLoading: false,
-  message: '',
-}
+  message: "",
+};
 
 // Get registrars
 export const getRegistrars = createAsyncThunk(
-  'registrars/getAll',
+  "registrars/getAll",
   async (_, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.admin.token
-      return await registrarService.getRegistrars(token)
+      const token = thunkAPI.getState().auth.admin.token;
+      return await registrarService.getRegistrars(token);
     } catch (error) {
       const message =
         (error.response &&
           error.response.data &&
           error.response.data.message) ||
         error.message ||
-        error.toString()
+        error.toString();
 
-      console.log(message)
+      console.log(message);
 
-      return thunkAPI.rejectWithValue(message)
+      return thunkAPI.rejectWithValue(message);
     }
-  }
-)
+  },
+);
 
 // Get a registrar
 export const getRegistrar = createAsyncThunk(
-  'registrars/getRegistrar',
+  "registrars/getRegistrar",
   async (registrarId, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.admin.token
-      return await registrarService.getRegistrar(registrarId, token)
+      const token = thunkAPI.getState().auth.admin.token;
+      return await registrarService.getRegistrar(registrarId, token);
     } catch (error) {
       const message =
         (error.response &&
           error.response.data &&
           error.response.data.message) ||
         error.message ||
-        error.toString()
+        error.toString();
 
-      return thunkAPI.rejectWithValue(message)
+      return thunkAPI.rejectWithValue(message);
     }
-  }
-)
+  },
+);
 
 // Create a registrar
 export const createRegistrar = createAsyncThunk(
-  'registrars/createRegistrar',
+  "registrars/createRegistrar",
   async (data, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.admin.token
-      return await registrarService.createRegistrar(data, token)
+      const token = thunkAPI.getState().auth.admin.token;
+      return await registrarService.createRegistrar(data, token);
     } catch (error) {
       const message =
         (error.response &&
           error.response.data &&
           error.response.data.message) ||
         error.message ||
-        error.toString()
+        error.toString();
 
-      return thunkAPI.rejectWithValue(message)
+      return thunkAPI.rejectWithValue(message);
     }
-  }
-)
+  },
+);
 
 // Toggle registrar Activation
 export const toggleRegistrarActivation = createAsyncThunk(
-  'registrars/toggleRegistrarActivation',
+  "registrars/toggleRegistrarActivation",
   async ({ data, registrarId }, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.admin.token
+      const token = thunkAPI.getState().auth.admin.token;
       return await registrarService.toggleRegistrarActivation(
         data,
         registrarId,
-        token
-      )
+        token,
+      );
     } catch (error) {
       const message =
         (error.response &&
           error.response.data &&
           error.response.data.message) ||
         error.message ||
-        error.toString()
+        error.toString();
 
-      return thunkAPI.rejectWithValue(message)
+      return thunkAPI.rejectWithValue(message);
     }
-  }
-)
+  },
+);
 
 // Delete a registrar
 export const deleteRegistrar = createAsyncThunk(
-  'registrars/deleteRegistrar',
+  "registrars/deleteRegistrar",
   async (registrarId, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.admin.token
+      const token = thunkAPI.getState().auth.admin.token;
 
-      return await registrarService.deleteRegistrar(registrarId, token)
+      return await registrarService.deleteRegistrar(registrarId, token);
     } catch (error) {
       const message =
         (error.response &&
           error.response.data &&
           error.response.data.message) ||
         error.message ||
-        error.toString()
+        error.toString();
 
-      console.log(message)
+      console.log(message);
 
-      return thunkAPI.rejectWithValue(message)
+      return thunkAPI.rejectWithValue(message);
     }
-  }
-)
+  },
+);
 
 // Generate token for registrar activation link and password creation
 export const generateActivationToken = createAsyncThunk(
-  'registrars/generateActivationToken',
+  "registrars/generateActivationToken",
   async (registrarId, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.admin.token
-      return await registrarService.generateActivationToken(registrarId, token)
+      const token = thunkAPI.getState().auth.admin.token;
+      return await registrarService.generateActivationToken(registrarId, token);
     } catch (error) {
       const message =
         (error.response &&
           error.response.data &&
           error.response.data.message) ||
         error.message ||
-        error.toString()
+        error.toString();
 
-      console.log(message)
+      console.log(message);
 
-      return thunkAPI.rejectWithValue(message)
+      return thunkAPI.rejectWithValue(message);
     }
-  }
-)
+  },
+);
 
 // Get registrar for activation and password creation
 export const getRegForActivation = createAsyncThunk(
-  'registrars/getRegForActivation',
+  "registrars/getRegForActivation",
   async (RegistrarActivationToken, thunkAPI) => {
     try {
       return await registrarService.getRegForActivation(
-        RegistrarActivationToken
-      )
+        RegistrarActivationToken,
+      );
     } catch (error) {
       const message =
         (error.response &&
           error.response.data &&
           error.response.data.message) ||
         error.message ||
-        error.toString()
+        error.toString();
 
-      return thunkAPI.rejectWithValue(message)
+      return thunkAPI.rejectWithValue(message);
     }
-  }
-)
+  },
+);
 
 // Create registrar Auth
 export const createRegAuth = createAsyncThunk(
-  'registrars/createRegAuth',
+  "registrars/createRegAuth",
   async ({ data, id }, thunkAPI) => {
-    console.log(data, id)
+    console.log(data, id);
     try {
-      return await registrarService.createRegAuth(data, id)
+      return await registrarService.createRegAuth(data, id);
     } catch (error) {
       const message =
         (error.response &&
           error.response.data &&
           error.response.data.message) ||
         error.message ||
-        error.toString()
+        error.toString();
 
-      return thunkAPI.rejectWithValue(message)
+      return thunkAPI.rejectWithValue(message);
     }
-  }
-)
+  },
+);
 
 export const registrarSlice = createSlice({
-  name: 'registrars',
+  name: "registrars",
   initialState,
   reducers: {
     // eslint-disable-next-line no-unused-vars
     reset: (state) => initialState,
     updateIsSuccess: (state, action) => {
-      state.isSuccess = action.payload // Set isSuccess to the payload value
+      state.isSuccess = action.payload; // Set isSuccess to the payload value
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(getRegistrars.pending, (state) => {
-        state.isLoading = true
+        state.isLoading = true;
       })
       .addCase(getRegistrars.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
-        state.registrars = action.payload
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.registrars = action.payload;
       })
       .addCase(getRegistrars.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       })
       .addCase(getRegistrar.pending, (state) => {
-        state.isLoading = true
+        state.isLoading = true;
       })
       .addCase(getRegistrar.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
-        state.registrar = action.payload
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.registrar = action.payload;
       })
       .addCase(getRegistrar.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       })
       .addCase(toggleRegistrarActivation.pending, (state) => {
-        state.isLoading = true
+        state.isLoading = true;
       })
       .addCase(toggleRegistrarActivation.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
-        state.message = action.payload
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message = action.payload;
       })
       .addCase(toggleRegistrarActivation.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       })
       .addCase(deleteRegistrar.pending, (state) => {
-        state.isLoading = true
+        state.isLoading = true;
       })
       .addCase(deleteRegistrar.fulfilled, (state) => {
-        state.isLoading = false
-        state.isSuccess = true
+        state.isLoading = false;
+        state.isSuccess = true;
         // state.myEvent.filter((event) => event._id !== action.payload._id)
       })
       .addCase(deleteRegistrar.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       })
       .addCase(createRegistrar.pending, (state) => {
-        state.isLoading = true
+        state.isLoading = true;
       })
       .addCase(createRegistrar.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
-        action.payload.createdAt = new Date().toLocaleDateString()
-        state.registrars = [action.payload, ...state.registrars]
+        state.isLoading = false;
+        state.isSuccess = true;
+        action.payload.createdAt = new Date().toLocaleDateString();
+        state.registrars = [action.payload, ...state.registrars];
       })
       .addCase(createRegistrar.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       })
       .addCase(generateActivationToken.pending, (state) => {
-        state.isLoading = true
+        state.isLoading = true;
       })
       .addCase(generateActivationToken.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
-        const token = action.payload.token
-        state.registrar = { ...state.registrar, token }
+        state.isLoading = false;
+        state.isSuccess = true;
+        const token = action.payload.token;
+        state.registrar = { ...state.registrar, token };
       })
       .addCase(generateActivationToken.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       })
       .addCase(getRegForActivation.pending, (state) => {
-        state.isLoading = true
+        state.isLoading = true;
       })
       .addCase(getRegForActivation.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
-        state.registrar = action.payload
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.registrar = action.payload;
       })
       .addCase(getRegForActivation.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       })
       .addCase(createRegAuth.pending, (state) => {
-        state.isLoading = true
+        state.isLoading = true;
       })
       .addCase(createRegAuth.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
-        state.registrar = action.payload
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.registrar = action.payload;
       })
       .addCase(createRegAuth.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
-      })
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      });
   },
-})
+});
 
-export const { reset, updateIsSuccess } = registrarSlice.actions
-export default registrarSlice.reducer
+export const { reset, updateIsSuccess } = registrarSlice.actions;
+export default registrarSlice.reducer;

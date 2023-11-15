@@ -1,75 +1,75 @@
-import PropTypes from 'prop-types'
-import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { toast } from 'react-toastify'
-import { editEvent } from '../features/Events/eventSlice'
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { editEvent } from "../features/Events/eventSlice";
 
 function EditEventForm({ eventId, closeEdit }) {
   const [eventData, setEventData] = useState({
-    eventName: '',
-    eventDate: '',
-    description: '',
-    linkId: '',
-  })
+    eventName: "",
+    eventDate: "",
+    description: "",
+    linkId: "",
+  });
 
   // const [isInitial, setIsInitial] = useState(true)
 
   const formatDate = (dateString) => {
-    if (!dateString) return ''
-    const date = new Date(dateString)
-    return date.toISOString().split('T')[0] // Extract yyyy-mm-dd
-  }
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    return date.toISOString().split("T")[0]; // Extract yyyy-mm-dd
+  };
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   // console.log(eventId)
 
   const { myEvent, isError, isLoading, message } = useSelector(
-    (state) => state.myEvents
-  )
+    (state) => state.myEvents,
+  );
 
   //   If editing event data, get the existing data
   useEffect(() => {
     if (myEvent) {
       setEventData({
-        eventName: myEvent.eventName || '1',
-        eventDate: myEvent.eventDate || '',
-        description: myEvent.description || '',
-        linkId: myEvent.linkId || '',
-      })
+        eventName: myEvent.eventName || "1",
+        eventDate: myEvent.eventDate || "",
+        description: myEvent.description || "",
+        linkId: myEvent.linkId || "",
+      });
     }
-  }, [myEvent])
+  }, [myEvent]);
 
-  const { eventName, eventDate, description, linkId } = eventData
+  const { eventName, eventDate, description, linkId } = eventData;
 
   const onChange = (e) => {
     setEventData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
-    }))
-  }
+    }));
+  };
 
   const onSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const data = {
       ...eventData,
-    }
-    dispatch(editEvent({ data, eventId }))
+    };
+    dispatch(editEvent({ data, eventId }));
 
-    closeEdit()
-  }
+    closeEdit();
+  };
 
   // Convert to error and success pop ups
   useEffect(() => {
     if (isError) {
-      toast.error(message)
+      toast.error(message);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isError, message])
+  }, [isError, message]);
 
   if (isLoading) {
-    return <div>loading...</div>
+    return <div>loading...</div>;
   }
 
   return (
@@ -131,7 +131,7 @@ function EditEventForm({ eventId, closeEdit }) {
                 htmlFor="description"
                 className="text-sm md:text-base lg:text-xl"
               >
-                Description{' '}
+                Description{" "}
               </label>
               <input
                 type="text"
@@ -148,7 +148,7 @@ function EditEventForm({ eventId, closeEdit }) {
                 htmlFor="linkId"
                 className="text-sm md:text-base lg:text-xl"
               >
-                Link{' '}
+                Link{" "}
               </label>
               <input
                 type="text"
@@ -167,19 +167,19 @@ function EditEventForm({ eventId, closeEdit }) {
               Edit
             </button>
           </div>
-        </form>{' '}
+        </form>{" "}
       </div>
     </div>
-  )
+  );
 }
 
 EditEventForm.propTypes = {
   eventId: PropTypes.string,
   closeEdit: PropTypes.func,
-}
+};
 
 EditEventForm.defaultProps = {
-  eventId: 'eventId',
-}
+  eventId: "eventId",
+};
 
-export default EditEventForm
+export default EditEventForm;

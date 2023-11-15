@@ -1,44 +1,44 @@
-import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useParams, useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
   getRegForActivation,
   createRegAuth,
-} from '../features/Registrars/registrarSlice'
-import Loading from '../components/Loading'
+} from "../features/Registrars/registrarSlice";
+import Loading from "../components/Loading";
 
 const RegistrarActivation = () => {
-  const [pass, setPass] = useState('')
+  const [pass, setPass] = useState("");
   const { registrar, isError, message, isLoading, isSuccess } = useSelector(
-    (state) => state.registrars
-  )
+    (state) => state.registrars,
+  );
 
-  const dispatch = useDispatch()
-  const { token } = useParams()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const { token } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getRegForActivation(token))
+    dispatch(getRegForActivation(token));
 
     if (isError) {
-      toast.error(message)
+      toast.error(message);
     }
-    console.log(registrar)
+    console.log(registrar);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isError, message, token])
+  }, [isError, message, token]);
 
   const onSubmit = (e) => {
-    e.preventDefault()
-    const data = { password: pass }
-    dispatch(createRegAuth({ data, id: registrar._id }))
+    e.preventDefault();
+    const data = { password: pass };
+    dispatch(createRegAuth({ data, id: registrar._id }));
 
-    if (isSuccess) navigate('/login')
-  }
+    if (isSuccess) navigate("/login");
+  };
 
   if (isLoading) {
-    return <Loading />
+    return <Loading />;
   }
 
   return (
@@ -48,7 +48,7 @@ const RegistrarActivation = () => {
           <div className="font-bold text-2xl">
             <span className="text-3xl">A</span>
             <span className="-ml-2">M</span>
-          </div>{' '}
+          </div>{" "}
           <div className="space-y-2">
             <h3 className="text-gray-800 text-2xl font-bold s">Sign up</h3>
           </div>
@@ -87,7 +87,7 @@ const RegistrarActivation = () => {
         </form>
       </div>
     </main>
-  )
-}
+  );
+};
 
-export default RegistrarActivation
+export default RegistrarActivation;

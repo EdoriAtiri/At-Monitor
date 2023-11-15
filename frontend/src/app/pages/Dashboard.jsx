@@ -1,5 +1,5 @@
-import { Link, Outlet } from 'react-router-dom'
-import Logo from '../components/Logo'
+import { Link, Outlet } from "react-router-dom";
+import Logo from "../components/Logo";
 import {
   FaCalendarDays,
   FaPersonCircleCheck,
@@ -7,7 +7,7 @@ import {
   FaGear,
   FaPowerOff,
   FaPeopleGroup,
-} from 'react-icons/fa6'
+} from "react-icons/fa6";
 
 function Dashboard() {
   return (
@@ -53,7 +53,7 @@ function Dashboard() {
         <Outlet />
       </div>
     </div>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;

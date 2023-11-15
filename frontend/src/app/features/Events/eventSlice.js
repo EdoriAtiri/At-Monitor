@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import eventService from './EventService'
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import eventService from "./EventService";
 
 const initialState = {
   myEvents: [],
@@ -7,121 +7,121 @@ const initialState = {
   isError: false,
   isSuccess: false,
   isLoading: false,
-  message: '',
-}
+  message: "",
+};
 
 // Get admin events
 export const getEvents = createAsyncThunk(
-  'events/getAll',
+  "events/getAll",
   async (_, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.admin.token
-      return await eventService.getEvents(token)
+      const token = thunkAPI.getState().auth.admin.token;
+      return await eventService.getEvents(token);
     } catch (error) {
       const message =
         (error.response &&
           error.response.data &&
           error.response.data.message) ||
         error.message ||
-        error.toString()
+        error.toString();
 
-      console.log(message)
+      console.log(message);
 
-      return thunkAPI.rejectWithValue(message)
+      return thunkAPI.rejectWithValue(message);
     }
-  }
-)
+  },
+);
 
 // Get an admin event
 export const getEvent = createAsyncThunk(
-  'events/getEvent',
+  "events/getEvent",
   async (eventId, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.admin.token
-      return await eventService.getEvent(eventId, token)
+      const token = thunkAPI.getState().auth.admin.token;
+      return await eventService.getEvent(eventId, token);
     } catch (error) {
       const message =
         (error.response &&
           error.response.data &&
           error.response.data.message) ||
         error.message ||
-        error.toString()
+        error.toString();
 
-      return thunkAPI.rejectWithValue(message)
+      return thunkAPI.rejectWithValue(message);
     }
-  }
-)
+  },
+);
 
 // Create an event
 export const createEvent = createAsyncThunk(
-  'events/createEvent',
+  "events/createEvent",
   async (data, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.admin.token
+      const token = thunkAPI.getState().auth.admin.token;
 
-      return await eventService.createEvent(data, token)
+      return await eventService.createEvent(data, token);
     } catch (error) {
       const message =
         (error.response &&
           error.response.data &&
           error.response.data.message) ||
         error.message ||
-        error.toString()
+        error.toString();
 
-      console.log(message)
+      console.log(message);
 
-      return thunkAPI.rejectWithValue(message)
+      return thunkAPI.rejectWithValue(message);
     }
-  }
-)
+  },
+);
 // Edit an event
 export const editEvent = createAsyncThunk(
-  'events/editEvent',
+  "events/editEvent",
   async ({ data, eventId }, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.admin.token
+      const token = thunkAPI.getState().auth.admin.token;
 
-      return await eventService.editEvent(data, eventId, token)
+      return await eventService.editEvent(data, eventId, token);
     } catch (error) {
       const message =
         (error.response &&
           error.response.data &&
           error.response.data.message) ||
         error.message ||
-        error.toString()
+        error.toString();
 
-      console.log(message)
+      console.log(message);
 
-      return thunkAPI.rejectWithValue(message)
+      return thunkAPI.rejectWithValue(message);
     }
-  }
-)
+  },
+);
 
 // Delete an event
 export const deleteEvent = createAsyncThunk(
-  'events/deleteEvent',
+  "events/deleteEvent",
   async (eventId, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.admin.token
+      const token = thunkAPI.getState().auth.admin.token;
 
-      return await eventService.deleteEvent(eventId, token)
+      return await eventService.deleteEvent(eventId, token);
     } catch (error) {
       const message =
         (error.response &&
           error.response.data &&
           error.response.data.message) ||
         error.message ||
-        error.toString()
+        error.toString();
 
-      console.log(message)
+      console.log(message);
 
-      return thunkAPI.rejectWithValue(message)
+      return thunkAPI.rejectWithValue(message);
     }
-  }
-)
+  },
+);
 
 export const eventSlice = createSlice({
-  name: 'event',
+  name: "event",
   initialState,
   reducers: {
     // eslint-disable-next-line no-unused-vars
@@ -131,72 +131,72 @@ export const eventSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getEvents.pending, (state) => {
-        state.isLoading = true
+        state.isLoading = true;
       })
       .addCase(getEvents.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
-        state.myEvents = action.payload
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.myEvents = action.payload;
       })
       .addCase(getEvents.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       })
       .addCase(getEvent.pending, (state) => {
-        state.isLoading = true
+        state.isLoading = true;
       })
       .addCase(getEvent.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
-        state.myEvent = action.payload
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.myEvent = action.payload;
       })
       .addCase(getEvent.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       })
       .addCase(createEvent.pending, (state) => {
-        state.isLoading = true
+        state.isLoading = true;
       })
       .addCase(createEvent.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
-        state.myEvents = [action.payload, ...state.myEvents]
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.myEvents = [action.payload, ...state.myEvents];
       })
       .addCase(createEvent.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       })
       .addCase(editEvent.pending, (state) => {
-        state.isLoading = true
+        state.isLoading = true;
       })
       .addCase(editEvent.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
-        state.myEvent = action.payload
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.myEvent = action.payload;
       })
       .addCase(editEvent.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       })
       .addCase(deleteEvent.pending, (state) => {
-        state.isLoading = true
+        state.isLoading = true;
       })
       .addCase(deleteEvent.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
-        state.myEvent.filter((event) => event._id !== action.payload._id)
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.myEvent.filter((event) => event._id !== action.payload._id);
       })
       .addCase(deleteEvent.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
-      })
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      });
   },
-})
+});
 
-export const { reset, resetSuccess } = eventSlice.actions
-export default eventSlice.reducer
+export const { reset, resetSuccess } = eventSlice.actions;
+export default eventSlice.reducer;

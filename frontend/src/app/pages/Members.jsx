@@ -1,73 +1,73 @@
-import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useSearchParams, useNavigate, Link } from 'react-router-dom'
-import { getMembers, reset } from '../features/Members/memberSlice'
-import Loading from '../components/Loading'
-import sortByProperty from '../lib/sortByProperty'
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useSearchParams, useNavigate, Link } from "react-router-dom";
+import { getMembers, reset } from "../features/Members/memberSlice";
+import Loading from "../components/Loading";
+import sortByProperty from "../lib/sortByProperty";
 
 const SORT_VALUES = [
   {
-    display: 'name',
-    value: 'fullName',
+    display: "name",
+    value: "fullName",
   },
   {
-    display: 'gender',
-    value: 'gender',
+    display: "gender",
+    value: "gender",
   },
   {
-    display: 'category',
-    value: 'category',
+    display: "category",
+    value: "category",
   },
   {
-    display: 'membership',
-    value: 'membershipStatus',
+    display: "membership",
+    value: "membershipStatus",
   },
-]
+];
 
 function Members() {
-  const [defaultMembers, setDefaultMembers] = useState([])
+  const [defaultMembers, setDefaultMembers] = useState([]);
   const { members, isSuccess, isLoading } = useSelector(
-    (state) => state.members
-  )
+    (state) => state.members,
+  );
   const [memberStats, setMemberStats] = useState({
-    total: '',
-    adults: '',
-    teenagersAndChildren: '',
-  })
+    total: "",
+    adults: "",
+    teenagersAndChildren: "",
+  });
 
-  const { total, adults, teenagersAndChildren } = memberStats
+  const { total, adults, teenagersAndChildren } = memberStats;
 
   const [searchParams, setSearchParams] = useSearchParams({
-    q: '',
-    sortBy: '',
-  })
-  const q = searchParams.get('q')
+    q: "",
+    sortBy: "",
+  });
+  const q = searchParams.get("q");
   // Search Params
-  const sortBy = searchParams.get('sortBy') || 'name'
+  const sortBy = searchParams.get("sortBy") || "name";
   // useSearchParams stores values as string, so for booleans and numbers check that you have the val you want
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // Triggers the reset reducer function in eventSlice and sets the state back to the initialState object, effectively clearing any data and resetting the flags like isLoading, isSuccess, isError, and message to their initial values.
   useEffect(() => {
     return () => {
       if (isSuccess) {
-        dispatch(reset())
+        dispatch(reset());
       }
-    }
-  }, [dispatch, isSuccess])
+    };
+  }, [dispatch, isSuccess]);
   // Gets members
   useEffect(() => {
-    dispatch(getMembers())
-  }, [dispatch])
+    dispatch(getMembers());
+  }, [dispatch]);
 
   // update default events
   useEffect(() => {
     if (members) {
-      setDefaultMembers(members)
+      setDefaultMembers(members);
     }
-  }, [members])
+  }, [members]);
 
   // Creates stats when getMembers is successful
   useEffect(() => {
@@ -75,15 +75,15 @@ function Members() {
       setMemberStats({
         total: members.length || 0,
         adults:
-          members.filter((members) => members.category === 'adult').length || 0,
+          members.filter((members) => members.category === "adult").length || 0,
         teenagersAndChildren:
           members.filter(
             (members) =>
-              members.category === 'teenager' || members.category === 'child'
+              members.category === "teenager" || members.category === "child",
           ).length || 0,
-      })
+      });
     }
-  }, [members])
+  }, [members]);
 
   // filter by query
   useEffect(() => {
@@ -92,37 +92,37 @@ function Members() {
         // Check if the item's name includes the provided name (case-insensitive)
         const nameMatch = item?.fullName
           ?.toLowerCase()
-          .includes(q?.toLowerCase())
-        return nameMatch
-      }) ?? []
+          .includes(q?.toLowerCase());
+        return nameMatch;
+      }) ?? [];
 
     SORT_VALUES.forEach((val) => {
       if (sortBy === val.display) {
-        sortMembers(filteredMembers, val.value)
+        sortMembers(filteredMembers, val.value);
       }
-    })
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [q, members, sortBy])
+  }, [q, members, sortBy]);
 
   const sortMembers = (arr, value) => {
     // For sort to work defaultMembers must be an array
-    let sortedMembers = [...arr]
-    sortedMembers.sort(sortByProperty(value))
-    setDefaultMembers(sortedMembers)
-  }
+    let sortedMembers = [...arr];
+    sortedMembers.sort(sortByProperty(value));
+    setDefaultMembers(sortedMembers);
+  };
 
   // Sort registrars by SORT_VALUE value if display name matches sortBy
   useEffect(() => {
     SORT_VALUES.forEach((val) => {
       if (sortBy === val.display) {
-        sortMembers(defaultMembers, val.value)
+        sortMembers(defaultMembers, val.value);
       }
-    })
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sortBy])
+  }, [sortBy]);
 
   if (isLoading) {
-    return <Loading />
+    return <Loading />;
   }
 
   return (
@@ -132,7 +132,7 @@ function Members() {
         <button className="text-lg border border-gray-700 p-1 rounded-md">
           <Link to="create">Create New Member</Link>
         </button>
-      </header>{' '}
+      </header>{" "}
       {/* Admin member Stats */}
       <div className="flex gap-4 mb-4 mt-8">
         <div className="stats shadow">
@@ -166,11 +166,11 @@ function Members() {
             onChange={(e) =>
               setSearchParams(
                 (prev) => {
-                  prev.set('q', e.target.value)
+                  prev.set("q", e.target.value);
 
-                  return prev
+                  return prev;
                 },
-                { replace: true }
+                { replace: true },
               )
             }
           />
@@ -189,11 +189,11 @@ function Members() {
             onChange={(e) =>
               setSearchParams(
                 (prev) => {
-                  prev.set('sortBy', e.target.value)
+                  prev.set("sortBy", e.target.value);
 
-                  return prev
+                  return prev;
                 },
-                { replace: true }
+                { replace: true },
               )
             }
           >
@@ -201,7 +201,7 @@ function Members() {
               <option className="capitalize" key={index} value={val.display}>
                 {val.display}
               </option>
-            ))}{' '}
+            ))}{" "}
           </select>
         </div>
       </div>
@@ -225,7 +225,7 @@ function Members() {
                   className="cursor-pointer capitalize hover:bg-gray-100 transition-colors focus:outline-none focus:bg-gray-100"
                   key={member._id}
                   onClick={() => {
-                    navigate(`/dashboard/members/${member._id}`)
+                    navigate(`/dashboard/members/${member._id}`);
                   }}
                 >
                   <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
@@ -250,7 +250,7 @@ function Members() {
         </table>
       </div>
     </div>
-  )
+  );
 }
 
-export default Members
+export default Members;

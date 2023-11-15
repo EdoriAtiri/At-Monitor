@@ -1,75 +1,75 @@
-import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useSearchParams } from 'react-router-dom'
-import { getRegistrars, reset } from '../features/Registrars/registrarSlice'
-import RegistrarCard from '../components/RegistrarCard'
-import Loading from '../components/Loading'
-import NewRegistrar from '../components/NewRegistrar'
-import sortByProperty from '../lib/sortByProperty'
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useSearchParams } from "react-router-dom";
+import { getRegistrars, reset } from "../features/Registrars/registrarSlice";
+import RegistrarCard from "../components/RegistrarCard";
+import Loading from "../components/Loading";
+import NewRegistrar from "../components/NewRegistrar";
+import sortByProperty from "../lib/sortByProperty";
 
 // const SORT_VALUES = ['date created', 'name', 'status']
 const SORT_VALUES = [
   {
-    display: 'date created',
-    value: 'createdAt',
+    display: "date created",
+    value: "createdAt",
   },
   {
-    display: 'name',
-    value: 'fullName',
+    display: "name",
+    value: "fullName",
   },
   {
-    display: 'status',
-    value: 'isActivated',
+    display: "status",
+    value: "isActivated",
   },
-]
+];
 
 const Registrars = () => {
-  const [defaultRegistrars, setDefaultRegistrars] = useState([])
+  const [defaultRegistrars, setDefaultRegistrars] = useState([]);
   // const [sortValue, setSortValue] = useState('date created')
-  const [isForm, setIsForm] = useState(false)
+  const [isForm, setIsForm] = useState(false);
   // Search Params
   const [searchParams, setSearchParams] = useSearchParams({
     activeOnly: false,
-    q: '',
-    sortBy: '',
-  })
-  const q = searchParams.get('q')
-  const activeOnly = searchParams.get('activeOnly') === 'true'
+    q: "",
+    sortBy: "",
+  });
+  const q = searchParams.get("q");
+  const activeOnly = searchParams.get("activeOnly") === "true";
   // Search Params
-  const sortBy = searchParams.get('sortBy') || 'date created'
+  const sortBy = searchParams.get("sortBy") || "date created";
   // useSearchParams stores values as string, so for booleans and numbers check that you have the val you want
 
   const { registrars, isSuccess, isLoading } = useSelector(
-    (state) => state.registrars
-  )
+    (state) => state.registrars,
+  );
   const [registrarStats, setRegistrarStats] = useState({
-    total: '',
-    active: '',
-    inactive: '',
-  })
+    total: "",
+    active: "",
+    inactive: "",
+  });
   // const { isAddRegistrar, setIsAddRegistrar } = useState(false)
-  const { total, active, inactive } = registrarStats
-  const dispatch = useDispatch()
+  const { total, active, inactive } = registrarStats;
+  const dispatch = useDispatch();
 
   useEffect(() => {
     return () => {
       if (isSuccess) {
-        dispatch(reset())
+        dispatch(reset());
       }
-    }
-  }, [dispatch, isSuccess])
+    };
+  }, [dispatch, isSuccess]);
 
   // Gets Registrars on mount
   useEffect(() => {
-    dispatch(getRegistrars())
-  }, [dispatch])
+    dispatch(getRegistrars());
+  }, [dispatch]);
 
   // update default registrars
   useEffect(() => {
     if (registrars) {
-      setDefaultRegistrars(registrars)
+      setDefaultRegistrars(registrars);
     }
-  }, [registrars])
+  }, [registrars]);
 
   // Creates stats when getRegistrars is successful
   useEffect(() => {
@@ -80,9 +80,9 @@ const Registrars = () => {
           registrars.filter((registrar) => registrar.isActivated).length || 0,
         inactive:
           registrars.filter((registrar) => !registrar.isActivated).length || 0,
-      })
+      });
     }
-  }, [registrars])
+  }, [registrars]);
 
   // filter by query or activeOnly or query and activeOnly
   useEffect(() => {
@@ -91,52 +91,52 @@ const Registrars = () => {
         // Check if the item's name includes the provided name (case-insensitive)
         const nameMatch = item?.fullName
           ?.toLowerCase()
-          .includes(q?.toLowerCase())
+          .includes(q?.toLowerCase());
 
         // Check if the item's activation status matches the provided isActive value
         const activationMatch = activeOnly
           ? item.isActivated
-          : item.isActivated || !item.isActivated
+          : item.isActivated || !item.isActivated;
 
         // Return true if both conditions are met
-        return nameMatch && activationMatch
-      }) ?? []
+        return nameMatch && activationMatch;
+      }) ?? [];
 
     SORT_VALUES.forEach((val) => {
       if (sortBy === val.display) {
-        sortRegistrars(filteredRegistrars, val.value)
+        sortRegistrars(filteredRegistrars, val.value);
       }
-    })
-  }, [activeOnly, q, registrars, sortBy])
+    });
+  }, [activeOnly, q, registrars, sortBy]);
 
   const sortRegistrars = (arr, value) => {
     // For sort to work defaultRegistrars must be an array
-    const sortedRegistrars = [...arr]
-    sortedRegistrars.sort(sortByProperty(value))
+    const sortedRegistrars = [...arr];
+    sortedRegistrars.sort(sortByProperty(value));
     // SortbyProperty returns inactive registrars first, the reverse method flips that
-    if (value === 'isActivated') sortedRegistrars.reverse()
-    setDefaultRegistrars(sortedRegistrars)
-  }
+    if (value === "isActivated") sortedRegistrars.reverse();
+    setDefaultRegistrars(sortedRegistrars);
+  };
 
   // Sort registrars by SORT_VALUE value if display name matches sortBy
   useEffect(() => {
     SORT_VALUES.forEach((val) => {
       if (sortBy === val.display) {
-        sortRegistrars(defaultRegistrars, val.value)
+        sortRegistrars(defaultRegistrars, val.value);
       }
-    })
+    });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sortBy])
+  }, [sortBy]);
 
   // Loading Screen
   if (isLoading) {
-    return <Loading />
+    return <Loading />;
   }
 
   return (
     <div className="mx-6 mt-10 mb-6">
-      {' '}
+      {" "}
       {isForm && <NewRegistrar closeForm={() => setIsForm(false)} />}
       <header className="items-center justify-between flex text-xl font-semibold">
         <h1>Registrars</h1>
@@ -146,7 +146,7 @@ const Registrars = () => {
         >
           Add Registrar
         </button>
-      </header>{' '}
+      </header>{" "}
       {/* Registrar Stats */}
       <div className="flex gap-4 mt-8">
         <div className="stats shadow">
@@ -180,11 +180,11 @@ const Registrars = () => {
             onChange={(e) =>
               setSearchParams(
                 (prev) => {
-                  prev.set('q', e.target.value)
+                  prev.set("q", e.target.value);
 
-                  return prev
+                  return prev;
                 },
-                { replace: true }
+                { replace: true },
               )
             }
           />
@@ -195,7 +195,7 @@ const Registrars = () => {
           <div className="flex items-center gap-2 h-full">
             <label className="text-sm" htmlFor="activeOnly">
               Active Only
-            </label>{' '}
+            </label>{" "}
             <input
               className=""
               type="checkbox"
@@ -204,11 +204,11 @@ const Registrars = () => {
               onChange={(e) =>
                 setSearchParams(
                   (prev) => {
-                    prev.set('activeOnly', e.target.checked)
+                    prev.set("activeOnly", e.target.checked);
 
-                    return prev
+                    return prev;
                   },
-                  { replace: true }
+                  { replace: true },
                 )
               }
             />
@@ -228,11 +228,11 @@ const Registrars = () => {
               onChange={(e) =>
                 setSearchParams(
                   (prev) => {
-                    prev.set('sortBy', e.target.value)
+                    prev.set("sortBy", e.target.value);
 
-                    return prev
+                    return prev;
                   },
-                  { replace: true }
+                  { replace: true },
                 )
               }
             >
@@ -240,7 +240,7 @@ const Registrars = () => {
                 <option className="capitalize" key={index} value={val.display}>
                   {val.display}
                 </option>
-              ))}{' '}
+              ))}{" "}
             </select>
           </div>
         </div>
@@ -262,7 +262,7 @@ const Registrars = () => {
         )}
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default Registrars
+export default Registrars;

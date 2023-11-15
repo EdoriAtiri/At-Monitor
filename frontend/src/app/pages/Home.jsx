@@ -1,10 +1,10 @@
-import { Link, Navigate } from 'react-router-dom'
-import { useAuthStatus } from '../hooks/useAuthStatus'
-import Button from '../components/Button'
-import Logo from '../components/Logo'
+import { Link, Navigate } from "react-router-dom";
+import { useAuthStatus } from "../hooks/useAuthStatus";
+import Button from "../components/Button";
+import Logo from "../components/Logo";
 
 function Home() {
-  const { loggedIn } = useAuthStatus()
+  const { loggedIn } = useAuthStatus();
 
   return loggedIn ? (
     <Navigate to="/dashboard/events" />
@@ -14,7 +14,7 @@ function Home() {
         <Logo />
         <div className="px-10 xl:px-20 m-auto space-y-6">
           <h1 className="font-bold text-4xl lg:text-6xl">
-            Track Event Attendance{' '}
+            Track Event Attendance{" "}
           </h1>
           <p className="text-sm lg:text-lg">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur ad
@@ -42,7 +42,7 @@ function Home() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;

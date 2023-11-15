@@ -1,20 +1,20 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import Home from './app/pages/Home.jsx'
-import Signup from './app/pages/Signup.jsx'
-import Login from './app/pages/Login.jsx'
-import Dashboard from './app/pages/Dashboard.jsx'
-import PrivateRoute from './app/components/PrivateRoute.jsx'
-import Events from './app/pages/Events.jsx'
-import Event from './app/pages/Event.jsx'
-import Profile from './app/pages/Profile.jsx'
-import Registrars from './app/pages/Registrars.jsx'
-import Registrar from './app/pages/Registrar.jsx'
-import RegistrarActivation from './app/pages/RegistrarActivation.jsx'
-import Members from './app/pages/Members.jsx'
-import Member from './app/pages/Member.jsx'
-import NewMember from './app/pages/NewMember.jsx'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Home from "./app/pages/Home.jsx";
+import Signup from "./app/pages/Signup.jsx";
+import Login from "./app/pages/Login.jsx";
+import Dashboard from "./app/pages/Dashboard.jsx";
+import PrivateRoute from "./app/components/PrivateRoute.jsx";
+import Events from "./app/pages/Events.jsx";
+import Event from "./app/pages/Event.jsx";
+import Profile from "./app/pages/Profile.jsx";
+import Registrars from "./app/pages/Registrars.jsx";
+import Registrar from "./app/pages/Registrar.jsx";
+import RegistrarActivation from "./app/pages/RegistrarActivation.jsx";
+import Members from "./app/pages/Members.jsx";
+import Member from "./app/pages/Member.jsx";
+import NewMember from "./app/pages/NewMember.jsx";
 
 function App() {
   return (
@@ -49,7 +49,7 @@ function App() {
         </div>
       </Router>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

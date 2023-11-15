@@ -1,59 +1,59 @@
-import PropTypes from 'prop-types'
-import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { toast } from 'react-toastify'
-import { createEvent } from '../features/Events/eventSlice'
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { createEvent } from "../features/Events/eventSlice";
 
 function EditRegistrarForm({ closeForm }) {
   const [eventData, setEventData] = useState({
-    eventName: '',
-    eventDate: '',
-    description: '',
-    linkId: '',
-  })
+    eventName: "",
+    eventDate: "",
+    description: "",
+    linkId: "",
+  });
 
   const { isError, isLoading, isSuccess, message } = useSelector(
-    (state) => state.myEvents
-  )
+    (state) => state.myEvents,
+  );
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   // console.log(eventId)
 
-  const { eventName, eventDate, description, linkId } = eventData
+  const { eventName, eventDate, description, linkId } = eventData;
 
   const onChange = (e) => {
     setEventData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
-    }))
-  }
+    }));
+  };
 
   // Submit event data
   const onSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const data = {
       ...eventData,
-    }
-    dispatch(createEvent(data))
-    closeForm()
-  }
+    };
+    dispatch(createEvent(data));
+    closeForm();
+  };
 
   // Convert to error and success pop ups
   useEffect(() => {
     if (isError) {
-      toast.error(message)
+      toast.error(message);
     }
 
     if (isSuccess) {
-      console.log('success')
+      console.log("success");
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isError, message])
+  }, [isError, message]);
 
   if (isLoading) {
-    return <div>loading...</div>
+    return <div>loading...</div>;
   }
 
   return (
@@ -115,7 +115,7 @@ function EditRegistrarForm({ closeForm }) {
                 htmlFor="description"
                 className="text-sm md:text-base lg:text-xl"
               >
-                Description{' '}
+                Description{" "}
               </label>
               <input
                 type="text"
@@ -132,7 +132,7 @@ function EditRegistrarForm({ closeForm }) {
                 htmlFor="linkId"
                 className="text-sm md:text-base lg:text-xl"
               >
-                Link{' '}
+                Link{" "}
               </label>
               <input
                 type="text"
@@ -151,14 +151,14 @@ function EditRegistrarForm({ closeForm }) {
               Create Event
             </button>
           </div>
-        </form>{' '}
+        </form>{" "}
       </div>
     </div>
-  )
+  );
 }
 
 EditRegistrarForm.propTypes = {
   closeForm: PropTypes.func,
-}
+};
 
-export default EditRegistrarForm
+export default EditRegistrarForm;

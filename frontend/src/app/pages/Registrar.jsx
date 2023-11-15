@@ -1,67 +1,67 @@
-import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useParams, Link, useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import ActConfirmation from '../components/ActConfirmation'
-import Loading from '../components/Loading'
-import { FaCopy } from 'react-icons/fa6'
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import ActConfirmation from "../components/ActConfirmation";
+import Loading from "../components/Loading";
+import { FaCopy } from "react-icons/fa6";
 import {
   getRegistrar,
   toggleRegistrarActivation,
   deleteRegistrar,
   generateActivationToken,
-} from '../features/Registrars/registrarSlice'
+} from "../features/Registrars/registrarSlice";
 
 function Registrar() {
-  const [isDeletePrompt, setIsDeletePrompt] = useState(false)
+  const [isDeletePrompt, setIsDeletePrompt] = useState(false);
   const { registrar, isLoading, isError, message, isSuccess } = useSelector(
-    (state) => state.registrars
-  )
+    (state) => state.registrars,
+  );
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const { registrarId } = useParams()
-  const domain = window.location.hostname
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { registrarId } = useParams();
+  const domain = window.location.hostname;
 
   useEffect(() => {
-    dispatch(getRegistrar(registrarId))
+    dispatch(getRegistrar(registrarId));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [registrarId])
+  }, [registrarId]);
 
   // Toggle Registrar Activation
   const onClickActivation = () => {
-    const data = { isActivated: !registrar.isActivated }
+    const data = { isActivated: !registrar.isActivated };
     dispatch(
       toggleRegistrarActivation({
         data,
         registrarId,
-      })
-    )
-  }
+      }),
+    );
+  };
 
   useEffect(() => {
     if (isError) {
-      toast.error(message)
+      toast.error(message);
     }
-  }, [isError, message])
+  }, [isError, message]);
 
   // Delete Registrar
   const onDeleteRegistrar = () => {
-    dispatch(deleteRegistrar(registrarId))
-    setIsDeletePrompt(false)
+    dispatch(deleteRegistrar(registrarId));
+    setIsDeletePrompt(false);
     if (isSuccess) {
-      navigate('/dashboard/registrars')
+      navigate("/dashboard/registrars");
     }
-  }
+  };
 
   // Generate Registrar activation Link
   const generateLink = () => {
-    dispatch(generateActivationToken(registrarId))
-  }
+    dispatch(generateActivationToken(registrarId));
+  };
 
   if (isLoading) {
-    return <Loading />
+    return <Loading />;
   }
   return (
     <div className=" mx-6 mt-10 mb-6">
@@ -88,7 +88,7 @@ function Registrar() {
             onClick={onClickActivation}
             className="text-lg border border-gray-700 p-1 rounded-md"
           >
-            {registrar.isActivated ? 'deactivate' : 'activate'}
+            {registrar.isActivated ? "deactivate" : "activate"}
           </button>
           <button
             onClick={() => setIsDeletePrompt(true)}
@@ -112,7 +112,7 @@ function Registrar() {
         <tbody>
           <tr className="">
             <td>{registrar.fullName}</td>
-            <td>{registrar.isAdmin ? 'Yes' : 'No'}</td>
+            <td>{registrar.isAdmin ? "Yes" : "No"}</td>
             <td>
               {registrar.isActivated ? (
                 <p className="text-green-500">Active</p>
@@ -128,17 +128,17 @@ function Registrar() {
             </td>
           </tr>
         </tbody>
-      </table>{' '}
+      </table>{" "}
       {/* Generated registrar token */}
       <div className="card w-96 bg-base-100 p-4 shadow-xl mt-4">
         <div className="card-body">
           <h2 className="card-title">Activation Link</h2>
           {registrar.token ? (
             <Link
-              to={'/registrar/' + registrar.token + '/activation'}
+              to={"/registrar/" + registrar.token + "/activation"}
               className=""
             >
-              {domain + ':5173/' + registrar.token.slice(0, 34) + '...'}
+              {domain + ":5173/" + registrar.token.slice(0, 34) + "..."}
             </Link>
           ) : (
             <p>Click Generate to create a new activation link</p>
@@ -150,11 +150,11 @@ function Registrar() {
               onClick={() => {
                 navigator.clipboard.writeText(
                   domain +
-                    ':5173/' +
-                    'registrar/' +
+                    ":5173/" +
+                    "registrar/" +
                     registrar.token +
-                    '/activation'
-                )
+                    "/activation",
+                );
               }}
               className="hover:text-blue-500 transition-all focus:text-blue-500 active:scale-90"
             >
@@ -167,7 +167,7 @@ function Registrar() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Registrar
+export default Registrar;

@@ -1,61 +1,61 @@
-import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import { login, reset } from '../features/Auth/authSlice'
-import Logo from '../components/Logo'
-import Loading from '../components/Loading'
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { login, reset } from "../features/Auth/authSlice";
+import Logo from "../components/Logo";
+import Loading from "../components/Loading";
 
 function Login() {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  })
+    email: "",
+    password: "",
+  });
 
-  const { email, password } = formData
+  const { email, password } = formData;
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { admin, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
-  )
+    (state) => state.auth,
+  );
 
   useEffect(() => {
     if (isError) {
-      toast.error(message)
+      toast.error(message);
     }
 
     // Redirect when logged in
     if (isSuccess || admin) {
-      navigate('/dashboard/events')
-      console.log('success')
+      navigate("/dashboard/events");
+      console.log("success");
     }
 
-    dispatch(reset())
+    dispatch(reset());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isError, message, isSuccess, admin, navigate])
+  }, [isError, message, isSuccess, admin, navigate]);
 
   const onChange = (e) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
-    }))
-  }
+    }));
+  };
 
   const onSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const data = {
       email,
       password,
-    }
+    };
 
-    dispatch(login(data))
-  }
+    dispatch(login(data));
+  };
 
   if (isLoading) {
-    return <Loading />
+    return <Loading />;
   }
 
   return (
@@ -108,7 +108,7 @@ function Login() {
         </form>
 
         <span className="text-sm text">
-          Don&apos;t have an account?{' '}
+          Don&apos;t have an account?{" "}
           <span className="text-blue-600 font-bold">
             <Link to="/signup">Signup</Link>
           </span>
@@ -126,7 +126,7 @@ function Login() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;

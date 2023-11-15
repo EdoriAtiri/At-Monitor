@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 
 const ActConfirmation = ({ title, action, onClickBtn, onClickCancel }) => {
   return (
@@ -25,25 +25,25 @@ const ActConfirmation = ({ title, action, onClickBtn, onClickCancel }) => {
               onClick={onClickCancel}
               className="btn border border-black uppercase"
             >
-              Cancel{' '}
+              Cancel{" "}
             </button>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 ActConfirmation.propTypes = {
   title: PropTypes.string,
   action: PropTypes.string,
   onClickBtn: PropTypes.func,
   onClickCancel: PropTypes.func,
-}
+};
 
 ActConfirmation.defaultProps = {
-  title: 'Delete',
-  action: 'delete',
-}
+  title: "Delete",
+  action: "delete",
+};
 
-export default ActConfirmation
+export default ActConfirmation;

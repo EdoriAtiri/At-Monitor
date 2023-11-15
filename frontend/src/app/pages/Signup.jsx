@@ -1,69 +1,69 @@
-import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import { signup, reset } from '../features/Auth/authSlice'
-import Logo from '../components/Logo'
-import Loading from '../components/Loading'
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { signup, reset } from "../features/Auth/authSlice";
+import Logo from "../components/Logo";
+import Loading from "../components/Loading";
 
 function Signup() {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    password2: '',
-  })
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    password2: "",
+  });
 
-  const { firstName, lastName, email, password, password2 } = formData
+  const { firstName, lastName, email, password, password2 } = formData;
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { admin, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
-  )
+    (state) => state.auth,
+  );
 
   useEffect(() => {
     if (isError) {
-      toast.error(message)
+      toast.error(message);
     }
 
     // Redirect when logged in
     if (isSuccess || admin) {
-      navigate('/dashboard/events')
-      console.log('success')
+      navigate("/dashboard/events");
+      console.log("success");
     }
 
-    dispatch(reset())
-  }, [isError, message, isSuccess, admin, navigate])
+    dispatch(reset());
+  }, [isError, message, isSuccess, admin, navigate]);
 
   const onChange = (e) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
-    }))
-  }
+    }));
+  };
 
   const onSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (password !== password2) {
-      toast.error('passwords do not match')
+      toast.error("passwords do not match");
     } else {
       const data = {
         firstName,
         lastName,
         email,
         password,
-      }
+      };
 
-      dispatch(signup(data))
+      dispatch(signup(data));
     }
-  }
+  };
 
   if (isLoading) {
-    return <Loading />
+    return <Loading />;
   }
 
   return (
@@ -156,7 +156,7 @@ function Signup() {
         </form>
 
         <span className="text-sm text">
-          Already have an account?{' '}
+          Already have an account?{" "}
           <span className="text-blue-600 font-bold">
             <Link to="/login">Login</Link>
           </span>
@@ -174,7 +174,7 @@ function Signup() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Signup
+export default Signup;

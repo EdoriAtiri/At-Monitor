@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 function Logo() {
   return (
@@ -8,7 +8,7 @@ function Logo() {
         <span className="-ml-2">M</span>
       </div>
     </Link>
-  )
+  );
 }
 
-export default Logo
+export default Logo;

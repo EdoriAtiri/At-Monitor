@@ -1,56 +1,56 @@
-import PropTypes from 'prop-types'
-import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { toast } from 'react-toastify'
-import { createRegistrar } from '../features/Registrars/registrarSlice'
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { createRegistrar } from "../features/Registrars/registrarSlice";
 
 function NewRegistrar({ closeForm }) {
   const [registrarData, setRegistrarData] = useState({
-    fullName: '',
-    email: '',
-  })
+    fullName: "",
+    email: "",
+  });
 
   const { isError, isLoading, isSuccess, message } = useSelector(
-    (state) => state.myEvents
-  )
+    (state) => state.myEvents,
+  );
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const { fullName, email } = registrarData
+  const { fullName, email } = registrarData;
 
   const onChange = (e) => {
     setRegistrarData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
-    }))
-  }
+    }));
+  };
 
   // Submit registrar data
   const onSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     // const data = {
     //   ...registrarData,
     // }
-    dispatch(createRegistrar(registrarData))
-    closeForm()
-  }
+    dispatch(createRegistrar(registrarData));
+    closeForm();
+  };
 
   // Convert to error and success pop ups
   useEffect(() => {
     if (isError) {
-      toast.error(message)
+      toast.error(message);
     }
 
     if (isSuccess) {
-      console.log('success')
+      console.log("success");
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isError, message])
+  }, [isError, message]);
 
   if (isLoading) {
-    return <div>loading...</div>
+    return <div>loading...</div>;
   }
 
   return (
@@ -96,7 +96,7 @@ function NewRegistrar({ closeForm }) {
                 htmlFor="email"
                 className="text-sm md:text-base lg:text-xl"
               >
-                Email{' '}
+                Email{" "}
               </label>
               <input
                 type="text"
@@ -115,14 +115,14 @@ function NewRegistrar({ closeForm }) {
               Create Registrar
             </button>
           </div>
-        </form>{' '}
+        </form>{" "}
       </div>
     </div>
-  )
+  );
 }
 
 NewRegistrar.propTypes = {
   closeForm: PropTypes.func,
-}
+};
 
-export default NewRegistrar
+export default NewRegistrar;

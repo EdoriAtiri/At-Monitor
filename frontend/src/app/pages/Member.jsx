@@ -1,32 +1,32 @@
-import { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import { getMember } from '../features/Members/memberSlice'
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { getMember } from "../features/Members/memberSlice";
 
 const Member = () => {
   const { member, isLoading, isError, message, isSuccess } = useSelector(
-    (state) => state.members
-  )
-  const dispatch = useDispatch()
+    (state) => state.members,
+  );
+  const dispatch = useDispatch();
 
-  const { memberId } = useParams()
+  const { memberId } = useParams();
 
   useEffect(() => {
     if (isError) {
-      toast.error(message)
+      toast.error(message);
     }
 
-    dispatch(getMember(memberId))
-    console.log(member, isLoading, isSuccess)
+    dispatch(getMember(memberId));
+    console.log(member, isLoading, isSuccess);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isError, message, memberId])
+  }, [isError, message, memberId]);
 
   return (
     <div className="mx-6 mt-10 mb-6">
       <h1 className="text-3xl mb-5 uppercase">
-        {member?.fullName?.split(' ')[0]}
+        {member?.fullName?.split(" ")[0]}
       </h1>
 
       <table className="flex w-full lg:w-96 justify-evenly py-2 px-4 lg:p-4 rounded-md">
@@ -54,7 +54,7 @@ const Member = () => {
         </tbody>
       </table>
     </div>
-  )
-}
+  );
+};
 
-export default Member
+export default Member;

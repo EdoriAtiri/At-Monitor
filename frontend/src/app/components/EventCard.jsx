@@ -1,18 +1,18 @@
-import PropTypes from 'prop-types'
-import { useNavigate } from 'react-router-dom'
-import formatDate from '../lib/formatDate'
+import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
+import formatDate from "../lib/formatDate";
 
 function EventCard({ name, created, date, registered, id }) {
-  const currentDate = new Date()
-  const past = currentDate > new Date(date)
+  const currentDate = new Date();
+  const past = currentDate > new Date(date);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <button
       className="w-full"
       onClick={() => {
-        navigate(`/dashboard/events/${id}`)
+        navigate(`/dashboard/events/${id}`);
       }}
     >
       <table className="flex w-full lg:w-96 justify-between border border-gray-700 py-2 px-4 lg:p-4 rounded-md">
@@ -46,7 +46,7 @@ function EventCard({ name, created, date, registered, id }) {
         </tbody>
       </table>
     </button>
-  )
+  );
 }
 
 EventCard.propTypes = {
@@ -55,13 +55,13 @@ EventCard.propTypes = {
   date: PropTypes.string,
   registered: PropTypes.number,
   id: PropTypes.string,
-}
+};
 
 EventCard.defaultProps = {
-  name: 'My Event',
-  created: '0/0/0',
-  date: '0/0/0',
+  name: "My Event",
+  created: "0/0/0",
+  date: "0/0/0",
   registered: 0,
-}
+};
 
-export default EventCard
+export default EventCard;

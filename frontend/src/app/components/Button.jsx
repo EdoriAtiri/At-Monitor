@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 
 function Button({ text, onClickBtn, customClass }) {
   return (
@@ -8,13 +8,13 @@ function Button({ text, onClickBtn, customClass }) {
     >
       {text}
     </button>
-  )
+  );
 }
 
 Button.propTypes = {
   text: PropTypes.string,
   customClass: PropTypes.string,
   onClickBtn: PropTypes.func,
-}
+};
 
-export default Button
+export default Button;
