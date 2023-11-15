@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useSearchParams, useNavigate } from 'react-router-dom'
+import { useSearchParams, useNavigate, Link } from 'react-router-dom'
 import { getMembers, reset } from '../features/Members/memberSlice'
-import NewEvent from '../components/NewEvent'
 import Loading from '../components/Loading'
 import sortByProperty from '../lib/sortByProperty'
 
@@ -27,7 +26,6 @@ const SORT_VALUES = [
 
 function Members() {
   const [defaultMembers, setDefaultMembers] = useState([])
-  const [isNewMember, setIsNewMember] = useState(false)
   const { members, isSuccess, isLoading } = useSelector(
     (state) => state.members
   )
@@ -129,14 +127,10 @@ function Members() {
 
   return (
     <div className=" mx-6 mt-10 mb-6">
-      {isNewMember && <NewEvent closeForm={() => setIsNewMember(false)} />}
       <header className="items-center justify-between flex text-xl font-semibold">
         <h1>Members</h1>
-        <button
-          onClick={() => setIsNewMember(true)}
-          className="text-lg border border-gray-700 p-1 rounded-md"
-        >
-          Create New Member
+        <button className="text-lg border border-gray-700 p-1 rounded-md">
+          <Link to="create">Create New Member</Link>
         </button>
       </header>{' '}
       {/* Admin member Stats */}
@@ -227,7 +221,8 @@ function Members() {
             {Array.isArray(defaultMembers) ? (
               defaultMembers.map((member, index) => (
                 <tr
-                  className="cursor-pointer capitalize hover:bg-gray-100 transition-colors"
+                  tabIndex="0"
+                  className="cursor-pointer capitalize hover:bg-gray-100 transition-colors focus:outline-none focus:bg-gray-100"
                   key={member._id}
                   onClick={() => {
                     navigate(`/dashboard/members/${member._id}`)

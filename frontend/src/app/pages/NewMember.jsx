@@ -171,33 +171,43 @@ function NewEvent({ closeForm }) {
                 required
               />
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 flex flex-col">
               <label
                 htmlFor="category"
                 className="text-sm md:text-base lg:text-xl"
               >
                 Category
               </label>
-              <select name="category" id="category" value={category}>
+              <select
+                className="border py-3 rounded"
+                name="category"
+                id="category"
+                value={category}
+              >
                 <option value="adult">Adult</option>
                 <option value="teenager">Teenager</option>
                 <option value="child">Child</option>
               </select>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 flex flex-col">
               <label
                 htmlFor="gender"
                 className="text-sm md:text-base lg:text-xl"
               >
                 Gender
               </label>
-              <select name="gender" id="gender" value={gender}>
+              <select
+                className="border py-3 rounded"
+                name="gender"
+                id="gender"
+                value={gender}
+              >
                 <option value="male">Male</option>
                 <option value="male">Female</option>
                 <option value="none">Prefer not to say</option>
               </select>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 flex flex-col">
               <label
                 htmlFor="membershipStatus"
                 className="text-sm md:text-base lg:text-xl"
