@@ -71,6 +71,9 @@ function NewEvent() {
 
   return (
     <div className="mx-6 mb-6 mt-10">
+      <header className="mb-8 flex items-center justify-between text-xl font-semibold">
+        <h1>Add a New Member</h1>
+      </header>
       <form onSubmit={onSubmit} className="space-y-7">
         <div className="flex flex-col space-y-4 lg:flex-row lg:gap-12 lg:space-y-0">
           {/*  */}
