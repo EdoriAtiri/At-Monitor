@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { createMember } from "../features/Members/memberSlice";
 
-function NewEvent() {
+function MemberForm() {
   const [memberData, setMemberData] = useState({
     fullName: "",
     gender: "",
@@ -244,4 +244,4 @@ function NewEvent() {
   );
 }
 
-export default NewEvent;
+export default MemberForm;

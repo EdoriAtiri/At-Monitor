@@ -14,7 +14,7 @@ import Registrar from "./app/pages/Registrar.jsx";
 import RegistrarActivation from "./app/pages/RegistrarActivation.jsx";
 import Members from "./app/pages/Members.jsx";
 import Member from "./app/pages/Member.jsx";
-import NewMember from "./app/pages/NewMember.jsx";
+import MemberForm from "./app/pages/MemberForm.jsx";
 
 function App() {
   return (
@@ -40,7 +40,7 @@ function App() {
                 <Route path="events" element={<Events />} />
                 <Route path="members" element={<Members />} />
                 <Route path="members/:memberId" element={<Member />} />
-                <Route path="members/create" element={<NewMember />} />
+                <Route path="members/create" element={<MemberForm />} />
                 <Route path="events/:eventId" element={<Event />} />
                 <Route path="registrars/:registrarId" element={<Registrar />} />
               </Route>
