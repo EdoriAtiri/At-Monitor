@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getMember, reset } from "../features/Members/memberSlice";
+import Loading from "../components/Loading";
 
 const Member = () => {
   const { member, isLoading, isError, message, isSuccess } = useSelector(
@@ -23,6 +24,10 @@ const Member = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError, message, memberId]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="mx-6 mb-6 mt-10">

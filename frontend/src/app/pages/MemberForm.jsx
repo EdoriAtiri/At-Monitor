@@ -9,6 +9,7 @@ import {
   reset,
 } from "../features/Members/memberSlice";
 import { formatDate } from "../lib/formatDate";
+import Loading from "../components/Loading";
 
 function MemberForm() {
   const [memberData, setMemberData] = useState({
@@ -99,7 +100,7 @@ function MemberForm() {
   }, [isSuccess, isError, message, navigate, isEdit]);
 
   if (isLoading) {
-    return <div>loading...</div>;
+    return <Loading />;
   }
 
   return (
