@@ -168,20 +168,20 @@ export const memberSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+      })
+      .addCase(editMember.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(editMember.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.member = action.payload;
+      })
+      .addCase(editMember.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       });
-    //   .addCase(editEvent.pending, (state) => {
-    //     state.isLoading = true
-    //   })
-    //   .addCase(editEvent.fulfilled, (state, action) => {
-    //     state.isLoading = false
-    //     state.isSuccess = true
-    //     state.myEvent = action.payload
-    //   })
-    //   .addCase(editEvent.rejected, (state, action) => {
-    //     state.isLoading = false
-    //     state.isError = true
-    //     state.message = action.payload
-    //   })
     //   .addCase(deleteEvent.pending, (state) => {
     //     state.isLoading = true
     //   })
