@@ -47,7 +47,7 @@ const updateMember = async (data, id, token) => {
     },
   };
 
-  const response = await axios.patch(API_URL + id + "/update", data, config);
+  const response = await axios.patch(API_URL + id, data, config);
   return response.data;
 };
 

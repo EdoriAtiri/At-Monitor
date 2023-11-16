@@ -20,6 +20,4 @@ router
   .patch(protect, updateMember)
   .delete(protect, deleteMember)
 
-router.route('/:id/update').post(protect, updateMember)
-
 module.exports = router
