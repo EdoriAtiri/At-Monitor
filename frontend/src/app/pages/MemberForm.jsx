@@ -55,7 +55,6 @@ function MemberForm() {
       const currentMember = { ...member };
       currentMember.dob = formatDate(member.dob);
       setMemberData(currentMember);
-      console.log(member);
     }
   }, [member]);
 
@@ -77,6 +76,10 @@ function MemberForm() {
     if (!isEdit) {
       dispatch(createMember(data));
     }
+    if (isEdit) {
+      const memberId = id;
+      dispatch(updateMember({ data, memberId }));
+    }
   };
 
   useEffect(() => {
@@ -86,6 +89,10 @@ function MemberForm() {
         navigate("/dashboard/members");
         toast.success("Member created successfully");
       }
+      // if (isEdit) {
+      //   // navigate(`/dashboard/members/${id}`);
+      //   // toast.success("Edited successfully");
+      // }
     }
     // Handle errors if any
     if (isError) {

@@ -40,14 +40,14 @@ const createMember = async (data, token) => {
 };
 
 // Update member record
-const updateMember = async (id, token) => {
+const updateMember = async (data, id, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
 
-  const response = await axios.patch(API_URL + id + "/update", config);
+  const response = await axios.patch(API_URL + id + "/update", data, config);
   return response.data;
 };
 

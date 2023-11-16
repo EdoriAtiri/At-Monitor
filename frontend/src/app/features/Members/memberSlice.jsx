@@ -79,6 +79,7 @@ export const createMember = createAsyncThunk(
 export const updateMember = createAsyncThunk(
   "members/updateMember",
   async ({ data, memberId }, thunkAPI) => {
+    console.log(memberId);
     try {
       const token = thunkAPI.getState().auth.admin.token;
 
