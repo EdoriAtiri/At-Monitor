@@ -75,14 +75,14 @@ export const createMember = createAsyncThunk(
   },
 );
 
-// Edit an member
-export const editMember = createAsyncThunk(
-  "members/editMember",
+// Update member record
+export const updateMember = createAsyncThunk(
+  "members/updateMember",
   async ({ data, memberId }, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.admin.token;
 
-      return await memberService.editMember(data, memberId, token);
+      return await memberService.updateMember(data, memberId, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -169,15 +169,15 @@ export const memberSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
-      .addCase(editMember.pending, (state) => {
+      .addCase(updateMember.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(editMember.fulfilled, (state, action) => {
+      .addCase(updateMember.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.member = action.payload;
       })
-      .addCase(editMember.rejected, (state, action) => {
+      .addCase(updateMember.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

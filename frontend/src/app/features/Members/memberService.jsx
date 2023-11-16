@@ -39,10 +39,23 @@ const createMember = async (data, token) => {
   return response.data;
 };
 
+// Update member record
+const updateMember = async (id, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.patch(API_URL + id + "/update", config);
+  return response.data;
+};
+
 const memberService = {
   getMembers,
   getMember,
   createMember,
+  updateMember,
 };
 
 export default memberService;
