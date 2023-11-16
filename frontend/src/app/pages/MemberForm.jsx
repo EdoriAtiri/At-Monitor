@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { createMember } from "../features/Members/memberSlice";
+import {
+  createMember,
+  getMember,
+  updateMember,
+} from "../features/Members/memberSlice";
 
 function MemberForm() {
   const [memberData, setMemberData] = useState({
@@ -16,16 +20,13 @@ function MemberForm() {
     membershipStatus: "",
   });
 
-  const { isError, isLoading, isSuccess, message } = useSelector(
+  const { member, isError, isLoading, isSuccess, message } = useSelector(
     (state) => state.members,
   );
 
   const [params] = useSearchParams();
   const isEdit = params.get("type") === "edit";
   const id = params.get("id");
-
-  console.log(isEdit);
-  console.log(id);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -40,6 +41,18 @@ function MemberForm() {
     dob,
     membershipStatus,
   } = memberData;
+
+  useEffect(() => {
+    if (isEdit && id) {
+      dispatch(getMember(id));
+    }
+  }, [dispatch, id, isEdit]);
+
+  useEffect(() => {
+    if (member) {
+      setMemberData(member);
+    }
+  }, [member]);
 
   const onChange = (e) => {
     setMemberData((prev) => ({
@@ -57,15 +70,15 @@ function MemberForm() {
     };
 
     dispatch(createMember(data));
-  };
-
-  useEffect(() => {
     // Check if isSuccess is true, then navigate
+
     if (isSuccess) {
       navigate("/dashboard/members");
       toast.success("Member created successfully");
     }
+  };
 
+  useEffect(() => {
     // Handle errors if any
     if (isError) {
       toast.error(message);
