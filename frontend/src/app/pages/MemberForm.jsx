@@ -7,6 +7,7 @@ import {
   getMember,
   updateMember,
 } from "../features/Members/memberSlice";
+import { formatDate } from "../lib/formatDate";
 
 function MemberForm() {
   const [memberData, setMemberData] = useState({
@@ -50,7 +51,10 @@ function MemberForm() {
 
   useEffect(() => {
     if (member) {
-      setMemberData(member);
+      const currentMember = { ...member };
+      currentMember.dob = formatDate(member.dob);
+      setMemberData(currentMember);
+      console.log(member);
     }
   }, [member]);
 
