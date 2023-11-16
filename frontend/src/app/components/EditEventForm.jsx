@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { editEvent } from "../features/Events/eventSlice";
+import { formatDate } from "../lib/formatDate";
 
 function EditEventForm({ eventId, closeEdit }) {
   const [eventData, setEventData] = useState({
@@ -13,12 +14,6 @@ function EditEventForm({ eventId, closeEdit }) {
   });
 
   // const [isInitial, setIsInitial] = useState(true)
-
-  const formatDate = (dateString) => {
-    if (!dateString) return "";
-    const date = new Date(dateString);
-    return date.toISOString().split("T")[0]; // Extract yyyy-mm-dd
-  };
 
   const dispatch = useDispatch();
   // console.log(eventId)
