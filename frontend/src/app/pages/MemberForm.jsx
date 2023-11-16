@@ -20,11 +20,7 @@ function MemberForm() {
     (state) => state.members,
   );
 
-  const [params, setParams] = useSearchParams({
-    activeOnly: false,
-    q: "",
-    sortBy: "",
-  });
+  const [params] = useSearchParams();
   const isEdit = params.get("type") === "edit";
   const id = params.get("id");
 

@@ -74,28 +74,29 @@ export const createMember = createAsyncThunk(
     }
   },
 );
-// // Edit an event
-// export const editEvent = createAsyncThunk(
-//   'events/editEvent',
-//   async ({ data, eventId }, thunkAPI) => {
-//     try {
-//       const token = thunkAPI.getState().auth.admin.token
 
-//       return await eventService.editEvent(data, eventId, token)
-//     } catch (error) {
-//       const message =
-//         (error.response &&
-//           error.response.data &&
-//           error.response.data.message) ||
-//         error.message ||
-//         error.toString()
+// Edit an member
+export const editMember = createAsyncThunk(
+  "members/editMember",
+  async ({ data, memberId }, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.admin.token;
 
-//       console.log(message)
+      return await memberService.editMember(data, memberId, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
 
-//       return thunkAPI.rejectWithValue(message)
-//     }
-//   }
-// )
+      console.log(message);
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  },
+);
 
 // // Delete an event
 // export const deleteEvent = createAsyncThunk(
