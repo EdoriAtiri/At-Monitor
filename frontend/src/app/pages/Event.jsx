@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import formatDate from "../lib/formatDate";
+import { formatDateDisplay } from "../lib/formatDate";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -77,7 +77,7 @@ function Event() {
           <div className="stat">
             <div className="stat-title">Event Date</div>
             <div className="stat-value text-2xl">
-              {formatDate(myEvent.eventDate)}
+              {formatDateDisplay(myEvent.eventDate)}
             </div>
           </div>
         </div>

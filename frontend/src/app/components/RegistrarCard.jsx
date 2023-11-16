@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import formatDate from "../lib/formatDate";
+import { formatDateDisplay } from "../lib/formatDate";
 import { useNavigate } from "react-router-dom";
 
 const RegistrarCard = ({ name, createdAt, status, id }) => {
@@ -22,7 +22,7 @@ const RegistrarCard = ({ name, createdAt, status, id }) => {
         <tbody>
           <tr className="flex flex-col gap-2 text-right">
             <td>{name}</td>
-            <td>{formatDate(createdAt)}</td>
+            <td>{formatDateDisplay(createdAt)}</td>
             <td>
               {status ? (
                 <span className="rounded bg-green-400 px-1 py-0.5 font-bold">

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import formatDate from "../lib/formatDate";
+import { formatDateDisplay } from "../lib/formatDate";
 
 function EventCard({ name, created, date, registered, id }) {
   const currentDate = new Date();
@@ -28,8 +28,8 @@ function EventCard({ name, created, date, registered, id }) {
         <tbody>
           <tr className="flex flex-col gap-2 text-right">
             <td>{name}</td>
-            <td>{formatDate(created)}</td>
-            <td>{formatDate(date)}</td>
+            <td>{formatDateDisplay(created)}</td>
+            <td>{formatDateDisplay(date)}</td>
             <td>{registered}</td>
             <td>
               {past ? (
