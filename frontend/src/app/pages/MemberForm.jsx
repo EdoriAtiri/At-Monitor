@@ -6,6 +6,7 @@ import {
   createMember,
   getMember,
   updateMember,
+  reset,
 } from "../features/Members/memberSlice";
 import { formatDate } from "../lib/formatDate";
 
@@ -68,26 +69,29 @@ function MemberForm() {
   // Submit members data
   const onSubmit = (e) => {
     e.preventDefault();
-
+    dispatch(reset());
     const data = {
       ...memberData,
     };
 
-    dispatch(createMember(data));
-    // Check if isSuccess is true, then navigate
-
-    if (isSuccess) {
-      navigate("/dashboard/members");
-      toast.success("Member created successfully");
+    if (!isEdit) {
+      dispatch(createMember(data));
     }
   };
 
   useEffect(() => {
+    // Check if isSuccess is true, then navigate
+    if (isSuccess) {
+      if (!isEdit) {
+        navigate("/dashboard/members");
+        toast.success("Member created successfully");
+      }
+    }
     // Handle errors if any
     if (isError) {
       toast.error(message);
     }
-  }, [isSuccess, isError, message, navigate]);
+  }, [isSuccess, isError, message, navigate, isEdit]);
 
   if (isLoading) {
     return <div>loading...</div>;
@@ -96,7 +100,7 @@ function MemberForm() {
   return (
     <div className="mx-6 mb-6 mt-10">
       <header className="mb-8 flex items-center justify-between text-xl font-semibold">
-        <h1>Add a New Member</h1>
+        <h1>{isEdit ? "Edit Member" : "Add a New Member"}</h1>
       </header>
       <form onSubmit={onSubmit} className="space-y-7">
         <div className="flex flex-col space-y-4 lg:flex-row lg:gap-12 lg:space-y-0">
@@ -260,7 +264,7 @@ function MemberForm() {
 
         <div className="lg:72 btn mt-36 w-96">
           <button className="form-input-style grid place-content-center bg-black font-bold text-white transition-transform active:scale-95">
-            Create
+            Submit
           </button>
         </div>
       </form>{" "}
