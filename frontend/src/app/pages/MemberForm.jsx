@@ -79,6 +79,8 @@ function MemberForm() {
     if (isEdit) {
       const memberId = id;
       dispatch(updateMember({ data, memberId }));
+      navigate(`/dashboard/members/${memberId}`);
+      toast.success("Edited successfully");
     }
   };
 
@@ -89,10 +91,6 @@ function MemberForm() {
         navigate("/dashboard/members");
         toast.success("Member created successfully");
       }
-      // if (isEdit) {
-      //   // navigate(`/dashboard/members/${id}`);
-      //   // toast.success("Edited successfully");
-      // }
     }
     // Handle errors if any
     if (isError) {
