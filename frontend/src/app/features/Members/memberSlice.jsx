@@ -182,20 +182,20 @@ export const memberSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+      })
+      .addCase(deleteMember.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteMember.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.members.filter((member) => member._id !== action.payload._id);
+      })
+      .addCase(deleteMember.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       });
-    //   .addCase(deleteMember.pending, (state) => {
-    //     state.isLoading = true
-    //   })
-    //   .addCase(deleteMember.fulfilled, (state, action) => {
-    //     state.isLoading = false
-    //     state.isSuccess = true
-    //     state.myEvent.filter((event) => event._id !== action.payload._id)
-    //   })
-    //   .addCase(deleteMember.rejected, (state, action) => {
-    //     state.isLoading = false
-    //     state.isError = true
-    //     state.message = action.payload
-    //   })
   },
 });
 
