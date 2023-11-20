@@ -2,7 +2,11 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { getMember, reset } from "../features/Members/memberSlice";
+import {
+  getMember,
+  deleteMember,
+  reset,
+} from "../features/Members/memberSlice";
 import Loading from "../components/Loading";
 
 const Member = () => {
@@ -46,7 +50,12 @@ const Member = () => {
           >
             Edit
           </button>
-          <button className="rounded-md border border-gray-700 p-1 text-lg">
+          <button
+            onClick={() => {
+              dispatch(deleteMember(memberId)), navigate(`/dashboard/members/`);
+            }}
+            className="rounded-md border border-gray-700 p-1 text-lg"
+          >
             Delete
           </button>
         </div>
