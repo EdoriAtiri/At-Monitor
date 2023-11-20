@@ -99,28 +99,28 @@ export const updateMember = createAsyncThunk(
   },
 );
 
-// // Delete an event
-// export const deleteEvent = createAsyncThunk(
-//   'events/deleteEvent',
-//   async (eventId, thunkAPI) => {
-//     try {
-//       const token = thunkAPI.getState().auth.admin.token
+// Delete member
+export const deleteMember = createAsyncThunk(
+  "events/deleteMember",
+  async (memberId, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.admin.token;
 
-//       return await eventService.deleteEvent(eventId, token)
-//     } catch (error) {
-//       const message =
-//         (error.response &&
-//           error.response.data &&
-//           error.response.data.message) ||
-//         error.message ||
-//         error.toString()
+      return await memberService.deleteMember(memberId, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
 
-//       console.log(message)
+      console.log(message);
 
-//       return thunkAPI.rejectWithValue(message)
-//     }
-//   }
-// )
+      return thunkAPI.rejectWithValue(message);
+    }
+  },
+);
 
 export const memberSlice = createSlice({
   name: "member",
@@ -183,15 +183,15 @@ export const memberSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       });
-    //   .addCase(deleteEvent.pending, (state) => {
+    //   .addCase(deleteMember.pending, (state) => {
     //     state.isLoading = true
     //   })
-    //   .addCase(deleteEvent.fulfilled, (state, action) => {
+    //   .addCase(deleteMember.fulfilled, (state, action) => {
     //     state.isLoading = false
     //     state.isSuccess = true
     //     state.myEvent.filter((event) => event._id !== action.payload._id)
     //   })
-    //   .addCase(deleteEvent.rejected, (state, action) => {
+    //   .addCase(deleteMember.rejected, (state, action) => {
     //     state.isLoading = false
     //     state.isError = true
     //     state.message = action.payload

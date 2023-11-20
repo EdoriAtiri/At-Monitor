@@ -6,7 +6,7 @@ import { getMember, reset } from "../features/Members/memberSlice";
 import Loading from "../components/Loading";
 
 const Member = () => {
-  const { member, isLoading, isError, message, isSuccess } = useSelector(
+  const { member, isLoading, isError, message } = useSelector(
     (state) => state.members,
   );
 
