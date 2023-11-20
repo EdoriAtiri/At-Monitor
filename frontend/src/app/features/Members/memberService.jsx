@@ -51,11 +51,24 @@ const updateMember = async (data, id, token) => {
   return response.data;
 };
 
+// Delete member record
+const deleteMember = async (id, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.delete(API_URL + id, config);
+  return response.data;
+};
+
 const memberService = {
   getMembers,
   getMember,
   createMember,
   updateMember,
+  deleteMember,
 };
 
 export default memberService;

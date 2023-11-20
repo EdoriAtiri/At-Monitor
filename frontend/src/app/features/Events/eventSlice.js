@@ -188,7 +188,7 @@ export const eventSlice = createSlice({
       .addCase(deleteEvent.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.myEvent.filter((event) => event._id !== action.payload._id);
+        state.myEvents.filter((event) => event._id !== action.payload._id);
       })
       .addCase(deleteEvent.rejected, (state, action) => {
         state.isLoading = false;
