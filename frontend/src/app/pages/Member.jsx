@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -8,8 +8,10 @@ import {
   reset,
 } from "../features/Members/memberSlice";
 import Loading from "../components/Loading";
+import ActConfirmation from "../components/ActConfirmation";
 
 const Member = () => {
+  const [isDeletePrompt, setIsDeletePrompt] = useState(false);
   const { member, isLoading, isError, message } = useSelector(
     (state) => state.members,
   );
@@ -29,12 +31,24 @@ const Member = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError, message, memberId]);
 
+  const onDeleteMember = () => {
+    dispatch(deleteMember(memberId)), navigate(`/dashboard/members/`);
+  };
+
   if (isLoading) {
     return <Loading />;
   }
 
   return (
     <div className="mx-6 mb-6 mt-10">
+      {isDeletePrompt && (
+        <ActConfirmation
+          action={`delete ${member?.fullName?.split(" ")[0]}`}
+          title="delete"
+          onClickBtn={onDeleteMember}
+          onClickCancel={() => setIsDeletePrompt(false)}
+        />
+      )}
       <header className="mb-5 flex justify-between">
         <h1 className=" text-3xl uppercase">
           {member?.fullName?.split(" ")[0]}
@@ -51,9 +65,7 @@ const Member = () => {
             Edit
           </button>
           <button
-            onClick={() => {
-              dispatch(deleteMember(memberId)), navigate(`/dashboard/members/`);
-            }}
+            onClick={() => setIsDeletePrompt(true)}
             className="rounded-md border border-gray-700 p-1 text-lg"
           >
             Delete
