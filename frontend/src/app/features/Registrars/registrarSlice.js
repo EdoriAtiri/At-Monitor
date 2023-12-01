@@ -226,6 +226,7 @@ export const registrarSlice = createSlice({
       .addCase(toggleRegistrarActivation.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+        state.registrar.isActivated = !state.registrar.isActivated;
         state.message = action.payload;
       })
       .addCase(toggleRegistrarActivation.rejected, (state, action) => {
