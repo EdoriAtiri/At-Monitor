@@ -7,6 +7,7 @@ import { getEvent, deleteEvent } from "../features/Events/eventSlice";
 import EditEventForm from "../components/EditEventForm";
 import ActConfirmation from "../components/ActConfirmation";
 import Loading from "../components/Loading";
+import { FaPlus } from "react-icons/fa6";
 
 function Event() {
   const [isDeletePrompt, setIsDeletePrompt] = useState(false);
@@ -114,27 +115,14 @@ function Event() {
         </tbody>
       </table>{" "}
       {/* Registered attendees */}
-      {/* <section className="mt-8">
-        <div>
-          <h2 className="text-xl">Registered Participants</h2>
-          {myEvent.registered.length === 0 && <div>no registered yet</div>}
-          {myEvent.registered.length && (
-            <div>
-              <span>
-                <span>10</span>total
-              </span>
-              <div className="flex">
-                sort by:{' '}
-                <select>
-                  <option value="date">Date</option>
-                  <option value="name">Name</option>
-                </select>
-              </div>
-              <ul></ul>
-            </div>
-          )}
+      <section className="mt-8">
+        <div className="flex justify-between">
+          <h2>Registration</h2>
+          <button className="grid h-8 w-8 place-content-center rounded-full bg-sky-400 transition-all hover:bg-slate-400 focus:border active:scale-95">
+            <FaPlus />
+          </button>
         </div>
-      </section> */}
+      </section>
     </div>
   );
 }
