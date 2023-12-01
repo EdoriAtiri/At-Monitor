@@ -68,10 +68,10 @@ function EditEventForm({ eventId, closeEdit }) {
   }
 
   return (
-    <div className="absolute left-0 top-0  h-screen w-screen">
+    <div className="absolute left-0 top-0 z-30 h-screen w-screen">
       <button
         onClick={closeEdit}
-        className="position absolute left-0 top-0 h-full w-full bg-black opacity-30"
+        className=" absolute left-0 top-0 h-full w-full bg-black opacity-30"
       ></button>
 
       <div className="absolute left-1/2 top-1/2 z-10 h-fit w-80 -translate-x-1/2 -translate-y-1/2 transform rounded-2xl bg-white px-6 py-6">

@@ -54,13 +54,13 @@ function NewRegistrar({ closeForm }) {
   }
 
   return (
-    <div className="absolute left-0 top-0  h-screen w-screen">
+    <div className="absolute left-0 top-0 z-30 h-screen w-screen">
       <button
         onClick={closeForm}
-        className="position absolute left-0 top-0 h-full w-full bg-black opacity-30"
+        className=" absolute left-0 top-0 h-full w-full bg-black opacity-30"
       ></button>
 
-      <div className="absolute left-1/2 top-1/2 z-10 h-fit w-80 -translate-x-1/2 -translate-y-1/2 transform rounded-2xl bg-white px-6 py-6">
+      <div className="absolute left-1/2 top-1/2 h-fit w-80 -translate-x-1/2 -translate-y-1/2 transform rounded-2xl bg-white px-6 py-6">
         <button
           onClick={closeForm}
           className="absolute right-0 top-0 p-1 pr-2 text-lg font-bold uppercase"
