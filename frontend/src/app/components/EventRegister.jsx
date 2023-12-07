@@ -16,27 +16,44 @@ const EventRegister = () => {
       </div>
 
       {/* List of registered*/}
-      <ul className="mt-12 divide-y">
-        {Array.isArray(myEvent.registered) && myEvent.registered.length > 0 ? (
-          myEvent.registered.map((item, index) => (
-            <li key={index} className="flex items-start justify-between py-3">
-              <div className="flex items-center gap-5">
-                <span className="font-bold">{index + 1}</span>
-                <div>
-                  <span className="block text-sm font-semibold text-gray-700">
+      <div className="mt-6 overflow-x-auto rounded-lg border shadow-sm">
+        <table className="w-full table-auto text-left text-sm">
+          <thead className="border-b bg-gray-50 font-medium text-gray-600">
+            <tr>
+              <th className="px-6 py-3">S/N</th>
+              <th className="px-6 py-3">Name</th>
+              <th className="px-6 py-3">Email</th>
+              <th className="px-6 py-3">Phone No</th>
+              <th className="px-6 py-3">First Time</th>
+              <th className="px-6 py-3">Gender</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y text-gray-600">
+            {Array.isArray(myEvent.registered) &&
+            myEvent.registered.length > 0 ? (
+              myEvent.registered.map((item, index) => (
+                <tr
+                  className="cursor-pointer capitalize transition-colors hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
+                  key={index}
+                >
+                  <td className="whitespace-nowrap px-6 py-4">{index + 1}</td>
+                  <td className="capit whitespace-nowrap px-6 py-4">
                     {item.fullName}
-                  </span>
-                  <span className="block text-sm text-gray-600">
-                    {item.email}
-                  </span>
-                </div>
-              </div>
-            </li>
-          ))
-        ) : (
-          <div>none</div>
-        )}
-      </ul>
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">{item.email}</td>
+                  <td className="whitespace-nowrap px-6 py-4">{item.phone}</td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {item.firstTimer ? "Yes" : "No"}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">{item.gender}</td>
+                </tr>
+              ))
+            ) : (
+              <div>No registered user</div>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
