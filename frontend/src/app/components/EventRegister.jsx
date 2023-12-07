@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FaPlus } from "react-icons/fa6";
-import { useState } from "react";
+import { FaMagnifyingGlass } from "react-icons/fa6";
 // import { FaMale } from "react-icons/fa";
 
 const EventRegister = () => {
@@ -98,6 +99,29 @@ const EventRegister = () => {
             >
               x
             </button>
+
+            {/* Search Member Form */}
+            <form onSubmit={(e) => e.preventDefault()} className=" mb-8 ">
+              <div className="relative">
+                <FaMagnifyingGlass
+                  className="
+                  absolute
+                  bottom-0
+                  left-3
+                  top-0
+                  my-auto
+                  h-6
+                  w-6
+                  text-indigo-600"
+                />
+                <input
+                  type="text"
+                  placeholder="Search Member"
+                  className="w-full rounded-md border bg-gray-50 py-3 pl-12 pr-4 font-semibold text-gray-500 outline-none placeholder:text-indigo-600 focus:border-indigo-600 focus:bg-white"
+                />
+              </div>
+            </form>
+
             {/* Registration Form */}
             <form
               onSubmit={onSubmit}
