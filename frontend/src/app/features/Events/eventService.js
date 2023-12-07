@@ -66,12 +66,30 @@ const deleteEvent = async (eventId, token) => {
   return response.data;
 };
 
+// Update event register
+const updateEventRegister = async (newAttendee, eventId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.patch(
+    `API_URL${eventId}/registration`,
+    newAttendee,
+    config,
+  );
+
+  return response.data;
+};
+
 const eventService = {
   getEvents,
   getEvent,
   createEvent,
   editEvent,
   deleteEvent,
+  updateEventRegister,
 };
 
 export default eventService;
