@@ -224,7 +224,10 @@ export const eventSlice = createSlice({
       .addCase(updateEventRegister.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.myEvent = action.payload;
+        state.myEvent.registered = [
+          ...state.myEvent.registered,
+          ...action.payload,
+        ];
       })
       .addCase(updateEventRegister.rejected, (state, action) => {
         state.isLoading = false;

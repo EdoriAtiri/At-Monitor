@@ -143,7 +143,7 @@ const deleteEvent = asyncHandler(async (req, res) => {
 })
 
 // @desc update an event register
-// @route /api/events/:id/register
+// @route /api/events/:id/registration
 // @access Private
 const updateRegister = asyncHandler(async (req, res) => {
   // Get Admin using the Id in the jwt
@@ -169,7 +169,7 @@ const updateRegister = asyncHandler(async (req, res) => {
     { $push: { registered: req.body } }
   )
 
-  res.status(201).json({ success: true })
+  res.status(201).json(req.body)
 })
 
 module.exports = {
