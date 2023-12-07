@@ -74,8 +74,8 @@ const updateEventRegister = async (newAttendee, eventId, token) => {
     },
   };
 
-  const response = await axios.patch(
-    `API_URL${eventId}/registration`,
+  const response = await axios.post(
+    `${API_URL}${eventId}/registration`,
     newAttendee,
     config,
   );

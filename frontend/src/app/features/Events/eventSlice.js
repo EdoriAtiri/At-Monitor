@@ -124,6 +124,7 @@ export const deleteEvent = createAsyncThunk(
 export const updateEventRegister = createAsyncThunk(
   "events/updateEventRegister",
   async ({ data, eventId }, thunkAPI) => {
+    console.log(data, eventId);
     try {
       const token = thunkAPI.getState().auth.admin.token;
 
@@ -224,9 +225,10 @@ export const eventSlice = createSlice({
       .addCase(updateEventRegister.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+        console.log(action.payload);
         state.myEvent.registered = [
           ...state.myEvent.registered,
-          ...action.payload,
+          action.payload,
         ];
       })
       .addCase(updateEventRegister.rejected, (state, action) => {

@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { updateEventRegister } from "../features/Events/eventSlice";
 import { FaPlus } from "react-icons/fa6";
 import { FaMagnifyingGlass } from "react-icons/fa6";
+import Loading from "./Loading";
 // import { FaMale } from "react-icons/fa";
 
 const EventRegister = () => {
@@ -15,7 +17,9 @@ const EventRegister = () => {
     memberId: "",
   });
   const { fullName, email, phone, firstTimer, gender } = formData;
-  const { myEvent } = useSelector((state) => state.myEvents);
+  const { myEvent, isLoading } = useSelector((state) => state.myEvents);
+
+  const dispatch = useDispatch();
 
   const onChange = (e) => {
     setFormData((prev) => ({
@@ -24,7 +28,12 @@ const EventRegister = () => {
     }));
   };
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    if (!formData.memberId) delete formData.memberId;
+
+    const data = { data: formData, eventId: myEvent._id };
+    dispatch(updateEventRegister(data));
+  };
 
   const closeForm = () => {
     setIsRegistrationForm(false);
@@ -32,6 +41,7 @@ const EventRegister = () => {
   return (
     // Actions
     <div className="mx-auto max-w-4xl">
+      {isLoading && <Loading />}
       <div className="flex items-center justify-between">
         <div>
           <h4 className="text-xl font-bold text-gray-800"> Registration</h4>
@@ -103,7 +113,7 @@ const EventRegister = () => {
             {/* Search Member Form */}
             <form onSubmit={(e) => e.preventDefault()} className=" mb-8 ">
               <div className="relative">
-                <FaMagnifyingGlass
+                {/* <FaMagnifyingGlass
                   className="
                   absolute
                   bottom-0
@@ -113,7 +123,7 @@ const EventRegister = () => {
                   h-6
                   w-6
                   text-indigo-600"
-                />
+                /> */}
                 <input
                   type="text"
                   placeholder="Search Member"
