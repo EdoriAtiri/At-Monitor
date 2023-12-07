@@ -98,111 +98,87 @@ const EventRegister = () => {
             >
               x
             </button>
-
             {/* Registration Form */}
             <form
               onSubmit={onSubmit}
-              className="h-full w-full  space-y-7 [&>*]:w-full"
+              className="h-full w-full space-y-7 [&>*]:w-full"
             >
-              <div className="space-y-4">
-                {/*  */}
-                <div className="space-y-2">
-                  <label
-                    htmlFor="fullName"
-                    className="text-sm md:text-base lg:text-xl"
-                  >
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    className="form-input-style"
-                    id="fullName"
-                    name="fullName"
-                    value={fullName}
-                    onChange={onChange}
-                    required
-                  />
-                </div>
+              {/*  */}
+              <div className="space-y-2">
+                <input
+                  type="text"
+                  className="form-input-style placeholder:text-gray-700"
+                  id="fullName"
+                  name="fullName"
+                  value={fullName}
+                  onChange={onChange}
+                  required
+                  placeholder="Full Name"
+                />
+              </div>
 
-                <div className="space-y-2">
-                  <label
-                    htmlFor="email"
-                    className="text-sm md:text-base lg:text-xl"
-                  >
-                    email
-                  </label>
-                  <input
-                    type="email"
-                    className="form-input-style"
-                    id="email"
-                    name="email"
-                    value={email}
-                    onChange={onChange}
-                    required
-                  />
-                </div>
+              <div className="space-y-2">
+                <input
+                  type="email"
+                  className="form-input-style placeholder:text-gray-700"
+                  id="email"
+                  name="email"
+                  value={email}
+                  onChange={onChange}
+                  required
+                  placeholder="Email"
+                />
+              </div>
 
-                <div className="space-y-2">
-                  <label
-                    htmlFor="phone"
-                    className="text-sm md:text-base lg:text-xl"
-                  >
-                    Phone No
-                  </label>
-                  <input
-                    type="tel"
-                    className="form-input-style"
-                    id="phone"
-                    name="phone"
-                    value={phone}
-                    onChange={onChange}
-                    required
-                  />
-                </div>
+              <div className="space-y-2">
+                <input
+                  type="tel"
+                  className="form-input-style placeholder:text-gray-700"
+                  id="phone"
+                  name="phone"
+                  value={phone}
+                  onChange={onChange}
+                  required
+                  placeholder="Phone Number"
+                />
+              </div>
 
-                <div className="space-y-2">
-                  <label
-                    htmlFor="firstTimer"
-                    className="text-sm md:text-base lg:text-xl"
-                  >
-                    Is this your first time?
-                  </label>
-                  <select
-                    onChange={onChange}
-                    className="form-input-style py-1 pr-2"
-                    name="firstTimer"
-                    id="firstTimer"
-                    value={firstTimer}
-                  >
-                    <option value={true}>Yes</option>
-                    <option value={false}>No</option>
-                  </select>
-                </div>
+              <div className="space-y-2">
+                <select
+                  onChange={onChange}
+                  className="form-input-style py-1 pr-2 text-gray-700"
+                  name="firstTimer"
+                  id="firstTimer"
+                  value={firstTimer}
+                >
+                  <option value="" disabled defaultValue hidden>
+                    Is This Their First Time ?
+                  </option>
+                  <option value={true}>Yes</option>
+                  <option value={false}>No</option>
+                </select>
+              </div>
 
-                <div className="space-y-2">
-                  <label
-                    htmlFor="gender"
-                    className="text-sm md:text-base lg:text-xl"
-                  >
-                    Is this your first time?
-                  </label>
-                  <select
-                    onChange={onChange}
-                    className="form-input-style py-1 pr-2"
-                    name="gender"
-                    id="gender"
-                    value={gender}
-                  >
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                  </select>
-                </div>
+              <div className="space-y-2">
+                <select
+                  onChange={onChange}
+                  className="form-input-style py-1 pr-2 text-gray-700"
+                  name="gender"
+                  id="gender"
+                  value={gender}
+                >
+                  <option value="" disabled defaultValue hidden>
+                    Gender
+                  </option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
 
-                <div className="btn mt-36">
-                  <button className="form-input-style grid place-content-center bg-black px-2 font-bold text-white transition-transform active:scale-95">
-                    Register
-                  </button>
-                </div>
+              <div className="btn mt-36">
+                <button className="form-input-style grid place-content-center bg-black px-2 font-bold text-white transition-transform active:scale-95">
+                  Register
+                </button>
               </div>
             </form>
           </div>
