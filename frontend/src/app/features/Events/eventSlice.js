@@ -120,6 +120,29 @@ export const deleteEvent = createAsyncThunk(
   },
 );
 
+// update event register
+export const updateEventRegister = createAsyncThunk(
+  "events/updateEventRegister",
+  async ({ data, eventId }, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.admin.token;
+
+      return await eventService.updateEventRegister(data, eventId, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      console.log(message);
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  },
+);
+
 export const eventSlice = createSlice({
   name: "event",
   initialState,
