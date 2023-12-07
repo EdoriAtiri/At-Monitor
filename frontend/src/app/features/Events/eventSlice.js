@@ -217,6 +217,19 @@ export const eventSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+      })
+      .addCase(updateEventRegister.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateEventRegister.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.myEvent = action.payload;
+      })
+      .addCase(updateEventRegister.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       });
   },
 });
