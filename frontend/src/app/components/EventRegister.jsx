@@ -16,8 +16,15 @@ const EventRegister = () => {
   const { fullName, email, phone, firstTimer, gender } = formData;
   const { myEvent } = useSelector((state) => state.myEvents);
 
-  const onChange = () => {};
+  const onChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   const onSubmit = () => {};
+
   const closeForm = () => {
     setIsRegistrationForm(false);
   };
