@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import Logo from "../components/Logo";
 import {
@@ -8,7 +9,7 @@ import {
   FaPowerOff,
   FaPeopleGroup,
 } from "react-icons/fa6";
-import { useState } from "react";
+import { AiOutlineMenu } from "react-icons/ai";
 
 function Dashboard() {
   const closeMobileMenu = () => {
@@ -25,7 +26,7 @@ function Dashboard() {
         onClick={() => setShowMobileMenu(!showMobileMenu)}
         className="absolute left-3 top-3 z-30 lg:hidden"
       >
-        X
+        <AiOutlineMenu />
       </button>
 
       {/* Dark Overlay for mobile menu */}

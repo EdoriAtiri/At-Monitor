@@ -7,7 +7,8 @@ import { getEvent, deleteEvent } from "../features/Events/eventSlice";
 import EditEventForm from "../components/EditEventForm";
 import ActConfirmation from "../components/ActConfirmation";
 import Loading from "../components/Loading";
-import { FaPlus } from "react-icons/fa6";
+import RegisterAttendee from "../components/RegisterAttendee";
+// import { FaPlus } from "react-icons/fa6";
 
 function Event() {
   const [isDeletePrompt, setIsDeletePrompt] = useState(false);
@@ -116,12 +117,13 @@ function Event() {
       </table>{" "}
       {/* Registered attendees */}
       <section className="mt-8">
-        <div className="flex justify-between">
+        {/* <div className="flex justify-between">
           <h2>Registration</h2>
           <button className="grid h-8 w-8 place-content-center rounded-full bg-sky-400 transition-all hover:bg-slate-400 focus:border active:scale-95">
             <FaPlus />
           </button>
-        </div>
+        </div> */}
+        <RegisterAttendee />
       </section>
     </div>
   );
