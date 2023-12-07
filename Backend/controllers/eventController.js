@@ -163,6 +163,7 @@ const updateRegister = asyncHandler(async (req, res) => {
 
   /* todo: add function to check if event has passed. if it has prevent register update */
 
+  // Add new attendee to event register
   const updateEventRegister = await Event.updateOne(
     { _id: req.params.id },
     { $push: { registered: req.body } }

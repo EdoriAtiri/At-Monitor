@@ -7,7 +7,7 @@ import { getEvent, deleteEvent } from "../features/Events/eventSlice";
 import EditEventForm from "../components/EditEventForm";
 import ActConfirmation from "../components/ActConfirmation";
 import Loading from "../components/Loading";
-import RegisterAttendee from "../components/RegisterAttendee";
+import EventRegister from "../components/EventRegister";
 // import { FaPlus } from "react-icons/fa6";
 
 function Event() {
@@ -123,7 +123,7 @@ function Event() {
             <FaPlus />
           </button>
         </div> */}
-        <RegisterAttendee />
+        <EventRegister />
       </section>
     </div>
   );

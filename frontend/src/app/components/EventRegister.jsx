@@ -25,7 +25,7 @@ const members = [
   },
 ];
 
-const RegisterAttendee = () => {
+const EventRegister = () => {
   return (
     <div className="mx-auto max-w-4xl">
       <div className="flex items-center justify-between">
@@ -58,4 +58,4 @@ const RegisterAttendee = () => {
   );
 };
 
-export default RegisterAttendee;
+export default EventRegister;
