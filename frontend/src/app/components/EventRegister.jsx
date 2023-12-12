@@ -4,7 +4,7 @@ import { updateEventRegister } from "../features/Events/eventSlice";
 import { FaPlus } from "react-icons/fa6";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import Loading from "./Loading";
-// import { FaMale } from "react-icons/fa";
+import { FaMale, FaFemale } from "react-icons/fa";
 
 const EventRegister = () => {
   const [isRegistrationForm, setIsRegistrationForm] = useState(false);
@@ -40,7 +40,7 @@ const EventRegister = () => {
   };
   return (
     // Actions
-    <div className="mx-auto max-w-4xl">
+    <div className="">
       {isLoading && <Loading />}
       <div className="flex items-center justify-between">
         <div>
@@ -84,7 +84,13 @@ const EventRegister = () => {
                   <td className="whitespace-nowrap px-6 py-4">
                     {item.firstTimer ? "Yes" : "No"}
                   </td>
-                  <td className="whitespace-nowrap px-6 py-4">{item.gender}</td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {item.gender === "male" ? (
+                      <FaMale className="text-blue-500" size="1.35em" />
+                    ) : (
+                      <FaFemale className="text-pink-500" size="1.35em" />
+                    )}
+                  </td>
                 </tr>
               ))
             ) : (
@@ -99,7 +105,7 @@ const EventRegister = () => {
         <div className="absolute left-0 top-0 z-30  h-screen w-screen">
           <button
             onClick={closeForm}
-            className=" absolute left-0 top-0 h-full w-full bg-black opacity-30"
+            className="fixed left-0 top-0 h-full w-full bg-black opacity-30"
           ></button>
 
           <div className="absolute left-1/2 top-1/2  h-fit w-80 -translate-x-1/2 -translate-y-1/2 transform rounded-2xl bg-white px-6 py-6">
@@ -113,7 +119,7 @@ const EventRegister = () => {
             {/* Search Member Form */}
             <form onSubmit={(e) => e.preventDefault()} className=" mb-8 ">
               <div className="relative">
-                {/* <FaMagnifyingGlass
+                <FaMagnifyingGlass
                   className="
                   absolute
                   bottom-0
@@ -123,7 +129,7 @@ const EventRegister = () => {
                   h-6
                   w-6
                   text-indigo-600"
-                /> */}
+                />
                 <input
                   type="text"
                   placeholder="Search Member"
