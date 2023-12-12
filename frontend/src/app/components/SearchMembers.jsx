@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 import { getMembers, reset } from "../features/Members/memberSlice";
 import { FaMagnifyingGlass } from "react-icons/fa6";
@@ -85,6 +86,10 @@ const SearchMembers = ({ setMemberInput }) => {
       )}
     </div>
   );
+};
+
+SearchMembers.propTypes = {
+  setMemberInput: PropTypes.func,
 };
 
 export default SearchMembers;
