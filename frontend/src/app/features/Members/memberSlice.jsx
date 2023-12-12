@@ -127,7 +127,12 @@ export const memberSlice = createSlice({
   initialState,
   reducers: {
     // eslint-disable-next-line no-unused-vars
-    reset: (state) => initialState,
+    reset: (state) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.isSuccess = false;
+      state.message = "";
+    },
   },
   extraReducers: (builder) => {
     builder

@@ -187,7 +187,12 @@ export const registrarSlice = createSlice({
   initialState,
   reducers: {
     // eslint-disable-next-line no-unused-vars
-    reset: (state) => initialState,
+    reset: (state) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.isSuccess = false;
+      state.message = "";
+    },
     updateIsSuccess: (state, action) => {
       state.isSuccess = action.payload; // Set isSuccess to the payload value
     },
