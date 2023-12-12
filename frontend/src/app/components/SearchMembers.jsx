@@ -1,10 +1,30 @@
+import { useSelector, useDispatch } from "react-redux";
+import { getMembers, reset } from "../features/Members/memberSlice";
 import { FaMagnifyingGlass } from "react-icons/fa6";
+import { useEffect, useState } from "react";
 
 const SearchMembers = () => {
+  const [query, setQuery] = useState("");
+  const { members } = useSelector((state) => state.members);
+
+  const dispatch = useDispatch();
+
+  const onChange = (e) => {
+    setQuery(e.target.value);
+    console.log(query);
+    if (!members || members.length === 0) {
+      dispatch(getMembers());
+    }
+  };
+
+  useEffect(() => {
+    console.log(members);
+  }, [members]);
+
   return (
     <div>
       {" "}
-      <form onSubmit={(e) => e.preventDefault()} className=" mb-8 ">
+      <form onSubmit={(e) => e.preventDefault()} className="mb-8">
         <div className="relative">
           <FaMagnifyingGlass
             className="
@@ -18,6 +38,8 @@ const SearchMembers = () => {
                   text-indigo-500"
           />
           <input
+            onChange={onChange}
+            value={query}
             type="text"
             placeholder="Search Member"
             className="w-full rounded-md border bg-gray-50 py-3 pl-12 pr-4 font-semibold text-gray-500 outline-none  focus:border-indigo-500 focus:bg-white"
