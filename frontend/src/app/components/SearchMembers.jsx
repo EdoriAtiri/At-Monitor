@@ -64,12 +64,15 @@ const SearchMembers = () => {
 
       {/* Results */}
       {query && filteredMembers && (
-        <div className="absolute z-20 flex h-fit w-full flex-col rounded-md border bg-gray-50 pl-3 pr-4 text-sm font-semibold">
+        <div className="absolute z-20 flex h-fit w-full flex-col rounded-md border bg-gray-50  text-sm font-semibold">
           {filteredMembers.length > 0 ? (
             filteredMembers.slice(0, 10).map((member) => (
-              <span key={member._id} className="border-b py-2.5">
+              <button
+                key={member._id}
+                className="border-b px-3 py-2.5 text-left hover:bg-gray-100"
+              >
                 {member.fullName}
-              </span>
+              </button>
             ))
           ) : (
             <p>member not found</p>
