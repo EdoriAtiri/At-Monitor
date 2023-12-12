@@ -128,12 +128,12 @@ const EventRegister = () => {
                   my-auto
                   h-6
                   w-6
-                  text-indigo-600"
+                  text-indigo-500"
                 />
                 <input
                   type="text"
                   placeholder="Search Member"
-                  className="w-full rounded-md border bg-gray-50 py-3 pl-12 pr-4 font-semibold text-gray-500 outline-none placeholder:text-indigo-600 focus:border-indigo-600 focus:bg-white"
+                  className="w-full rounded-md border bg-gray-50 py-3 pl-12 pr-4 font-semibold text-gray-500 outline-none  focus:border-indigo-500 focus:bg-white"
                 />
               </div>
             </form>
