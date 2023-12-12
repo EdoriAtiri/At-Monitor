@@ -37,6 +37,7 @@ const EventRegister = () => {
 
   const closeForm = () => {
     setIsRegistrationForm(false);
+    document.body.style.overflow = "auto";
   };
 
   const setMemberInput = (val) => {
@@ -49,16 +50,22 @@ const EventRegister = () => {
       firstTimer: false,
     });
   };
+
+  const registerPerson = () => {
+    setIsRegistrationForm(true);
+    window.scrollTo(0, 0);
+    document.body.style.overflow = "hidden";
+  };
   return (
     // Actions
     <div className="">
       {isLoading && <Loading />}
       <div className="flex items-center justify-between">
         <div>
-          <h4 className="text-xl font-bold text-gray-800"> Registration</h4>
+          <h4 className="text-xl font-bold text-gray-800">Registered</h4>
         </div>
         <button
-          onClick={() => setIsRegistrationForm(true)}
+          onClick={registerPerson}
           className="grid h-8 w-8 place-content-center rounded-full bg-sky-400 transition-all hover:bg-slate-400 focus:border active:scale-95"
         >
           <FaPlus />
