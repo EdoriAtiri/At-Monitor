@@ -5,9 +5,15 @@ import { useEffect, useState } from "react";
 
 const SearchMembers = () => {
   const [query, setQuery] = useState("");
-  const { members } = useSelector((state) => state.members);
+  const { members, isSuccess } = useSelector((state) => state.members);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(reset());
+    }
+  }, [dispatch, isSuccess]);
 
   const onChange = (e) => {
     setQuery(e.target.value);
