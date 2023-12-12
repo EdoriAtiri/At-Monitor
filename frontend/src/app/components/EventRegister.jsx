@@ -38,6 +38,17 @@ const EventRegister = () => {
   const closeForm = () => {
     setIsRegistrationForm(false);
   };
+
+  const setMemberInput = (val) => {
+    console.log(val);
+    setFormData({
+      fullName: val.fullName,
+      email: val.email,
+      phone: val.phone,
+      gender: val.gender,
+      firstTimer: false,
+    });
+  };
   return (
     // Actions
     <div className="">
@@ -117,7 +128,7 @@ const EventRegister = () => {
             </button>
 
             {/* Search Member Form */}
-            <SearchMembers/>
+            <SearchMembers setMemberInput={setMemberInput} />
 
             {/* Registration Form */}
             <form

@@ -3,7 +3,7 @@ import { getMembers, reset } from "../features/Members/memberSlice";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 
-const SearchMembers = () => {
+const SearchMembers = ({ setMemberInput }) => {
   const [query, setQuery] = useState("");
   const [filteredMembers, setFilteredMembers] = useState([]);
   const { members, isSuccess } = useSelector((state) => state.members);
@@ -68,6 +68,10 @@ const SearchMembers = () => {
           {filteredMembers.length > 0 ? (
             filteredMembers.slice(0, 10).map((member) => (
               <button
+                onClick={() => {
+                  setQuery("");
+                  setMemberInput(member);
+                }}
                 key={member._id}
                 className="border-b px-3 py-2.5 text-left hover:bg-gray-100"
               >
