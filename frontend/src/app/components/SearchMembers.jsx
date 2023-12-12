@@ -22,12 +22,10 @@ const SearchMembers = () => {
   }, [members]);
 
   return (
-    <div>
-      {" "}
-      <form onSubmit={(e) => e.preventDefault()} className="mb-8">
-        <div className="relative">
-          <FaMagnifyingGlass
-            className="
+    <div className="relative mb-8">
+      <div className="relative">
+        <FaMagnifyingGlass
+          className="
                   absolute
                   bottom-0
                   left-3
@@ -36,16 +34,29 @@ const SearchMembers = () => {
                   h-6
                   w-6
                   text-indigo-500"
-          />
-          <input
-            onChange={onChange}
-            value={query}
-            type="text"
-            placeholder="Search Member"
-            className="w-full rounded-md border bg-gray-50 py-3 pl-12 pr-4 font-semibold text-gray-500 outline-none  focus:border-indigo-500 focus:bg-white"
-          />
-        </div>
-      </form>
+        />
+        <input
+          onChange={onChange}
+          value={query}
+          type="text"
+          placeholder="Search Member"
+          className="w-full rounded-md border bg-gray-50 py-3 pl-12 pr-4 font-semibold text-gray-500 outline-none  focus:border-indigo-500 focus:bg-white"
+        />
+      </div>
+
+      {/* Results */}
+      <div className="absolute z-20 flex h-fit w-full flex-col rounded-md border bg-gray-50 pl-3 pr-4 text-sm font-semibold">
+        <span className="border-b py-2.5">Lorem, ipsum.</span>{" "}
+        <span className="border-b py-2.5">Lorem, ipsum.</span>{" "}
+        <span className="border-b py-2.5">Lorem, ipsum.</span>{" "}
+        <span className="border-b py-2.5">Lorem, ipsum.</span>{" "}
+        <span className="border-b py-2.5">Lorem, ipsum.</span>{" "}
+        <span className="border-b py-2.5">Lorem, ipsum.</span>{" "}
+        <span className="border-b py-2.5">Lorem, ipsum.</span>{" "}
+        <span className="border-b py-2.5">Lorem, ipsum.</span>{" "}
+        <span className="border-b py-2.5">Lorem, ipsum.</span>{" "}
+        <span className="border-b py-2.5">Lorem, ipsum.</span>{" "}
+      </div>
     </div>
   );
 };
