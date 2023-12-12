@@ -46,16 +46,15 @@ const SearchMembers = () => {
 
       {/* Results */}
       <div className="absolute z-20 flex h-fit w-full flex-col rounded-md border bg-gray-50 pl-3 pr-4 text-sm font-semibold">
-        <span className="border-b py-2.5">Lorem, ipsum.</span>{" "}
-        <span className="border-b py-2.5">Lorem, ipsum.</span>{" "}
-        <span className="border-b py-2.5">Lorem, ipsum.</span>{" "}
-        <span className="border-b py-2.5">Lorem, ipsum.</span>{" "}
-        <span className="border-b py-2.5">Lorem, ipsum.</span>{" "}
-        <span className="border-b py-2.5">Lorem, ipsum.</span>{" "}
-        <span className="border-b py-2.5">Lorem, ipsum.</span>{" "}
-        <span className="border-b py-2.5">Lorem, ipsum.</span>{" "}
-        <span className="border-b py-2.5">Lorem, ipsum.</span>{" "}
-        <span className="border-b py-2.5">Lorem, ipsum.</span>{" "}
+        {members || members.length > 0 ? (
+          members.slice(0, 10).map((member) => (
+            <span key={member._id} className="border-b py-2.5">
+              {member.fullName}
+            </span>
+          ))
+        ) : (
+          <p>member not found</p>
+        )}
       </div>
     </div>
   );
