@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 const SearchMembers = () => {
   const [query, setQuery] = useState("");
+  const [filteredMembers, setFilteredMembers] = useState([]);
   const { members, isSuccess } = useSelector((state) => state.members);
 
   const dispatch = useDispatch();
@@ -24,8 +25,19 @@ const SearchMembers = () => {
   };
 
   useEffect(() => {
-    console.log(members);
-  }, [members]);
+    if (query) {
+      const filteredResult =
+        members?.filter((item) => {
+          // Check if the item's name includes the provided name (case-insensitive)
+          const nameMatch = item?.fullName
+            ?.toLowerCase()
+            .includes(query?.toLowerCase());
+          return nameMatch;
+        }) ?? [];
+
+      setFilteredMembers(filteredResult);
+    }
+  }, [members, query]);
 
   return (
     <div className="relative mb-8">
@@ -51,17 +63,19 @@ const SearchMembers = () => {
       </div>
 
       {/* Results */}
-      <div className="absolute z-20 flex h-fit w-full flex-col rounded-md border bg-gray-50 pl-3 pr-4 text-sm font-semibold">
-        {members || members.length > 0 ? (
-          members.slice(0, 10).map((member) => (
-            <span key={member._id} className="border-b py-2.5">
-              {member.fullName}
-            </span>
-          ))
-        ) : (
-          <p>member not found</p>
-        )}
-      </div>
+      {query && filteredMembers && (
+        <div className="absolute z-20 flex h-fit w-full flex-col rounded-md border bg-gray-50 pl-3 pr-4 text-sm font-semibold">
+          {filteredMembers.length > 0 ? (
+            filteredMembers.slice(0, 10).map((member) => (
+              <span key={member._id} className="border-b py-2.5">
+                {member.fullName}
+              </span>
+            ))
+          ) : (
+            <p>member not found</p>
+          )}
+        </div>
+      )}
     </div>
   );
 };
