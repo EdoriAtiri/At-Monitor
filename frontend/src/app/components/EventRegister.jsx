@@ -30,9 +30,9 @@ const EventRegister = () => {
 
   const onSubmit = () => {
     if (!formData.memberId) delete formData.memberId;
-
     const data = { data: formData, eventId: myEvent._id };
     dispatch(updateEventRegister(data));
+    closeForm();
   };
 
   const closeForm = () => {

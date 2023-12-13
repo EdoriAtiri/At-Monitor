@@ -19,7 +19,6 @@ const SearchMembers = ({ setMemberInput }) => {
 
   const onChange = (e) => {
     setQuery(e.target.value);
-    console.log(query);
     if (!members || members.length === 0) {
       dispatch(getMembers());
     }
