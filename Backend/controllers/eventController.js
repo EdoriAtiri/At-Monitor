@@ -172,6 +172,15 @@ const updateRegister = asyncHandler(async (req, res) => {
   }
 
   /* todo: add function to check if event has passed. if it has prevent register update */
+  function hasEventPassed(eventDate) {
+    const currentDate = new Date()
+    return currentDate > eventDate
+  }
+
+  if (hasEventPassed(thisEvent.eventDate)) {
+    res.status(404)
+    throw new Error('Event concluded. Registration not allowed.')
+  }
 
   // Add new attendee to event register
   const updateEventRegister = await Event.updateOne(
