@@ -148,7 +148,6 @@ const deleteEvent = asyncHandler(async (req, res) => {
 const updateRegister = asyncHandler(async (req, res) => {
   // Get Admin using the Id in the jwt
   const admin = await Admin.findById(req.admin.id)
-  console.log(req.body)
   if (!admin) {
     res.status(401)
     throw new Error('Admin not found')
@@ -156,9 +155,20 @@ const updateRegister = asyncHandler(async (req, res) => {
 
   const thisEvent = await Event.findById(req.params.id)
 
+  // Check if event exists
   if (!thisEvent) {
     res.status(404)
     throw new Error('Event not found')
+  }
+
+  // Check if a person with the same name and email has been registered already
+  const registered = await thisEvent.registered
+  const newPerson = registered.find(
+    (reg) => reg.email === req.body.email && reg.fullName === req.body.fullName
+  )
+  if (newPerson) {
+    res.status(404)
+    throw new Error('Already registered this person')
   }
 
   /* todo: add function to check if event has passed. if it has prevent register update */
