@@ -48,6 +48,7 @@ const EventRegister = () => {
       phone: val.phone,
       gender: val.gender,
       firstTimer: false,
+      memberId: val.memberId,
     });
   };
 
