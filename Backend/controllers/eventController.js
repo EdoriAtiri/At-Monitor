@@ -39,14 +39,16 @@ const createEvent = asyncHandler(async (req, res) => {
 // @access Private
 const getEvents = asyncHandler(async (req, res) => {
   // Get Admin using the Id in the jwt
-  const admin = await Admin.findById(req.admin.id)
+  const admin =
+    (await Admin.findById(req.admin.id)) ||
+    (await Registrar.findById(req.registrar.admin))
 
   if (!admin) {
     res.status(401)
     throw new Error('Admin not found')
   }
 
-  const events = await Event.find({ admin: req.admin.id })
+  const events = await Event.find({ admin: admin })
 
   res.status(200).json(events)
 })

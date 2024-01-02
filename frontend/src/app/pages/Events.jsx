@@ -96,13 +96,15 @@ function Events() {
   // filter by query
   useEffect(() => {
     const filteredEvents =
-      myEvents?.filter((item) => {
-        // Check if the item's name includes the provided name (case-insensitive)
-        const nameMatch = item?.eventName
-          ?.toLowerCase()
-          .includes(q?.toLowerCase());
-        return nameMatch;
-      }) ?? [];
+      (Array.isArray(myEvents)
+        ? myEvents.filter((item) => {
+            // Check if the item's name includes the provided name (case-insensitive)
+            const nameMatch = item?.eventName
+              ?.toLowerCase()
+              .includes(q?.toLowerCase());
+            return nameMatch;
+          })
+        : []) ?? [];
 
     SORT_VALUES.forEach((val) => {
       if (sortBy === val.display) {
