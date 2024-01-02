@@ -4,10 +4,10 @@ const generateToken = require('../lib/genToken')
 
 const Admin = require('../models/adminModel')
 
-// @desc Login a new admin
+// @desc Login admin/registrar
 // @route /api/login
 // @access Public
-const loginAdmin = asyncHandler(async (req, res) => {
+const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body
 
   const admin = await Admin.findOne({ email })
