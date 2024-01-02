@@ -35,6 +35,7 @@ const login = asyncHandler(async (req, res) => {
       lastName: registrar.fullName.split(' ')[1],
       email: registrar.email,
       type: 'registrar',
+      hasAdminPrivilege: registrar.hasAdminPrivilege,
       token: generateToken(registrar._id, '30d'),
     })
   } else {

@@ -295,7 +295,7 @@ const toggleRegistrarActivation = asyncHandler(async (req, res) => {
   if (registrarId && !registrarId.password) {
     res.status(403)
     throw new Error(
-      'Not allowed to activate a registrar without the registrar activating themselves. Generate a token and forward it to the registrar.'
+      'Cannot activate a registrar until the registrar activates themselves. Generate a token and forward it to the registrar.'
     )
   }
 
