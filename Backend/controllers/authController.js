@@ -5,7 +5,7 @@ const generateToken = require('../lib/genToken')
 const Admin = require('../models/adminModel')
 
 // @desc Login admin/registrar
-// @route /api/login
+// @route /api/auth/login
 // @access Public
 const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body

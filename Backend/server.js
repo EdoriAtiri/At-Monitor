@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 })
 
 // Routes
-// app.use('/api/users', require('./routes/userRoutes'))
+app.use('/api/auth', require('./routes/authRoutes'))
 app.use('/api/admins', require('./routes/adminRoutes'))
 app.use('/api/events', require('./routes/eventRoutes'))
 app.use('/api/members', require('./routes/memberRoutes'))
