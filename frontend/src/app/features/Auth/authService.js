@@ -28,9 +28,13 @@ const login = async (data) => {
   return response.data;
 };
 
+// Logout admin
+const logout = () => localStorage.removeItem("admin");
+
 const authService = {
   signup,
   login,
+  logout,
 };
 
 export default authService;
