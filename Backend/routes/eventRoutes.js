@@ -19,7 +19,7 @@ router
   .route('/:id')
   .get(protect, getEvent)
   .patch(protect, checkAdminPrivileges, updateEvent)
-  .delete(protect, deleteEvent)
+  .delete(protect, checkAdminPrivileges, deleteEvent)
 
 router.route('/:id/registration').post(protect, updateRegister)
 

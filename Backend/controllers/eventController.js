@@ -86,10 +86,8 @@ const getEvent = asyncHandler(async (req, res) => {
 // @route /api/events/:id
 // @access Private
 const updateEvent = asyncHandler(async (req, res) => {
-  // Get Admin using the Id in the jwt
-  const adminId = req.admin?.id || req.registrar.admin
-  const admin = await Admin.findById(adminId)
-  const registrar = (await Registrar.findById(req.registrar?._id)) || ''
+  // Get AdminId from req
+  const adminId = req.admin?.id || req.registrar?.admin
 
   const eventId = await Event.findById(req.params.id)
 
@@ -100,7 +98,7 @@ const updateEvent = asyncHandler(async (req, res) => {
   }
 
   // If the event was not created by the admin trying to update it, disallow and return err
-  if (eventId.admin.toString() !== admin._id.toString()) {
+  if (eventId.admin.toString() !== adminId.toString()) {
     res.status(404)
     throw new Error('Not Authorized')
   }
@@ -116,13 +114,8 @@ const updateEvent = asyncHandler(async (req, res) => {
 // @route /api/events/:id
 // @access Private
 const deleteEvent = asyncHandler(async (req, res) => {
-  // Get Admin using the Id in the jwt
-  const admin = await Admin.findById(req.admin.id)
-
-  if (!admin) {
-    res.status(401)
-    throw new Error('Admin not found')
-  }
+  // Get AdminId from req
+  const adminId = req.admin?.id || req.registrar?.admin
 
   const thisEvent = await Event.findById(req.params.id)
 
@@ -133,7 +126,7 @@ const deleteEvent = asyncHandler(async (req, res) => {
   }
 
   // If the admin trying to delete event did not create it, deny them and return error
-  if (thisEvent.admin.toString() !== req.admin.id) {
+  if (thisEvent.admin.toString() !== adminId.toString()) {
     res.status(401)
     throw new Error('Not Authorized')
   }
