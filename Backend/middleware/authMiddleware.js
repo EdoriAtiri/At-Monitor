@@ -20,6 +20,7 @@ const protect = asyncHandler(async (req, res, next) => {
       req.registrar =
         (await Registrar.findById(decoded.id).select('-password')) || null
 
+      // console.log(req.registrar)
       next()
     } catch (error) {
       console.log(error)

@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler')
 
 const Admin = require('../models/adminModel')
 const Event = require('../models/eventModel')
+const Registrar = require('../models/registrarModel')
 
 // @desc Create a new event
 // @route /api/events
@@ -39,16 +40,15 @@ const createEvent = asyncHandler(async (req, res) => {
 // @access Private
 const getEvents = asyncHandler(async (req, res) => {
   // Get Admin using the Id in the jwt
-  const admin =
-    (await Admin.findById(req.admin.id)) ||
-    (await Registrar.findById(req.registrar.admin))
+  const adminId = req.admin?.id || req.registrar.admin
+  const admin = await Admin.findById(adminId)
 
   if (!admin) {
     res.status(401)
     throw new Error('Admin not found')
   }
 
-  const events = await Event.find({ admin: admin })
+  const events = await Event.find({ admin: adminId })
 
   res.status(200).json(events)
 })
@@ -58,7 +58,8 @@ const getEvents = asyncHandler(async (req, res) => {
 // @access Private
 const getEvent = asyncHandler(async (req, res) => {
   // Get Admin using the Id in the jwt
-  const admin = await Admin.findById(req.admin.id)
+  const adminId = req.admin?.id || req.registrar.admin
+  const admin = await Admin.findById(adminId)
 
   if (!admin) {
     res.status(401)
@@ -73,7 +74,7 @@ const getEvent = asyncHandler(async (req, res) => {
   }
 
   //   Check that the admin that created the event matches the admin making the get request
-  if (req.admin.id !== thisEvent.admin.toString()) {
+  if (admin._id.toString() !== thisEvent.admin.toString()) {
     res.status(401)
     throw new Error('Not Authorized')
   }
@@ -86,12 +87,20 @@ const getEvent = asyncHandler(async (req, res) => {
 // @access Private
 const updateEvent = asyncHandler(async (req, res) => {
   // Get Admin using the Id in the jwt
-  const admin = await Admin.findById(req.admin.id)
+  const adminId = req.admin?.id || req.registrar.admin
+  const admin = await Admin.findById(adminId)
+  const registrar = (await Registrar.findById(req.registrar?._id)) || ''
 
-  console.log(req.body)
+  // Check for admin
   if (!admin) {
     res.status(401)
-    throw new Error('Admin not found')
+    throw new Error('Not found')
+  }
+
+  // Check if req is by registrar and if they have admin privileges
+  if (admin && registrar && !registrar.hasAdminPrivilege) {
+    res.status(401)
+    throw new Error('Not Authorized. Contact your admin')
   }
 
   const eventId = await Event.findById(req.params.id)
@@ -101,10 +110,10 @@ const updateEvent = asyncHandler(async (req, res) => {
     throw new Error('Event not found')
   }
 
-  //   if (event.admin !== admin) {
-  //     res.status(404)
-  //     throw new Error('Not Authorized')
-  //   }
+  if (eventId.admin.toString() !== admin._id.toString()) {
+    res.status(404)
+    throw new Error('Not Authorized')
+  }
 
   const updatedEvent = await Event.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
