@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs')
 const generateToken = require('../lib/genToken')
 
 const Admin = require('../models/adminModel')
+const Registrar = require('../models/registrarModel')
 
 // @desc Login admin/registrar
 // @route /api/auth/login
@@ -11,18 +12,35 @@ const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body
 
   const admin = await Admin.findOne({ email })
+  const registrar = await Registrar.findOne({ email })
 
-  //  Check if admin and password match
+  //  Check if email and password match
+
   if (admin && (await bcrypt.compare(password, admin.password))) {
     res.status(200).json({
       _id: admin._id,
       firstName: admin.firstName,
       lastName: admin.lastName,
       email: admin.email,
+      type: 'admin',
       token: generateToken(admin._id, '30d'),
+    })
+  } else if (
+    registrar &&
+    (await bcrypt.compare(password, registrar.password))
+  ) {
+    res.status(200).json({
+      _id: registrar._id,
+      firstName: registrar.fullName.split(' ')[0],
+      lastName: registrar.fullName.split(' ')[1],
+      email: registrar.email,
+      type: 'registrar',
+      token: generateToken(registrar._id, '30d'),
     })
   } else {
     res.status(401)
     throw new Error('Invalid Credentials')
   }
 })
+
+module.exports = { login }
