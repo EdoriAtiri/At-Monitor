@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const { protect } = require('../middleware/authMiddleware')
+const checkAdminPrivileges = require('../middleware/rolePrivilegeMiddleware')
 
 const {
   createEvent,
@@ -17,7 +18,7 @@ router.route('/').get(protect, getEvents).post(protect, createEvent)
 router
   .route('/:id')
   .get(protect, getEvent)
-  .patch(protect, updateEvent)
+  .patch(protect, checkAdminPrivileges, updateEvent)
   .delete(protect, deleteEvent)
 
 router.route('/:id/registration').post(protect, updateRegister)

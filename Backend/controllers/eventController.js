@@ -91,25 +91,15 @@ const updateEvent = asyncHandler(async (req, res) => {
   const admin = await Admin.findById(adminId)
   const registrar = (await Registrar.findById(req.registrar?._id)) || ''
 
-  // Check for admin
-  if (!admin) {
-    res.status(401)
-    throw new Error('Not found')
-  }
-
-  // Check if req is by registrar and if they have admin privileges
-  if (admin && registrar && !registrar.hasAdminPrivilege) {
-    res.status(401)
-    throw new Error('Not Authorized. Contact your admin')
-  }
-
   const eventId = await Event.findById(req.params.id)
 
+  // If event does not exist return error message
   if (!eventId) {
     res.status(404)
     throw new Error('Event not found')
   }
 
+  // If the event was not created by the admin trying to update it, disallow and return err
   if (eventId.admin.toString() !== admin._id.toString()) {
     res.status(404)
     throw new Error('Not Authorized')
