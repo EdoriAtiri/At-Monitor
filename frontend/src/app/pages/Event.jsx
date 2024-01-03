@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import {
   getEvent,
   deleteEvent,
-  reset,
   resetEventState,
 } from "../features/Events/eventSlice";
 import EditEventForm from "../components/EditEventForm";
@@ -51,9 +50,9 @@ function Event() {
     dispatch(resetEventState());
     dispatch(deleteEvent(eventId));
 
-    // if (isSuccess) {
-    //   navigate("/dashboard/events");
-    // }
+    if (isSuccess) {
+      navigate("/dashboard/events");
+    }
 
     if (isError) {
       setIsDeletePrompt(false);
@@ -63,12 +62,14 @@ function Event() {
 
   return (
     <div className="mx-6 mb-6 mt-10">
+      {/* Edit event form */}
       {editEvent && (
         <EditEventForm
           eventId={eventId}
           closeEdit={() => setEditEvent(false)}
         />
       )}
+      {/* Confirm Delete prompt */}
       {isDeletePrompt && (
         <ActConfirmation
           action={`delete ${myEvent.eventName} ?`}
