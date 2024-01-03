@@ -24,7 +24,7 @@ router
   .route('/:id')
   .get(protect, getRegistrar)
   // .patch(protect, createRegistrarPassword)
-  .delete(protect, deleteRegistrar)
+  .delete(protect, checkAdminPrivileges, deleteRegistrar)
 
 router
   .route('/:id/generate')
