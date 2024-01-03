@@ -17,8 +17,8 @@ router.route('/').get(protect, getMembers)
 
 router
   .route('/:id')
-  .get(protect, getMember)
-  .patch(protect, updateMember)
-  .delete(protect, deleteMember)
+  .get(protect, checkAdminPrivileges, getMember)
+  .patch(protect, checkAdminPrivileges, updateMember)
+  .delete(protect, checkAdminPrivileges, deleteMember)
 
 module.exports = router

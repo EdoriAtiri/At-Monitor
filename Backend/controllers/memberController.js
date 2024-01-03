@@ -80,7 +80,6 @@ const registerMember = asyncHandler(async (req, res) => {
 // @route /api/members
 // @access Private
 const getMembers = asyncHandler(async (req, res) => {
-  // Get Admin using the Id in the jwt
   // Get AdminId from req
   const adminId = req.admin?.id || req.registrar?.admin
   const admin = await Admin.findById(adminId)
@@ -99,17 +98,13 @@ const getMembers = asyncHandler(async (req, res) => {
 // @route /api/members/:id/
 // @access Public
 const getMember = asyncHandler(async (req, res) => {
-  // Get Admin using the Id in the jwt
-  const admin = await Admin.findById(req.admin.id)
-  if (!admin) {
-    res.status(401)
-    throw new Error('Admin not found')
-  }
+  // Get AdminId from req
+  const adminId = req.admin?.id || req.registrar?.admin
 
   // Get id from params
   const id = req.params.id
   // Find member
-  const member = await Member.findOne({ _id: id, admin: admin._id })
+  const member = await Member.findOne({ _id: id, admin: adminId })
 
   // If the member is found return member id, name and email, else return error
   if (member) {
@@ -135,8 +130,9 @@ const getMember = asyncHandler(async (req, res) => {
 // @route /api/users/id/update
 // @access Public
 const updateMember = asyncHandler(async (req, res) => {
-  // Get Admin using the Id in the jwt
-  const admin = await Admin.findById(req.admin.id)
+  // Get AdminId from req
+  const adminId = req.admin?.id || req.registrar?.admin
+  const admin = await Admin.findById(adminId)
 
   if (!admin) {
     res.status(401)
