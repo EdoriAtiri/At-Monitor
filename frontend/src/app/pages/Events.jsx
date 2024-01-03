@@ -130,6 +130,7 @@ function Events() {
     if (sortBy !== "finished" || sortBy !== "pending") {
       sortedEvents.sort(sortByProperty(value));
       if (sortBy === "event date") sortedEvents.reverse();
+      if (sortBy === "date created") sortedEvents.reverse();
       // SortbyProperty returns inactive Events first, the reverse method flips that
     }
 
