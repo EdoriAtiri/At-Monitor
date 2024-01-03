@@ -48,8 +48,9 @@ function Registrar() {
   useEffect(() => {
     if (isError) {
       toast.error(message);
+      dispatch(resetRegistrarState());
     }
-  }, [isError, message]);
+  }, [dispatch, isError, message]);
 
   // Delete Registrar
   const onDeleteRegistrar = () => {
