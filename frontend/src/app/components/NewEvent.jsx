@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { createEvent } from "../features/Events/eventSlice";
+import { createEvent, resetEventState } from "../features/Events/eventSlice";
 
 function NewEvent({ closeForm }) {
   const [eventData, setEventData] = useState({
@@ -31,6 +31,7 @@ function NewEvent({ closeForm }) {
   // Submit event data
   const onSubmit = (e) => {
     e.preventDefault();
+    resetEventState();
 
     const data = {
       ...eventData,

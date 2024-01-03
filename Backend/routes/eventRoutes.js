@@ -13,7 +13,10 @@ const {
   updateRegister,
 } = require('../controllers/eventController')
 
-router.route('/').get(protect, getEvents).post(protect, createEvent)
+router
+  .route('/')
+  .get(protect, getEvents)
+  .post(protect, checkAdminPrivileges, createEvent)
 
 router
   .route('/:id')

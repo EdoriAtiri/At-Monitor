@@ -86,7 +86,9 @@ const registerMember = asyncHandler(async (req, res) => {
 // @access Private
 const getMembers = asyncHandler(async (req, res) => {
   // Get Admin using the Id in the jwt
-  const admin = await Admin.findById(req.admin.id)
+  // Get AdminId from req
+  const adminId = req.admin?.id || req.registrar?.admin
+  const admin = await Admin.findById(adminId)
 
   if (!admin) {
     res.status(401)

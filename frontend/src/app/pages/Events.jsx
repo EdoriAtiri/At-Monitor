@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import { getEvents, reset } from "../features/Events/eventSlice";
+import { toast } from "react-toastify";
+import { getEvents, resetEventState } from "../features/Events/eventSlice";
 import EventCard from "../components/EventCard";
 import NewEvent from "../components/NewEvent";
 import Loading from "../components/Loading";
@@ -33,7 +34,7 @@ const SORT_VALUES = [
 function Events() {
   const [defaultEvents, setDefaultEvents] = useState([]);
   const [isNewEvent, setIsNewEvent] = useState(false);
-  const { myEvents, isSuccess, isLoading } = useSelector(
+  const { myEvents, isSuccess, isLoading, isError, message } = useSelector(
     (state) => state.myEvents,
   );
   const [eventStats, setEventStats] = useState({
@@ -59,7 +60,7 @@ function Events() {
   useEffect(() => {
     return () => {
       if (isSuccess) {
-        dispatch(reset());
+        dispatch(resetEventState());
       }
     };
   }, [dispatch, isSuccess]);
@@ -152,6 +153,14 @@ function Events() {
     console.log(sortBy);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortBy]);
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isError, message]);
 
   if (isLoading) {
     return <Loading />;

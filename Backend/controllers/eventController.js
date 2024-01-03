@@ -8,8 +8,8 @@ const Registrar = require('../models/registrarModel')
 // @route /api/events
 // @access Private
 const createEvent = asyncHandler(async (req, res) => {
-  // Get Admin using the Id in the jwt
-  const admin = await Admin.findById(req.admin.id)
+  // Get AdminId from req
+  const adminId = req.admin?.id || req.registrar?.admin
 
   const { eventName, eventDate, description, linkId, registered } = req.body
 
@@ -18,13 +18,8 @@ const createEvent = asyncHandler(async (req, res) => {
     throw new Error('Please add event name and date to create event')
   }
 
-  if (!admin) {
-    res.status(401)
-    throw new Error('Admin not found')
-  }
-
   const event = await Event.create({
-    admin: req.admin.id,
+    admin: adminId,
     eventName,
     eventDate,
     description,
@@ -140,8 +135,11 @@ const deleteEvent = asyncHandler(async (req, res) => {
 // @route /api/events/:id/registration
 // @access Private
 const updateRegister = asyncHandler(async (req, res) => {
-  // Get Admin using the Id in the jwt
-  const admin = await Admin.findById(req.admin.id)
+  // Get AdminId from req
+  const adminId = req.admin?.id || req.registrar?.admin
+  const admin = await Admin.findById(adminId)
+
+  // Check if admin is authorized to perform action
   if (!admin) {
     res.status(401)
     throw new Error('Admin not found')
