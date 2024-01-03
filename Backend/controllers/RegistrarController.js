@@ -13,14 +13,8 @@ const Admin = require('../models/adminModel')
 // @route /api/registrar
 // @access Public
 const createRegistrar = asyncHandler(async (req, res) => {
-  // Get Admin using the Id in the jwt
-  //   const admin = await Admin.findById(req.admin.id)
-  const admin = await Admin.findById(req.admin.id)
-
-  if (!admin) {
-    res.status(401)
-    throw new Error('Admin not found')
-  }
+  // Get AdminId from req
+  const adminId = req.admin?.id || req.registrar?.admin
 
   const { fullName, email } = req.body
 
@@ -54,7 +48,7 @@ const createRegistrar = asyncHandler(async (req, res) => {
 
   // Create registrar
   const registrar = await Registrar.create({
-    admin: req.admin.id,
+    admin: adminId,
     // member: memberExists._id,
     fullName,
     email,
@@ -68,7 +62,6 @@ const createRegistrar = asyncHandler(async (req, res) => {
       fullName: registrar.fullName,
       email: registrar.email,
       hasAdminPrivilege: registrar.hasAdminPrivilege,
-      // token: generateToken(registrar._id, '1d'),
     })
   } else {
     res.status(400)

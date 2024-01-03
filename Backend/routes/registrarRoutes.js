@@ -13,8 +13,12 @@ const {
   deleteRegistrar,
   toggleRegistrarActivation,
 } = require('../controllers/RegistrarController')
+const checkAdminPrivileges = require('../middleware/rolePrivilegeMiddleware')
 
-router.route('/').post(protect, createRegistrar).get(protect, getRegistrars)
+router
+  .route('/')
+  .post(protect, checkAdminPrivileges, createRegistrar)
+  .get(protect, getRegistrars)
 
 router
   .route('/:id')
