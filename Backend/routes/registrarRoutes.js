@@ -22,8 +22,7 @@ router
 
 router
   .route('/:id')
-  .get(protect, getRegistrar)
-  // .patch(protect, createRegistrarPassword)
+  .get(protect, checkAdminPrivileges, getRegistrar)
   .delete(protect, checkAdminPrivileges, deleteRegistrar)
 
 router
