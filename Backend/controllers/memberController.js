@@ -9,7 +9,6 @@ const Admin = require('../models/adminModel')
 const registerMember = asyncHandler(async (req, res) => {
   // Get AdminId from req
   const adminId = req.admin?.id || req.registrar?.admin
-  const admin = await Admin.findById(adminId)
 
   const {
     fullName,
@@ -22,7 +21,7 @@ const registerMember = asyncHandler(async (req, res) => {
     membershipStatus,
   } = req.body
 
-  // Validation
+  // Basic Validation
   if (
     !fullName ||
     !address ||
@@ -47,7 +46,7 @@ const registerMember = asyncHandler(async (req, res) => {
 
   // Create member
   const member = await Member.create({
-    admin: req.admin.id,
+    admin: adminId,
     fullName,
     phone,
     email,
@@ -91,7 +90,7 @@ const getMembers = asyncHandler(async (req, res) => {
     throw new Error('Admin not found')
   }
 
-  const members = await Member.find({ admin: req.admin.id })
+  const members = await Member.find({ admin: adminId })
 
   res.status(200).json(members)
 })
