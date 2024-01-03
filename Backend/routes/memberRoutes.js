@@ -10,8 +10,9 @@ const {
   getMembers,
   getMember,
 } = require('../controllers/memberController')
+const checkAdminPrivileges = require('../middleware/rolePrivilegeMiddleware')
 
-router.route('/').post(protect, registerMember)
+router.route('/').post(protect, checkAdminPrivileges, registerMember)
 router.route('/').get(protect, getMembers)
 
 router

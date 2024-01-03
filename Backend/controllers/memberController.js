@@ -7,13 +7,9 @@ const Admin = require('../models/adminModel')
 // @route /api/users
 // @access Public
 const registerMember = asyncHandler(async (req, res) => {
-  // Get Admin using the Id in the jwt
-  const admin = await Admin.findById(req.admin.id)
-
-  if (!admin) {
-    res.status(401)
-    throw new Error('Admin not found')
-  }
+  // Get AdminId from req
+  const adminId = req.admin?.id || req.registrar?.admin
+  const admin = await Admin.findById(adminId)
 
   const {
     fullName,
