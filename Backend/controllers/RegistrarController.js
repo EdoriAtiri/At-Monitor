@@ -244,7 +244,6 @@ const createRegistrarPassword = asyncHandler(async (req, res) => {
 const deleteRegistrar = asyncHandler(async (req, res) => {
   // Get AdminId from req
   const adminId = req.admin?.id || req.registrar?.admin
-  const admin = await Admin.findById(adminId)
 
   // Check if Registrar exists
   const registrarId = await Registrar.findById(req.params.id)
@@ -263,13 +262,8 @@ const deleteRegistrar = asyncHandler(async (req, res) => {
 // @route /api/registrars/id/activation
 // @access Public
 const toggleRegistrarActivation = asyncHandler(async (req, res) => {
-  // Get Admin using the Id added in the auth middleware
-  const admin = await Admin.findById(req.admin.id)
-
-  if (!admin) {
-    res.status(401)
-    throw new Error('You are not authorized to do this operation')
-  }
+  // Get AdminId from req
+  const adminId = req.admin?.id || req.registrar?.admin
 
   // Check if Registrar exists
   const registrarId = await Registrar.findById(req.params.id)

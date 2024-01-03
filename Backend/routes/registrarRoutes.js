@@ -30,9 +30,11 @@ router
   .route('/:id/generate')
   .get(protect, checkAdminPrivileges, generateRegistrarToken)
 
-router.route('/:token/activation').get(getRegistrarActivation)
+router
+  .route('/:id/activation')
+  .patch(protect, checkAdminPrivileges, toggleRegistrarActivation)
 
-router.route('/:id/activation').patch(protect, toggleRegistrarActivation)
+router.route('/:token/activation').get(getRegistrarActivation)
 // set header for this
 router.route('/:id/auth/create').patch(createRegistrarPassword)
 
