@@ -15,7 +15,10 @@ const {
   toggleRegistrarActivation,
 } = require('../controllers/RegistrarController')
 
-router.route('/').post(protect, createRegistrar).get(protect, getRegistrars)
+router
+  .route('/')
+  .post(protect, checkAdminPrivileges, createRegistrar)
+  .get(protect, checkAdminPrivileges, getRegistrars)
 
 router
   .route('/:id')

@@ -134,7 +134,10 @@ const getRegistrarActivation = asyncHandler(async (req, res) => {
 // @access Public
 const getRegistrar = asyncHandler(async (req, res) => {
   // Get Admin using the Id in the jwt
-  const admin = await Admin.findById(req.admin.id)
+  // Get AdminId from req
+  const adminId = req.admin?.id || req.registrar?.admin
+  const admin = await Admin.findById(adminId)
+
   if (!admin) {
     res.status(401)
     throw new Error('Admin not found')
@@ -143,7 +146,7 @@ const getRegistrar = asyncHandler(async (req, res) => {
   // Get id from params
   const id = req.params.id
   // Find registrar
-  const registrar = await Registrar.findOne({ _id: id, admin: admin._id })
+  const registrar = await Registrar.findOne({ _id: id, admin: adminId })
 
   // If the registrar is found return registrar id, name and email, else return error
   if (registrar) {
@@ -166,15 +169,16 @@ const getRegistrar = asyncHandler(async (req, res) => {
 // @route /api/registrar/
 // @access Public
 const getRegistrars = asyncHandler(async (req, res) => {
-  // Get Admin using the Id in the jwt
-  const admin = await Admin.findById(req.admin.id)
+  // Get AdminId from req
+  const adminId = req.admin?.id || req.registrar?.admin
+  const admin = await Admin.findById(adminId)
 
   if (!admin) {
     res.status(401)
     throw new Error('Admin not found')
   }
 
-  const registrars = await Registrar.find({ admin: req.admin.id }).select(
+  const registrars = await Registrar.find({ admin: adminId }).select(
     '-password'
   )
 
