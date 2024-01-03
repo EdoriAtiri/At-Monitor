@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const { protect } = require('../middleware/authMiddleware')
+const checkAdminPrivileges = require('../middleware/rolePrivilegeMiddleware')
 
 const {
   createRegistrar,
@@ -13,12 +14,8 @@ const {
   deleteRegistrar,
   toggleRegistrarActivation,
 } = require('../controllers/RegistrarController')
-const checkAdminPrivileges = require('../middleware/rolePrivilegeMiddleware')
 
-router
-  .route('/')
-  .post(protect, checkAdminPrivileges, createRegistrar)
-  .get(protect, getRegistrars)
+router.route('/').post(protect, createRegistrar).get(protect, getRegistrars)
 
 router
   .route('/:id')
@@ -26,8 +23,12 @@ router
   // .patch(protect, createRegistrarPassword)
   .delete(protect, deleteRegistrar)
 
-router.route('/:id/generate').get(protect, generateRegistrarToken)
+router
+  .route('/:id/generate')
+  .get(protect, checkAdminPrivileges, generateRegistrarToken)
+
 router.route('/:token/activation').get(getRegistrarActivation)
+
 router.route('/:id/activation').patch(protect, toggleRegistrarActivation)
 // set header for this
 router.route('/:id/auth/create').patch(createRegistrarPassword)

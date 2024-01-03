@@ -73,15 +73,6 @@ const createRegistrar = asyncHandler(async (req, res) => {
 // @route /api/registrarToken
 // @access Public
 const generateRegistrarToken = asyncHandler(async (req, res) => {
-  // Get Admin using the Id in the jwt
-  const admin = await Admin.findById(req.admin.id)
-
-  // check if admin
-  if (!admin) {
-    res.status(401)
-    throw new Error('Admin not found')
-  }
-
   // Get id from request body and check if exists, throw error if not
   const { id } = req.params
 
