@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import { getRegistrars, reset } from "../features/Registrars/registrarSlice";
+import { toast } from "react-toastify";
+import {
+  getRegistrars,
+  resetRegistrarState,
+} from "../features/Registrars/registrarSlice";
 import RegistrarCard from "../components/RegistrarCard";
 import Loading from "../components/Loading";
 import NewRegistrar from "../components/NewRegistrar";
@@ -39,7 +43,7 @@ const Registrars = () => {
   const sortBy = searchParams.get("sortBy") || "date created";
   // useSearchParams stores values as string, so for booleans and numbers check that you have the val you want
 
-  const { registrars, isSuccess, isLoading } = useSelector(
+  const { registrars, isSuccess, isLoading, isError, message } = useSelector(
     (state) => state.registrars,
   );
   const [registrarStats, setRegistrarStats] = useState({
@@ -54,7 +58,7 @@ const Registrars = () => {
   useEffect(() => {
     return () => {
       if (isSuccess) {
-        dispatch(reset());
+        dispatch(resetRegistrarState());
       }
     };
   }, [dispatch, isSuccess]);
@@ -128,6 +132,12 @@ const Registrars = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortBy]);
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+  }, [isError, message]);
 
   // Loading Screen
   if (isLoading) {

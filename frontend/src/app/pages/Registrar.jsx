@@ -10,6 +10,7 @@ import {
   toggleRegistrarActivation,
   deleteRegistrar,
   generateActivationToken,
+  resetRegistrarState,
 } from "../features/Registrars/registrarSlice";
 
 function Registrar() {
@@ -25,6 +26,10 @@ function Registrar() {
 
   useEffect(() => {
     dispatch(getRegistrar(registrarId));
+
+    if (isSuccess) {
+      dispatch(resetRegistrarState());
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [registrarId]);

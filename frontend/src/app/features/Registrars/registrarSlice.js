@@ -182,6 +182,13 @@ export const createRegAuth = createAsyncThunk(
   },
 );
 
+export const resetRegistrarState = createAsyncThunk(
+  "events/reset",
+  async () => {
+    return;
+  },
+);
+
 export const registrarSlice = createSlice({
   name: "registrars",
   initialState,
@@ -305,6 +312,12 @@ export const registrarSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+      })
+      .addCase(resetRegistrarState.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = false;
+        state.message = "";
       });
   },
 });
