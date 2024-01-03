@@ -3,7 +3,12 @@ import { formatDateDisplay } from "../lib/formatDate";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { getEvent, deleteEvent } from "../features/Events/eventSlice";
+import {
+  getEvent,
+  deleteEvent,
+  reset,
+  resetEventState,
+} from "../features/Events/eventSlice";
 import EditEventForm from "../components/EditEventForm";
 import ActConfirmation from "../components/ActConfirmation";
 import Loading from "../components/Loading";
@@ -36,16 +41,23 @@ function Event() {
     return <Loading />;
   }
 
+  // Open edit event form
   const openEdit = () => {
     setEditEvent(true);
   };
 
   // Delete Event
   const onDeleteEvent = () => {
+    dispatch(resetEventState());
     dispatch(deleteEvent(eventId));
 
-    if (isSuccess) {
-      navigate("/dashboard/events");
+    // if (isSuccess) {
+    //   navigate("/dashboard/events");
+    // }
+
+    if (isError) {
+      setIsDeletePrompt(false);
+      toast.error(message);
     }
   };
 

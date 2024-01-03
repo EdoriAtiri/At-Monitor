@@ -144,6 +144,9 @@ export const updateEventRegister = createAsyncThunk(
   },
 );
 
+export const resetEventState = createAsyncThunk("events/reset", async () => {
+  return;
+});
 export const eventSlice = createSlice({
   name: "event",
   initialState,
@@ -169,6 +172,7 @@ export const eventSlice = createSlice({
       .addCase(getEvents.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
+        state.isSuccess = false;
         state.message = action.payload;
       })
       .addCase(getEvent.pending, (state) => {
@@ -182,6 +186,7 @@ export const eventSlice = createSlice({
       .addCase(getEvent.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
+        state.isSuccess = false;
         state.message = action.payload;
       })
       .addCase(createEvent.pending, (state) => {
@@ -195,6 +200,7 @@ export const eventSlice = createSlice({
       .addCase(createEvent.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
+        state.isSuccess = false;
         state.message = action.payload;
       })
       .addCase(editEvent.pending, (state) => {
@@ -209,6 +215,7 @@ export const eventSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+        state.isSuccess = false;
       })
       .addCase(deleteEvent.pending, (state) => {
         state.isLoading = true;
@@ -221,6 +228,7 @@ export const eventSlice = createSlice({
       .addCase(deleteEvent.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
+        state.isSuccess = false;
         state.message = action.payload;
       })
       .addCase(updateEventRegister.pending, (state) => {
@@ -238,7 +246,14 @@ export const eventSlice = createSlice({
       .addCase(updateEventRegister.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
+        state.isSuccess = false;
         state.message = action.payload;
+      })
+      .addCase(resetEventState.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = false;
+        state.message = "";
       });
   },
 });
