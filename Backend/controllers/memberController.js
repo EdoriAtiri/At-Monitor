@@ -106,6 +106,12 @@ const getMember = asyncHandler(async (req, res) => {
   // Find member
   const member = await Member.findOne({ _id: id, admin: adminId })
 
+  // If the admin trying to get member did not create it, deny them and return error
+  if (member.admin.toString() !== adminId.toString()) {
+    res.status(401)
+    throw new Error('Not Authorized')
+  }
+
   // If the member is found return member id, name and email, else return error
   if (member) {
     res.status(200).json({
@@ -132,19 +138,19 @@ const getMember = asyncHandler(async (req, res) => {
 const updateMember = asyncHandler(async (req, res) => {
   // Get AdminId from req
   const adminId = req.admin?.id || req.registrar?.admin
-  const admin = await Admin.findById(adminId)
-
-  if (!admin) {
-    res.status(401)
-    throw new Error('Admin not found')
-  }
 
   // Check if member exists
-  const memberId = await Member.findById(req.params.id)
+  const member = await Member.findById(req.params.id)
 
-  if (!memberId) {
+  if (!member) {
     res.status(404)
     throw new Error('Member not found')
+  }
+
+  // If the admin trying to get member did not create it, deny them and return error
+  if (member.admin.toString() !== adminId.toString()) {
+    res.status(401)
+    throw new Error('Not Authorized')
   }
 
   const updatedMember = await Member.findByIdAndUpdate(
@@ -164,22 +170,22 @@ const updateMember = asyncHandler(async (req, res) => {
 const deleteMember = asyncHandler(async (req, res) => {
   // Get AdminId from req
   const adminId = req.admin?.id || req.registrar?.admin
-  const admin = await Admin.findById(adminId)
-
-  if (!admin) {
-    res.status(401)
-    throw new Error('Admin not found')
-  }
 
   // Check if member exists
-  const memberId = await Member.findById(req.params.id)
+  const member = await Member.findById(req.params.id)
 
-  if (!memberId) {
+  if (!member) {
     res.status(404)
     throw new Error('Member not found')
   }
 
-  memberId.deleteOne()
+  // If the admin trying to get member did not create it, deny them and return error
+  if (member.admin.toString() !== adminId.toString()) {
+    res.status(401)
+    throw new Error('Not Authorized')
+  }
+
+  member.deleteOne()
 
   res.status(200).json({ success: true })
 })
