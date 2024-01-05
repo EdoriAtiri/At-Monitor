@@ -14,8 +14,15 @@ const login = asyncHandler(async (req, res) => {
   const admin = await Admin.findOne({ email })
   const registrar = await Registrar.findOne({ email })
 
-  //  Check if email and password match
+  // Check if admin or registrar exists
 
+  // Check if account has been deactivated
+  if (!registrar.isActivated && registrar.password) {
+    res.status(401)
+    throw new Error('Account deactivated, contact your admin for help')
+  }
+
+  //  Check if email and password match
   if (admin && (await bcrypt.compare(password, admin.password))) {
     res.status(200).json({
       _id: admin._id,
