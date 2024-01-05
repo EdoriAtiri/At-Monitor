@@ -11,6 +11,7 @@ import {
   deleteRegistrar,
   generateActivationToken,
   resetRegistrarState,
+  toggleHasAdminPrivilege,
 } from "../features/Registrars/registrarSlice";
 
 function Registrar() {
@@ -39,6 +40,18 @@ function Registrar() {
     const data = { isActivated: !registrar.isActivated };
     dispatch(
       toggleRegistrarActivation({
+        data,
+        registrarId,
+      }),
+    );
+  };
+
+  // Toggle Registrar Privilege
+  const onClickAdminPrivilege = () => {
+    const data = { hasAdminPrivilege: !registrar.hasAdminPrivilege };
+    console.log(data);
+    dispatch(
+      toggleHasAdminPrivilege({
         data,
         registrarId,
       }),
@@ -93,7 +106,12 @@ function Registrar() {
           <div className="form-control">
             <label className="label cursor-pointer">
               <span className="label-text mr-2 text-lg">Admin Privilege</span>
-              <input type="checkbox" className="toggle" checked />
+              <input
+                onChange={onClickAdminPrivilege}
+                type="checkbox"
+                className="toggle"
+                checked={registrar.hasAdminPrivilege}
+              />
             </label>
           </div>
           <button
