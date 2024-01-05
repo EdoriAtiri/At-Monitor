@@ -26,6 +26,14 @@ const login = asyncHandler(async (req, res) => {
     throw new Error('Account deactivated, contact your admin for help')
   }
 
+  // Check if registrar has a password
+  if (registrar && !registrar?.password) {
+    res.status(401)
+    throw new Error(
+      'Account has not been activated, contact your admin for help'
+    )
+  }
+
   //  Check if email and password match
   if (admin && (await bcrypt.compare(password, admin.password))) {
     res.status(200).json({
