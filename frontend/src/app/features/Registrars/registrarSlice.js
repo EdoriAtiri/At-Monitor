@@ -96,6 +96,30 @@ export const toggleRegistrarActivation = createAsyncThunk(
   },
 );
 
+// Toggle registrar privilege
+export const toggleHasAdminPrivileges = createAsyncThunk(
+  "registrars/toggleHasAdminPrivileges",
+  async ({ data, registrarId }, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.admin.token;
+      return await registrarService.toggleHasAdminPrivileges(
+        data,
+        registrarId,
+        token,
+      );
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  },
+);
+
 // Delete a registrar
 export const deleteRegistrar = createAsyncThunk(
   "registrars/deleteRegistrar",
