@@ -90,6 +90,12 @@ function Registrar() {
         <h1 className="mb-5 text-3xl uppercase">{registrar.fullName}</h1>
         {/* Actions */}
         <div className="flex items-center gap-3">
+          <div className="form-control">
+            <label className="label cursor-pointer">
+              <span className="label-text mr-2 text-lg">Admin Privilege</span>
+              <input type="checkbox" className="toggle" checked />
+            </label>
+          </div>
           <button
             onClick={onClickActivation}
             className="rounded-md border border-gray-700 p-1 text-lg"

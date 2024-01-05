@@ -128,7 +128,7 @@ const deleteEvent = asyncHandler(async (req, res) => {
 
   await thisEvent.deleteOne()
 
-  res.status(200).json({ success: true })
+  res.status(200).json({ _id: req.params.id })
 })
 
 // @desc update an event register
