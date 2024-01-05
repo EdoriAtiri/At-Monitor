@@ -54,6 +54,22 @@ const toggleRegistrarActivation = async (data, registrarId, token) => {
   return response.data;
 };
 
+// Toggle Registrar admin privilege
+const toggleHasAdminPrivilege = async (data, registrarId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.patch(
+    `${API_URL}${registrarId}/privilege`,
+    data,
+    config,
+  );
+
+  return response.data;
+};
+
 // Delete a registrar
 const deleteRegistrar = async (registrarId, token) => {
   const config = {
@@ -97,6 +113,7 @@ const registrarService = {
   getRegistrars,
   getRegistrar,
   toggleRegistrarActivation,
+  toggleHasAdminPrivilege,
   deleteRegistrar,
   createRegistrar,
   generateActivationToken,
