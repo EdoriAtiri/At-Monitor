@@ -15,9 +15,13 @@ const login = asyncHandler(async (req, res) => {
   const registrar = await Registrar.findOne({ email })
 
   // Check if admin or registrar exists
+  if (!admin && !registrar) {
+    res.status(401)
+    throw new Error('Invalid Credentials')
+  }
 
   // Check if account has been deactivated
-  if (!registrar.isActivated && registrar.password) {
+  if (!registrar?.isActivated && registrar?.password) {
     res.status(401)
     throw new Error('Account deactivated, contact your admin for help')
   }
