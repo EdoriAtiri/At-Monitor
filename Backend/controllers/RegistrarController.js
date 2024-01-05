@@ -312,6 +312,14 @@ const toggleRegistrarPrivilege = asyncHandler(async (req, res) => {
     throw new Error('Registrar not found')
   }
 
+  // Check if Registrar is activated
+  if (registrarId && !registrarId.isActivated) {
+    res.status(403)
+    throw new Error(
+      'Cannot toggle admin privilege until user has activated their registrar profile.'
+    )
+  }
+
   // check if request data type is boolean
   if (typeof req.body.hasAdminPrivilege !== 'boolean') {
     res.status(400)
