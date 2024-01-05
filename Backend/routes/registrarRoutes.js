@@ -13,6 +13,7 @@ const {
   getRegistrars,
   deleteRegistrar,
   toggleRegistrarActivation,
+  toggleRegistrarPrivilege,
 } = require('../controllers/RegistrarController')
 
 router
@@ -32,6 +33,10 @@ router
 router
   .route('/:id/activation')
   .patch(protect, checkAdminPrivileges, toggleRegistrarActivation)
+
+router
+  .route('/:id/privilege')
+  .patch(protect, checkAdminPrivileges, toggleRegistrarPrivilege)
 
 router.route('/:token/activation').get(getRegistrarActivation)
 // set header for this
