@@ -97,12 +97,12 @@ export const toggleRegistrarActivation = createAsyncThunk(
 );
 
 // Toggle registrar privilege
-export const toggleHasAdminPrivileges = createAsyncThunk(
-  "registrars/toggleHasAdminPrivileges",
+export const toggleHasAdminPrivilege = createAsyncThunk(
+  "registrars/toggleHasAdminPrivilege",
   async ({ data, registrarId }, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.admin.token;
-      return await registrarService.toggleHasAdminPrivileges(
+      return await registrarService.toggleHasAdminPrivilege(
         data,
         registrarId,
         token,
@@ -266,6 +266,20 @@ export const registrarSlice = createSlice({
         state.message = action.payload;
       })
       .addCase(toggleRegistrarActivation.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(toggleHasAdminPrivilege.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(toggleHasAdminPrivilege.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.registrar.hasAdminPrivilege = !state.registrar.hasAdminPrivilege;
+        state.message = action.payload;
+      })
+      .addCase(toggleHasAdminPrivilege.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
