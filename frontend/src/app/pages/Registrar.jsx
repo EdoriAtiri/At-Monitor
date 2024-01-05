@@ -49,7 +49,6 @@ function Registrar() {
   // Toggle Registrar Privilege
   const onClickAdminPrivilege = () => {
     const data = { hasAdminPrivilege: !registrar.hasAdminPrivilege };
-    console.log(data);
     dispatch(
       toggleHasAdminPrivilege({
         data,
