@@ -297,12 +297,44 @@ const toggleRegistrarActivation = asyncHandler(async (req, res) => {
   res.status(200).json({ success: true })
 })
 
+// @desc toggle registrar hasAdminPrivileges
+// @route /api/registrars/id/privilege
+// @access Public
+const toggleRegistrarPrivilege = asyncHandler(async (req, res) => {
+  // Get AdminId from req
+  const adminId = req.admin?.id || req.registrar?.admin
+
+  // Check if Registrar exists
+  const registrarId = await Registrar.findById(req.params.id)
+
+  if (!registrarId) {
+    res.status(404)
+    throw new Error('Registrar not found')
+  }
+
+  // check if request data type is boolean
+  if (typeof req.body.hasAdminPrivilege !== 'boolean') {
+    res.status(400)
+    throw new Error('Invalid data type')
+  }
+
+  await Registrar.findByIdAndUpdate(
+    req.params.id,
+    { hasAdminPrivilege: req.body.hasAdminPrivilege },
+    {
+      new: true,
+    }
+  )
+  res.status(200).json({ success: true })
+})
+
 module.exports = {
   createRegistrar,
   getRegistrar,
   getRegistrars,
   deleteRegistrar,
   toggleRegistrarActivation,
+  toggleRegistrarPrivilege,
   getRegistrarActivation,
   generateRegistrarToken,
   createRegistrarPassword,
