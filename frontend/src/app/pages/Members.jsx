@@ -4,6 +4,7 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import { getMembers, reset } from "../features/Members/memberSlice";
 import Loading from "../components/Loading";
 import sortByProperty from "../lib/sortByProperty";
+import useSuperUserCheck from "../hooks/useSuperUserCheck";
 
 const SORT_VALUES = [
   {
@@ -26,6 +27,7 @@ const SORT_VALUES = [
 
 function Members() {
   const [defaultMembers, setDefaultMembers] = useState([]);
+  const isSuperUser = useSuperUserCheck();
   const { members, isSuccess, isLoading } = useSelector(
     (state) => state.members,
   );
@@ -129,16 +131,18 @@ function Members() {
     <div className=" mx-6 mb-6 mt-10">
       <header className="mb-8 flex items-center justify-between text-xl font-semibold">
         <h1>Members</h1>
-        <button
-          onClick={() => {
-            dispatch(reset());
-            navigate("/dashboard/members/create");
-          }}
-          className="rounded-md border border-gray-700 p-1 text-lg"
-        >
-          {" "}
-          Create New Member
-        </button>
+        {isSuperUser && (
+          <button
+            onClick={() => {
+              dispatch(reset());
+              navigate("/dashboard/members/create");
+            }}
+            className="rounded-md border border-gray-700 p-1 text-lg"
+          >
+            {" "}
+            Create New Member
+          </button>
+        )}
       </header>{" "}
       {/* Admin member Stats */}
       <div className="mb-4 flex gap-4">

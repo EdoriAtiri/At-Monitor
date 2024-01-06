@@ -7,6 +7,7 @@ import EventCard from "../components/EventCard";
 import NewEvent from "../components/NewEvent";
 import Loading from "../components/Loading";
 import sortByProperty from "../lib/sortByProperty";
+import useSuperUserCheck from "../hooks/useSuperUserCheck";
 
 const SORT_VALUES = [
   {
@@ -34,6 +35,7 @@ const SORT_VALUES = [
 function Events() {
   const [defaultEvents, setDefaultEvents] = useState([]);
   const [isNewEvent, setIsNewEvent] = useState(false);
+  const isSuperUser = useSuperUserCheck();
   const { myEvents, isSuccess, isLoading, isError, message } = useSelector(
     (state) => state.myEvents,
   );
@@ -172,12 +174,14 @@ function Events() {
       {isNewEvent && <NewEvent closeForm={() => setIsNewEvent(false)} />}
       <header className="flex items-center justify-between text-xl font-semibold">
         <h1>My Events</h1>
-        <button
-          onClick={() => setIsNewEvent(true)}
-          className="rounded-md border border-gray-700 p-1 text-lg"
-        >
-          Create New Event
-        </button>
+        {isSuperUser && (
+          <button
+            onClick={() => setIsNewEvent(true)}
+            className="rounded-md border border-gray-700 p-1 text-lg"
+          >
+            Create New Event
+          </button>
+        )}
       </header>{" "}
       {/* Admin Event Stats */}
       <div className="mb-4 mt-8 flex gap-4">
