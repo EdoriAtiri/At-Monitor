@@ -12,8 +12,10 @@ import {
 } from "react-icons/fa6";
 import { AiOutlineMenu } from "react-icons/ai";
 import { logout } from "../features/Auth/authSlice";
+import useSuperUserCheck from "../hooks/useSuperUserCheck";
 
 function Dashboard() {
+  const isSuperUser = useSuperUserCheck();
   const closeMobileMenu = () => {
     if (showMobileMenu) {
       setShowMobileMenu(false);
@@ -62,9 +64,11 @@ function Dashboard() {
             <li onClick={closeMobileMenu} className="sidebar-icons">
               <FaCalendarDays /> <Link to="events">Events</Link>
             </li>
-            <li onClick={closeMobileMenu} className="sidebar-icons">
-              <FaPersonCircleCheck /> <Link to="registrars">Registrars</Link>
-            </li>
+            {true && (
+              <li onClick={closeMobileMenu} className="sidebar-icons">
+                <FaPersonCircleCheck /> <Link to="registrars">Registrars</Link>
+              </li>
+            )}
             <li onClick={closeMobileMenu} className="sidebar-icons">
               <FaPeopleGroup />
               <Link to="members">Members</Link>
@@ -76,7 +80,7 @@ function Dashboard() {
           </ul>
         </nav>
 
-        <ul className="space-y-6 pl-6 text-xl font-semibold opacity-80">
+        <ul className="space-y-6 pl-6 text-xl font-semibold ">
           <li onClick={closeMobileMenu} className="sidebar-icons">
             <FaGear />
             <Link>Settings</Link>
