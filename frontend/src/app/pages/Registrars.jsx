@@ -10,6 +10,7 @@ import RegistrarCard from "../components/RegistrarCard";
 import Loading from "../components/Loading";
 import NewRegistrar from "../components/NewRegistrar";
 import sortByProperty from "../lib/sortByProperty";
+import useSuperUserCheck from "../hooks/useSuperUserCheck";
 
 // const SORT_VALUES = ['date created', 'name', 'status']
 const SORT_VALUES = [
@@ -40,8 +41,9 @@ const Registrars = () => {
   const q = searchParams.get("q");
   const activeOnly = searchParams.get("activeOnly") === "true";
   // Search Params
-  const sortBy = searchParams.get("sortBy") || "date created";
   // useSearchParams stores values as string, so for booleans and numbers check that you have the val you want
+  const sortBy = searchParams.get("sortBy") || "date created";
+  const isSuperUser = useSuperUserCheck();
 
   const { registrars, isSuccess, isLoading, isError, message } = useSelector(
     (state) => state.registrars,
@@ -144,7 +146,7 @@ const Registrars = () => {
     return <Loading />;
   }
 
-  return (
+  return isSuperUser ? (
     <div className="mx-6 mb-6 mt-10">
       {" "}
       {isForm && <NewRegistrar closeForm={() => setIsForm(false)} />}
@@ -271,6 +273,12 @@ const Registrars = () => {
           <p>An error occurred while loading registars</p>
         )}
       </section>
+    </div>
+  ) : (
+    <div className="ml-6 mt-10">
+      <h1 className="text-xl font-bold">
+        Not Allowed. Contact your administrator
+      </h1>
     </div>
   );
 };

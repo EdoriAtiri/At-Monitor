@@ -13,9 +13,11 @@ import {
   resetRegistrarState,
   toggleHasAdminPrivilege,
 } from "../features/Registrars/registrarSlice";
+import useSuperUserCheck from "../hooks/useSuperUserCheck";
 
 function Registrar() {
   const [isDeletePrompt, setIsDeletePrompt] = useState(false);
+  const isSuperUser = useSuperUserCheck();
   const { registrar, isLoading, isError, message, isSuccess } = useSelector(
     (state) => state.registrars,
   );
@@ -81,7 +83,7 @@ function Registrar() {
   if (isLoading) {
     return <Loading />;
   }
-  return (
+  return isSuperUser ? (
     <div className=" mx-6 mb-6 mt-10">
       {/* {edit && (
         <EditEventForm
@@ -195,6 +197,12 @@ function Registrar() {
           </button>
         </div>
       </div>
+    </div>
+  ) : (
+    <div className="ml-6 mt-10">
+      <h1 className="text-xl font-bold">
+        Not Allowed. Contact your administrator
+      </h1>
     </div>
   );
 }
