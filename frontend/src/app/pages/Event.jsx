@@ -12,11 +12,13 @@ import EditEventForm from "../components/EditEventForm";
 import ActConfirmation from "../components/ActConfirmation";
 import Loading from "../components/Loading";
 import EventRegister from "../components/EventRegister";
+import useSuperUserCheck from "../hooks/useSuperUserCheck";
 // import { FaPlus } from "react-icons/fa6";
 
 function Event() {
   const [isDeletePrompt, setIsDeletePrompt] = useState(false);
   const [editEvent, setEditEvent] = useState(false);
+  const isSuperUser = useSuperUserCheck();
   const { myEvent, isLoading, isError, message, isSuccess } = useSelector(
     (state) => state.myEvents,
   );
@@ -98,20 +100,22 @@ function Event() {
         </div>
 
         {/* Actions */}
-        <div className="flex items-center gap-3">
-          <button
-            onClick={openEdit}
-            className="rounded-md border border-gray-700 p-1 text-lg"
-          >
-            Edit
-          </button>
-          <button
-            onClick={() => setIsDeletePrompt(true)}
-            className="rounded-md border border-gray-700 p-1 text-lg"
-          >
-            Delete
-          </button>
-        </div>
+        {isSuperUser && (
+          <div className="flex items-center gap-3">
+            <button
+              onClick={openEdit}
+              className="rounded-md border border-gray-700 p-1 text-lg"
+            >
+              Edit
+            </button>
+            <button
+              onClick={() => setIsDeletePrompt(true)}
+              className="rounded-md border border-gray-700 p-1 text-lg"
+            >
+              Delete
+            </button>
+          </div>
+        )}
       </div>
       {/* Table for description and link */}
       <table className="table">

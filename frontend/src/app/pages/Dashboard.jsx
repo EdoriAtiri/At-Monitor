@@ -64,7 +64,7 @@ function Dashboard() {
             <li onClick={closeMobileMenu} className="sidebar-icons">
               <FaCalendarDays /> <Link to="events">Events</Link>
             </li>
-            {true && (
+            {isSuperUser && (
               <li onClick={closeMobileMenu} className="sidebar-icons">
                 <FaPersonCircleCheck /> <Link to="registrars">Registrars</Link>
               </li>
