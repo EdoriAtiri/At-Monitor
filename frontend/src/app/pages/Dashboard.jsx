@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import Logo from "../components/Logo";
 import {
   FaCalendarDays,
@@ -10,12 +11,22 @@ import {
   FaPeopleGroup,
 } from "react-icons/fa6";
 import { AiOutlineMenu } from "react-icons/ai";
+import { logout } from "../features/Auth/authSlice";
 
 function Dashboard() {
   const closeMobileMenu = () => {
     if (showMobileMenu) {
       setShowMobileMenu(false);
     }
+  };
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const onClickLogout = () => {
+    closeMobileMenu();
+    dispatch(logout());
+    navigate("/signup");
   };
 
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -70,7 +81,7 @@ function Dashboard() {
             <FaGear />
             <Link>Settings</Link>
           </li>
-          <li onClick={closeMobileMenu} className="sidebar-icons">
+          <li onClick={onClickLogout} className="sidebar-icons">
             <FaPowerOff /> <Link>Logout</Link>
           </li>
         </ul>
