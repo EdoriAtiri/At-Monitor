@@ -80,7 +80,43 @@ const loginAdmin = asyncHandler(async (req, res) => {
   }
 })
 
+// @desc edit admin
+// @route /api/admins/
+// @access Public
+const editAdmin = asyncHandler(async (req, res) => {
+  // Get admin id from req
+  const admin = await Admin.findById(req.admin.id)
+  console.log(req.admin._id)
+  console.log(admin)
+  if (!admin) {
+    res.status(401)
+    throw new Error('Admin not found')
+  }
+
+  const { firstName, lastName, email } = req.body
+
+  if (!firstName || !lastName || !email) {
+    res.status(400)
+    throw new Error('Fields cannot be empty')
+  }
+
+  const updatedAdmin = await Admin.findByIdAndUpdate(
+    req.admin._id,
+    { firstName: firstName, lastName: lastName, email: email },
+    {
+      new: true,
+    }
+  )
+
+  res.status(200).json({
+    firstName: updatedAdmin.firstName,
+    lastName: updatedAdmin.lastName,
+    email: updatedAdmin.email,
+  })
+})
+
 module.exports = {
   registerAdmin,
   loginAdmin,
+  editAdmin,
 }
