@@ -184,6 +184,44 @@ const getRegistrars = asyncHandler(async (req, res) => {
   res.status(200).json(registrars)
 })
 
+// @desc edit registrar
+// @route /api/registrar/
+// @access Public
+const editRegistrar = asyncHandler(async (req, res) => {
+  // Get registrar from req
+  const registrar = await Admin.findById(req.registrar._id)
+
+  if (!registrar) {
+    res.status(401)
+    throw new Error('Registrar not found')
+  }
+
+  const { fullName, email, hasAdminPrivilege, isActivated } = req.body
+
+  if (!fullName || !email) {
+    res.status(400)
+    throw new Error('Fields cannot be empty')
+  }
+
+  if (hasAdminPrivilege || isActivated) {
+    res.status(403)
+    throw new Error('Not Allowed')
+  }
+
+  const updatedRegistrar = await Registrar.findByIdAndUpdate(
+    req.registrar._id,
+    { fullName: fullName, email: email },
+    {
+      new: true,
+    }
+  )
+
+  res.status(200).json({
+    fullName: updatedRegistrar.fullName,
+    email: updatedRegistrar.email,
+  })
+})
+
 // @desc create registrar password
 // @route /api/registrar/:id/createauth
 // @access Public
