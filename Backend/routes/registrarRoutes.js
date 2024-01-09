@@ -14,12 +14,14 @@ const {
   deleteRegistrar,
   toggleRegistrarActivation,
   toggleRegistrarPrivilege,
+  editRegistrar,
 } = require('../controllers/RegistrarController')
 
 router
   .route('/')
   .post(protect, checkAdminPrivileges, createRegistrar)
   .get(protect, checkAdminPrivileges, getRegistrars)
+  .patch(protect, editRegistrar)
 
 router
   .route('/:id')

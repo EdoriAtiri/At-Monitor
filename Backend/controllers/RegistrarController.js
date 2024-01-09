@@ -189,7 +189,8 @@ const getRegistrars = asyncHandler(async (req, res) => {
 // @access Public
 const editRegistrar = asyncHandler(async (req, res) => {
   // Get registrar from req
-  const registrar = await Admin.findById(req.registrar._id)
+  const registrar = await Registrar.findById(req.registrar._id)
+  console.log(req.registrar._id)
 
   if (!registrar) {
     res.status(401)
@@ -384,4 +385,5 @@ module.exports = {
   getRegistrarActivation,
   generateRegistrarToken,
   createRegistrarPassword,
+  editRegistrar,
 }
