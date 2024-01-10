@@ -1,7 +1,6 @@
 const asyncHandler = require('express-async-handler')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const validator = require('validator')
 const generateToken = require('../lib/genToken')
 
 const Admin = require('../models/adminModel')
@@ -32,7 +31,7 @@ const registerAdmin = asyncHandler(async (req, res) => {
     throw new Error('Password must be at least 8 characters')
   }
 
-  if (!validator.isEmail(email)) {
+  if (!isEmail(email)) {
     res.status(400)
     throw new Error('Please provide a valid email address')
   }
@@ -106,7 +105,7 @@ const editAdmin = asyncHandler(async (req, res) => {
     throw new Error('Fields cannot be empty')
   }
 
-  if (!validator.isEmail(email)) {
+  if (!isEmail(email)) {
     res.status(400)
     throw new Error('Please provide a valid email address')
   }
