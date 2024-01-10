@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const generateToken = require('../lib/genToken')
+const isEmail = require('../lib/isEmail')
 
 const Admin = require('../models/adminModel')
 
