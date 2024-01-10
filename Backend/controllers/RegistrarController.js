@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const generateToken = require('../lib/genToken')
+const isEmail = require('../lib/isEmail')
 
 const Member = require('../models/memberModel')
 const Registrar = require('../models/registrarModel')
@@ -22,6 +23,11 @@ const createRegistrar = asyncHandler(async (req, res) => {
   if (!fullName || !email) {
     res.status(400)
     throw new Error('Please include all required fields')
+  }
+
+  if (!isEmail(email)) {
+    res.status(400)
+    throw new Error('Please provide a valid email address')
   }
 
   //  Check if already a registrar
