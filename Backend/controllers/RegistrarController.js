@@ -210,6 +210,11 @@ const editRegistrar = asyncHandler(async (req, res) => {
     throw new Error('Fields cannot be empty')
   }
 
+  if (!isEmail(email)) {
+    res.status(400)
+    throw new Error('Please provide a valid email address')
+  }
+
   if (hasAdminPrivilege || isActivated) {
     res.status(403)
     throw new Error('Not Allowed')
