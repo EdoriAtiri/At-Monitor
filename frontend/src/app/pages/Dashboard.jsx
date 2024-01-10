@@ -16,6 +16,9 @@ import useSuperUserCheck from "../hooks/useSuperUserCheck";
 
 function Dashboard() {
   const isSuperUser = useSuperUserCheck();
+
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+
   const closeMobileMenu = () => {
     if (showMobileMenu) {
       setShowMobileMenu(false);
@@ -31,7 +34,6 @@ function Dashboard() {
     navigate("/signup");
   };
 
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
   return (
     <div className="relative flex flex-row">
       {/* Open Mobile Menu */}
@@ -46,7 +48,7 @@ function Dashboard() {
 
       <button
         onClick={closeMobileMenu}
-        className={`absolute inset-0 z-20 h-full w-full bg-black opacity-30 lg:hidden ${
+        className={`absolute inset-0 z-20 h-full min-h-screen w-full bg-black opacity-30 lg:hidden ${
           !showMobileMenu && "hidden"
         }`}
       ></button>
