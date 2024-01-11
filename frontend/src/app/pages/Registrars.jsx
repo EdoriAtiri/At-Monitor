@@ -151,7 +151,7 @@ const Registrars = () => {
       {" "}
       {isForm && <NewRegistrar closeForm={() => setIsForm(false)} />}
       <header className="flex items-center justify-between text-xl font-semibold">
-        <h1>Registrars</h1>
+        <h1 className="page-heading">Registrars</h1>
         <button
           onClick={() => setIsForm(true)}
           className="rounded-md border border-gray-700 p-1 text-lg"
