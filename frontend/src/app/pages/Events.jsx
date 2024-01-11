@@ -173,7 +173,7 @@ function Events() {
     <div className=" mx-6 mb-6 mt-10">
       {isNewEvent && <NewEvent closeForm={() => setIsNewEvent(false)} />}
       <header className="flex items-center justify-between text-xl font-semibold">
-        <h1>My Events</h1>
+        <h1 className="page-heading">My Events</h1>
         {isSuperUser && (
           <button
             onClick={() => setIsNewEvent(true)}

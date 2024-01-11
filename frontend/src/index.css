@@ -14,4 +14,8 @@
   .sidebar-icons {
     @apply flex items-center gap-6;
   }
+
+  .page-heading {
+    @apply text-2xl font-bold uppercase lg:text-4xl;
+  }
 }
