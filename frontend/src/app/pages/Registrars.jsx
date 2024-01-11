@@ -258,7 +258,7 @@ const Registrars = () => {
         </div>
       </div>
       {/* Registrars */}
-      <section className="mt-6 flex w-full  flex-col gap-8">
+      <section className="mt-8 grid w-full grid-cols-1 gap-8 sm:grid-cols-2 min-[1488px]:grid-cols-3">
         {Array.isArray(defaultRegistrars) ? (
           defaultRegistrars.map((registrar) => (
             <RegistrarCard
