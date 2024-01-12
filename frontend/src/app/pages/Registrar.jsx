@@ -85,12 +85,6 @@ function Registrar() {
   }
   return isSuperUser ? (
     <div className=" mx-6 mb-6 mt-10">
-      {/* {edit && (
-        <EditEventForm
-          eventId={eventId}
-          closeEdit={() => setEditEvent(false)}
-        />
-      )} */}
       {isDeletePrompt && (
         <ActConfirmation
           action={`delete ${registrar.fullName} ?`}
@@ -100,13 +94,15 @@ function Registrar() {
         />
       )}
       {/* Stat for creator and date */}
-      <div className="mb-4 flex justify-between gap-4">
+      <div className="mb-4 flex flex-col justify-between gap-4 sm:flex-row">
         <h1 className="mb-5 text-3xl uppercase">{registrar.fullName}</h1>
         {/* Actions */}
         <div className="flex items-center gap-3">
           <div className="form-control">
             <label className="label cursor-pointer">
-              <span className="label-text mr-2 text-lg">Admin Privilege</span>
+              <span className="label-text mr-1 text-lg sm:mr-2">
+                Admin Privilege
+              </span>
               <input
                 onChange={onClickAdminPrivilege}
                 type="checkbox"
@@ -130,38 +126,34 @@ function Registrar() {
         </div>
       </div>
       {/* Registrar Details */}
-      <table className="table">
-        <thead>
-          <tr className="font-bold">
-            <th>Full Name</th>
-            <th>Admin Status</th>
-            <th>Status</th>
-            <th>Email</th>
-            <th>Membership</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr className="">
-            <td>{registrar.fullName}</td>
-            <td>{registrar.isAdmin ? "Yes" : "No"}</td>
-            <td>
-              {registrar.isActivated ? (
-                <p className="text-green-500">Active</p>
-              ) : (
-                <p className="text-red-500">Inactive</p>
-              )}
-            </td>
-            <td>{registrar.email}</td>
-            {/* @todo 
-            Add Icon instead of text and add link address */}
-            <td>
-              <Link>Link</Link>
-            </td>
-          </tr>
-        </tbody>
-      </table>{" "}
+      <div className="mt-6 overflow-x-auto rounded-lg border shadow-sm">
+        <table className="table table-auto">
+          <thead>
+            <tr className="font-bold">
+              <th>Full Name</th>
+              <th>Admin Status</th>
+              <th>Status</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y">
+            <tr className="">
+              <td>{registrar.fullName}</td>
+              <td>{registrar.isAdmin ? "Yes" : "No"}</td>
+              <td>
+                {registrar.isActivated ? (
+                  <p className="text-green-500">Active</p>
+                ) : (
+                  <p className="text-red-500">Inactive</p>
+                )}
+              </td>
+              <td>{registrar.email}</td>
+            </tr>
+          </tbody>
+        </table>{" "}
+      </div>
       {/* Generated registrar token */}
-      <div className="card mt-4 w-96 bg-base-100 p-4 shadow-xl">
+      <div className="w-70 card mt-4 bg-base-100 p-4 shadow-xl sm:w-96">
         <div className="card-body">
           <h2 className="card-title">Activation Link</h2>
           {registrar.token ? (
