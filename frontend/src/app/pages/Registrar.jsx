@@ -167,15 +167,18 @@ function Registrar() {
           {registrar.token ? (
             <Link
               to={"/registrar/" + registrar.token + "/activation"}
-              className=""
+              className="w-full break-all"
             >
-              {domain + ":5173/" + registrar.token.slice(0, 34) + "..."}
+              <p className="line-clamp-2 font-bold">
+                {domain + ":5173/" + registrar.token}
+              </p>
             </Link>
           ) : (
             <p>Click Generate to create a new activation link</p>
           )}
         </div>
         <div className="card-actions flex items-center justify-end gap-2">
+          {/* Copy to clipboard */}
           {registrar.token && (
             <button
               onClick={() => {
