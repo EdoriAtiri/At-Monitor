@@ -95,7 +95,7 @@ function Registrar() {
       )}
       {/* Stat for creator and date */}
       <div className="mb-4 flex flex-col justify-between gap-4 sm:flex-row">
-        <h1 className="mb-5 text-3xl uppercase">{registrar.fullName}</h1>
+        <h1 className="page-heading mb-5">{registrar.fullName}</h1>
         {/* Actions */}
         <div className="flex items-center gap-3">
           <div className="form-control">

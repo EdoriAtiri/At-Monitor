@@ -80,7 +80,7 @@ function Event() {
           onClickCancel={() => setIsDeletePrompt(false)}
         />
       )}
-      <h1 className="mb-5 text-3xl uppercase">{myEvent.eventName}</h1>
+      <h1 className="page-heading mb-5">{myEvent.eventName}</h1>
       {/* Stat for creator and date */}
       <div className="mb-4 flex gap-4 sm:mb-8">
         <div className="stats shadow">

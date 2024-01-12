@@ -50,9 +50,7 @@ const Member = () => {
         />
       )}
       <header className="mb-5 flex justify-between">
-        <h1 className=" text-3xl uppercase">
-          {member?.fullName?.split(" ")[0]}
-        </h1>
+        <h1 className="page-heading">{member?.fullName?.split(" ")[0]}</h1>
         {/* Actions */}
         <div className="flex gap-3">
           <button
