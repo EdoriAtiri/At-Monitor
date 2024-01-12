@@ -161,10 +161,6 @@ function Signup() {
       </div>
 
       <div className="relative hidden flex-col px-10 py-10 sm:flex sm:w-1/2">
-        <ul className="flex h-fit w-full flex-row justify-end gap-6 py-4 text-sm xl:text-base">
-          <li className="nav">About</li>
-          <li className="nav">Contact</li>
-        </ul>
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform text-7xl font-bold">
           <span className="xl text-8xl">A</span>
           <span className="-ml-4">M</span>
