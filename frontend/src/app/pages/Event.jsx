@@ -22,7 +22,7 @@ function Event() {
   const { myEvent, isLoading, isError, message, isSuccess } = useSelector(
     (state) => state.myEvents,
   );
-  const { admin } = useSelector((state) => state.auth);
+  // const { admin } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -82,15 +82,8 @@ function Event() {
       )}
       <h1 className="mb-5 text-3xl uppercase">{myEvent.eventName}</h1>
       {/* Stat for creator and date */}
-      <div className="mb-4 flex gap-4">
+      <div className="mb-4 flex gap-4 sm:mb-8">
         <div className="stats shadow">
-          <div className="stat">
-            <div className="stat-title">Created By</div>
-            <div className="stat-value text-2xl">
-              {`${admin.firstName} ${admin.lastName}`}
-            </div>
-          </div>
-
           <div className="stat">
             <div className="stat-title">Event Date</div>
             <div className="stat-value text-2xl">
@@ -118,15 +111,16 @@ function Event() {
         )}
       </div>
       {/* Table for description and link */}
-      <table className="table">
+      <table className="flex w-full flex-row gap-4">
         <thead>
-          <tr className="font-bold">
-            <th>Link</th>
-            <th>Description</th>
+          <tr className="flex flex-col gap-3 text-left font-bold">
+            <th>Link:</th>
+            <th>Description:</th>
           </tr>
         </thead>
+
         <tbody>
-          <tr className="">
+          <tr className="flex flex-col gap-3">
             <td>{myEvent.linkId}</td>
             <td>{myEvent.description}</td>
           </tr>
@@ -134,12 +128,6 @@ function Event() {
       </table>{" "}
       {/* Registered attendees */}
       <section className="mt-8">
-        {/* <div className="flex justify-between">
-          <h2>Registration</h2>
-          <button className="grid h-8 w-8 place-content-center rounded-full bg-sky-400 transition-all hover:bg-slate-400 focus:border active:scale-95">
-            <FaPlus />
-          </button>
-        </div> */}
         <EventRegister />
       </section>
     </div>
