@@ -112,7 +112,7 @@ function MemberForm() {
         <div className="flex flex-col space-y-4 lg:flex-row lg:gap-12 lg:space-y-0">
           {/*  */}
           <div className="space-y-4">
-            <div className="w-96 space-y-2 lg:w-72">
+            <div className="w-full space-y-2 sm:w-96 lg:w-72">
               <label
                 htmlFor="fullName"
                 className="text-sm md:text-base lg:text-xl"
@@ -129,7 +129,7 @@ function MemberForm() {
                 required
               />
             </div>
-            <div className="w-96 space-y-2 lg:w-72">
+            <div className="w-full space-y-2 sm:w-96 lg:w-72">
               <label
                 htmlFor="email"
                 className="text-sm md:text-base lg:text-xl"
@@ -146,7 +146,7 @@ function MemberForm() {
                 required
               />
             </div>
-            <div className="w-96 space-y-2 lg:w-72">
+            <div className="w-full space-y-2 sm:w-96 lg:w-72">
               <label
                 htmlFor="phone"
                 className="text-sm md:text-base lg:text-xl"
@@ -163,7 +163,7 @@ function MemberForm() {
                 required
               />
             </div>
-            <div className="w-96 space-y-2 lg:w-72">
+            <div className="w-full space-y-2 sm:w-96 lg:w-72">
               <label
                 htmlFor="address"
                 className="text-sm md:text-base lg:text-xl"
@@ -180,7 +180,7 @@ function MemberForm() {
                 required
               />
             </div>
-            <div className="w-96 space-y-2 lg:w-72">
+            <div className="w-full space-y-2 sm:w-96 lg:w-72">
               <label htmlFor="dob" className="text-sm md:text-base lg:text-xl">
                 DOB
               </label>
@@ -197,7 +197,7 @@ function MemberForm() {
           </div>
           {/*  */}
           <div className="space-y-4">
-            <div className="flex w-96 flex-col space-y-2 lg:w-72">
+            <div className="flex w-full flex-col space-y-2 sm:w-96 lg:w-72">
               <label
                 htmlFor="category"
                 className="text-sm md:text-base lg:text-xl"
@@ -219,7 +219,7 @@ function MemberForm() {
                 <option value="child">Child</option>
               </select>
             </div>
-            <div className="flex w-96 flex-col space-y-2 lg:w-72">
+            <div className="flex w-full flex-col space-y-2 sm:w-96 lg:w-72">
               <label
                 htmlFor="gender"
                 className="text-sm md:text-base lg:text-xl"
@@ -242,7 +242,7 @@ function MemberForm() {
                 <option value="none">Prefer not to say</option>
               </select>
             </div>
-            <div className="flex w-96 flex-col space-y-2 lg:w-72">
+            <div className="flex w-full flex-col space-y-2 sm:w-96 lg:w-72">
               <label
                 htmlFor="membershipStatus"
                 className="text-sm md:text-base lg:text-xl"
@@ -268,7 +268,7 @@ function MemberForm() {
           </div>
         </div>
 
-        <div className="lg:72 btn mt-36 w-96">
+        <div className="lg:72 btn mt-36 w-full sm:w-96">
           <button className="form-input-style grid place-content-center bg-black font-bold text-white transition-transform active:scale-95">
             Submit
           </button>
