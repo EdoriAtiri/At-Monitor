@@ -15,6 +15,7 @@ import RegistrarActivation from "./app/pages/RegistrarActivation.jsx";
 import Members from "./app/pages/Members.jsx";
 import Member from "./app/pages/Member.jsx";
 import MemberForm from "./app/pages/MemberForm.jsx";
+import Header from "./app/components/header.jsx";
 
 function App() {
   return (
@@ -26,9 +27,12 @@ function App() {
           <Routes>
             {/* <Route path="/" element={<PrivateRoute />}>
             </Route> */}
-            <Route path="/" element={<Home />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Header />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/login" element={<Login />} />
+            </Route>
+
             <Route
               path="/registrar/:token/activation"
               element={<RegistrarActivation />}

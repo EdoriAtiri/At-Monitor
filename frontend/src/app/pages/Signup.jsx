@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { signup, reset } from "../features/Auth/authSlice";
-import Logo from "../components/Logo";
 import Loading from "../components/Loading";
 
 function Signup() {
@@ -68,9 +67,7 @@ function Signup() {
 
   return (
     <div className="flex min-h-screen w-full flex-row">
-      <div className="flex w-1/2 flex-col items-center justify-center gap-6 py-10">
-        <Logo />
-
+      <div className="flex w-full flex-col items-center justify-center gap-6 py-10 sm:w-1/2">
         <div className="w-3/4 space-y-1 text-left lg:w-1/2 [&>*]:w-full">
           <h2 className="text-2xl font-bold tracking-tight lg:text-3xl">
             Lets create your account
@@ -163,7 +160,7 @@ function Signup() {
         </span>
       </div>
 
-      <div className="relative flex w-1/2 flex-col px-10 py-10">
+      <div className="relative hidden flex-col px-10 py-10 sm:flex sm:w-1/2">
         <ul className="flex h-fit w-full flex-row justify-end gap-6 py-4 text-sm xl:text-base">
           <li className="nav">About</li>
           <li className="nav">Contact</li>
