@@ -21,12 +21,19 @@ function Home() {
           <div className="flex flex-row space-x-4 lg:space-x-6 xl:space-x-8">
             <Link to="/signup">
               <Button
-                customClass={"border-none bg-white text-blue-950"}
+                customClass={
+                  "border-opacity-0 hover:border-opacity-100 hover-border  hover:bg-transparent hover:text-white bg-white text-blue-950"
+                }
                 text="Sign Up"
               />
             </Link>
             <Link to="/login">
-              <Button customClass={"border-2"} text="Login" />
+              <Button
+                customClass={
+                  "hover:bg-white hover:text-blue-950 hover:border-opacity-0"
+                }
+                text="Login"
+              />
             </Link>
           </div>
         </div>

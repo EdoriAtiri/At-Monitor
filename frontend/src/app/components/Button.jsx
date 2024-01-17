@@ -4,7 +4,7 @@ function Button({ text, onClickBtn, customClass }) {
   return (
     <button
       onClick={onClickBtn}
-      className={`grid h-10 w-28 place-content-center rounded-md border border-white font-bold ${customClass}`}
+      className={`grid h-10 w-28 place-content-center rounded-md border-2 border-white font-bold transition-all ${customClass}`}
     >
       {text}
     </button>
