@@ -9,7 +9,7 @@ function Home() {
     <Navigate to="/dashboard/events" />
   ) : (
     <div className="flex min-h-[calc(100vh-3.5rem)] w-full flex-row bg-blue-950 text-white">
-      <div className="grid w-1/2 place-content-center space-y-32 py-10 ">
+      <div className="grid w-1/2 place-content-center py-10 ">
         <div className="m-auto px-6 lg:px-10 xl:px-20">
           <h1 className="pb-6 text-5xl font-bold lg:text-6xl">
             Track Event Attendance{" "}
