@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Logo() {
   return (
     <Link to="/">
-      <div className="text-2xl font-bold">
+      <div className="text-2xl font-bold text-blue-950">
         <span className="text-3xl">A</span>
         <span className="-ml-2">M</span>
       </div>
