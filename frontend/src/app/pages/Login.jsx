@@ -59,59 +59,60 @@ function Login() {
 
   return (
     <div className="flex min-h-[calc(100vh-3.5rem)] w-full flex-row bg-blue-950 text-white">
-      <div className="flex w-full flex-col items-center gap-6 pt-6 sm:w-1/2 ">
-        <div className="w-3/4 space-y-1 text-left lg:w-1/2 [&>*]:w-full">
-          <h2 className="text-2xl font-bold tracking-tight lg:text-3xl">
-            Login in to AT Monitor
-          </h2>
-        </div>
-
-        <form
-          onSubmit={onSubmit}
-          className="w-3/4 space-y-7 lg:w-1/2 [&>*]:w-full"
-        >
-          <div className="space-y-4">
-            <div className="form-group">
-              <input
-                type="email"
-                className="form-input-style"
-                id="email"
-                name="email"
-                value={email}
-                onChange={onChange}
-                placeholder="Enter your email address"
-                required
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="password"
-                className="form-input-style"
-                id="password"
-                name="password"
-                value={password}
-                onChange={onChange}
-                placeholder="Enter password"
-                required
-              />
-            </div>
+      {" "}
+      <div className="grid w-1/2 place-content-center py-10">
+        <div className="flex w-full flex-col items-center gap-6">
+          <div className="space-y-1 text-center [&>*]:w-full">
+            <h2 className="text-2xl font-bold tracking-tight lg:text-3xl">
+              Login to AT Monitor
+            </h2>
           </div>
 
-          <div className="btn mt-36">
-            <button className="form-input-style grid place-content-center bg-black font-bold text-white transition-transform active:scale-95">
-              Continue
-            </button>
-          </div>
-        </form>
+          <form onSubmit={onSubmit} className=" w-full space-y-7 [&>*]:w-full">
+            <div className="space-y-4">
+              <div className="form-group">
+                <input
+                  type="email"
+                  className="form-input-style"
+                  id="email"
+                  name="email"
+                  value={email}
+                  onChange={onChange}
+                  placeholder="Enter your email address"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="password"
+                  className="form-input-style"
+                  id="password"
+                  name="password"
+                  value={password}
+                  onChange={onChange}
+                  placeholder="Enter password"
+                  required
+                />
+              </div>
+            </div>
+            {/* .btn */}
+            <div className=" mt-36">
+              <button className="form-input-style grid place-content-center bg-black font-bold text-white transition-transform active:scale-95">
+                Continue
+              </button>
+            </div>
+          </form>
 
-        <span className="text text-sm">
-          Don&apos;t have an account?{" "}
-          <span className="font-bold text-blue-600">
-            <Link to="/signup">Signup</Link>
+          <span className="text text-sm">
+            <span className="italic">Don&apos;t have an account? </span>
+            <span className="relative text-base font-bold text-blue-50 underline decoration-blue-200">
+              {" "}
+              <Link to="/signup">Signup</Link>
+            </span>
           </span>
-        </span>
+        </div>
       </div>
-
+      {/*  */}
       <div className="relative flex w-1/2 flex-col px-10 py-10">
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform text-7xl font-bold">
           <span className="xl text-8xl">A</span>
