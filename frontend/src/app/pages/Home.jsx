@@ -8,13 +8,13 @@ function Home() {
   return loggedIn ? (
     <Navigate to="/dashboard/events" />
   ) : (
-    <div className="flex min-h-screen w-full flex-row">
-      <div className="w-1/2 space-y-32 py-10">
-        <div className="m-auto space-y-6 px-10 xl:px-20">
-          <h1 className="text-4xl font-bold lg:text-6xl">
+    <div className="flex min-h-[calc(100vh-3.5rem)] w-full flex-row bg-blue-950 text-white">
+      <div className="grid w-1/2 place-content-center space-y-32 py-10 ">
+        <div className="m-auto px-6 lg:px-10 xl:px-20">
+          <h1 className="pb-6 text-5xl font-bold lg:text-6xl">
             Track Event Attendance{" "}
           </h1>
-          <p className="text-sm lg:text-lg">
+          <p className="pb-16 text-base lg:text-lg">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur ad
             provident, deleniti ipsum molestias illo aut!
           </p>
