@@ -20,10 +20,13 @@ function Home() {
           </p>
           <div className="flex flex-row space-x-4 lg:space-x-6 xl:space-x-8">
             <Link to="/signup">
-              <Button text="Sign Up" />
+              <Button
+                customClass={"border-none bg-white text-blue-950"}
+                text="Sign Up"
+              />
             </Link>
             <Link to="/login">
-              <Button text="Login" />
+              <Button customClass={"border-2"} text="Login" />
             </Link>
           </div>
         </div>
