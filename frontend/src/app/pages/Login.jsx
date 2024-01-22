@@ -68,7 +68,10 @@ function Login() {
             </h2>
           </div>
 
-          <form onSubmit={onSubmit} className=" w-full space-y-7 [&>*]:w-full">
+          <form
+            onSubmit={onSubmit}
+            className="w-full space-y-7 text-black [&>*]:w-full"
+          >
             <div className="space-y-4">
               <div className="form-group">
                 <input
