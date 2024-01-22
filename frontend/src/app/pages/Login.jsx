@@ -58,9 +58,9 @@ function Login() {
   }
 
   return (
-    <div className="flex min-h-[calc(100vh-3.5rem)] w-full flex-row bg-blue-950 text-white">
+    <div className="grid min-h-[calc(100vh-3.5rem)] w-full place-content-center bg-blue-950 text-white sm:flex sm:flex-row">
       {" "}
-      <div className="grid w-1/2 place-content-center py-10">
+      <div className="grid w-full place-content-center py-10 sm:w-1/2">
         <div className="flex w-full flex-col items-center gap-6">
           <div className="space-y-1 text-center [&>*]:w-full">
             <h2 className="text-2xl font-bold tracking-tight lg:text-3xl">
@@ -116,7 +116,7 @@ function Login() {
         </div>
       </div>
       {/*  */}
-      <div className="relative flex w-1/2 flex-col px-10 py-10">
+      <div className="relative hidden flex-col px-10 py-10 sm:flex sm:w-1/2">
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform text-7xl font-bold">
           <span className="xl text-8xl">A</span>
           <span className="-ml-4">M</span>
