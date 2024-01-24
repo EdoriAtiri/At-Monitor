@@ -255,6 +255,12 @@ function Events() {
           </select>
         </div>
       </div>
+      {/*Message if no events */}
+      {defaultEvents.length === 0 && (
+        <div className="grid h-96 w-full place-content-center">
+          No Events Created Yet
+        </div>
+      )}
       {/* Events */}
       <section className="mt-8 grid w-full grid-cols-1 gap-8 sm:grid-cols-2 min-[1488px]:grid-cols-3">
         {Array.isArray(defaultEvents) ? (
@@ -269,7 +275,7 @@ function Events() {
             />
           ))
         ) : (
-          <p>Error loading events...</p>
+          <p>Error loading events</p>
         )}
       </section>
     </div>
