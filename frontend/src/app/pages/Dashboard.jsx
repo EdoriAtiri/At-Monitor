@@ -5,8 +5,8 @@ import Logo from "../components/Logo";
 import {
   FaCalendarDays,
   FaPersonCircleCheck,
-  FaUserCheck,
-  FaGear,
+  // FaUserCheck,
+  // FaGear,
   FaPowerOff,
   FaPeopleGroup,
 } from "react-icons/fa6";
@@ -75,18 +75,18 @@ function Dashboard() {
               <FaPeopleGroup />
               <Link to="members">Members</Link>
             </li>
-            <li onClick={closeMobileMenu} className="sidebar-icons">
+            {/* <li onClick={closeMobileMenu} className="sidebar-icons">
               <FaUserCheck />
               <Link to="profile">Profile</Link>
-            </li>
+            </li> */}
           </ul>
         </nav>
 
         <ul className="space-y-6 pl-6 text-xl font-semibold ">
-          <li onClick={closeMobileMenu} className="sidebar-icons">
+          {/* <li onClick={closeMobileMenu} className="sidebar-icons">
             <FaGear />
             <Link>Settings</Link>
-          </li>
+          </li> */}
           <li onClick={onClickLogout} className="sidebar-icons">
             <FaPowerOff /> <Link>Logout</Link>
           </li>
