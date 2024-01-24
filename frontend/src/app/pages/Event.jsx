@@ -114,14 +114,14 @@ function Event() {
       <table className="flex w-full flex-row gap-4">
         <thead>
           <tr className="flex flex-col gap-3 text-left font-bold">
-            <th>Link:</th>
+            {/* <th>Link:</th> */}
             <th>Description:</th>
           </tr>
         </thead>
 
         <tbody>
           <tr className="flex flex-col gap-3">
-            <td>{myEvent.linkId}</td>
+            {/* <td>{myEvent.linkId}</td> */}
             <td>{myEvent.description}</td>
           </tr>
         </tbody>
