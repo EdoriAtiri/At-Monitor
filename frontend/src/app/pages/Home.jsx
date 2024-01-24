@@ -11,12 +11,13 @@ function Home() {
     <div className="flex min-h-[calc(100vh-3.5rem)] w-full flex-row bg-blue-950 text-white">
       <div className="grid w-full place-content-center py-10 sm:w-1/2 ">
         <div className="m-auto px-6 lg:px-10 xl:px-20">
-          <h1 className="pb-6 text-5xl font-bold lg:text-6xl">
+          <h1 className="pb-6 text-5xl font-bold sm:text-6xl xl:text-7xl 2xl:text-8xl">
             Track Event Attendance{" "}
           </h1>
           <p className="pb-16 text-base lg:text-lg">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur ad
-            provident, deleniti ipsum molestias illo aut!
+            Elevate your gatherings with our state-of-the-art attendance
+            tracking system. Effortless organization, real-time insights, and a
+            smoother event experience await.
           </p>
           <div className="flex flex-row space-x-4 lg:space-x-6 xl:space-x-8">
             <Link to="/signup">
