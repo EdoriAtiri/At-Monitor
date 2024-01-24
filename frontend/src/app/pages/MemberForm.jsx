@@ -241,7 +241,7 @@ function MemberForm() {
                 </option>
 
                 <option value="male">Male</option>
-                <option value="male">Female</option>
+                <option value="Female">Female</option>
                 <option value="none">Prefer not to say</option>
               </select>
             </div>
