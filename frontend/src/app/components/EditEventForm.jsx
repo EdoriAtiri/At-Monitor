@@ -102,6 +102,7 @@ function EditEventForm({ eventId, closeEdit }) {
                 value={eventName}
                 onChange={onChange}
                 required
+                autoFocus
               />
             </div>
             <div className="form-group space-y-2">

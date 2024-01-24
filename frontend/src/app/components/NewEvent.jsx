@@ -91,6 +91,7 @@ function NewEvent({ closeForm }) {
                 name="eventName"
                 value={eventName}
                 onChange={onChange}
+                autoFocus
                 required
               />
             </div>

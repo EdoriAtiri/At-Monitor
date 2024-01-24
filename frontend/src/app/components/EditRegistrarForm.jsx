@@ -91,6 +91,7 @@ function EditRegistrarForm({ closeForm }) {
                 value={eventName}
                 onChange={onChange}
                 required
+                autoFocus
               />
             </div>
             <div className="space-y-2">

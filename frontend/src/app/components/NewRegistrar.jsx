@@ -91,6 +91,7 @@ function NewRegistrar({ closeForm }) {
                 name="fullName"
                 value={fullName}
                 onChange={onChange}
+                autoFocus
                 required
               />
             </div>
