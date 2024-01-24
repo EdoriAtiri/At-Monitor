@@ -60,7 +60,9 @@ function Dashboard() {
           !showMobileMenu && "-translate-x-96 transform"
         } z-[25] h-screen w-60 space-y-16 bg-sky-400 pt-14 transition-transform duration-300 lg:z-0  lg:-translate-x-0`}
       >
-        <Logo />
+        <div className="pl-6">
+          <Logo />
+        </div>
         <nav className="pl-6">
           <ul className="space-y-6 text-xl font-semibold">
             <li onClick={closeMobileMenu} className="sidebar-icons">
