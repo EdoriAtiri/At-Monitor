@@ -147,6 +147,7 @@ export const updateEventRegister = createAsyncThunk(
 export const resetEventState = createAsyncThunk("events/reset", async () => {
   return;
 });
+
 export const eventSlice = createSlice({
   name: "event",
   initialState,

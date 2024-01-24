@@ -121,6 +121,9 @@ export const deleteMember = createAsyncThunk(
     }
   },
 );
+export const resetMemberState = createAsyncThunk("members/reset", async () => {
+  return;
+});
 
 export const memberSlice = createSlice({
   name: "member",
@@ -200,6 +203,12 @@ export const memberSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+      })
+      .addCase(resetMemberState.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = false;
+        state.message = "";
       });
   },
 });
