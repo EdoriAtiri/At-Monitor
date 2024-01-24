@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { getMembers, reset } from "../features/Members/memberSlice";
+import {
+  getMembers,
+  reset,
+  resetMemberState,
+} from "../features/Members/memberSlice";
 import Loading from "../components/Loading";
 import sortByProperty from "../lib/sortByProperty";
 import useSuperUserCheck from "../hooks/useSuperUserCheck";
@@ -56,6 +60,7 @@ function Members() {
     return () => {
       if (isSuccess) {
         dispatch(reset());
+        dispatch(resetMemberState());
       }
     };
   }, [dispatch, isSuccess]);
@@ -134,7 +139,7 @@ function Members() {
         {isSuperUser && (
           <button
             onClick={() => {
-              dispatch(reset());
+              dispatch(resetMemberState());
               navigate("/dashboard/members/create");
             }}
             className="rounded-md border border-gray-700 p-1 text-lg"

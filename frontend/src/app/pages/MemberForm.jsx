@@ -76,7 +76,9 @@ function MemberForm() {
 
     if (!isEdit) {
       dispatch(createMember(data));
+      navigate("/dashboard/members");
     }
+
     if (isEdit) {
       const memberId = id;
       dispatch(updateMember({ data, memberId }));
@@ -87,12 +89,11 @@ function MemberForm() {
 
   useEffect(() => {
     // Check if isSuccess is true, then navigate
-    if (isSuccess) {
-      if (!isEdit) {
-        navigate("/dashboard/members");
-        toast.success("Member created successfully");
-      }
-    }
+    // if (isSuccess && !isEdit) {
+    //   navigate("/dashboard/members");
+    //   toast.success("Member created successfully");
+    // }
+
     // Handle errors if any
     if (isError) {
       toast.error(message);
