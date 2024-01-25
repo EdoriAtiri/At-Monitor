@@ -34,7 +34,7 @@ const eventSchema = mongoose.Schema(
     },
     linkId: {
       type: String,
-      required: true,
+      // required: true,
     },
     registered: [registeredSchema],
   },

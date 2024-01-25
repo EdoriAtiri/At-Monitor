@@ -83,7 +83,7 @@ function MemberForm() {
       const memberId = id;
       dispatch(updateMember({ data, memberId }));
       navigate(`/dashboard/members/${memberId}`);
-      toast.success("Edited successfully");
+      // toast.success("Edited successfully");
     }
   };
 
