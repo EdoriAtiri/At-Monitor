@@ -66,7 +66,7 @@ function Event() {
     }
   };
 
-  return (
+  return myEvent.eventName ? (
     <div className="mx-6 mb-6 mt-10">
       {/* Edit event form */}
       {editEvent && (
@@ -135,6 +135,8 @@ function Event() {
         <EventRegister />
       </section>
     </div>
+  ) : (
+    <Loading />
   );
 }
 
