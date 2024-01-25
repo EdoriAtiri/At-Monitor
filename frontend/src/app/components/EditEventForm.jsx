@@ -136,7 +136,6 @@ function EditEventForm({ eventId, closeEdit }) {
                 name="description"
                 value={description}
                 onChange={onChange}
-                required
               />
             </div>
             <div className="form-group space-y-2">
@@ -153,7 +152,6 @@ function EditEventForm({ eventId, closeEdit }) {
                 name="linkId"
                 value={linkId}
                 onChange={onChange}
-                required
               />
             </div>
           </div>

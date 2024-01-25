@@ -126,7 +126,6 @@ function NewEvent({ closeForm }) {
                 name="description"
                 value={description}
                 onChange={onChange}
-                required
               />
             </div>
             <div className="space-y-2">
@@ -143,7 +142,6 @@ function NewEvent({ closeForm }) {
                 name="linkId"
                 value={linkId}
                 onChange={onChange}
-                required
               />
             </div>
           </div>
