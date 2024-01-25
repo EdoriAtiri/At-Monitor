@@ -91,7 +91,7 @@ function Event() {
           <div className="stat">
             <div className="stat-title">Event Date</div>
             <div className="stat-value text-2xl">
-              {formatDateDisplay(myEvent.eventDate)}
+              {myEvent.eventDate && formatDateDisplay(myEvent.eventDate)}
             </div>
           </div>
         </div>
