@@ -3,11 +3,7 @@ import { formatDateDisplay } from "../lib/formatDate";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import {
-  getEvent,
-  deleteEvent,
-  resetEventState,
-} from "../features/Events/eventSlice";
+import { getEvent, deleteEvent, reset } from "../features/Events/eventSlice";
 import EditEventForm from "../components/EditEventForm";
 import ActConfirmation from "../components/ActConfirmation";
 import Loading from "../components/Loading";
@@ -38,6 +34,14 @@ function Event() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError, message, eventId]);
 
+  useEffect(() => {
+    return () => {
+      if (isSuccess) {
+        dispatch(reset());
+      }
+    };
+  }, [dispatch, isSuccess]);
+
   if (isLoading) {
     return <Loading />;
   }
@@ -49,7 +53,7 @@ function Event() {
 
   // Delete Event
   const onDeleteEvent = () => {
-    dispatch(resetEventState());
+    dispatch(reset());
     dispatch(deleteEvent(eventId));
 
     if (isSuccess) {

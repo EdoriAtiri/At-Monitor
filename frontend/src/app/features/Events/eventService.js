@@ -11,6 +11,7 @@ const getEvents = async (token) => {
   };
 
   const response = await axios.get(API_URL, config);
+  console.log("get:" + response);
 
   return response.data;
 };
@@ -62,6 +63,7 @@ const deleteEvent = async (eventId, token) => {
   };
 
   const response = await axios.delete(API_URL + eventId, config);
+  console.log("delete:" + response);
 
   return response.data;
 };
