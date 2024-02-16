@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const API_URL = "http://localhost:5000/api/events/";
+const API_URL = import.meta.env.VITE_BASEURL + "events/";
 
 // Get admin events
 const getEvents = async (token) => {
