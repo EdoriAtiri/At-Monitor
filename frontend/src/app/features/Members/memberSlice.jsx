@@ -177,6 +177,7 @@ export const memberSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+        console.log(state.message);
       })
       .addCase(updateMember.pending, (state) => {
         state.isLoading = true;
@@ -194,10 +195,10 @@ export const memberSlice = createSlice({
       .addCase(deleteMember.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(deleteMember.fulfilled, (state, action) => {
+      .addCase(deleteMember.fulfilled, (state) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.members.filter((member) => member._id !== action.payload._id);
+        state.members.filter((member) => member._id !== state.member._id);
       })
       .addCase(deleteMember.rejected, (state, action) => {
         state.isLoading = false;

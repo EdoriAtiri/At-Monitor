@@ -4,7 +4,7 @@ const Member = require('../models/memberModel')
 const Admin = require('../models/adminModel')
 
 // @desc Register a new member
-// @route /api/users
+// @route /api/members
 // @access Public
 const registerMember = asyncHandler(async (req, res) => {
   // Get AdminId from req
@@ -35,7 +35,7 @@ const registerMember = asyncHandler(async (req, res) => {
     res.status(400)
     throw new Error('Please include all required fields')
   }
-
+  console.log(req.body)
   //  Check if member is already registered
   const memberExists = await Member.findOne({ email })
 
