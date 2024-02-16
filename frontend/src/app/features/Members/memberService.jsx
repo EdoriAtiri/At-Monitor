@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const API_URL = "http://localhost:5000/api/members/";
+const API_URL = import.meta.env.VITE_BASEURL + "members/";
 
 // Get admin members
 const getMembers = async (token) => {

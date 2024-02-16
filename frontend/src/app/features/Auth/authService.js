@@ -1,5 +1,6 @@
 import axios from "axios";
-const API_URL = "http://localhost:5000/api/admins/";
+
+const API_URL = import.meta.env.VITE_BASEURL + "admins/";
 
 // Signup admin
 const signup = async (data) => {

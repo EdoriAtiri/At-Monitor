@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const API_URL = "http://localhost:5000/api/registrars/";
+const API_URL = import.meta.env.VITE_BASEURL + "registrars/";
 
 const getRegistrars = async (token) => {
   const config = {
