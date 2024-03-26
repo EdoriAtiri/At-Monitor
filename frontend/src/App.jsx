@@ -15,7 +15,7 @@ import RegistrarActivation from "./app/pages/RegistrarActivation.jsx";
 import Members from "./app/pages/Members.jsx";
 import Member from "./app/pages/Member.jsx";
 import MemberForm from "./app/pages/MemberForm.jsx";
-import Header from "./app/components/header.jsx";
+import Header from "./app/components/Header.jsx";
 
 function App() {
   return (
