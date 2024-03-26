@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_BASEURL + "admins/";
+const API_URL = import.meta.env.VITE_BASEURL;
 
 // Signup admin
 const signup = async (data) => {
-  const response = await axios.post(API_URL, data);
+  const response = await axios.post(API_URL + "admins/", data);
 
   if (response.data) {
     localStorage.setItem("admin", JSON.stringify(response.data));
@@ -18,10 +18,7 @@ const signup = async (data) => {
 // Login admin
 const login = async (data) => {
   console.log(data);
-  const response = await axios.post(
-    "http://localhost:5000/api/auth/login",
-    data,
-  );
+  const response = await axios.post(API_URL + "auth/login", data);
 
   if (response.data) {
     localStorage.setItem("admin", JSON.stringify(response.data));
